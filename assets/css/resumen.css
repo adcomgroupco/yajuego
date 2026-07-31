@@ -15,7 +15,7 @@
 
 body {
   min-height: 100vh;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--b);
   color: var(--w);
   padding: 56px 40px 72px;
@@ -75,10 +75,10 @@ body {
 }
 
 h1 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(38px, 6vw, 72px);
   line-height: .94;
-  letter-spacing: -.05em;
+  letter-spacing: -.02em;
   font-weight: 800;
   margin-bottom: 22px;
 }
@@ -114,10 +114,10 @@ h1 span {
 
 .stat b {
   display: block;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 27px;
   font-weight: 800;
-  letter-spacing: -.03em;
+  letter-spacing: -.02em;
   color: var(--y);
   line-height: 1.1;
 }
@@ -154,10 +154,10 @@ h1 span {
 }
 
 .track-head h2 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 24px;
   font-weight: 800;
-  letter-spacing: -.025em;
+  letter-spacing: -.02em;
 }
 
 .track-head em {
@@ -209,7 +209,7 @@ h1 span {
 }
 
 .item .num {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: rgba(255, 192, 0, .28);
   font-size: 40px;
   line-height: .9;
@@ -218,7 +218,7 @@ h1 span {
 }
 
 .item h3 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 21px;
   line-height: 1.15;
   letter-spacing: -.02em;
@@ -330,7 +330,7 @@ h1 span {
 
 .file b {
   display: block;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: var(--w);
@@ -368,10 +368,10 @@ h1 span {
 }
 
 .thread h2 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 22px;
   font-weight: 800;
-  letter-spacing: -.025em;
+  letter-spacing: -.02em;
   margin-bottom: 16px;
 }
 
@@ -403,7 +403,7 @@ h1 span {
   border-radius: 50%;
   background: rgba(255, 192, 0, .14);
   color: var(--y);
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 12px;
   font-weight: 800;
 }

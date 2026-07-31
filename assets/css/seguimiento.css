@@ -1,0 +1,247 @@
+:root {
+  --y: #ffc000;
+  --b: #111;
+  --w: #fff;
+  --g2: #282828;
+  --g3: #777;
+  --muted: #a7a7a7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: var(--b);
+  color: var(--w);
+  padding: 48px 40px 64px;
+  overflow-x: hidden;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 192, 0, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 192, 0, .045) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: fixed;
+  width: 55vw;
+  height: 55vw;
+  right: -18vw;
+  top: -18vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 192, 0, .16) 0%, rgba(255, 192, 0, .05) 42%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  width: min(1240px, 100%);
+  margin: 0 auto;
+}
+
+/* ---------- Encabezado ---------- */
+
+.eyebrow {
+  color: var(--y);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--y);
+  flex: none;
+}
+
+h1 {
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1;
+  letter-spacing: -.02em;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+h1 span {
+  color: var(--y);
+}
+
+.lede {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.lede strong {
+  color: #d8d8d8;
+  font-weight: 500;
+}
+
+/* ---------- Qué permite ---------- */
+
+.uses {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.uses li {
+  background: rgba(26, 26, 26, .92);
+  border: 1px solid var(--g2);
+  border-left: 2px solid rgba(255, 192, 0, .55);
+  border-radius: 6px;
+  padding: 16px 18px;
+  color: #949494;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.uses li b {
+  display: block;
+  color: var(--w);
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+/* ---------- Barra de acciones ---------- */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--y);
+  color: #111;
+}
+
+.btn-ghost {
+  background: rgba(255, 192, 0, .1);
+  color: var(--y);
+  border: 1px solid rgba(255, 192, 0, .28);
+}
+
+.hint {
+  color: #5a5a5a;
+  font-size: 11.5px;
+  line-height: 1.6;
+  margin-left: auto;
+}
+
+/* ---------- Embed del dashboard ---------- */
+
+.embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 620px;
+  border: 1px solid var(--g2);
+  border-radius: 10px;
+  background: #161616;
+  overflow: hidden;
+}
+
+.embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.note {
+  color: #5a5a5a;
+  font-size: 11.5px;
+  line-height: 1.7;
+  margin-top: 14px;
+  max-width: 820px;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--g2);
+  color: #555;
+  font-size: 11.5px;
+}
+
+.footer a {
+  color: var(--y);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+  body {
+    padding: 32px 20px 52px;
+  }
+
+  .embed {
+    aspect-ratio: auto;
+    height: 78vh;
+    min-height: 480px;
+  }
+
+  .hint {
+    margin-left: 0;
+  }
+}
