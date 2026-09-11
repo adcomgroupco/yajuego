@@ -1,15 +1,15 @@
 :root {
-  --y: #ffc000;
+  --y: #ffd400;
   --b: #111;
   --w: #fff;
   --g1: #1a1a1a;
   --g2: #282828;
-  --g3: #777;
+  --g3: #777
 }
 
 * {
   margin: 0;
-  padding: 0;
+  padding: 0
 }
 
 body {
@@ -21,17 +21,17 @@ body {
   align-items: center;
   justify-content: center;
   padding: 40px;
-  overflow: auto;
+  overflow: auto
 }
 
 .bg-grid {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 192, 0, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 192, 0, .045) 1px, transparent 1px);
+    linear-gradient(rgba(255, 212, 0, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 212, 0, .045) 1px, transparent 1px);
   background-size: 60px 60px;
-  pointer-events: none;
+  pointer-events: none
 }
 
 .blob {
@@ -41,33 +41,31 @@ body {
   right: -18vw;
   top: -18vw;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 192, 0, .16) 0%, rgba(255, 192, 0, .05) 42%, transparent 70%);
-  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 212, 0, .16) 0%, rgba(255, 212, 0, .05) 42%, transparent 70%);
+  pointer-events: none
 }
 
 .wrap {
   position: relative;
   z-index: 2;
-  width: min(980px, 100%);
+  width: min(980px, 100%)
 }
 
 .eyebrow {
   color: var(--y);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
   margin-bottom: 18px;
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: center
 }
 
 .eyebrow::before {
   content: '';
   width: 28px;
   height: 1px;
-  background: var(--y);
+  background: var(--y)
 }
 
 h1 {
@@ -76,11 +74,11 @@ h1 {
   line-height: .92;
   letter-spacing: -.02em;
   font-weight: 800;
-  margin-bottom: 22px;
+  margin-bottom: 22px
 }
 
 h1 span {
-  color: var(--y);
+  color: var(--y)
 }
 
 p {
@@ -88,13 +86,13 @@ p {
   color: #aaa;
   font-size: 15px;
   line-height: 1.8;
-  margin-bottom: 38px;
+  margin-bottom: 38px
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 18px
 }
 
 .card {
@@ -104,11 +102,11 @@ p {
   color: var(--w);
   background: rgba(26, 26, 26, .92);
   border: 1px solid var(--g2);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 28px;
   min-height: 220px;
   overflow: hidden;
-  transition: all .22s ease;
+  transition: all .22s ease
 }
 
 .card::after {
@@ -121,26 +119,26 @@ p {
   background: var(--y);
   transform: scaleX(.25);
   transform-origin: left;
-  transition: transform .22s ease;
+  transition: transform .22s ease
 }
 
 .card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 192, 0, .5);
-  background: #1e1e1e;
+  border-color: rgba(255, 212, 0, .5);
+  background: #1e1e1e
 }
 
 .card:hover::after {
-  transform: scaleX(1);
+  transform: scaleX(1)
 }
 
 .num {
   font-family: 'Poppins', sans-serif;
-  color: rgba(255, 192, 0, .28);
+  color: rgba(255, 212, 0, .28);
   font-size: 44px;
   line-height: 1;
   font-weight: 800;
-  margin-bottom: 18px;
+  margin-bottom: 18px
 }
 
 .card h2 {
@@ -148,14 +146,14 @@ p {
   font-size: 22px;
   line-height: 1.15;
   letter-spacing: -.02em;
-  margin-bottom: 12px;
+  margin-bottom: 12px
 }
 
 .card small {
   color: var(--g3);
   font-size: 13px;
   line-height: 1.65;
-  display: block;
+  display: block
 }
 
 .tag {
@@ -163,37 +161,35 @@ p {
   margin-top: 24px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255, 192, 0, .1);
+  background: rgba(255, 212, 0, .1);
   color: var(--y);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700
 }
 
 .footer {
   margin-top: 28px;
   color: #555;
-  font-size: 11px;
+  font-size: 12px
 }
 
 @media (max-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr))
   }
 }
 
 @media (max-width: 760px) {
   body {
     padding: 26px;
-    overflow: auto;
+    overflow: auto
   }
 
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 
   .card {
-    min-height: auto;
+    min-height: auto
   }
 }

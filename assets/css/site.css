@@ -1,66 +1,66 @@
 :root {
-  --yj-yellow: #ffc000;
+  --yj-yellow: #ffd400;
   --yj-black: #111;
   --yj-white: #fff;
   --yj-panel: #1a1a1a;
   --yj-panel-2: #282828;
   --yj-muted: #a7a7a7;
   --yj-line: #2d2d2d;
-  --yj-radius: 8px;
+  --yj-radius: 8px
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth
 }
 
 body {
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased
 }
 
 ::selection {
-  background: rgba(255, 192, 0, .28);
-  color: var(--yj-white);
+  background: rgba(255, 212, 0, .28);
+  color: var(--yj-white)
 }
 
 :focus-visible {
   outline: 2px solid var(--yj-yellow);
-  outline-offset: 3px;
+  outline-offset: 3px
 }
 
 a {
-  text-underline-offset: 3px;
+  text-underline-offset: 3px
 }
 
 img,
 svg,
 canvas,
 video {
-  max-width: 100%;
+  max-width: 100%
 }
 
 #sidebar::-webkit-scrollbar,
 .table-wrap::-webkit-scrollbar,
 .ktbl-wrap::-webkit-scrollbar {
   width: 4px;
-  height: 6px;
+  height: 6px
 }
 
 #sidebar::-webkit-scrollbar-track,
 .table-wrap::-webkit-scrollbar-track,
 .ktbl-wrap::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent
 }
 
 #sidebar::-webkit-scrollbar-thumb,
 .table-wrap::-webkit-scrollbar-thumb,
 .ktbl-wrap::-webkit-scrollbar-thumb {
   background: #2a2a2a;
-  border-radius: 4px;
+  border-radius: 0
 }
 
 .skip-link {
@@ -74,16 +74,16 @@ video {
   background: var(--yj-yellow);
   color: var(--yj-black);
   font-weight: 800;
-  text-decoration: none;
+  text-decoration: none
 }
 
 .skip-link:focus {
-  transform: translateY(0);
+  transform: translateY(0)
 }
 
 @media print {
   * {
     box-shadow: none !important;
-    text-shadow: none !important;
+    text-shadow: none !important
   }
 }

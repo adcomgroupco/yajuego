@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-suelo="tinta">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YaJuego - Flow Ago-Dic 2026 + Influencers</title>
+<link rel="stylesheet" href="assets/css/adcom-tokens.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
   <style>
     :root {
-      --y: #ffc000;
+      --y: #ffd400;
       --b: #111;
       --w: #fff;
       --p1: #1a1a1a;
@@ -20,17 +21,17 @@
       --green: #26d07c;
       --red: #ff4d5e;
       --blue: #5fb3ff;
-      --side: 260px;
+      --side: 260px
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box }
+    html { scroll-behavior: smooth }
     body {
       min-height: 100vh;
       background: var(--b);
       color: var(--w);
       font-family: 'Poppins', sans-serif;
-      display: flex;
+      display: flex
     }
 
     #sidebar {
@@ -40,22 +41,20 @@
       background: #0d0d0d;
       border-right: 1px solid #202020;
       overflow-y: auto;
-      z-index: 20;
+      z-index: 20
     }
 
     .sb-head {
       padding: 24px 22px;
-      border-bottom: 1px solid #202020;
+      border-bottom: 1px solid #202020
     }
 
     .sb-kicker,
     .ey,
     .label {
       color: var(--y);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800
     }
 
     .sb-title {
@@ -63,20 +62,18 @@
       font-family: 'Poppins', sans-serif;
       font-size: 18px;
       line-height: 1.1;
-      font-weight: 800;
+      font-weight: 800
     }
 
     .sb-client {
       padding: 16px 22px 14px;
-      border-bottom: 1px solid #202020;
+      border-bottom: 1px solid #202020
     }
 
     .sb-client-label,
     .sb-section-label {
-      color: #666;
-      font-size: 9px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
+      color:var(--fg-muted);
+      font-size: 12px
     }
 
     .sb-client-name {
@@ -84,17 +81,17 @@
       color: var(--y);
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 800
     }
 
     .sb-client-url {
       margin-top: 2px;
-      color: #666;
-      font-size: 10px;
+      color:var(--fg-muted);
+      font-size: 12px
     }
 
-    .sb-nav { padding: 16px 0; }
-    .sb-section-label { padding: 12px 22px 6px; }
+    .sb-nav { padding: 16px 0 }
+    .sb-section-label { padding: 12px 22px 6px }
     .sb-item {
       display: grid;
       grid-template-columns: 24px 1fr;
@@ -105,11 +102,11 @@
       text-decoration: none;
       font-size: 12px;
       font-weight: 700;
-      position: relative;
+      position: relative
     }
 
-    .sb-item:hover { background: rgba(255, 192, 0, .08); color: var(--w); }
-    .sb-item.active { background: rgba(255, 192, 0, .08); color: var(--y); }
+    .sb-item:hover { background: rgba(255, 212, 0, .08); color: var(--w) }
+    .sb-item.active { background: rgba(255, 212, 0, .08); color: var(--y) }
     .sb-item.active::before {
       content: "";
       position: absolute;
@@ -117,42 +114,42 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: var(--y);
+      background: var(--y)
     }
 
     .sb-num {
       width: 24px;
       height: 24px;
-      border-radius: 5px;
+      border-radius: 0;
       background: var(--p2);
       color: var(--y);
       display: grid;
       place-items: center;
       font-family: 'Poppins', sans-serif;
-      font-size: 10px;
+      font-size: 12px
     }
 
     .sb-item.active .sb-num {
       background: var(--y);
-      color: var(--b);
+      color: var(--b)
     }
 
     .sb-foot {
       padding: 20px 22px;
       border-top: 1px solid #202020;
       color: var(--muted);
-      font-size: 11px;
-      line-height: 1.5;
+      font-size: 12px;
+      line-height: 1.5
     }
 
     main {
       width: calc(100% - var(--side));
-      margin-left: var(--side);
+      margin-left: var(--side)
     }
 
     section {
       padding: 64px min(5vw, 64px);
-      border-bottom: 1px solid #1f1f1f;
+      border-bottom: 1px solid #1f1f1f
     }
 
     .hero {
@@ -160,10 +157,10 @@
       display: grid;
       align-content: end;
       background:
-        linear-gradient(rgba(255, 192, 0, .045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 192, 0, .045) 1px, transparent 1px),
+        linear-gradient(rgba(255, 212, 0, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 212, 0, .045) 1px, transparent 1px),
         #111;
-      background-size: 64px 64px;
+      background-size: 64px 64px
     }
 
     h1 {
@@ -173,17 +170,17 @@
       font-size: clamp(42px, 7vw, 92px);
       line-height: .94;
       font-weight: 800;
-      letter-spacing: 0;
+      letter-spacing: 0
     }
 
     h1 span,
-    h2 span { color: var(--y); }
+    h2 span { color: var(--y) }
 
     .lead {
       max-width: 760px;
       color: var(--muted);
       font-size: 16px;
-      line-height: 1.8;
+      line-height: 1.8
     }
 
     .hero-metrics,
@@ -191,7 +188,7 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
-      margin-top: 34px;
+      margin-top: 34px
     }
 
     .metric,
@@ -199,17 +196,17 @@
     .phone-card {
       background: var(--p1);
       border: 1px solid var(--p2);
-      border-radius: 8px;
+      border-radius: var(--radius-sm)
     }
 
-    .metric { padding: 20px; }
+    .metric { padding: 20px }
     .metric strong {
       display: block;
       color: var(--y);
       font-family: 'Poppins', sans-serif;
       font-size: clamp(24px, 3vw, 42px);
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .metric small,
@@ -218,7 +215,7 @@
     td,
     .note {
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.65
     }
 
     h2 {
@@ -226,56 +223,56 @@
       font-size: clamp(30px, 4vw, 52px);
       line-height: 1.02;
       letter-spacing: 0;
-      margin: 10px 0 14px;
+      margin: 10px 0 14px
     }
 
     .section-head {
       max-width: 860px;
-      margin-bottom: 30px;
+      margin-bottom: 30px
     }
 
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      gap: 16px
     }
 
     .panel {
       padding: 22px;
-      min-height: 170px;
+      min-height: 170px
     }
 
     .panel h3 {
       font-family: 'Poppins', sans-serif;
       font-size: 20px;
       margin-bottom: 12px;
-      letter-spacing: 0;
+      letter-spacing: 0
     }
 
     .bar {
       height: 10px;
       margin: 16px 0 12px;
-      border-radius: 4px;
+      border-radius: 0;
       background: #252525;
-      overflow: hidden;
+      overflow: hidden
     }
 
-    .fill { height: 100%; background: var(--y); }
-    .fill.green { background: var(--green); }
-    .fill.blue { background: var(--blue); }
-    .fill.red { background: var(--red); }
+    .fill { height: 100%; background: var(--y) }
+    .fill.green { background: var(--green) }
+    .fill.blue { background: var(--blue) }
+    .fill.red { background: var(--red) }
 
     .table-wrap {
       overflow-x: auto;
       border: 1px solid var(--p2);
-      border-radius: 8px;
+      border-radius: var(--radius-sm)
     }
 
     table {
       width: 100%;
       min-width: 980px;
       border-collapse: collapse;
-      background: #151515;
+      background: #151515
     }
 
     th {
@@ -284,71 +281,67 @@
       padding: 12px 14px;
       text-align: left;
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
+      font-size: 12px
     }
 
     td {
       padding: 14px;
       border-bottom: 1px solid #252525;
       font-size: 13px;
-      vertical-align: top;
+      vertical-align: top
     }
 
-    td strong { color: var(--w); }
-    .money { color: var(--y); font-family: 'Poppins', sans-serif; font-weight: 800; }
-    tr.total-row td { background: #1c1c1c; border-top: 1px solid var(--p2); }
+    td strong { color: var(--w) }
+    .money { color: var(--y); font-family: 'Poppins', sans-serif; font-weight: 800 }
+    tr.total-row td { background: #1c1c1c; border-top: 1px solid var(--p2) }
     .monthly-flow th:nth-child(5),
     .monthly-flow td:nth-child(5) {
       background: rgba(255, 195, 0, .08);
       border-left: 1px solid rgba(255, 195, 0, .28);
-      border-right: 1px solid rgba(255, 195, 0, .28);
+      border-right: 1px solid rgba(255, 195, 0, .28)
     }
 
-    .monthly-flow th:nth-child(5) { background: #ffd24a; }
-    .monthly-flow tr.total-row td { background: #202020; }
-    .monthly-flow tr.total-row td:nth-child(5) { background: rgba(255, 195, 0, .16); }
+    .monthly-flow th:nth-child(5) { background: #ffd24a }
+    .monthly-flow tr.total-row td { background: #202020 }
+    .monthly-flow tr.total-row td:nth-child(5) { background: rgba(255, 195, 0, .16) }
 
     .monthly-flow tr.optimization-row td {
       background: rgba(38, 208, 124, .15);
-      border-top: 1px solid rgba(38, 208, 124, .38);
+      border-top: 1px solid rgba(38, 208, 124, .38)
     }
 
     .monthly-flow tr.optimization-row td:nth-child(5) {
-      background: rgba(38, 208, 124, .24);
+      background: rgba(38, 208, 124, .24)
     }
 
     .monthly-flow tr.grand-total-row td {
       background: rgba(255, 195, 0, .18);
       border-top: 1px solid rgba(255, 195, 0, .5);
-      border-bottom: 1px solid rgba(255, 195, 0, .5);
+      border-bottom: 1px solid rgba(255, 195, 0, .5)
     }
 
     .monthly-flow tr.grand-total-row td:nth-child(5) {
-      background: rgba(255, 195, 0, .3);
+      background: rgba(255, 195, 0, .3)
     }
 
     .mark {
       display: inline-block;
       margin-left: 8px;
       padding: 2px 7px;
-      border-radius: 20px;
+      border-radius: var(--radius);
       background: rgba(38, 208, 124, .14);
       color: var(--green);
       font-family: 'Poppins', sans-serif;
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
       vertical-align: middle;
-      white-space: nowrap;
+      white-space: nowrap
     }
 
     .timeline {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 12px
     }
 
     .flight {
@@ -359,33 +352,33 @@
       padding: 16px;
       background: var(--p1);
       border: 1px solid var(--p2);
-      border-radius: 8px;
+      border-radius: var(--radius-sm)
     }
 
     .flight strong {
       font-family: 'Poppins', sans-serif;
-      color: var(--w);
+      color: var(--w)
     }
 
-    .flight .bar { margin: 0; }
-    .flight small { color: var(--muted); display: block; margin-top: 4px; }
+    .flight .bar { margin: 0 }
+    .flight small { color: var(--muted); display: block; margin-top: 4px }
 
     .topview-grid {
       display: grid;
       grid-template-columns: minmax(280px, 360px) 1fr;
       gap: 18px;
-      align-items: stretch;
+      align-items: stretch
     }
 
     .topview-detail {
       display: grid;
-      gap: 16px;
+      gap: 16px
     }
 
     .phone-card {
       padding: 18px;
       display: grid;
-      gap: 16px;
+      gap: 16px
     }
 
     .phone {
@@ -393,11 +386,11 @@
       aspect-ratio: 9 / 16;
       margin: 0 auto;
       border: 8px solid #050505;
-      border-radius: 30px;
+      border-radius: var(--radius);
       background: #101010;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 22px 50px rgba(0, 0, 0, .38);
+      box-shadow: none
     }
 
     .phone::before {
@@ -408,9 +401,9 @@
       width: 72px;
       height: 18px;
       transform: translateX(-50%);
-      border-radius: 20px;
+      border-radius: var(--radius);
       background: #000;
-      z-index: 4;
+      z-index: 4
     }
 
     .creative {
@@ -421,23 +414,23 @@
       justify-content: space-between;
       padding: 44px 18px 22px;
       background:
-        linear-gradient(150deg, rgba(255, 192, 0, .28), transparent 42%),
+        linear-gradient(150deg, rgba(255, 212, 0, .28), transparent 42%),
         linear-gradient(15deg, rgba(38, 208, 124, .25), transparent 48%),
-        #151515;
+        #151515
     }
 
     .creative.final {
       background:
         linear-gradient(150deg, rgba(255, 77, 94, .24), transparent 42%),
-        linear-gradient(15deg, rgba(255, 192, 0, .24), transparent 48%),
-        #151515;
+        linear-gradient(15deg, rgba(255, 212, 0, .24), transparent 48%),
+        #151515
     }
 
     .creative.semi {
       background:
         linear-gradient(150deg, rgba(95, 179, 255, .24), transparent 42%),
-        linear-gradient(15deg, rgba(255, 192, 0, .23), transparent 48%),
-        #151515;
+        linear-gradient(15deg, rgba(255, 212, 0, .23), transparent 48%),
+        #151515
     }
 
     .phone-logo {
@@ -445,19 +438,19 @@
       height: 28px;
       display: grid;
       place-items: center;
-      border-radius: 5px;
+      border-radius: 0;
       background: var(--y);
       color: var(--b);
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 800
     }
 
     .avatar-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 14px;
+      margin-top: 14px
     }
 
     .avatar {
@@ -465,13 +458,13 @@
       height: 34px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--y), var(--green));
-      border: 2px solid #fff;
+      border: 2px solid #fff
     }
 
     .avatar-row span {
       color: #fff;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 700
     }
 
     .creative h3 {
@@ -479,24 +472,24 @@
       font-size: 26px;
       line-height: 1;
       letter-spacing: 0;
-      margin-top: 16px;
+      margin-top: 16px
     }
 
     .creative p {
       color: #e8e8e8;
       font-size: 13px;
       line-height: 1.35;
-      margin-top: 10px;
+      margin-top: 10px
     }
 
     .cta {
       align-self: flex-start;
       padding: 10px 14px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       background: var(--w);
       color: var(--b);
       font-weight: 800;
-      font-size: 12px;
+      font-size: 12px
     }
 
     .ui-rail {
@@ -505,14 +498,14 @@
       bottom: 84px;
       display: grid;
       gap: 11px;
-      z-index: 3;
+      z-index: 3
     }
 
     .dot {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.88)
     }
 
     .caption {
@@ -521,8 +514,8 @@
       right: 54px;
       bottom: 22px;
       color: #fff;
-      font-size: 11px;
-      line-height: 1.35;
+      font-size: 12px;
+      line-height: 1.35
     }
 
     .badge-18 {
@@ -533,69 +526,69 @@
       background: rgba(0,0,0,.6);
       color: var(--w);
       border: 1px solid rgba(255,255,255,.3);
-      border-radius: 5px;
+      border-radius: 0;
       padding: 3px 6px;
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: .06em;
+      letter-spacing: .06em
     }
 
     .phone-card h3 {
       font-family: 'Poppins', sans-serif;
-      font-size: 18px;
+      font-size: 18px
     }
 
     .spec-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 14px
     }
 
     .preview-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
-      margin-bottom: 26px;
+      margin-bottom: 26px
     }
 
     .preview-card {
       background: var(--p1);
       border: 1px solid var(--p2);
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 18px;
       display: grid;
-      gap: 14px;
+      gap: 14px
     }
 
-    .preview-card .plat { color: var(--y); }
+    .preview-card .plat { color: var(--y) }
     .preview-card h4 {
       font-family: 'Poppins', sans-serif;
-      font-size: 16px;
+      font-size: 16px
     }
 
     .preview-card .phone {
       width: min(100%, 190px);
       border-width: 6px;
-      border-radius: 24px;
+      border-radius: var(--radius)
     }
 
-    .preview-card .creative { padding: 40px 14px 18px; }
-    .preview-card .creative h3 { font-size: 22px; }
-    .preview-card .creative p { font-size: 11px; margin-top: 8px; }
+    .preview-card .creative { padding: 40px 14px 18px }
+    .preview-card .creative h3 { font-size: 22px }
+    .preview-card .creative p { font-size:var(--fs-body-min); margin-top: 8px }
 
     .banner-mock {
       width: 100%;
       aspect-ratio: 16 / 10;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       border: 1px solid var(--p2);
       background:
-        linear-gradient(135deg, rgba(255,192,0,.22), transparent 55%),
+        linear-gradient(135deg, rgba(255,212,0,.22), transparent 55%),
         linear-gradient(315deg, rgba(38,208,124,.16), transparent 50%),
         #101010;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 16px;
+      padding: 16px
     }
 
     .banner-mock .b-logo {
@@ -606,14 +599,14 @@
       font-weight: 800;
       font-size: 12px;
       padding: 4px 9px;
-      border-radius: 5px;
+      border-radius: 0
     }
 
     .banner-mock .b-head {
       font-family: 'Poppins', sans-serif;
       font-size: 22px;
       line-height: 1.05;
-      color: var(--w);
+      color: var(--w)
     }
 
     .banner-mock .b-cta {
@@ -621,43 +614,42 @@
       background: var(--w);
       color: var(--b);
       font-weight: 800;
-      font-size: 11px;
+      font-size: 12px;
       padding: 7px 12px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm)
     }
 
     .source {
       margin-top: 22px;
-      font-size: 12px;
-    }
+      font-size:var(--fs-body-min)}
 
-    .source a { color: var(--y); }
+    .source a { color: var(--y) }
 
     .pill {
       display: inline-block;
       margin: 0 6px 6px 0;
       padding: 5px 10px;
-      border-radius: 20px;
+      border-radius: var(--radius);
       background: var(--p2);
       color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 700
     }
 
     @media (max-width: 980px) {
-      body { display: block; }
-      #sidebar { position: static; width: 100%; }
-      .sb-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .sb-section-label { display: none; }
-      main { width: 100%; margin-left: 0; }
-      .hero-metrics, .kpis, .grid-3, .topview-grid, .spec-list, .preview-grid { grid-template-columns: 1fr; }
-      .flight { grid-template-columns: 1fr; }
+      body { display: block }
+      #sidebar { position: static; width: 100% }
+      .sb-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) }
+      .sb-section-label { display: none }
+      main { width: 100%; margin-left: 0 }
+      .hero-metrics, .kpis, .grid-3, .topview-grid, .spec-list, .preview-grid { grid-template-columns: 1fr }
+      .flight { grid-template-columns: 1fr }
     }
 
     @media (max-width: 620px) {
-      section { padding: 42px 22px; }
-      .sb-nav { grid-template-columns: 1fr; }
-      .hero { min-height: auto; padding-top: 86px; }
+      section { padding: 42px 22px }
+      .sb-nav { grid-template-columns: 1fr }
+      .hero { min-height: auto; padding-top: 86px }
     }
   </style>
 </head>
@@ -950,7 +942,7 @@
         <article class="preview-card">
           <div>
             <div class="plat label">Programmatic</div>
-            <h4>Display contextual</h4>
+            <h3>Display contextual</h3>
           </div>
           <div class="banner-mock">
             <div class="b-logo">YaJuego</div>
@@ -1035,12 +1027,12 @@
       let current = "resumen";
       sections.forEach((section) => {
         const box = section.getBoundingClientRect();
-        if (box.top <= 130) current = section.id;
+        if (box.top <= 130) current = section.id
       });
 
       navItems.forEach((item) => {
-        item.classList.toggle("active", item.getAttribute("href") === `#${current}`);
-      });
+        item.classList.toggle("active", item.getAttribute("href") === `#${current}`)
+      })
     };
 
     window.addEventListener("scroll", setActiveItem, { passive: true });

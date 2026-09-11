@@ -1,16 +1,16 @@
 :root {
-  --y: #ffc000;
+  --y: #ffd400;
   --b: #111;
   --w: #fff;
   --g1: #1a1a1a;
   --g2: #282828;
   --g3: #777;
-  --muted: #a7a7a7;
+  --muted: #a7a7a7
 }
 
 * {
   margin: 0;
-  padding: 0;
+  padding: 0
 }
 
 body {
@@ -19,18 +19,18 @@ body {
   background: var(--b);
   color: var(--w);
   padding: 56px 40px 72px;
-  overflow-x: hidden;
+  overflow-x: hidden
 }
 
 .bg-grid {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 192, 0, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 192, 0, .045) 1px, transparent 1px);
+    linear-gradient(rgba(255, 212, 0, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 212, 0, .045) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 0
 }
 
 .blob {
@@ -40,30 +40,28 @@ body {
   right: -18vw;
   top: -18vw;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 192, 0, .16) 0%, rgba(255, 192, 0, .05) 42%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 212, 0, .16) 0%, rgba(255, 212, 0, .05) 42%, transparent 70%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 0
 }
 
 .wrap {
   position: relative;
   z-index: 2;
   width: min(1080px, 100%);
-  margin: 0 auto;
+  margin: 0 auto
 }
 
 /* ---------- Hero ---------- */
 
 .eyebrow {
   color: var(--y);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
   margin-bottom: 18px;
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: center
 }
 
 .eyebrow::before {
@@ -71,7 +69,7 @@ body {
   width: 28px;
   height: 1px;
   background: var(--y);
-  flex: none;
+  flex: none
 }
 
 h1 {
@@ -80,18 +78,18 @@ h1 {
   line-height: .94;
   letter-spacing: -.02em;
   font-weight: 800;
-  margin-bottom: 22px;
+  margin-bottom: 22px
 }
 
 h1 span {
-  color: var(--y);
+  color: var(--y)
 }
 
 .lede {
   max-width: 680px;
   color: var(--muted);
   font-size: 15.5px;
-  line-height: 1.8;
+  line-height: 1.8
 }
 
 /* ---------- Banda de cifras ---------- */
@@ -103,13 +101,13 @@ h1 span {
   margin: 40px 0 8px;
   background: var(--g2);
   border: 1px solid var(--g2);
-  border-radius: 8px;
-  overflow: hidden;
+  border-radius: var(--radius-sm);
+  overflow: hidden
 }
 
 .stat {
   background: rgba(26, 26, 26, .92);
-  padding: 22px 20px;
+  padding: 22px 20px
 }
 
 .stat b {
@@ -119,28 +117,27 @@ h1 span {
   font-weight: 800;
   letter-spacing: -.02em;
   color: var(--y);
-  line-height: 1.1;
+  line-height: 1.1
 }
 
 .stat span {
   display: block;
   margin-top: 7px;
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.5;
-  color: var(--g3);
-}
+  color:var(--fg-muted)}
 
 .stats-note {
-  color: #5a5a5a;
-  font-size: 11px;
+  color:var(--fg-muted);
+  font-size:var(--fs-body-min);
   line-height: 1.6;
-  margin-bottom: 56px;
+  margin-bottom: 56px
 }
 
 /* ---------- Bloques por frente ---------- */
 
 .track {
-  margin-bottom: 54px;
+  margin-bottom: 54px
 }
 
 .track-head {
@@ -150,21 +147,21 @@ h1 span {
   padding-bottom: 14px;
   margin-bottom: 22px;
   border-bottom: 1px solid var(--g2);
-  flex-wrap: wrap;
+  flex-wrap: wrap
 }
 
 .track-head h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 24px;
   font-weight: 800;
-  letter-spacing: -.02em;
+  letter-spacing: -.02em
 }
 
 .track-head em {
   font-style: normal;
-  color: var(--g3);
+  color:var(--fg-muted);
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.5
 }
 
 /* ---------- Fila de entregable ---------- */
@@ -178,11 +175,11 @@ h1 span {
   color: var(--w);
   background: rgba(26, 26, 26, .92);
   border: 1px solid var(--g2);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 26px 28px;
   margin-bottom: 14px;
   overflow: hidden;
-  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease
 }
 
 .item::after {
@@ -195,26 +192,26 @@ h1 span {
   background: var(--y);
   transform: scaleY(.18);
   transform-origin: top;
-  transition: transform .22s ease;
+  transition: transform .22s ease
 }
 
 .item:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 192, 0, .5);
-  background: #1e1e1e;
+  border-color: rgba(255, 212, 0, .5);
+  background: #1e1e1e
 }
 
 .item:hover::after {
-  transform: scaleY(1);
+  transform: scaleY(1)
 }
 
 .item .num {
   font-family: 'Poppins', sans-serif;
-  color: rgba(255, 192, 0, .28);
+  color: rgba(255, 212, 0, .28);
   font-size: 40px;
   line-height: .9;
   font-weight: 800;
-  grid-row: 1 / span 4;
+  grid-row: 1 / span 4
 }
 
 .item h3 {
@@ -222,27 +219,25 @@ h1 span {
   font-size: 21px;
   line-height: 1.15;
   letter-spacing: -.02em;
-  margin-bottom: 8px;
+  margin-bottom: 8px
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 13px;
+  margin-bottom: 13px
 }
 
 .meta i {
   font-style: normal;
   padding: 4px 9px;
-  border-radius: 4px;
+  border-radius: 0;
   background: rgba(255, 255, 255, .05);
   border: 1px solid var(--g2);
   color: #8d8d8d;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500
 }
 
 .item p {
@@ -250,12 +245,12 @@ h1 span {
   font-size: 14px;
   line-height: 1.72;
   margin-bottom: 15px;
-  max-width: 74ch;
+  max-width: 74ch
 }
 
 .item p strong {
   color: #d8d8d8;
-  font-weight: 500;
+  font-weight: 500
 }
 
 .keys {
@@ -263,15 +258,15 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 8px 22px;
-  margin-bottom: 18px;
+  margin-bottom: 18px
 }
 
 .keys li {
   position: relative;
   padding-left: 15px;
   color: #949494;
-  font-size: 12.8px;
-  line-height: 1.6;
+  font-size:var(--fs-body-min);
+  line-height: 1.6
 }
 
 .keys li::before {
@@ -282,12 +277,12 @@ h1 span {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: rgba(255, 192, 0, .55);
+  background: rgba(255, 212, 0, .55)
 }
 
 .keys li b {
   color: var(--w);
-  font-weight: 700;
+  font-weight: 700
 }
 
 .tag {
@@ -296,13 +291,11 @@ h1 span {
   gap: 7px;
   padding: 7px 13px;
   border-radius: 999px;
-  background: rgba(255, 192, 0, .1);
+  background: rgba(255, 212, 0, .1);
   color: var(--y);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  width: fit-content;
+  width: fit-content
 }
 
 /* ---------- Materiales de apoyo ---------- */
@@ -310,7 +303,7 @@ h1 span {
 .files {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: 14px
 }
 
 .file {
@@ -318,14 +311,14 @@ h1 span {
   text-decoration: none;
   background: rgba(26, 26, 26, .92);
   border: 1px solid var(--g2);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 22px;
-  transition: transform .22s ease, border-color .22s ease;
+  transition: transform .22s ease, border-color .22s ease
 }
 
 .file:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 192, 0, .5);
+  border-color: rgba(255, 212, 0, .5)
 }
 
 .file b {
@@ -335,14 +328,14 @@ h1 span {
   font-weight: 700;
   color: var(--w);
   line-height: 1.3;
-  margin-bottom: 9px;
+  margin-bottom: 9px
 }
 
 .file span {
   display: block;
-  color: var(--g3);
+  color:var(--fg-muted);
   font-size: 12.5px;
-  line-height: 1.6;
+  line-height: 1.6
 }
 
 .file i {
@@ -350,21 +343,18 @@ h1 span {
   display: inline-block;
   margin-bottom: 12px;
   color: var(--y);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700
 }
 
 /* ---------- Hilo conductor ---------- */
 
 .thread {
   border: 1px solid var(--g2);
-  border-left: 3px solid var(--y);
-  border-radius: 8px;
-  background: rgba(255, 192, 0, .035);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 212, 0, .035);
   padding: 32px 34px;
-  margin-top: 54px;
+  margin-top: 54px
 }
 
 .thread h2 {
@@ -372,14 +362,14 @@ h1 span {
   font-size: 22px;
   font-weight: 800;
   letter-spacing: -.02em;
-  margin-bottom: 16px;
+  margin-bottom: 16px
 }
 
 .thread ol {
   list-style: none;
   counter-reset: step;
   display: grid;
-  gap: 14px;
+  gap: 14px
 }
 
 .thread li {
@@ -388,7 +378,7 @@ h1 span {
   padding-left: 38px;
   color: var(--muted);
   font-size: 14px;
-  line-height: 1.72;
+  line-height: 1.72
 }
 
 .thread li::before {
@@ -401,16 +391,16 @@ h1 span {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 192, 0, .14);
+  background: rgba(255, 212, 0, .14);
   color: var(--y);
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 800
 }
 
 .thread li b {
   color: var(--w);
-  font-weight: 700;
+  font-weight: 700
 }
 
 /* ---------- Footer ---------- */
@@ -424,57 +414,57 @@ h1 span {
   margin-top: 44px;
   padding-top: 22px;
   border-top: 1px solid var(--g2);
-  color: #555;
-  font-size: 11.5px;
+  color:var(--fg-muted);
+  font-size: 12px
 }
 
 .footer a {
   color: var(--y);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 700
 }
 
 .footer a:hover {
-  text-decoration: underline;
+  text-decoration: underline
 }
 
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1024px) {
   .stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr))
   }
 
   .files {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 }
 
 @media (max-width: 760px) {
   body {
-    padding: 34px 22px 56px;
+    padding: 34px 22px 56px
   }
 
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 
   .item {
     grid-template-columns: 1fr;
-    padding: 24px 22px;
+    padding: 24px 22px
   }
 
   .item .num {
     grid-row: auto;
     font-size: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 10px
   }
 
   .keys {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 
   .thread {
-    padding: 26px 22px;
+    padding: 26px 22px
   }
 }
