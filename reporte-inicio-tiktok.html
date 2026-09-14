@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reporte estratégico del inicio de la pauta de TikTok de YaJuego, con comparación frente a Meta y Google y un plan de acción centrado en contenido.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" href="data:,">
+  <title>YaJuego | Inicio de pauta en TikTok</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/adcom.css">
+  <script defer src="assets/js/adcom.js"></script>
+  <style>
+    .report-section{padding-block:var(--s-7)}
+    .report-section + .report-section{padding-top:0}
+    .report-section[id]{scroll-margin-top:86px}
+    .thesis{max-width:18ch;font-size:clamp(2.7rem,5.3vw,4.5rem);letter-spacing:-.04em}
+    .hero-tag{display:inline-flex;align-items:center;gap:9px;margin-bottom:var(--s-4);font-size:.78rem;font-weight:600;color:var(--fg-muted)}
+    .hero-tag::before{content:"";width:9px;height:9px;background:var(--accent);border-radius:50%}
+    .hero-callout{align-self:stretch;display:flex;flex-direction:column;justify-content:space-between;gap:var(--s-5);padding:var(--s-5);border:1px solid var(--rule);border-radius:var(--radius);background:var(--raised)}
+    .hero-callout .label{font-size:var(--fs-min);font-weight:700;color:var(--fg-muted)}
+    .hero-callout strong{display:block;font-size:clamp(3.2rem,8vw,6.7rem);letter-spacing:-.04em;line-height:.85;color:var(--accent)}
+    .hero-callout p{max-width:31ch;color:var(--fg-secondary);font-size:.92rem}
+    .data-note{margin-top:var(--s-4);font-size:var(--fs-body-min);color:var(--fg-muted)}
+    .verdict{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:var(--s-col);align-items:start;border-top:1px solid var(--rule-strong);padding-top:var(--s-5)}
+    .verdict h3{font-size:clamp(1.35rem,2.5vw,2.1rem);max-width:15ch}
+    .verdict-copy{display:grid;gap:var(--s-4);max-width:68ch;color:var(--fg-secondary)}
+    .verdict-copy strong{color:var(--fg)}
+    .funnel{display:grid;grid-template-columns:repeat(4,1fr);margin-top:var(--s-6);border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong)}
+    .funnel-step{padding:var(--s-5) var(--s-4) var(--s-5) 0;border-right:1px solid var(--rule);min-width:0}
+    .funnel-step + .funnel-step{padding-left:var(--s-4)}
+    .funnel-step:last-child{border-right:0}
+    .funnel-step small{display:block;color:var(--fg-muted);font-weight:600}
+    .funnel-step b{display:block;margin-top:5px;font-size:clamp(1.65rem,3.2vw,2.65rem);letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+    .funnel-step span{display:block;margin-top:8px;color:var(--fg-secondary);font-size:var(--fs-body-min)}
+    .funnel-step.is-focus b{color:var(--accent-fg)}
+    .compare-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s-col);margin-top:var(--s-6)}
+    .compare-block{border-top:1px solid var(--rule-strong);padding-top:var(--s-4)}
+    .compare-block h3{font-size:1.1rem;letter-spacing:-.02em}
+    .compare-row{display:grid;grid-template-columns:76px 1fr 86px;gap:12px;align-items:center;margin-top:15px;font-size:var(--fs-body-min)}
+    .compare-row span:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+    .track{height:10px;background:var(--sunken)}
+    .track i{display:block;height:100%;background:var(--serie-1)}
+    .compare-row.recent .track i{background:var(--serie-2)}
+    .delta{margin-top:var(--s-4);padding-top:var(--s-4);border-top:1px solid var(--rule);color:var(--fg-secondary);font-size:.9rem}
+    .delta b{color:var(--fg)}
+    .channel-table td:first-child{font-weight:800;color:var(--fg)}
+    .channel-table .role{max-width:30ch}
+    .metric-good{color:var(--pos);font-weight:700}
+    .metric-focus{color:var(--fg);font-weight:700}
+    .caveat{padding:var(--s-4) 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);color:var(--fg-secondary);font-size:.9rem}
+    .role-flow{display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--s-6);border:1px solid var(--rule-strong)}
+    .role-step{position:relative;padding:var(--s-5);background:var(--raised)}
+    .role-step + .role-step{border-left:1px solid var(--rule-strong)}
+    .role-step small{display:block;color:var(--fg-muted);font-weight:700}
+    .role-step h3{margin-top:8px;font-size:clamp(1.2rem,2vw,1.7rem)}
+    .role-step p{margin-top:10px;color:var(--fg-secondary);font-size:.9rem}
+    .role-step::after{content:"";position:absolute;right:-8px;top:50%;width:15px;height:15px;background:var(--raised);border-top:1px solid var(--rule-strong);border-right:1px solid var(--rule-strong);transform:translateY(-50%) rotate(45deg);z-index:2}
+    .role-step:last-child::after{display:none}
+    .creative-name{min-width:230px;font-weight:700;color:var(--fg)}
+    .creative-name small{display:block;margin-top:3px;color:var(--fg-muted);font-weight:500}
+    .creative-table td{font-size:.86rem}
+    .creative-table .decision{min-width:185px;color:var(--fg-secondary)}
+    .content-lessons{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-col);margin-top:var(--s-6)}
+    .lesson{border-top:1px solid var(--rule-strong);padding-top:var(--s-4)}
+    .lesson .number{font-size:var(--fs-min);font-weight:700;color:var(--fg-muted)}
+    .lesson h3{margin-top:10px;font-size:clamp(1.2rem,2vw,1.65rem)}
+    .lesson p{margin-top:10px;color:var(--fg-secondary);font-size:.92rem}
+    .audit-list{margin:var(--s-5) 0 0;padding:0;list-style:none;border-top:1px solid var(--rule-strong)}
+    .audit-list li{display:grid;grid-template-columns:minmax(170px,.7fr) minmax(0,1.3fr);gap:var(--s-col);padding:var(--s-4) 0;border-bottom:1px solid var(--rule)}
+    .audit-list b{font-size:.92rem}
+    .audit-list span{color:var(--fg-secondary)}
+    .strategy-matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin-top:var(--s-6)}
+    .strategy-matrix article{padding:var(--s-5);border:1px solid var(--rule);border-radius:var(--radius);background:var(--raised)}
+    .strategy-matrix article:first-child{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--raised))}
+    .strategy-matrix small{color:var(--fg-muted);font-weight:700}
+    .strategy-matrix h3{margin-top:9px;font-size:1.25rem}
+    .strategy-matrix p{margin-top:10px;color:var(--fg-secondary);font-size:.9rem}
+    .formula{display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--s-5);border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong)}
+    .formula div{padding:var(--s-4);border-right:1px solid var(--rule)}
+    .formula div:first-child{padding-left:0}
+    .formula div:last-child{border-right:0;padding-right:0}
+    .formula b{display:block;font-size:.95rem}
+    .formula span{display:block;margin-top:7px;color:var(--fg-secondary);font-size:.85rem}
+    .plan{counter-reset:phase;margin-top:var(--s-6);border-top:1px solid var(--rule-strong)}
+    .phase{counter-increment:phase;display:grid;grid-template-columns:92px minmax(190px,.75fr) minmax(0,1.25fr);gap:var(--s-col);padding:var(--s-5) 0;border-bottom:1px solid var(--rule)}
+    .phase::before{content:"0" counter(phase);font-size:clamp(1.55rem,3vw,2.4rem);font-weight:800;letter-spacing:-.05em;color:var(--accent-fg)}
+    .phase h3{font-size:1.2rem}
+    .phase p{color:var(--fg-secondary);font-size:.92rem}
+    .phase ul{margin:12px 0 0;padding-left:1.1rem;color:var(--fg-secondary);font-size:.9rem}
+    .phase li + li{margin-top:7px}
+    .guardrails{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s-4);margin-top:var(--s-6)}
+    .guardrail{border-top:1px solid var(--rule-strong);padding-top:var(--s-4)}
+    .guardrail b{display:block;font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:-.04em}
+    .guardrail span{display:block;margin-top:5px;color:var(--fg-secondary);font-size:.82rem}
+    .sources{font-size:.86rem;color:var(--fg-secondary)}
+    .sources ol{margin:var(--s-5) 0 0;padding-left:1.3rem;columns:2;column-gap:var(--s-col)}
+    .sources li{break-inside:avoid;margin:0 0 12px}
+    .sources a{font-weight:600;color:var(--fg)}
+    .method{margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--rule);max-width:80ch;color:var(--fg-muted);font-size:var(--fs-body-min)}
+    @media(max-width:900px){
+      .verdict,.compare-grid{grid-template-columns:1fr}
+      .content-lessons,.strategy-matrix{grid-template-columns:1fr}
+      .funnel,.guardrails{grid-template-columns:repeat(2,1fr)}
+      .funnel-step:nth-child(2){border-right:0}
+      .funnel-step:nth-child(n+3){border-top:1px solid var(--rule)}
+      .role-flow{grid-template-columns:1fr}
+      .role-step + .role-step{border-left:0;border-top:1px solid var(--rule-strong)}
+      .role-step::after{right:auto;left:50%;top:auto;bottom:-8px;transform:translateX(-50%) rotate(135deg)}
+      .phase{grid-template-columns:60px 1fr}
+      .phase > div{grid-column:2}
+    }
+    @media(max-width:620px){
+      .funnel,.guardrails{grid-template-columns:1fr}
+      .funnel-step,.funnel-step + .funnel-step{padding:var(--s-4) 0;border-right:0;border-top:1px solid var(--rule)}
+      .funnel-step:first-child{border-top:0}
+      .audit-list li{grid-template-columns:1fr;gap:8px}
+      .formula{grid-template-columns:1fr}
+      .formula div,.formula div:first-child,.formula div:last-child{padding:var(--s-4) 0;border-right:0;border-bottom:1px solid var(--rule)}
+      .formula div:last-child{border-bottom:0}
+      .phase{grid-template-columns:44px 1fr;gap:var(--s-4)}
+      .sources ol{columns:1}
+    }
+    @media print{
+      .report-section{padding-block:34px}
+      .portada{padding-block:34px}
+      .role-step::after{display:none}
+      a{color:inherit;text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#contenido">Ir al reporte</a>
+
+<header class="masthead">
+  <a class="wordmark" href="index.html"><i></i>YaJuego <span>documentos</span></a>
+  <nav aria-label="Secciones del reporte">
+    <a href="#resultado">Resultado</a>
+    <a href="#canales">Canales</a>
+    <a href="#contenido">Contenido</a>
+    <a href="#plan">Plan</a>
+  </nav>
+  <span class="stamp">20 ago–13 sep · 2026</span>
+</header>
+
+<main id="top">
+  <section class="portada" data-suelo="tinta">
+    <div class="portada-wrap">
+      <div class="portada-copy">
+        <span class="hero-tag">Reporte de inicio · TikTok Ads</span>
+        <h1 class="thesis">La atención llegó. <em>Ahora, a convertirla.</em></h1>
+        <p class="portada-lede">TikTok inició con una ventaja real en costo de atención: <b>$75 por clic</b> y <b>$113 por visita a landing</b>. La siguiente oportunidad es convertir ese interés en una base creciente de registros, alineando el contenido con el objetivo comercial.</p>
+        <div class="portada-acciones">
+          <a class="button button-primary" href="#plan">Ver decisiones</a>
+          <a class="button button-ghost" href="index.html">Volver al hub</a>
+        </div>
+      </div>
+      <aside class="portada-visual hero-callout" aria-label="Señal principal">
+        <span class="label">Registro reportado</span>
+        <strong class="tnum">17</strong>
+        <p>Con $1,44 millones invertidos. Esta primera base permitirá establecer el CPA de referencia cuando el evento y la atribución queden alineados.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="report-section wrap" id="resultado">
+    <div class="titulo-seccion">
+      <h2>Un buen arranque de tráfico con un <em>siguiente salto de negocio</em></h2>
+      <p>El canal encuentra atención más económica que Meta y Google. La promesa creativa, la optimización y la señal de conversión pueden alinearse ahora en una misma historia.</p>
+    </div>
+
+    <div class="verdict">
+      <h3>Veredicto ejecutivo</h3>
+      <div class="verdict-copy">
+        <p><strong>Lo rescatable:</strong> la gramática de meme futbolero sí consigue detener el scroll. Las mejores piezas superan 52% de visualización a dos segundos y dos anuncios llevan tráfico a la landing por menos de $80.</p>
+        <p><strong>La siguiente oportunidad:</strong> llevar la promesa de “bono de bienvenida” desde el nombre del anuncio hasta la historia: beneficio, condiciones y paso de registro antes del cierre. A la vez, conviene llevar el grupo desde el evento <code>SHOPPING</code> hacia el evento de registro.</p>
+        <p><strong>Decisión:</strong> continuar TikTok y evolucionar su sistema. Conservar los hooks ganadores, insertar producto y oferta dentro de la historia, concentrar los creativos activos y alinear la señal de optimización antes de aumentar presupuesto.</p>
+      </div>
+    </div>
+
+    <div class="funnel" aria-label="Embudo de TikTok">
+      <div class="funnel-step">
+        <small>Impresiones</small>
+        <b>566.442</b>
+        <span>CPM $2.543</span>
+      </div>
+      <div class="funnel-step">
+        <small>Clics</small>
+        <b>19.258</b>
+        <span>CTR 3,40% · CPC $75</span>
+      </div>
+      <div class="funnel-step">
+        <small>Visitas a landing</small>
+        <b>12.747</b>
+        <span>66,2% de los clics · $113</span>
+      </div>
+      <div class="funnel-step is-focus">
+        <small>Registros reportados</small>
+        <b>17</b>
+        <span>0,13% de las visitas · CPA $84.720</span>
+      </div>
+    </div>
+    <p class="data-note">Inversión total: $1.440.232 COP. Alcance: 224.758 personas. Frecuencia: 2,52. Periodo de días completos: 20 de agosto al 13 de septiembre de 2026.</p>
+
+    <div class="compare-grid">
+      <div class="compare-block">
+        <h3>La entrega cambió de escala</h3>
+        <div class="compare-row">
+          <span>21–27 ago</span><div class="track"><i style="width:100%"></i></div><span>288.931 imp.</span>
+        </div>
+        <div class="compare-row recent">
+          <span>7–13 sep</span><div class="track"><i style="width:19.1%"></i></div><span>55.195 imp.</span>
+        </div>
+        <p class="delta">Con inversión prácticamente igual, las impresiones pasaron de 288.931 a 55.195 y el CPM de $1.446 a $7.607. Esta evolución invita a renovar contenidos y observar por separado la mezcla de inventario y la presión de subasta.</p>
+      </div>
+      <div class="compare-block">
+        <h3>La atención temprana evolucionó</h3>
+        <div class="compare-row">
+          <span>21–27 ago</span><div class="track"><i style="width:100%"></i></div><span>42,4% a 2 s</span>
+        </div>
+        <div class="compare-row recent">
+          <span>7–13 sep</span><div class="track"><i style="width:87.5%"></i></div><span>37,1% a 2 s</span>
+        </div>
+        <p class="delta">La retención a dos segundos pasó de 42,4% a 37,1%, mientras el CTR llegó a 11,18%. La nueva tanda puede recuperar profundidad de visualización y conservar esa capacidad de generar clics.</p>
+      </div>
+    </div>
+
+    <div class="bloque-aviso" style="margin-top:var(--s-6)">
+      <h3>La cifra de “compras” merece una lectura operativa</h3>
+      <p>TikTok devuelve 25.757 eventos <code>complete_payment</code>, un volumen superior al total de clics. Puede reflejar repeticiones o una atribución amplia; por ahora se interpreta como actividad del evento y se validará antes de asociarla con compradores únicos, ventas o retorno.</p>
+    </div>
+  </section>
+
+  <section class="report-section wrap" id="canales">
+    <div class="titulo-seccion">
+      <h2>TikTok gana en descubrimiento; <em>Meta y Google completan el recorrido</em></h2>
+      <p>La comparación es direccional: Meta es una cuenta madura con múltiples campañas y Google mezcla acciones de conversión. Sirve para definir el rol del contenido, no para declarar un ganador absoluto.</p>
+    </div>
+
+    <div class="tabla-abierta channel-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Canal</th>
+            <th>Inversión</th>
+            <th>CPM</th>
+            <th>CTR</th>
+            <th>Costo por clic</th>
+            <th class="role">Lectura estratégica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TikTok</td>
+            <td>$1,44 M</td>
+            <td class="metric-good">$2.543</td>
+            <td>3,40%</td>
+            <td class="metric-good">$75</td>
+            <td class="role">Descubrimiento y prueba de hooks. La señal de registro está en etapa de alineación.</td>
+          </tr>
+          <tr>
+            <td>Meta</td>
+            <td>$46,75 M</td>
+            <td>$5.362</td>
+            <td>0,93% enlace</td>
+            <td>$574 enlace</td>
+            <td class="role">Escala de conversión y retargeting. Reportó 3.329 registros a $14.044.</td>
+          </tr>
+          <tr>
+            <td>Google Search</td>
+            <td>$172,63 M</td>
+            <td>—</td>
+            <td class="metric-good">7,58%</td>
+            <td>$5.048</td>
+            <td class="role">Captura intención ya existente. El contenido debe responder con máxima claridad a la búsqueda.</td>
+          </tr>
+          <tr>
+            <td>Google Demand Gen</td>
+            <td>$19,87 M</td>
+            <td>$4.032</td>
+            <td>0,91%</td>
+            <td>$442</td>
+            <td class="role">Demanda visual multiformato. Buen referente para combinar video, imagen y CTA.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caveat"><strong>Lectura comparable de conversiones:</strong> el evento de Meta es <code>complete_registration</code>; Google agrega varias acciones; TikTok reporta <code>user_registration</code> y <code>complete_payment</code>. Cada plataforma tiene una definición distinta, por eso la comparación se concentra en costos de medios y función del canal.</p>
+
+    <div class="role-flow" aria-label="Rol recomendado de los canales">
+      <article class="role-step">
+        <small>01 · TikTok</small>
+        <h3>Crear significado</h3>
+        <p>Hook cultural, tensión futbolera y una razón clara para conocer YaJuego.</p>
+      </article>
+      <article class="role-step">
+        <small>02 · Meta</small>
+        <h3>Demostrar el beneficio</h3>
+        <p>Retargeting, prueba de producto, bono explicado y repetición eficiente.</p>
+      </article>
+      <article class="role-step">
+        <small>03 · Google</small>
+        <h3>Capturar intención</h3>
+        <p>Resolver la búsqueda de marca, registro y producto cuando el interés ya existe.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="report-section wrap" id="contenido">
+    <div class="titulo-seccion">
+      <h2>El meme abre la puerta; <em>la oferta puede entrar antes</em></h2>
+      <p>Se revisaron los 13 anuncios y una muestra visual de los principales videos. La estructura nativa y deportiva ya funciona; el siguiente paso es integrar el beneficio y el registro dentro de esa misma historia.</p>
+    </div>
+
+    <div class="tabla-abierta creative-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Creativo</th>
+            <th>Gasto</th>
+            <th>2 segundos</th>
+            <th>CTR</th>
+            <th>Costo visita</th>
+            <th class="decision">Decisión de contenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="creative-name">Entrenamientos del Madrid<small>21 s · meme futbolero</small></td>
+            <td>$171.304</td>
+            <td class="metric-good">52,3%</td>
+            <td>3,32%</td>
+            <td class="metric-good">$74</td>
+            <td class="decision"><strong>Iterar.</strong> Mantener el hook; corregir cierre y cumplimiento.</td>
+          </tr>
+          <tr>
+            <td class="creative-name">Combinada perdidas<small>18 s · reacción deportiva</small></td>
+            <td>$146.545</td>
+            <td class="metric-good">56,9%</td>
+            <td>1,95%</td>
+            <td class="metric-focus">$173</td>
+            <td class="decision"><strong>Desarrollar el puente.</strong> Gran hook con espacio para conectar el producto.</td>
+          </tr>
+          <tr>
+            <td class="creative-name">Gol de Cardona<small>16 s · momento de partido</small></td>
+            <td>$73.587</td>
+            <td>35,7%</td>
+            <td class="metric-good">6,95%</td>
+            <td class="metric-good">$42</td>
+            <td class="decision"><strong>Escalar variantes.</strong> Mejor conexión hacia la landing.</td>
+          </tr>
+          <tr>
+            <td class="creative-name">Cholo YaJuego<small>15 s · meme de dolor</small></td>
+            <td>$123.864</td>
+            <td>41,2%</td>
+            <td class="metric-good">4,80%</td>
+            <td class="metric-good">$79</td>
+            <td class="decision"><strong>Iterar.</strong> Añadir oferta y prueba de registro.</td>
+          </tr>
+          <tr>
+            <td class="creative-name">Leicester City<small>86 s · formato largo</small></td>
+            <td>$172.768</td>
+            <td class="metric-focus">14,1%</td>
+            <td>3,73%</td>
+            <td class="metric-focus">$222</td>
+            <td class="decision"><strong>Crear una versión breve.</strong> Conservar la idea y fortalecer la retención temprana.</td>
+          </tr>
+          <tr>
+            <td class="creative-name">Meme batalla campal<small>22 s · entretenimiento</small></td>
+            <td>$127.873</td>
+            <td>41,8%</td>
+            <td class="metric-focus">0,69%</td>
+            <td class="metric-focus">$398</td>
+            <td class="decision"><strong>Replantear la invitación.</strong> Buen alcance con oportunidad de sumar intención.</td>
+          </tr>
+          <tr>
+            <td class="creative-name">Andan en un country<small>99 s · formato largo</small></td>
+            <td>$109.285</td>
+            <td>27,2%</td>
+            <td class="metric-good">26,86%</td>
+            <td>$61</td>
+            <td class="decision"><strong>Crear una prueba propia.</strong> Usarlo como contenido de alcance en un grupo separado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-lessons">
+      <article class="lesson">
+        <span class="number">01 · Hook</span>
+        <h3>El fútbol cotidiano sí detiene</h3>
+        <p>Entrenamientos del Madrid y Combinada superan 52% a dos segundos. La tensión reconocible —perder por una jugada, un entrenamiento caótico, un gol inesperado— es el territorio correcto.</p>
+      </article>
+      <article class="lesson">
+        <span class="number">02 · Puente</span>
+        <h3>El producto puede entrar en la historia</h3>
+        <p>Una frase puente puede unir el meme con el beneficio sin cambiar el tono: “si ya estás viviendo el partido, activa tu bono y juega con…”.</p>
+      </article>
+      <article class="lesson">
+        <span class="number">03 · Cierre</span>
+        <h3>El cierre puede explicar el siguiente paso</h3>
+        <p>Las piezas pueden sumar monto, mecánica, prueba del registro y motivo inmediato. Meta demuestra que los visuales directos de beneficio pueden convertir incluso con menos CTR.</p>
+      </article>
+    </div>
+
+    <ul class="audit-list" aria-label="Hallazgos de la auditoría visual">
+      <li><b>Formato correcto</b><span>Los 13 videos son verticales 9:16 y la mayoría dura entre 15 y 22 segundos. Es una base adecuada para el canal.</span></li>
+      <li><b>Marca visible</b><span>YaJuego aparece desde el inicio como firma. La siguiente evolución es convertir la marca en parte de la acción y del relato.</span></li>
+      <li><b>Promesa por desarrollar</b><span>Los nombres de anuncio dicen “Bono de bienvenida · Regístrate”; ahora el beneficio puede convertirse en parte central de los videos.</span></li>
+      <li><b>Actualización regulatoria</b><span>“Entrenamientos del Madrid” cierra con “Vigilado Supersalud”. Conviene actualizarlo con los activos vigentes de Coljuegos, el sello autorizado, +18, juego responsable y los términos de la promoción, previa revisión legal.</span></li>
+      <li><b>Evolución de producción</b><span>Los hooks que hoy utilizan fragmentos de transmisión o terceros pueden transformarse en reacción de creador, comentario, actuación o material con autorización.</span></li>
+    </ul>
+
+    <div class="strategy-matrix">
+      <article>
+        <small>Territorio 1 · Mantener</small>
+        <h3>Memes de tensión futbolera</h3>
+        <p>El momento que todo hincha reconoce, logo temprano y remate conectado con una acción real dentro de YaJuego.</p>
+      </article>
+      <article>
+        <small>Territorio 2 · Crear</small>
+        <h3>Creador explica el beneficio</h3>
+        <p>Rostro, voz, demostración y términos sencillos. Menos pieza publicitaria; más recomendación que responde “qué gano y cómo empiezo”.</p>
+      </article>
+      <article>
+        <small>Territorio 3 · Crear</small>
+        <h3>Prueba de producto</h3>
+        <p>Captura de interfaz o reconstrucción autorizada: registro, navegación, selección y confirmación. La confianza puede verse y comprobarse.</p>
+      </article>
+    </div>
+
+    <div class="formula" aria-label="Fórmula de la próxima tanda">
+      <div><b>0–3 s · Hook</b><span>Conflicto futbolero, rostro o movimiento. Texto grande y entendible sin contexto.</span></div>
+      <div><b>3–10 s · Puente y prueba</b><span>Conectar el dolor con un beneficio concreto y mostrar cómo se usa.</span></div>
+      <div><b>10–20 s · Acción</b><span>Registro explícito, términos legibles, +18, juego responsable y sello validado.</span></div>
+    </div>
+  </section>
+
+  <section class="report-section wrap" id="plan">
+    <div class="titulo-seccion">
+      <h2>Potenciar lo que <em>ya funciona</em></h2>
+      <p>El plan conserva el lenguaje nativo del canal y cambia cuatro cosas: señal, cantidad de activos, claridad de oferta y velocidad de aprendizaje.</p>
+    </div>
+
+    <div class="plan">
+      <article class="phase">
+        <h3>Alinear antes de escalar<br><span class="rotulo es-acento">0–48 horas</span></h3>
+        <div>
+          <p>Alinear la campaña con el resultado que realmente se quiere comprar.</p>
+          <ul>
+            <li>Validar en TikTok Events Manager, GA4 y backend qué dispara <code>CompleteRegistration</code> y <code>CompletePayment</code>.</li>
+            <li>Optimizar registro con su evento correcto; separar pago en otra campaña si ese fuera un segundo objetivo.</li>
+            <li>Actualizar “Vigilado Supersalud” y validar el bloque legal completo.</li>
+            <li>Llevar Batalla campal y Leicester a un ciclo de edición; probar Andan en un country dentro de un grupo propio.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="phase">
+        <h3>Producir el primer sprint<br><span class="rotulo">Semana 1</span></h3>
+        <div>
+          <p>Crear 12 variaciones desde tres territorios y activarlas en tandas sucesivas.</p>
+          <ul>
+            <li>3 familias de hook × 2 formas de explicar el beneficio × 2 cierres.</li>
+            <li>Versiones de 15–25 segundos con voz, subtítulos, producto visible y oferta dentro del relato.</li>
+            <li>Usar Gol de Cardona, Cholo y Entrenamientos como puntos de partida para nuevas versiones.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="phase">
+        <h3>Aprender con mayor claridad<br><span class="rotulo">Semanas 2–3</span></h3>
+        <div>
+          <p>Trabajar con 3–5 creativos activos por grupo, como recomienda TikTok, y rotar por hipótesis.</p>
+          <ul>
+            <li>Separar los formatos largos de awareness de los anuncios de registro.</li>
+            <li>Agregar 2–3 variaciones nuevas por semana; conservar el ganador como control.</li>
+            <li>Leer hook, visita y registro en ese orden. Premiar el CTR cuando también fortalezca la visita y la conversión validada.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="phase">
+        <h3>Conectar los canales<br><span class="rotulo">Semana 4</span></h3>
+        <div>
+          <p>Convertir los aprendizajes de TikTok en un sistema de mensajes para todo el embudo.</p>
+          <ul>
+            <li>Retargeting en Meta con demostración, beneficio y objeciones vistas en comentarios.</li>
+            <li>Search y PMax con la misma promesa, lenguaje de registro y páginas de destino coherentes.</li>
+            <li>Documentar hooks ganadores con sus tasas de dos y seis segundos para complementar la intuición creativa.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="guardrails" aria-label="Umbrales operativos propuestos">
+      <div class="guardrail"><b>≥ 45%</b><span>Visualización a 2 s. Meta interna basada en las mejores piezas actuales.</span></div>
+      <div class="guardrail"><b>≥ 25%</b><span>Visualización a 6 s para hooks de 15–25 s.</span></div>
+      <div class="guardrail"><b>≤ $120</b><span>Costo por visita a landing. El arranque está en $113.</span></div>
+      <div class="guardrail"><b>1 verdad</b><span>Registro validado en TikTok, GA4 y backend antes de juzgar CPA.</span></div>
+    </div>
+    <p class="data-note">Estos son límites operativos internos, distintos de un benchmark de mercado. A los 10.000 impactos por pieza, un hook por debajo de 30% a dos segundos o una visita superior a $200 entra en un ciclo de edición; el CPA se evalúa cuando la medición quede alineada.</p>
+  </section>
+
+  <section class="report-section wrap sources" id="fuentes">
+    <div class="titulo-seccion">
+      <h2>Fuentes y <em>criterio</em></h2>
+      <p>Datos de plataformas al 14 de septiembre de 2026 y lineamientos oficiales vigentes consultados para la recomendación.</p>
+    </div>
+    <ol>
+      <li><a href="https://ads.tiktok.com/help/article/creative-best-practices?lang=en" target="_blank" rel="noopener">TikTok Ads · Performance creative best practices</a>: hook temprano, 3–5 creativos por grupo y renovación.</li>
+      <li><a href="https://ads.tiktok.com/help/article/available-recommendations?lang=en" target="_blank" rel="noopener">TikTok Ads · Available recommendations</a>: diversidad creativa y configuración de Pixel.</li>
+      <li><a href="https://ads.tiktok.com/business/en/blog/creative-best-practices-top-performing-ads?redirected=1" target="_blank" rel="noopener">TikTok for Business · Creative best practices</a>: vertical, sonido, safe zone y renovación.</li>
+      <li><a href="https://ads.tiktok.com/help/article/tiktok-ads-policy-gambling-and-games?lang=en" target="_blank" rel="noopener">TikTok Ads Policy · Gambling and games</a>: edad, geografía, juego responsable y términos claros.</li>
+      <li><a href="https://www.facebook.com/business/ads/facebook-instagram-reels-ads" target="_blank" rel="noopener">Meta · Reels ads</a>: 9:16, audio y contenido nativo en safe zone.</li>
+      <li><a href="https://support.google.com/google-ads/answer/14783551?hl=en-GB" target="_blank" rel="noopener">Google Ads · ABCD for effective video ads</a>: atención, marca temprana, conexión y dirección.</li>
+      <li><a href="https://support.google.com/google-ads/answer/14693848?hl=en" target="_blank" rel="noopener">Google Ads · Performance Four</a>: variedad de formatos y conservación de ganadores.</li>
+      <li><a href="https://www.coljuegos.gov.co/publicaciones/301707/marcas_coljuegos/" target="_blank" rel="noopener">Coljuegos · Marcas y manual 2026</a>: activos oficiales y sello “Autoriza Coljuegos”.</li>
+    </ol>
+    <p class="method"><strong>Metodología.</strong> TikTok Ads API: cuenta ADCOM – YaJuego, campaña “Conversión | Registros TikTok | CO | Ago-Sep 2026”, 13 anuncios, periodo 20 ago–13 sep. Meta Marketing API: cuenta YaJuego Colombia, mismo periodo, cifras agregadas. Google Ads API: cuenta YaJuego 2024 New, mismo periodo, corte por tipo de canal. La auditoría visual cubrió las piezas principales disponibles en vista previa. Todos los valores monetarios están en COP y se redondean para lectura.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>YaJuego · Consultoría digital 2026 · Inicio de pauta TikTok</span>
+  <a href="index.html">Volver al hub</a>
+</footer>
+</body>
+</html>
