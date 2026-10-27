@@ -14,6 +14,8 @@ Sitio estático con entregables de consultoría digital para YaJuego.
 - `auditoria-ga4.html`: auditoría GA4 de fuente / medio, purchase y registro.
 - `flow-mundial-top-view.html`: proyección de medios 3 meses Mundial 2026 + escenario TopView.
 - `flow-ago-dic-influencers.html`: plan de medios ago–dic 2026 con Programmatic, TikTok e Influencers.
+- `roster-influencers.html`: roster de nueve creadores de Instagram que propone Management CM, con seguidores, interacción, calidad de audiencia y KPIs de inversión. Fotos en `assets/img/roster/`.
+- `roster/<creador>.html`: una ficha por creador (rendimiento, audiencia, inversión estimada), enlazada desde el roster.
 - `seguimiento-pauta.html`: informe de seguimiento de pauta embebido desde Looker Studio.
 - `assets/css/site.css`: estilos base compartidos por las landing pages.
 - `assets/css/index.css`: estilos específicos del hub.
