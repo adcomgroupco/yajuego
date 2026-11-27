@@ -15,22 +15,23 @@ Sitio estático con entregables de consultoría digital para YaJuego.
 - `planeacion/flow-mundial.html`: proyección de medios 3 meses Mundial 2026 + escenario TopView.
 - `planeacion/flow-ago-dic.html`: plan de medios ago–dic 2026 con Programmatic, TikTok e Influencers.
 - `influencers/roster.html`: roster de cuatro creadores de Instagram (de los nueve que propuso Management CM), por qué se descartó a los otros cinco y una reserva que completa $20 millones, con seguidores, interacción, calidad de audiencia y KPIs de inversión. Fotos en `assets/img/roster/`.
-- `roster/<creador>.html`: una ficha por creador (rendimiento, audiencia, inversión estimada), enlazada desde el roster.
+- `influencers/creadores/<creador>.html`: una ficha por creador (rendimiento, audiencia, inversión estimada), enlazada desde el roster.
 - `planeacion/seguimiento.html`: informe de seguimiento de pauta embebido desde Looker Studio.
-- `assets/css/site.css`: estilos base compartidos por las landing pages.
-- `assets/css/index.css`: estilos específicos del hub.
-- `assets/css/resumen.css`: estilos específicos del resumen ejecutivo.
-- `assets/css/seguimiento.css`: estilos específicos del informe de seguimiento.
+- `planeacion/programatica.html`: informe de programática, generado desde `data/input/yajuego/` con Media Bridge.
+- `assets/css/adcom-v2.css`, `assets/ds/`, `assets/logos/`: el kit de diseño v2 de Adcom (copias: no se editan aquí).
+- `assets/css/resumen.css`, `seguimiento.css`: estilos propios de esos dos informes.
+- `assets/css/site.css`, `index.css`, `adcom.css`, `adcom-tokens.css` y `assets/js/adcom.js`: restos del sistema anterior (amarillo, Poppins). Ninguna página migrada los carga; se pueden retirar cuando `programatica.html` también esté en v2.
 
 ## Convención visual
 
-Las páginas funcionan como landing pages/reportes independientes:
+Este repo usa el **sistema de diseño v2** de Adcom: fondo claro (washi), texto sumi, un solo acento lima,
+Inter Tight e Inter con fuentes locales y el wordmark oficial. La regla completa es
+[`ESTANDARES-DISENO.md`](ESTANDARES-DISENO.md); la galería de componentes, `banco-formatos/componentes.html`.
 
-- HTML en la raíz para mantener compatibilidad directa con GitHub Pages.
-- Estilos comunes en `assets/css/site.css`.
-- Estilos específicos cerca de cada documento cuando el reporte requiere tablas, gráficos o layouts propios.
-- Índice lateral fijo en reportes extensos y tarjetas de navegación en el hub.
-- Tipografía única en todo el sitio: **Poppins** (pesos 300–800 + itálica 400), cargada desde Google Fonts.
+- Cada documento es una página independiente dentro de su carpeta temática (`diagnostico/`, `auditorias/`,
+  `planeacion/`, `influencers/`); las rutas anteriores en la raíz solo redirigen.
+- La lima es relleno con texto sumi (lo que se pulsa y lo primero de cada bloque), nunca texto ni línea.
+- Verificación: `python -I herramientas/auditar_v2.py` desde la raíz del repo.
 
 
 ## Organización de documentos
