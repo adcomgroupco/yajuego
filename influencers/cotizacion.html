@@ -5,101 +5,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Cotización del roster de influencers de YaJuego: tres creadores, reel collab y derechos de pauta por un mes.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#f4f4f1">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Cotización del roster</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/adcom.css">
-  <script defer src="../assets/js/adcom.js"></script>
+  <link rel="stylesheet" href="../assets/ds/fonts.css">
+  <link rel="stylesheet" href="../assets/css/adcom-v2.css?v=20261127">
+  <style>
+    /* Cotización: solo tokens del sistema, ningún valor suelto. Prefijo co- */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-padding-top:var(--nav-height)}
+    body{margin:0;background:var(--washi);color:var(--sumi)}
+    dl,dd{margin:0}
+
+    .ad-hero .co-h1{margin:0;font-size:clamp(40px,6.4vw,88px)}
+    .co-hero__resto{margin-block-start:var(--space-12)}
+    .co-hero__resto .ad-lead{margin:0;max-width:44ch}
+    .co-kpis{margin:0}
+    .co-kpis--hero{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .co-kpis--hero .ad-kpi--on{grid-column:1/-1}
+
+    .co-persona{padding:0;gap:0;overflow:hidden}
+    .co-persona__foto{display:block;border-bottom:1px solid var(--piedra)}
+    .co-persona__foto img{display:block;width:100%;height:auto;aspect-ratio:1/1}
+    .co-persona__cuerpo{display:flex;flex-direction:column;gap:var(--space-2);flex:1;padding:var(--space-6)}
+    .co-persona h3{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.015em}
+    .co-persona__tipo{font-size:13px;color:var(--tinta-suave)}
+    .co-persona__cuerpo p{margin:0;font-size:15px;color:var(--tinta-secundaria)}
+    .co-persona__datos{margin:auto 0 0;padding-block-start:var(--space-4)}
+    .co-persona__datos .ad-stat__n{font-size:32px}
+
+    .co-fig{margin-block-start:var(--space-10)}
+    .co-total .ad-stat__n{font-size:clamp(48px,7vw,96px)}
+    .co-total .ad-cierre__in{align-items:center}
+    .co-colofon{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
+    .co-colofon dd{font-size:15px;color:var(--tinta-secundaria)}
+
+    @media (max-width:640px){
+      .ad-nav__links{display:none}
+    }
+  </style>
+  <link rel="icon" type="image/png" href="../assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="../assets/ds/logos/apple-touch-icon.png">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-<header class="masthead">
-  <a class="wordmark" href="../index.html"><i></i>YaJuego <span>documentos</span></a>
-  <span class="stamp">Cotización</span>
+<header class="ad-nav">
+  <nav class="ad-nav__in" aria-label="Cotización">
+    <a class="ad-marca" href="../index.html"><img src="../assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · documentos</i></a>
+    <div class="ad-nav__links"><a href="#creadores">Creadores</a><a href="#inversion">Inversión</a><a href="#condiciones">Condiciones</a></div>
+  </nav>
 </header>
 
-<main id="contenido">
+<main id="contenido" tabindex="-1">
 
-  <section class="opening wrap">
-    <h1>Tres creadores para <em>YaJuego</em></h1>
-    <p class="lede">Una cuenta por plaza, con reel collab y derechos de pauta por un mes. Esta es la inversión para ponerlos en marcha.</p>
-    <div class="opening-meta">
-      <div><b>20 nov 2026</b><span>Fecha de emisión</span></div>
-      <div><b>30 días</b><span>Vigencia</span></div>
-      <div><b>$13.638.202</b><span>Valor total con IVA</span></div>
-    </div>
-  </section>
-
-  <section class="grupo wrap" id="creadores">
-    <div class="head">
-      <h2>Quiénes y cuánto</h2>
-      <p class="lede">Valor por creador, antes de impuestos.</p>
-    </div>
-    <div class="works">
-      <article class="work">
-        <figure><img src="../assets/img/roster/el_bermu09.jpg" alt="Foto de perfil de el_bermu09" loading="lazy" width="320" height="320"></figure>
-        <div class="work-body">
-          <h3>Camilo Bermúdez</h3>
-          <span class="work-kind">@el_bermu09 · Ibagué</span>
-          <p>Reel collab y derechos de pauta por 1 mes.</p>
-          <div class="work-stats"><span><b>$4.044.944</b>Subtotal antes de IVA</span></div>
-        </div>
-      </article>
-      <article class="work">
-        <figure><img src="../assets/img/roster/soypipefutbol.jpg" alt="Foto de perfil de soypipefutbol" loading="lazy" width="320" height="320"></figure>
-        <div class="work-body">
-          <h3>Soy Pipe Fútbol</h3>
-          <span class="work-kind">@soypipefutbol · Medellín</span>
-          <p>Reel collab y derechos de pauta por 1 mes.</p>
-          <div class="work-stats"><span><b>$2.528.090</b>Subtotal antes de IVA</span></div>
-        </div>
-      </article>
-      <article class="work">
-        <figure><img src="../assets/img/roster/uncalenoporahi.jpg" alt="Foto de perfil de uncalenoporahi" loading="lazy" width="320" height="320"></figure>
-        <div class="work-body">
-          <h3>Un Caleño por ahí</h3>
-          <span class="work-kind">@uncalenoporahi · Cali</span>
-          <p>Reel collab y derechos de pauta por 1 mes.</p>
-          <div class="work-stats"><span><b>$4.887.640</b>Subtotal antes de IVA</span></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="franja" data-suelo="tinta" id="inversion">
-    <div class="wrap">
-      <div class="head">
-        <h2>La inversión</h2>
-        <p class="lede">La suma de los tres creadores, el IVA y el total de la factura.</p>
+  <section class="ad-hero" aria-labelledby="titulo">
+    <div class="ad-wrap">
+      <h1 id="titulo" class="co-h1">
+        <span class="ad-ln">Tres creadores para</span>
+        <span class="ad-ln"><span class="ad-hl">YaJuego</span></span>
+      </h1>
+      <div class="ad-split ad-split--arriba co-hero__resto">
+        <p class="ad-lead">Una cuenta por plaza, con reel collab y derechos de pauta por un mes. Esta es la inversión para ponerlos en marcha.</p>
+        <dl class="ad-kpis co-kpis co-kpis--hero">
+          <div class="ad-kpi"><dt class="ad-kpi__l">Fecha de emisión</dt><dd class="ad-kpi__n">20 nov 2026</dd></div>
+          <div class="ad-kpi"><dt class="ad-kpi__l">Vigencia</dt><dd class="ad-kpi__n">30 días</dd></div>
+          <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">Valor total con IVA</dt><dd class="ad-kpi__n">$13.638.202</dd></div>
+        </dl>
       </div>
-      <dl class="tira-cifras">
-        <div><dt>Valor antes de impuestos</dt><dd>$11.460.674</dd></div>
-        <div><dt>IVA (19%)</dt><dd>$2.177.528</dd></div>
+    </div>
+  </section>
+
+  <section class="ad-sec ad-sec--papel" id="creadores" aria-labelledby="t-creadores">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab ad-sec-cab--grande">
+        <h2 id="t-creadores">Quiénes y cuánto</h2>
+        <p class="ad-lead">Valor por creador, antes de impuestos.</p>
+      </header>
+      <div class="ad-grid" style="--col:280px">
+        <article class="ad-card co-persona">
+          <div class="co-persona__foto"><img src="../assets/img/roster/el_bermu09.jpg" alt="Foto de perfil de el_bermu09" loading="lazy" width="320" height="320"></div>
+          <div class="co-persona__cuerpo">
+            <h3>Camilo Bermúdez</h3>
+            <span class="co-persona__tipo">@el_bermu09 · Ibagué</span>
+            <p>Reel collab y derechos de pauta por 1 mes.</p>
+            <dl class="co-persona__datos"><div class="ad-stat"><dt class="ad-stat__m">Subtotal antes de IVA</dt><dd class="ad-stat__n">$4.044.944</dd></div></dl>
+          </div>
+        </article>
+        <article class="ad-card co-persona">
+          <div class="co-persona__foto"><img src="../assets/img/roster/soypipefutbol.jpg" alt="Foto de perfil de soypipefutbol" loading="lazy" width="320" height="320"></div>
+          <div class="co-persona__cuerpo">
+            <h3>Soy Pipe Fútbol</h3>
+            <span class="co-persona__tipo">@soypipefutbol · Medellín</span>
+            <p>Reel collab y derechos de pauta por 1 mes.</p>
+            <dl class="co-persona__datos"><div class="ad-stat"><dt class="ad-stat__m">Subtotal antes de IVA</dt><dd class="ad-stat__n">$2.528.090</dd></div></dl>
+          </div>
+        </article>
+        <article class="ad-card co-persona">
+          <div class="co-persona__foto"><img src="../assets/img/roster/uncalenoporahi.jpg" alt="Foto de perfil de uncalenoporahi" loading="lazy" width="320" height="320"></div>
+          <div class="co-persona__cuerpo">
+            <h3>Un Caleño por ahí</h3>
+            <span class="co-persona__tipo">@uncalenoporahi · Cali</span>
+            <p>Reel collab y derechos de pauta por 1 mes.</p>
+            <dl class="co-persona__datos"><div class="ad-stat"><dt class="ad-stat__m">Subtotal antes de IVA</dt><dd class="ad-stat__n">$4.887.640</dd></div></dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="inversion" aria-labelledby="t-inversion">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab ad-sec-cab--grande">
+        <h2 id="t-inversion">La inversión</h2>
+        <p class="ad-lead">La suma de los tres creadores, el IVA y el total de la factura.</p>
+      </header>
+      <dl class="ad-kpis co-kpis">
+        <div class="ad-kpi"><dt class="ad-kpi__l">Valor antes de impuestos</dt><dd class="ad-kpi__n">$11.460.674</dd></div>
+        <div class="ad-kpi"><dt class="ad-kpi__l">IVA (19%)</dt><dd class="ad-kpi__n">$2.177.528</dd></div>
       </dl>
-      <div class="panel-dato es-acento" style="margin-top:var(--s-5)">
-        <h3>Valor total de la factura</h3>
-        <p style="font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:10px 0 0">$13.638.202</p>
-      </div>
+      <figure class="ad-figura co-fig">
+        <ul class="ad-barra-apilada" role="img" aria-label="Del total de $13.638.202: Camilo Bermúdez 4.044.944, Soy Pipe Fútbol 2.528.090, Un Caleño por ahí 4.887.640 e IVA de 2.177.528">
+          <li style="--v:4044944;--c:var(--sumi)"></li><li style="--v:2528090;--c:var(--tinta-secundaria)"></li><li style="--v:4887640;--c:var(--tinta-tenue)"></li><li class="is-on" style="--v:2177528"></li>
+        </ul>
+        <ul class="ad-leyenda">
+          <li><i style="--c:var(--sumi)"></i>Camilo Bermúdez</li>
+          <li><i style="--c:var(--tinta-secundaria)"></i>Soy Pipe Fútbol</li>
+          <li><i style="--c:var(--tinta-tenue)"></i>Un Caleño por ahí</li>
+          <li><i style="--c:var(--lima)"></i>IVA (19%)</li>
+        </ul>
+      </figure>
     </div>
   </section>
 
-  <section class="colophon wrap">
-    <dl>
-      <dt>Incluye</dt>
-      <dd>Un reel collab y los derechos de pauta por un mes, por cada creador.</dd>
-      <dt>Vigencia</dt>
-      <dd>Esta cotización es válida por treinta (30) días a partir de la fecha de emisión. Después de este período, los precios y términos están sujetos a cambios sin previo aviso.</dd>
-    </dl>
+  <section class="ad-sec ad-sec--oscuro co-total" aria-labelledby="t-total">
+    <div class="ad-wrap ad-cierre__in">
+      <h2 id="t-total" class="ad-t-h2">Valor total de la factura</h2>
+      <p class="ad-stat"><span class="ad-stat__n"><span class="ad-fill">$13.638.202</span></span></p>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="condiciones" aria-label="Condiciones de la cotización">
+    <div class="ad-wrap">
+      <dl class="ad-ficha co-colofon">
+        <div><dt>Incluye</dt><dd>Un reel collab y los derechos de pauta por un mes, por cada creador.</dd></div>
+        <div><dt>Vigencia</dt><dd>Esta cotización es válida por treinta (30) días a partir de la fecha de emisión. Después de este período, los precios y términos están sujetos a cambios sin previo aviso.</dd></div>
+      </dl>
+    </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <span>YaJuego, biblioteca de documentos</span>
-  <span>Colombia. Juega con control, +18</span>
+<footer class="ad-foot">
+  <div class="ad-foot__in">
+    <span>YaJuego, biblioteca de documentos</span>
+    <span>Colombia. Juega con control, +18</span>
+  </div>
 </footer>
-
 </body>
 </html>

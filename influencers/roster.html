@@ -5,251 +5,340 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Roster de cuatro creadores de Instagram para YaJuego: seguidores, interacción, calidad de audiencia, inversión estimada, por qué se descartó a los demás y reserva hasta $20 millones.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#f4f4f1">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Roster de influencers</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/adcom.css">
-  <script defer src="../assets/js/adcom.js"></script>
+  <link rel="stylesheet" href="../assets/ds/fonts.css">
+  <link rel="stylesheet" href="../assets/css/adcom-v2.css?v=20261127">
+  <style>
+    /* Roster: solo tokens del sistema, ningún valor suelto. Prefijo ro- */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-padding-top:var(--nav-height)}
+    body{margin:0;background:var(--washi);color:var(--sumi)}
+    dl,dd{margin:0}
+    .ad-tabla tbody th{font-weight:500}
+    .ad-tabla table{min-width:640px}
+    .ro-ancha table{min-width:860px}
+    .ro-ancha-xl table{min-width:900px}
+
+    .ad-hero .ro-h1{margin:0;font-size:clamp(40px,5.8vw,76px)}
+    .ro-hero__resto{margin-block-start:var(--space-12)}
+    .ro-hero__resto .ad-lead{margin:0;max-width:52ch}
+    .ro-kpis{margin:0}
+    .ro-kpis .ad-kpi__n{font-size:clamp(28px,3.2vw,40px)}
+
+    .ro-razones .ad-fila{grid-template-columns:auto minmax(0,1fr);align-items:start}
+    .ro-razones h3.ad-fila__t{margin:4px 0 var(--space-2)}
+    .ro-razones p{margin:0;font-size:16px;color:var(--tinta-secundaria)}
+    .ro-cab{margin:0}
+    @media (min-width:901px){.ro-cab{position:sticky;top:calc(var(--nav-height) + var(--space-8))}}
+
+    .ro-persona{padding:0;gap:0;overflow:hidden}
+    .ro-persona__foto{display:block;border-bottom:1px solid var(--piedra)}
+    .ro-persona__foto img{display:block;width:100%;height:auto;aspect-ratio:1/1}
+    .ro-persona__cuerpo{display:flex;flex-direction:column;gap:var(--space-2);flex:1;padding:var(--space-6)}
+    .ro-persona h3{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.015em}
+    .ro-persona h3 a{display:inline-flex;align-items:center;min-height:var(--target-min);text-decoration:none}
+    .ro-persona h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+    .ro-persona__tipo{font-size:13px;color:var(--tinta-suave)}
+    .ro-persona__cuerpo p{margin:0;font-size:15px;color:var(--tinta-secundaria)}
+    .ro-persona__datos{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-6);margin:auto 0 0;padding-block-start:var(--space-4)}
+    .ro-persona__datos .ad-stat__n{font-size:28px}
+
+    .ro-nota{margin:var(--space-6) 0 0}
+    .ro-fig{margin-block:var(--space-10)}
+    .ro-lectura h3{margin:0 0 var(--space-2);font-size:22px;line-height:1.2;letter-spacing:-.015em;color:var(--sumi)}
+    .ro-lectura p{font-size:16px}
+    .ro-colofon{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
+    .ro-colofon dd{font-size:15px;color:var(--tinta-secundaria)}
+
+    @media (max-width:640px){
+      .ad-nav__links{display:none}
+    }
+  </style>
+  <link rel="icon" type="image/png" href="../assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="../assets/ds/logos/apple-touch-icon.png">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-<header class="masthead">
-  <a class="wordmark" href="../index.html"><i></i>YaJuego <span>documentos</span></a>
-  <span class="stamp">Roster de influencers</span>
+<header class="ad-nav">
+  <nav class="ad-nav__in" aria-label="Roster de influencers">
+    <a class="ad-marca" href="../index.html"><img src="../assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · documentos</i></a>
+    <div class="ad-nav__links"><a href="#porque">Por qué</a><a href="#creadores">Creadores</a><a href="#comparativo">Comparativo</a><a href="#audiencias">Audiencias</a><a href="#descartados">Descartados</a><a href="#inversion">Inversión</a></div>
+  </nav>
 </header>
 
-<main id="contenido" class="wrap">
+<main id="contenido" tabindex="-1">
 
-  <header class="opening">
-    <h1>Un roster de <em>cuatro creadores</em> para YaJuego</h1>
-    <p class="lede">De las nueve cuentas que propuso Management CM, esta propuesta conserva cuatro, de perfil futbolero y de humor, una por cada plaza: Ibagué, Barranquilla, Medellín y Cali. Las otras cinco se descartaron por su costo por mil views, su bajo engagement o la ubicación de su audiencia, como se explica más abajo. Ninguna está aprobada todavía: la decisión de cuáles entran al plan de influencers es de YaJuego.</p>
-    <div class="opening-meta">
-      <div><b>4</b><span>Cuentas de Instagram</span></div>
-      <div><b>314.226</b><span>Seguidores sumados, sin deduplicar</span></div>
-      <div><b>$14.022.472</b><span>Valor bruto de los cuatro talentos</span></div>
-      <div><b>$20.000.000</b><span>Total con la reserva de $5.977.528</span></div>
-    </div>
-  </header>
-
-  <hr class="divider">
-
-  <section class="grupo" id="porque">
-    <div class="head">
-      <h2>Por qué escogimos estos perfiles</h2>
-      <p class="lede">Buscamos creadores que le hablen al hincha, que cubran varias ciudades y que mezclen tamaños de cuenta, y que además se pueda comprobar quién los sigue.</p>
-    </div>
-
-    <ol class="orders">
-      <li>
+  <section class="ad-hero ro-hero" aria-labelledby="titulo">
+    <div class="ad-wrap">
+      <h1 id="titulo" class="ro-h1">
+        <span class="ad-ln">Un roster de <span class="ad-hl">cuatro creadores</span></span>
+        <span class="ad-ln">para YaJuego</span>
+      </h1>
+      <div class="ad-split ad-split--arriba ro-hero__resto">
         <div>
-          <h3>Hablan el idioma del fútbol</h3>
-          <p class="note">Afinidad con el producto</p>
+          <p class="ad-lead">De las nueve cuentas que propuso Management CM, esta propuesta conserva cuatro, de perfil futbolero y de humor, una por cada plaza: Ibagué, Barranquilla, Medellín y Cali. Las otras cinco se descartaron por su costo por mil views, su bajo engagement o la ubicación de su audiencia, como se explica más abajo. Ninguna está aprobada todavía: la decisión de cuáles entran al plan de influencers es de YaJuego.</p>
+          <div class="ad-hero__acciones">
+            <a class="ad-btn ad-btn--accent" href="#creadores">Ver los creadores</a>
+          </div>
         </div>
-        <div>
-          <p>Tres de las cuatro cuentas tienen el fútbol en su contenido o en su comunidad: un equipo de fútbol de creadores o una hinchada propia, la de Atlético Nacional y la del Deportivo Cali. La cuarta aporta humor y calle. Es un contexto natural para integrar YaJuego en partidos, retos y experiencias futboleras.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Cubren cuatro plazas</h3>
-          <p class="note">Alcance geográfico</p>
-        </div>
-        <div>
-          <p>Una cuenta por plaza: Ibagué, Barranquilla, Medellín y Cali, donde 41% de la audiencia de @uncalenoporahi se concentra.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Mezclan tamaños de cuenta</h3>
-          <p class="note">Alcance y cercanía</p>
-        </div>
-        <div>
-          <p>Una cuenta pasa de 200 mil seguidores, otra está en 80,2 mil y dos tienen 16,1 mil o menos. La más grande interactúa 3,6% y la de 80,2 mil, 5,0%; entre las pequeñas, @soypipefutbol llega a 5,0%. Las cuentas grandes aportan alcance y las pequeñas, una comunidad cercana.</p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <h3>Se puede comprobar quién los sigue</h3>
-          <p class="note">Calidad de audiencia</p>
-        </div>
-        <div>
-          <p>De tres de las cuatro cuentas hay datos de audiencia: credibilidad, seguidores reales, país y edad. Con ellos más abajo se ve qué tan sólido es cada perfil, y es parte de lo que se usó para descartar a otros.</p>
-        </div>
-      </li>
-    </ol>
-  </section>
-
-  <section class="grupo" id="creadores">
-    <div class="head">
-      <h2>Quiénes son</h2>
-      <p class="lede">De mayor a menor audiencia. Cada creador abre su ficha con rendimiento, audiencia e inversión estimada.</p>
-    </div>
-
-    <div class="works">
-      <article class="work">
-        <a href="creadores/el_bermu09.html"><figure><img src="../assets/img/roster/el_bermu09.jpg" alt="Foto de perfil de el_bermu09" loading="lazy" width="320" height="320"></figure></a>
-        <div class="work-body">
-          <h3><a href="creadores/el_bermu09.html">@el_bermu09</a></h3>
-          <span class="work-kind">Ibagué</span>
-          <p>Su contenido es de humor, calle y situaciones cotidianas. También es emprendedor y tiene una comunidad de creadores en la región.</p>
-          <div class="work-stats"><span><b>207,6 mil</b>Seguidores</span><span><b>3,6%</b>Interacción</span></div>
-        </div>
-      </article>
-
-      <article class="work">
-        <a href="creadores/elgonchi.html"><figure><img src="../assets/img/roster/elgonchi.jpg" alt="Foto de perfil de elgonchi__" loading="lazy" width="320" height="320"></figure></a>
-        <div class="work-body">
-          <h3><a href="creadores/elgonchi.html">@elgonchi__</a></h3>
-          <span class="work-kind">Barranquilla</span>
-          <p>Creador de humor y entretenimiento que, además, hace parte de un equipo de fútbol de creadores. Su perfil permite integrar YAJUEGO desde el humor y las dinámicas futboleras, con potencial para conectar con una audiencia amplia.</p>
-          <div class="work-stats"><span><b>80,2 mil</b>Seguidores</span><span><b>5,0%</b>Interacción</span></div>
-        </div>
-      </article>
-
-      <article class="work">
-        <a href="creadores/uncalenoporahi.html"><figure><img src="../assets/img/roster/uncalenoporahi.jpg" alt="Foto de perfil de uncalenoporahi" loading="lazy" width="320" height="320"></figure></a>
-        <div class="work-body">
-          <h3><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></h3>
-          <span class="work-kind">Audiencia concentrada en Cali</span>
-          <p>Creador enfocado en el Deportivo Cali y el fútbol colombiano. Su audiencia tiene una alta concentración en Cali, lo que lo convierte en una opción estratégica para conectar con los hinchas de la región.</p>
-          <div class="work-stats"><span><b>16,1 mil</b>Seguidores</span><span><b>3,8%</b>Interacción</span></div>
-        </div>
-      </article>
-
-      <article class="work">
-        <a href="creadores/soypipefutbol.html"><figure><img src="../assets/img/roster/soypipefutbol.jpg" alt="Foto de perfil de soypipefutbol" loading="lazy" width="320" height="320"></figure></a>
-        <div class="work-body">
-          <h3><a href="creadores/soypipefutbol.html">@soypipefutbol</a></h3>
-          <span class="work-kind">Medellín</span>
-          <p>Creador y periodista enfocado en Atlético Nacional, con una comunidad de hinchas que conecta desde la pasión y la identidad verdolaga.</p>
-          <div class="work-stats"><span><b>10,3 mil</b>Seguidores</span><span><b>5,0%</b>Interacción</span></div>
-        </div>
-      </article>
-
+        <dl class="ad-kpis ro-kpis">
+          <div class="ad-kpi"><dt class="ad-kpi__l">Cuentas de Instagram</dt><dd class="ad-kpi__n">4</dd></div>
+          <div class="ad-kpi"><dt class="ad-kpi__l">Seguidores sumados, sin deduplicar</dt><dd class="ad-kpi__n">314.226</dd></div>
+          <div class="ad-kpi"><dt class="ad-kpi__l">Valor bruto de los cuatro talentos</dt><dd class="ad-kpi__n">$14.022.472</dd></div>
+          <div class="ad-kpi"><dt class="ad-kpi__l">Total con la reserva de $5.977.528</dt><dd class="ad-kpi__n">$20.000.000</dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
-  <section class="grupo" id="comparativo">
-    <div class="head">
-      <h2>Lo que se puede comparar</h2>
-      <p class="lede">Seguidores e interacción, lado a lado. Una cuenta pequeña con buena interacción puede rendir más por peso invertido que una grande con interacción baja.</p>
-    </div>
-
-    <div class="table-scroll">
-      <table>
-        <caption>Las cuatro cuentas, de mayor a menor número de seguidores.</caption>
-        <thead>
-          <tr><th scope="col">Creador</th><th scope="col">Plaza</th><th scope="col">Seguidores</th><th scope="col">Interacción</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row"><a href="creadores/el_bermu09.html">@el_bermu09</a></th><td>Ibagué</td><td>207.602</td><td>3,6%</td></tr>
-          <tr><th scope="row"><a href="creadores/elgonchi.html">@elgonchi__</a></th><td>Barranquilla</td><td>80.209</td><td>5,0%</td></tr>
-          <tr><th scope="row"><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></th><td>Cali (audiencia)</td><td>16.123</td><td>3,8%</td></tr>
-          <tr><th scope="row"><a href="creadores/soypipefutbol.html">@soypipefutbol</a></th><td>Medellín</td><td>10.292</td><td>5,0%</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="grupo" id="audiencias">
-    <div class="head">
-      <h2>Quién los sigue de verdad</h2>
-      <p class="lede">Tamaño no es calidad. Estas son las señales de audiencia que Blindy calcula para cada cuenta. De una de ellas no hay datos.</p>
-    </div>
-
-    <div class="table-scroll">
-      <table>
-        <caption>Calidad de audiencia por creador. «13 a 17 años» es la franja de menores que reporta Instagram.</caption>
-        <thead>
-          <tr><th scope="col">Creador</th><th scope="col">Credibilidad</th><th scope="col">Seguidores reales</th><th scope="col">Audiencia en Colombia</th><th scope="col">13 a 17 años</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row"><a href="creadores/el_bermu09.html">@el_bermu09</a></th><td>Sin dato</td><td>Sin dato</td><td>Sin dato</td><td>Sin dato</td></tr>
-          <tr><th scope="row"><a href="creadores/elgonchi.html">@elgonchi__</a></th><td>70%</td><td>55,6%</td><td>90,7%</td><td>6,2%</td></tr>
-          <tr><th scope="row"><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></th><td>75%</td><td>56,7%</td><td>78,9%</td><td>2,6%</td></tr>
-          <tr><th scope="row"><a href="creadores/soypipefutbol.html">@soypipefutbol</a></th><td>73%</td><td>Sin dato</td><td>73,9%</td><td>9,1%</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="note">De @el_bermu09 Blindy no tiene datos de audiencia, así que no se puede verificar ninguna de estas señales. Conviene pedírselos a Management CM.</p>
-  </section>
-
-  <section class="grupo" id="descartados">
-    <div class="head">
-      <h2>Por qué descartamos a los otros cinco</h2>
-      <p class="lede">De las nueve cuentas de Management CM quedaron fuera cinco. Los motivos son el costo por mil views, el bajo engagement y, en dos casos, una audiencia que está en otros países.</p>
-    </div>
-
-    <div class="table-scroll">
-      <table>
-        <caption>Cuentas descartadas, con las cifras que pesaron. El costo por mil views es valor bruto entre las views estimadas del PDF.</caption>
-        <thead>
-          <tr><th scope="col">Creador</th><th scope="col">Seguidores</th><th scope="col">Interacción</th><th scope="col">Costo por mil views</th><th scope="col">Por qué se descartó</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">@soyeltruji</th><td>14.861</td><td class="is-neg">0,1%</td><td>$57.086</td><td>Interacción de 0,1% y solo 25,6% de seguidores reales. Sus mayores audiencias están en India, Italia y Estados Unidos, no en Colombia.</td></tr>
-          <tr><th scope="row">@caspian.col</th><td>10.774</td><td>4,8%</td><td class="is-neg">$230.895</td><td>Costo por mil views alto y solo 25,1% de su audiencia en Colombia: el resto está en Argentina, España y Chile, entre otros.</td></tr>
-          <tr><th scope="row">@jeisonmattaa</th><td>265.533</td><td>3,7%</td><td class="is-neg">$145.998</td><td>Es el talento más caro ($6.134.831) para 42.020 views estimadas, y solo incluye el reel collab.</td></tr>
-          <tr><th scope="row">@xpgabo_</th><td>31.706</td><td>6,7%</td><td class="is-neg">$844.320</td><td>Costo por mil views muy alto: $2.921.348 para 3.460 views estimadas.</td></tr>
-          <tr><th scope="row">@juango____</th><td>4.055</td><td>5,1%</td><td class="is-neg">$1.449.082</td><td>Costo por mil views muy alto: $1.825.843 para 1.260 views estimadas.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="note">@soypipefutbol se conserva aunque su costo por mil views es alto ($490.159): sus views estimadas en el PDF (4.470) están muy por debajo del promedio de sus reels en Blindy (312.745), así que ese costo sobrestima lo que cuesta cada mil views reales.</p>
-  </section>
-
-  <section class="grupo" id="inversion">
-    <div class="head">
-      <h2>Lo que costaría y lo que se espera</h2>
-      <p class="lede">Valor bruto por talento, alcance y views esperadas, y la reserva que completa $20 millones. No se indica la moneda de los valores.</p>
-    </div>
-
-    <dl class="tira-cifras"><div><dt>Valor bruto de los talentos</dt><dd>$14.022.472</dd></div><div><dt>Reserva</dt><dd>$5.977.528</dd></div><div><dt>Total de la propuesta</dt><dd>$20.000.000</dd></div><div><dt>Costo por mil views</dt><dd>$23.584<small>Solo los cuatro talentos</small></dd></div></dl>
-
-    <div class="table-scroll">
-      <table>
-        <caption>Del costo por mil views más bajo al más alto. Es un cálculo propio: valor bruto entre las views estimadas del PDF.</caption>
-        <thead>
-          <tr><th scope="col">Creador</th><th scope="col">Acciones</th><th scope="col">Valor bruto</th><th scope="col">Alcance est.</th><th scope="col">Views est.</th><th scope="col">Costo por mil views</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row"><a href="creadores/el_bermu09.html">@el_bermu09</a></th><td>Reel collab + derecho de pauta por un mes</td><td>$3.505.618</td><td>4.555</td><td>318.980</td><td>$10.990</td></tr>
-          <tr><th scope="row"><a href="creadores/elgonchi.html">@elgonchi__</a></th><td>Reel collab + derecho de pauta por un mes</td><td>$4.089.888</td><td>32.577</td><td>231.750</td><td>$17.648</td></tr>
-          <tr><th scope="row"><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></th><td>Reel collab + derecho de pauta por un mes</td><td>$4.235.955</td><td>22.601</td><td>39.380</td><td>$107.566</td></tr>
-          <tr><th scope="row"><a href="creadores/soypipefutbol.html">@soypipefutbol</a></th><td>Reel collab + derecho de pauta por un mes</td><td>$2.191.011</td><td>4.555</td><td>4.470</td><td>$490.159</td></tr>
-          <tr><th scope="row"><strong>Subtotal talentos</strong></th><td></td><td><strong>$14.022.472</strong></td><td><strong>64.288</strong></td><td><strong>594.580</strong></td><td><strong>$23.584</strong></td></tr>
-          <tr><th scope="row"><a href="https://www.instagram.com/danigoals__/" rel="noopener" target="_blank">@danigoals__</a></th><td>Reserva: cotización en revisión</td><td>$5.977.528</td><td>Por definir</td><td>Por definir</td><td>Por definir</td></tr>
-          <tr><th scope="row"><strong>Total de la propuesta</strong></th><td></td><td><strong>$20.000.000</strong></td><td></td><td></td><td></td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="panel">
-      <h3>El costo por mil views depende de cuántas views se supongan.</h3>
-      <p>En una cuenta, @uncalenoporahi, las views estimadas coinciden con el promedio de sus reels en Blindy. En tres no:<b>@el_bermu09</b> (318.980 estimadas contra 1.033.239), <b>@elgonchi__</b> (231.750 estimadas contra 49.581) y <b>@soypipefutbol</b> (4.470 contra 312.745). Antes de comparar costos conviene saber de dónde salió cada estimación. Además, el PDF repite el mismo alcance (4.555) en @soypipefutbol y @el_bermu09.</p>
+  <section class="ad-sec ad-sec--papel" id="porque" aria-labelledby="t-porque">
+    <div class="ad-wrap ad-split ad-split--arriba">
+      <header class="ad-sec-cab ad-sec-cab--grande ro-cab">
+        <h2 id="t-porque">Por qué escogimos estos perfiles</h2>
+        <p class="ad-lead">Buscamos creadores que le hablen al hincha, que cubran varias ciudades y que mezclen tamaños de cuenta, y que además se pueda comprobar quién los sigue.</p>
+      </header>
+      <ol class="ad-filas ro-razones" aria-label="Criterios de selección">
+        <li class="ad-fila">
+          <span class="ad-n ad-n--md" aria-hidden="true">1</span>
+          <div>
+            <span class="ad-fila__k">Afinidad con el producto</span>
+            <h3 class="ad-fila__t">Hablan el idioma del fútbol</h3>
+            <p>Tres de las cuatro cuentas tienen el fútbol en su contenido o en su comunidad: un equipo de fútbol de creadores o una hinchada propia, la de Atlético Nacional y la del Deportivo Cali. La cuarta aporta humor y calle. Es un contexto natural para integrar YaJuego en partidos, retos y experiencias futboleras.</p>
+          </div>
+        </li>
+        <li class="ad-fila">
+          <span class="ad-n ad-n--md" aria-hidden="true">2</span>
+          <div>
+            <span class="ad-fila__k">Alcance geográfico</span>
+            <h3 class="ad-fila__t">Cubren cuatro plazas</h3>
+            <p>Una cuenta por plaza: Ibagué, Barranquilla, Medellín y Cali, donde 41% de la audiencia de @uncalenoporahi se concentra.</p>
+          </div>
+        </li>
+        <li class="ad-fila">
+          <span class="ad-n ad-n--md" aria-hidden="true">3</span>
+          <div>
+            <span class="ad-fila__k">Alcance y cercanía</span>
+            <h3 class="ad-fila__t">Mezclan tamaños de cuenta</h3>
+            <p>Una cuenta pasa de 200 mil seguidores, otra está en 80,2 mil y dos tienen 16,1 mil o menos. La más grande interactúa 3,6% y la de 80,2 mil, 5,0%; entre las pequeñas, @soypipefutbol llega a 5,0%. Las cuentas grandes aportan alcance y las pequeñas, una comunidad cercana.</p>
+          </div>
+        </li>
+        <li class="ad-fila">
+          <span class="ad-n ad-n--md" aria-hidden="true">4</span>
+          <div>
+            <span class="ad-fila__k">Calidad de audiencia</span>
+            <h3 class="ad-fila__t">Se puede comprobar quién los sigue</h3>
+            <p>De tres de las cuatro cuentas hay datos de audiencia: credibilidad, seguidores reales, país y edad. Con ellos más abajo se ve qué tan sólido es cada perfil, y es parte de lo que se usó para descartar a otros.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section class="colophon">
-    <dl>
-      <dt>Fuentes</dt>
-      <dd>Lista «Roster de Management CM: YAJUEGO», plataforma Blindy, consultada el 27 de octubre de 2026 (<a href="https://www.blindy.bio/r/3ee5f999-b5ef-4c66-b4cd-db32c887b4c9" rel="noopener" target="_blank">abrir la lista original</a>), y el documento «Kpis YAJUEGO - Hoja 1».</dd>
-      <dt>Gerente de cuenta</dt>
-      <dd>Sofía Rendón, Management CM</dd>
-      <dt>Alcance de las cifras</dt>
-      <dd>Seguidores, interacción y audiencia son los de Blindy, sin recalcular. La suma de seguidores cuenta una vez cada cuenta y no es alcance único. El alcance y las views estimadas vienen del documento de KPIs de la cuenta; el valor bruto es el de la propuesta y el costo por mil views es un cálculo propio.</dd>
-    </dl>
+  <section class="ad-sec" id="creadores" aria-labelledby="t-creadores">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab ad-sec-cab--grande">
+        <h2 id="t-creadores">Quiénes son</h2>
+        <p class="ad-lead">De mayor a menor audiencia. Cada creador abre su ficha con rendimiento, audiencia e inversión estimada.</p>
+      </header>
+      <div class="ad-grid" style="--col:250px">
+        <article class="ad-card ro-persona">
+          <a class="ro-persona__foto" href="creadores/el_bermu09.html"><img src="../assets/img/roster/el_bermu09.jpg" alt="Foto de perfil de el_bermu09" loading="lazy" width="320" height="320"></a>
+          <div class="ro-persona__cuerpo">
+            <h3><a href="creadores/el_bermu09.html">@el_bermu09</a></h3>
+            <span class="ro-persona__tipo">Ibagué</span>
+            <p>Su contenido es de humor, calle y situaciones cotidianas. También es emprendedor y tiene una comunidad de creadores en la región.</p>
+            <dl class="ro-persona__datos">
+              <div class="ad-stat"><dt class="ad-stat__m">Seguidores</dt><dd class="ad-stat__n">207,6 mil</dd></div>
+              <div class="ad-stat"><dt class="ad-stat__m">Interacción</dt><dd class="ad-stat__n">3,6%</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="ad-card ro-persona">
+          <a class="ro-persona__foto" href="creadores/elgonchi.html"><img src="../assets/img/roster/elgonchi.jpg" alt="Foto de perfil de elgonchi__" loading="lazy" width="320" height="320"></a>
+          <div class="ro-persona__cuerpo">
+            <h3><a href="creadores/elgonchi.html">@elgonchi__</a></h3>
+            <span class="ro-persona__tipo">Barranquilla</span>
+            <p>Creador de humor y entretenimiento que, además, hace parte de un equipo de fútbol de creadores. Su perfil permite integrar YAJUEGO desde el humor y las dinámicas futboleras, con potencial para conectar con una audiencia amplia.</p>
+            <dl class="ro-persona__datos">
+              <div class="ad-stat"><dt class="ad-stat__m">Seguidores</dt><dd class="ad-stat__n">80,2 mil</dd></div>
+              <div class="ad-stat"><dt class="ad-stat__m">Interacción</dt><dd class="ad-stat__n">5,0%</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="ad-card ro-persona">
+          <a class="ro-persona__foto" href="creadores/uncalenoporahi.html"><img src="../assets/img/roster/uncalenoporahi.jpg" alt="Foto de perfil de uncalenoporahi" loading="lazy" width="320" height="320"></a>
+          <div class="ro-persona__cuerpo">
+            <h3><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></h3>
+            <span class="ro-persona__tipo">Audiencia concentrada en Cali</span>
+            <p>Creador enfocado en el Deportivo Cali y el fútbol colombiano. Su audiencia tiene una alta concentración en Cali, lo que lo convierte en una opción estratégica para conectar con los hinchas de la región.</p>
+            <dl class="ro-persona__datos">
+              <div class="ad-stat"><dt class="ad-stat__m">Seguidores</dt><dd class="ad-stat__n">16,1 mil</dd></div>
+              <div class="ad-stat"><dt class="ad-stat__m">Interacción</dt><dd class="ad-stat__n">3,8%</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="ad-card ro-persona">
+          <a class="ro-persona__foto" href="creadores/soypipefutbol.html"><img src="../assets/img/roster/soypipefutbol.jpg" alt="Foto de perfil de soypipefutbol" loading="lazy" width="320" height="320"></a>
+          <div class="ro-persona__cuerpo">
+            <h3><a href="creadores/soypipefutbol.html">@soypipefutbol</a></h3>
+            <span class="ro-persona__tipo">Medellín</span>
+            <p>Creador y periodista enfocado en Atlético Nacional, con una comunidad de hinchas que conecta desde la pasión y la identidad verdolaga.</p>
+            <dl class="ro-persona__datos">
+              <div class="ad-stat"><dt class="ad-stat__m">Seguidores</dt><dd class="ad-stat__n">10,3 mil</dd></div>
+              <div class="ad-stat"><dt class="ad-stat__m">Interacción</dt><dd class="ad-stat__n">5,0%</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-sec ad-sec--papel" id="comparativo" aria-labelledby="t-comparativo">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        <h2 id="t-comparativo">Lo que se puede comparar</h2>
+        <p>Seguidores e interacción, lado a lado. Una cuenta pequeña con buena interacción puede rendir más por peso invertido que una grande con interacción baja.</p>
+      </header>
+      <div class="ad-tabla" role="region" aria-label="Seguidores e interacción de las cuatro cuentas" tabindex="0">
+        <table>
+          <caption>Las cuatro cuentas, de mayor a menor número de seguidores.</caption>
+          <thead>
+            <tr><th scope="col">Creador</th><th scope="col">Plaza</th><th scope="col" class="valor">Seguidores</th><th scope="col" class="valor">Interacción</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><a href="creadores/el_bermu09.html">@el_bermu09</a></th><td>Ibagué</td><td class="valor">207.602</td><td class="valor">3,6%</td></tr>
+            <tr><th scope="row"><a href="creadores/elgonchi.html">@elgonchi__</a></th><td>Barranquilla</td><td class="valor">80.209</td><td class="valor">5,0%</td></tr>
+            <tr><th scope="row"><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></th><td>Cali (audiencia)</td><td class="valor">16.123</td><td class="valor">3,8%</td></tr>
+            <tr><th scope="row"><a href="creadores/soypipefutbol.html">@soypipefutbol</a></th><td>Medellín</td><td class="valor">10.292</td><td class="valor">5,0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="audiencias" aria-labelledby="t-audiencias">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        <h2 id="t-audiencias">Quién los sigue de verdad</h2>
+        <p>Tamaño no es calidad. Estas son las señales de audiencia que Blindy calcula para cada cuenta. De una de ellas no hay datos.</p>
+      </header>
+      <div class="ad-tabla" role="region" aria-label="Calidad de audiencia por creador" tabindex="0">
+        <table>
+          <caption>Calidad de audiencia por creador. «13 a 17 años» es la franja de menores que reporta Instagram.</caption>
+          <thead>
+            <tr><th scope="col">Creador</th><th scope="col" class="valor">Credibilidad</th><th scope="col" class="valor">Seguidores reales</th><th scope="col" class="valor">Audiencia en Colombia</th><th scope="col" class="valor">13 a 17 años</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><a href="creadores/el_bermu09.html">@el_bermu09</a></th><td class="valor"><span class="ad-estado ad-estado--sin">Sin dato</span></td><td class="valor"><span class="ad-estado ad-estado--sin">Sin dato</span></td><td class="valor"><span class="ad-estado ad-estado--sin">Sin dato</span></td><td class="valor"><span class="ad-estado ad-estado--sin">Sin dato</span></td></tr>
+            <tr><th scope="row"><a href="creadores/elgonchi.html">@elgonchi__</a></th><td class="valor">70%</td><td class="valor">55,6%</td><td class="valor">90,7%</td><td class="valor">6,2%</td></tr>
+            <tr><th scope="row"><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></th><td class="valor">75%</td><td class="valor">56,7%</td><td class="valor">78,9%</td><td class="valor">2,6%</td></tr>
+            <tr><th scope="row"><a href="creadores/soypipefutbol.html">@soypipefutbol</a></th><td class="valor">73%</td><td class="valor"><span class="ad-estado ad-estado--sin">Sin dato</span></td><td class="valor">73,9%</td><td class="valor">9,1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ad-aviso ro-nota">De @el_bermu09 Blindy no tiene datos de audiencia, así que no se puede verificar ninguna de estas señales. Conviene pedírselos a Management CM.</p>
+    </div>
+  </section>
+
+  <section class="ad-sec ad-sec--papel" id="descartados" aria-labelledby="t-descartados">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        <h2 id="t-descartados">Por qué descartamos a los otros cinco</h2>
+        <p>De las nueve cuentas de Management CM quedaron fuera cinco. Los motivos son el costo por mil views, el bajo engagement y, en dos casos, una audiencia que está en otros países.</p>
+      </header>
+      <div class="ad-tabla ro-ancha" role="region" aria-label="Cuentas descartadas" tabindex="0">
+        <table>
+          <caption>Cuentas descartadas, con las cifras que pesaron. El costo por mil views es valor bruto entre las views estimadas del PDF.</caption>
+          <thead>
+            <tr><th scope="col">Creador</th><th scope="col" class="valor">Seguidores</th><th scope="col" class="valor">Interacción</th><th scope="col" class="valor">Costo por mil views</th><th scope="col">Por qué se descartó</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">@soyeltruji</th><td class="valor">14.861</td><td class="valor"><span class="ad-estado ad-estado--alerta">0,1%</span></td><td class="valor">$57.086</td><td>Interacción de 0,1% y solo 25,6% de seguidores reales. Sus mayores audiencias están en India, Italia y Estados Unidos, no en Colombia.</td></tr>
+            <tr><th scope="row">@caspian.col</th><td class="valor">10.774</td><td class="valor">4,8%</td><td class="valor"><span class="ad-estado ad-estado--alerta">$230.895</span></td><td>Costo por mil views alto y solo 25,1% de su audiencia en Colombia: el resto está en Argentina, España y Chile, entre otros.</td></tr>
+            <tr><th scope="row">@jeisonmattaa</th><td class="valor">265.533</td><td class="valor">3,7%</td><td class="valor"><span class="ad-estado ad-estado--alerta">$145.998</span></td><td>Es el talento más caro ($6.134.831) para 42.020 views estimadas, y solo incluye el reel collab.</td></tr>
+            <tr><th scope="row">@xpgabo_</th><td class="valor">31.706</td><td class="valor">6,7%</td><td class="valor"><span class="ad-estado ad-estado--alerta">$844.320</span></td><td>Costo por mil views muy alto: $2.921.348 para 3.460 views estimadas.</td></tr>
+            <tr><th scope="row">@juango____</th><td class="valor">4.055</td><td class="valor">5,1%</td><td class="valor"><span class="ad-estado ad-estado--alerta">$1.449.082</span></td><td>Costo por mil views muy alto: $1.825.843 para 1.260 views estimadas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ad-aviso ro-nota">@soypipefutbol se conserva aunque su costo por mil views es alto ($490.159): sus views estimadas en el PDF (4.470) están muy por debajo del promedio de sus reels en Blindy (312.745), así que ese costo sobrestima lo que cuesta cada mil views reales.</p>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="inversion" aria-labelledby="t-inversion">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        <h2 id="t-inversion">Lo que costaría y lo que se espera</h2>
+        <p>Valor bruto por talento, alcance y views esperadas, y la reserva que completa $20 millones. No se indica la moneda de los valores.</p>
+      </header>
+
+      <dl class="ad-kpis ro-kpis">
+        <div class="ad-kpi"><dt class="ad-kpi__l">Valor bruto de los talentos</dt><dd class="ad-kpi__n">$14.022.472</dd></div>
+        <div class="ad-kpi"><dt class="ad-kpi__l">Reserva</dt><dd class="ad-kpi__n">$5.977.528</dd></div>
+        <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">Total de la propuesta</dt><dd class="ad-kpi__n">$20.000.000</dd></div>
+        <div class="ad-kpi"><dt class="ad-kpi__l">Costo por mil views</dt><dd class="ad-kpi__n">$23.584</dd><dd class="ad-kpi__m">Solo los cuatro talentos</dd></div>
+      </dl>
+
+      <figure class="ad-figura ro-fig">
+        <ul class="ad-barra-apilada" role="img" aria-label="Del total de $20.000.000: @el_bermu09 3.505.618, @elgonchi__ 4.089.888, @uncalenoporahi 4.235.955, @soypipefutbol 2.191.011 y la reserva de 5.977.528">
+          <li style="--v:3505618;--c:var(--sumi)"></li><li style="--v:4089888;--c:var(--tinta-secundaria)"></li><li style="--v:4235955;--c:var(--tinta-tenue)"></li><li style="--v:2191011;--c:var(--piedra-borde)"></li><li class="is-on" style="--v:5977528"></li>
+        </ul>
+        <ul class="ad-leyenda">
+          <li><i style="--c:var(--sumi)"></i>@el_bermu09</li>
+          <li><i style="--c:var(--tinta-secundaria)"></i>@elgonchi__</li>
+          <li><i style="--c:var(--tinta-tenue)"></i>@uncalenoporahi</li>
+          <li><i style="--c:var(--piedra-borde)"></i>@soypipefutbol</li>
+          <li><i style="--c:var(--lima)"></i>Reserva</li>
+        </ul>
+      </figure>
+
+      <div class="ad-tabla ro-ancha-xl" role="region" aria-label="Inversión por creador" tabindex="0">
+        <table>
+          <caption>Del costo por mil views más bajo al más alto. Es un cálculo propio: valor bruto entre las views estimadas del PDF.</caption>
+          <thead>
+            <tr><th scope="col">Creador</th><th scope="col">Acciones</th><th scope="col" class="valor">Valor bruto</th><th scope="col" class="valor">Alcance est.</th><th scope="col" class="valor">Views est.</th><th scope="col" class="valor">Costo por mil views</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><a href="creadores/el_bermu09.html">@el_bermu09</a></th><td>Reel collab + derecho de pauta por un mes</td><td class="valor">$3.505.618</td><td class="valor">4.555</td><td class="valor">318.980</td><td class="valor">$10.990</td></tr>
+            <tr><th scope="row"><a href="creadores/elgonchi.html">@elgonchi__</a></th><td>Reel collab + derecho de pauta por un mes</td><td class="valor">$4.089.888</td><td class="valor">32.577</td><td class="valor">231.750</td><td class="valor">$17.648</td></tr>
+            <tr><th scope="row"><a href="creadores/uncalenoporahi.html">@uncalenoporahi</a></th><td>Reel collab + derecho de pauta por un mes</td><td class="valor">$4.235.955</td><td class="valor">22.601</td><td class="valor">39.380</td><td class="valor">$107.566</td></tr>
+            <tr><th scope="row"><a href="creadores/soypipefutbol.html">@soypipefutbol</a></th><td>Reel collab + derecho de pauta por un mes</td><td class="valor">$2.191.011</td><td class="valor">4.555</td><td class="valor">4.470</td><td class="valor">$490.159</td></tr>
+            <tr><th scope="row"><strong>Subtotal talentos</strong></th><td></td><td class="valor"><strong>$14.022.472</strong></td><td class="valor"><strong>64.288</strong></td><td class="valor"><strong>594.580</strong></td><td class="valor"><strong>$23.584</strong></td></tr>
+            <tr><th scope="row"><a href="https://www.instagram.com/danigoals__/" rel="noopener" target="_blank">@danigoals__</a></th><td>Reserva: cotización en revisión</td><td class="valor">$5.977.528</td><td class="valor">Por definir</td><td class="valor">Por definir</td><td class="valor">Por definir</td></tr>
+            <tr><th scope="row"><strong>Total de la propuesta</strong></th><td></td><td class="valor"><strong>$20.000.000</strong></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ad-lectura ro-lectura ro-nota">
+        <h3>El costo por mil views depende de cuántas views se supongan.</h3>
+        <p>En una cuenta, @uncalenoporahi, las views estimadas coinciden con el promedio de sus reels en Blindy. En tres no: <b>@el_bermu09</b> (318.980 estimadas contra 1.033.239), <b>@elgonchi__</b> (231.750 estimadas contra 49.581) y <b>@soypipefutbol</b> (4.470 contra 312.745). Antes de comparar costos conviene saber de dónde salió cada estimación. Además, el PDF repite el mismo alcance (4.555) en @soypipefutbol y @el_bermu09.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-sec ad-sec--papel" aria-label="Fuentes y alcance de las cifras">
+    <div class="ad-wrap">
+      <dl class="ad-ficha ro-colofon">
+        <div><dt>Fuentes</dt><dd>Lista «Roster de Management CM: YAJUEGO», plataforma Blindy, consultada el 27 de octubre de 2026 (<a href="https://www.blindy.bio/r/3ee5f999-b5ef-4c66-b4cd-db32c887b4c9" rel="noopener" target="_blank">abrir la lista original</a>), y el documento «Kpis YAJUEGO - Hoja 1».</dd></div>
+        <div><dt>Gerente de cuenta</dt><dd>Sofía Rendón, Management CM</dd></div>
+        <div><dt>Alcance de las cifras</dt><dd>Seguidores, interacción y audiencia son los de Blindy, sin recalcular. La suma de seguidores cuenta una vez cada cuenta y no es alcance único. El alcance y las views estimadas vienen del documento de KPIs de la cuenta; el valor bruto es el de la propuesta y el costo por mil views es un cálculo propio.</dd></div>
+      </dl>
+    </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <span>YaJuego, biblioteca de documentos</span>
-  <span>Colombia. Juega con control, +18</span>
+<footer class="ad-foot">
+  <div class="ad-foot__in">
+    <span>YaJuego, biblioteca de documentos</span>
+    <span>Colombia. Juega con control, +18</span>
+  </div>
 </footer>
-
 </body>
 </html>
