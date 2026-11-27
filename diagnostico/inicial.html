@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es" data-suelo="tinta">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YaJuego | Diagnóstico inicial</title>
+<link rel="stylesheet" href="../assets/css/adcom-tokens.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<style>
+*{font-family: 'Poppins', sans-serif}
+:root{--y:#ffd400;--b:#111;--w:#fff;--g1:#1a1a1a;--g2:#282828;--g3:#555;--g4:#999;--r:#EF4444;--gr:#22C55E;--pu:#8B5CF6;--sidebar:280px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family: 'Poppins', sans-serif;background:var(--b);color:var(--w);display:flex}
+#sidebar{width:var(--sidebar);position:fixed;top:0;left:0;bottom:0;background:#0d0d0d;border-right:1px solid #1f1f1f;display:flex;flex-direction:column;z-index:10;overflow-y:auto}
+.sb-head{padding:1.5rem 1.4rem 1.2rem;border-bottom:1px solid #1f1f1f;display:flex;gap:.75rem;align-items:center}.sb-logo{width:38px;height:38px;border-radius:50%;background:var(--y);color:#111;font-family: 'Poppins', sans-serif;font-weight:800;display:flex;align-items:center;justify-content:center}.sb-brand{font-family: 'Poppins', sans-serif;font-weight:800;font-size:14px;letter-spacing:.06em}.sb-brand small{display:block;font-family: 'Poppins', sans-serif;font-size:12px;font-weight:400;color:var(--g4);letter-spacing:.12em}
+.sb-client{padding:1rem 1.4rem;border-bottom:1px solid #1f1f1f}.sb-client-label{font-size:12px;color:var(--fg-muted)}.sb-client-name{font-family: 'Poppins', sans-serif;font-size:13px;font-weight:700;color:var(--y);margin-top:4px}.sb-client-url{font-size:12px;color:var(--fg-muted);margin-top:2px}
+.sb-nav{padding:1rem 0;flex:1}.sb-section-label{font-size:12px;color:var(--fg-muted);padding:.8rem 1.4rem .3rem}.sb-item{display:flex;align-items:center;gap:.7rem;padding:.6rem 1.4rem;color:var(--g4);text-decoration:none;font-size:12px;font-weight:500;position:relative}.sb-item:hover{background:rgba(255,255,255,.04);color:var(--w)}.sb-item.active{background:rgba(255,212,0,.08);color:var(--y)}.sb-item.active:before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--y)}.sb-num{width:20px;height:20px;border-radius:0;background:var(--g2);display:flex;align-items:center;justify-content:center;font-family: 'Poppins', sans-serif;font-size:12px;font-weight:800}.sb-item.active .sb-num{background:var(--y);color:#111}
+.sb-footer{padding:1rem 1.4rem;border-top:1px solid #1f1f1f}.sb-total-label{font-size:12px;color:var(--fg-muted)}.sb-total-val{font-family: 'Poppins', sans-serif;font-size:1.4rem;font-weight:800;color:var(--y)}.sb-total-sub{font-size:12px;color:var(--fg-muted)}
+#main{margin-left:var(--sidebar);width:calc(100% - var(--sidebar));min-height:100vh}.sec{padding:4rem 3.5rem;min-height:100vh;border-bottom:1px solid #1a1a1a}.sec:nth-child(even){background:#0e0e0e}.sec:nth-child(odd){background:var(--b)}
+#s-hero{display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,212,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,212,0,.04) 1px,transparent 1px);background-size:60px 60px}.hero-blob{position:absolute;top:-10%;right:-5%;width:55vw;height:70vh;border-radius:40% 60% 70% 30%;background:radial-gradient(ellipse at 60% 40%,rgba(255,212,0,.13),transparent 70%)}.hero-content{position:relative;z-index:1}
+.hero-ey,.sec-eyebrow{font-size:12px;font-weight:700;color:var(--y);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}.hero-ey:before,.sec-eyebrow:before{content:'';width:20px;height:1px;background:var(--y)}.sec-eyebrow{font-size:12px;margin-bottom:.6rem}
+.hero-title{font-family: 'Poppins', sans-serif;font-weight:800;font-size:clamp(3rem,6vw,6rem);line-height:.9;letter-spacing: -.02em;margin-bottom:1.4rem}.hero-title em{font-style:normal;color:var(--y)}.hero-sub{font-size:.95rem;color:var(--g4);font-weight:300;max-width:760px;line-height:1.75;margin-bottom:2.5rem}
+.hero-stats{display:flex;flex-wrap:wrap}.hstat{padding:0 2rem;border-left:1px solid rgba(255,212,0,.2)}.hstat:first-child{padding-left:0;border-left:0}.hstat-num{font-family: 'Poppins', sans-serif;font-size:1.55rem;font-weight:800;color:var(--y)}.hstat-label{font-size:12px;color:var(--g4);letter-spacing:.05em;margin-top:2px}
+.sec-title{font-family: 'Poppins', sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:.6rem}.sec-desc{color:var(--g4);font-size:.88rem;font-weight:300;margin-bottom:2.2rem;max-width:860px;line-height:1.65}
+.krow{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2rem}.kcard{background:var(--g1);border:1px solid var(--g2);border-radius:var(--radius-sm);padding:1.05rem 1rem;position:relative;overflow:hidden}.kcard:after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--y)}.kv{font-family: 'Poppins', sans-serif;font-size:1.35rem;font-weight:800;color:var(--y)}.kl{font-size:12px;font-weight:700;color:var(--g4);margin-top:4px}.ks{font-size:12px;color:var(--fg-muted);margin-top:2px;line-height:1.4}
+.ktbl-wrap{overflow-x:auto;border:1px solid #1d1d1d;border-radius:var(--radius-sm)}.ktbl{width:100%;min-width:1500px;border-collapse:collapse}.ktbl th{background:var(--y);color:#111;font-family: 'Poppins', sans-serif;font-size:12px;font-weight:800;padding:.85rem .75rem;text-align:left;position:sticky;top:0}.ktbl td{padding:.9rem .75rem;border-bottom:1px solid #222;vertical-align:top;font-size:.8rem;line-height:1.55}.ktbl tr:hover td{background:#151515}.chip{display:inline-block;background:var(--g2);padding:3px 9px;border-radius:var(--radius);font-size:12px;font-weight:700;white-space:nowrap}.crit{background:rgba(239,68,68,.18);color:#FCA5A5}.alta{background:rgba(255,212,0,.16);color:var(--y)}.media{background:rgba(139,92,246,.18);color:#C4B5FD}.medio{background:#242424;color:#ddd}.kpc{font-family: 'Poppins', sans-serif;font-size:.82rem;font-weight:800;color:var(--y);margin-bottom:3px}.krc{font-size:var(--fs-body-min);color:var(--g4);font-weight:300;line-height:1.58}.muted{color:var(--g4)}
+.fg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}.fg.three{grid-template-columns:repeat(3,1fr)}.fg.two{grid-template-columns:repeat(2,1fr)}.fc{background:var(--g1);border:1px solid var(--g2);border-radius:var(--radius-sm);padding:1.35rem 1.15rem;transition:all .2s;position:relative;overflow:hidden}.fc:before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent}.fc:hover{border-color:rgba(255,212,0,.28);transform:translateY(-2px)}.fc:hover:before{background:var(--y)}.fn{font-family: 'Poppins', sans-serif;font-size:.9rem;font-weight:800;margin-bottom:.55rem}.fd{font-size:var(--fs-body-min);color:var(--g4);line-height:1.68;font-weight:300}
+.ibar{background:var(--g1);border:1px solid var(--g2);border-radius:var(--radius-sm);padding:1rem 1.3rem;margin:1.2rem 0}.ibar p{font-size:.82rem;color:var(--g4);line-height:1.7}.cbox{background:#0d0d0d;border:1px solid #1e1e1e;border-radius:var(--radius-sm);padding:1rem 1.3rem;margin-top:1.5rem}.cbox p{font-size:var(--fs-body-min);color:var(--g4);line-height:1.7}
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#222}.ecard{background:#0d0d0d;padding:2rem 1.6rem}.ecard.rec{background:#130f00}.ebadge{display:inline-block;font-family: 'Poppins', sans-serif;font-size:12px;font-weight:800;padding:4px 11px;border-radius:var(--radius);margin-bottom:1.1rem}.eb-c{background:#222;color:var(--g4)}.eb-r{background:var(--y);color:#111}.eb-a{background:var(--gr);color:#111}.etot{font-family: 'Poppins', sans-serif;font-size:2rem;font-weight:800;line-height:1.05;margin-bottom:.5rem}.etl{font-size:var(--fs-body-min);color:var(--g4);line-height:1.62;margin-bottom:1rem}.elines{border-top:1px solid #1e1e1e}.eline{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px solid #161616}.eln{font-size:.78rem;color:var(--g4);font-weight:300}.elv{font-family: 'Poppins', sans-serif;font-size:.78rem;font-weight:800;text-align:right}
+.quote{font-family: 'Poppins', sans-serif;font-size:clamp(1.4rem,3vw,2.4rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;max-width:920px}.quote em{font-style:normal;color:var(--y)}.source-list{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}.src{background:#0d0d0d;border:1px solid #1e1e1e;border-radius:var(--radius-sm);padding:1rem;font-size:var(--fs-body-min);color:var(--g4);line-height:1.55;word-break:break-word}.footer-note{font-size:var(--fs-body-min);color:var(--fg-muted);margin-top:2rem}
+#sidebar::-webkit-scrollbar{width:4px}#sidebar::-webkit-scrollbar-track{background:transparent}#sidebar::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:0}
+@media(max-width:1100px){#sidebar{display:none}#main{margin-left:0;width:100%}.fg,.fg.three,.fg.two,.egrid,.source-list{grid-template-columns:1fr}.krow{grid-template-columns:repeat(2,1fr)}.sec{padding:2.4rem 1.4rem}.hstat{padding:0 1rem 1rem 0;border-left:0}}
+</style>
+</head>
+<body>
+<aside id="sidebar">
+  <div class="sb-head"><div class="sb-logo">YJ</div><div class="sb-brand">YA JUEGO<small>Diagnóstico digital</small></div></div>
+  <div class="sb-client"><div class="sb-client-label">Cliente</div><div class="sb-client-name">sports.yajuego.co</div><div class="sb-client-url">Google Ads + Meta Ads + campaña mundial</div></div>
+  <nav class="sb-nav">
+    <div class="sb-section-label">Contenido</div>
+    <a class="sb-item active" href="#s-hero"><span class="sb-num">00</span>Inicio</a>
+    <a class="sb-item" href="#s-check"><span class="sb-num">01</span>Checklist con KPI</a>
+    <a class="sb-item" href="#s-kpis"><span class="sb-num">02</span>KPIs de análisis</a>
+    <a class="sb-item" href="#s-conclusiones"><span class="sb-num">03</span>Conclusiones</a>
+    <a class="sb-item" href="#s-google"><span class="sb-num">04</span>Google Ads</a>
+    <a class="sb-item" href="#s-meta"><span class="sb-num">05</span>Meta Ads</a>
+    <a class="sb-item" href="#s-cierre"><span class="sb-num">06</span>Cierre</a>
+  </nav>
+  <div class="sb-footer"><div class="sb-total-label">Foco</div><div class="sb-total-val">18</div><div class="sb-total-sub">acciones priorizadas</div></div>
+</aside>
+<main id="main">
+<section class="sec" id="s-hero">
+  <div class="hero-grid"></div><div class="hero-blob"></div>
+  <div class="hero-content">
+    <div class="hero-ey">Consultoría de performance</div>
+    <h1 class="hero-title">Diagnóstico <em>360</em><br>YaJuego</h1>
+    <p class="hero-sub">Documento ejecutivo para orientar optimizaciones en Google Ads e integrar la nueva lectura de Meta Ads 2026. La campaña de Curazao se conecta como lenguaje creativo transversal para captar demanda, alimentar consideración y mejorar conversión.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">$661,8M</div><div class="hstat-label">Inversión Google analizada</div></div>
+      <div class="hstat"><div class="hstat-num">$200,1M</div><div class="hstat-label">Inversión Meta analizada</div></div>
+      <div class="hstat"><div class="hstat-num">77,4%</div><div class="hstat-label">Gasto concentrado en Search</div></div>
+      <div class="hstat"><div class="hstat-num">100%</div><div class="hstat-label">Keywords en amplia</div></div>
+      <div class="hstat"><div class="hstat-num">Curazao</div><div class="hstat-label">Campaña integrada al funnel</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="s-check">
+  <div class="sec-eyebrow">01 · Checklist ejecutivo con KPI</div>
+  <h2 class="sec-title">Acciones recomendadas según hallazgos de cuenta y benchmarks.</h2>
+  <p class="sec-desc">El checklist parte del dato observado, define el KPI que responde a cada acción y explica por qué debería ejecutarse. Meta se actualiza con la data del nuevo diagnóstico 2026, sin replicar tablas de detalle por campaña.</p>
+  <div class="ktbl-wrap">
+    <table class="ktbl">
+      <thead>
+        <tr><th>Prioridad</th><th>Medio</th><th>KPI impactado</th><th>Hallazgo / contexto con dato</th><th>Acción recomendada</th><th>Razón de la acción</th><th>Uso de campaña de marca / Curazao</th></tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="chip crit">Crítica</span></td>
+          <td><span class="chip medio">Google Ads · Medición</span></td>
+          <td><div class="kpc">CPA real · CVR · Conversiones primarias · Calidad de señal</div></td>
+          <td><div class="krc">PMax y Demand Gen muestran CPAs de $133 a $468 COP y volúmenes de conversión muy superiores al comportamiento de Search. Ejemplo: PMax “Beneficios YaJuego {new videos}” registra 177.051,91 conversiones con 10.438 clics y CPA de $133 COP.</div></td>
+          <td><div class="krc">Auditar conversiones primarias/secundarias, deduplicación GA4/Google Ads, eventos importados y definición de conversión de valor: registro, depósito, primer depósito o apuesta.</div></td>
+          <td><div class="krc">El algoritmo puede estar optimizando microeventos o eventos repetidos. Antes de escalar presupuesto, hay que asegurar que la cuenta aprenda de acciones comparables y relevantes para negocio.</div></td>
+          <td><div class="krc">Curazao debe tener eventos separados por etapa: visita landing, registro, depósito y participación. No mezclar clics o visitas con conversiones finales.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip crit">Crítica</span></td>
+          <td><span class="chip medio">Google Search</span></td>
+          <td><div class="kpc">CPA Search · CTR · CPC · CVR · Share de inversión</div></td>
+          <td><div class="krc">Search concentra $512,2M COP, equivalente al 77,4% de la inversión analizada. Su CPA agregado es $67.644 COP, CTR 2,89%, CPC $4.194 COP y CVR 6,20%.</div></td>
+          <td><div class="krc">Reestructurar Search por intención: Brand, Promo, Genérico, Competitor, Mundial/Curazao y Remarketing Search. Separar presupuestos y objetivos por intención.</div></td>
+          <td><div class="krc">Hoy la mayor parte del presupuesto está en Search, pero la estructura mezcla intenciones. Separar campañas permite comparar eficiencia real y proteger las búsquedas de mayor probabilidad de conversión.</div></td>
+          <td><div class="krc">Crear campaña Search específica para la promo: “viaje Curazao YaJuego”, “mundial Curazao”, “promoción mundial YaJuego”, “bono mundial”.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip crit">Crítica</span></td>
+          <td><span class="chip medio">Google Search · Keywords</span></td>
+          <td><div class="kpc">CTR · Quality Score · CPC · CPA</div></td>
+          <td><div class="krc">El 100% de las 422 keywords activas/registradas están en concordancia amplia. Esto abre cobertura, pero también aumenta riesgo de búsquedas irrelevantes y gasto con baja intención.</div></td>
+          <td><div class="krc">Crear arquitectura de match types: exacta para marca y términos transaccionales; frase para expansión controlada; amplia solo con smart bidding, audiencias y negativos robustos.</div></td>
+          <td><div class="krc">La amplia puede ser útil, pero en una categoría sensible y competitiva necesita controles. La mezcla de intención afecta CTR, CPC y aprendizaje de puja.</div></td>
+          <td><div class="krc">Usar exact/frase para términos de campaña Curazao y ampliar solo con grupos de exploración controlados.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Google Search · Competitor</span></td>
+          <td><div class="kpc">CPA · CTR · CPC · % gasto improductivo</div></td>
+          <td><div class="krc">La campaña Competitor invierte $95,1M COP, 14,4% del total, con CTR de 0,62%, CPC $7.290 COP y CPA $118.413 COP. Es el CPA más alto entre campañas Search principales.</div></td>
+          <td><div class="krc">Reducir/limitar competitor, separar por competidor, excluir términos de baja calidad y mantener solo marcas con CPA o volumen justificable.</div></td>
+          <td><div class="krc">El bajo CTR sugiere baja relevancia del anuncio frente a la intención del usuario. Competitor debe ser una táctica defensiva/ofensiva medida, no un drenaje de presupuesto.</div></td>
+          <td><div class="krc">Usar Curazao como ángulo diferencial solo en competitor de mayor volumen: “Si estás buscando dónde jugar el mundial, participa por verlo desde Curazao”.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Google Search · Calidad</span></td>
+          <td><div class="kpc">CTR · CPC · CPA · Quality Score</div></td>
+          <td><div class="krc">Hay 11 keywords en estado “Limitado” por baja calidad, con $46,8M COP de inversión, 1,22M impresiones y 6.444 clics. Betplay y Rushbet concentran parte relevante de este problema.</div></td>
+          <td><div class="krc">Revisar anuncios, landings, concordancias y términos asociados a keywords limitadas. Pausar lo que no pueda mejorar relevancia o calidad.</div></td>
+          <td><div class="krc">La baja calidad puede elevar CPC, limitar entrega y afectar la eficiencia general. No basta con aparecer: hay que aparecer con relevancia suficiente.</div></td>
+          <td><div class="krc">No forzar Curazao en keywords donde el usuario busca otra marca si el anuncio no resuelve claramente el diferencial.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Google Search · Brand</span></td>
+          <td><div class="kpc">CPA Brand · CTR Brand · Protección de marca</div></td>
+          <td><div class="krc">Brand invierte $203,1M COP, 30,7% del total, con CPA $75.519 COP. Además, hay términos de marca fuera de la campaña Brand que suman $11,0M COP de inversión.</div></td>
+          <td><div class="krc">Blindar marca: mover términos “YaJuego/Yajuego” a Brand, negativizarlos en campañas genéricas/promociones y revisar si Brand está capturando usuarios existentes.</div></td>
+          <td><div class="krc">La marca debe ser eficiente y limpia. Si términos brand aparecen en campañas no brand, distorsionan el aprendizaje y la lectura de performance.</div></td>
+          <td><div class="krc">Durante Curazao, separar “Brand evergreen” de “Brand + promo” para medir demanda incremental de la campaña.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Google Search · Promotions</span></td>
+          <td><div class="kpc">CPA Promo · CVR · Volumen de registros/depósitos</div></td>
+          <td><div class="krc">Promotions tiene $152,2M COP de inversión, CTR 5,66%, CPA $52.061 COP y CVR 7,70%; es una de las líneas Search más eficientes frente a Brand y Competitor.</div></td>
+          <td><div class="krc">Escalar promociones con control: grupos por beneficio, bono, mundial, Curazao, depósito mínimo y términos de alta intención. Mantener negativos para evitar tráfico informativo.</div></td>
+          <td><div class="krc">Promotions ya muestra mejor CPA relativo; puede ser el espacio natural para capturar demanda de Curazao si la landing y los copies están alineados.</div></td>
+          <td><div class="krc">Usar copies con urgencia: “Participa antes del cierre”, “Deposita y participa por Curazao”, “Mundial + buena vida”.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">PMax</span></td>
+          <td><div class="kpc">CPA real · Asset performance · CVR · Incrementalidad</div></td>
+          <td><div class="krc">PMax representa $66,8M COP, 10,1% de inversión, pero presenta datos atípicos: CPA agregado de $376 COP y 177.775 conversiones. Esto no es comparable con Search sin auditoría.</div></td>
+          <td><div class="krc">Revisar objetivos, Final URL Expansion, URL exclusions, asset groups, señales de audiencia y reportes de assets. Separar asset group de Curazao con landing dedicada.</div></td>
+          <td><div class="krc">PMax puede escalar, pero si optimiza a eventos incorrectos o URLs no deseadas, maximiza volumen aparente y no negocio.</div></td>
+          <td><div class="krc">Asset group “Mundial desde Curazao”: imágenes lifestyle, piezas 1:1, 4:5, 9:16 y videos cortos con CTA a registro/depósito.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Demand Gen</span></td>
+          <td><div class="kpc">CTR · CPC · Engagement · Conversiones asistidas</div></td>
+          <td><div class="krc">Demand Gen suma $76,3M COP, 11,5% de inversión, 258.073 clics, CTR 1,15% y CPC $296 COP. Es un canal eficiente para tráfico, pero requiere validar calidad de conversión.</div></td>
+          <td><div class="krc">Crear campañas/ads por ángulo creativo y etapa: awareness, consideración y remarketing. Usar asset diversity por formato: square, landscape y vertical.</div></td>
+          <td><div class="krc">Demand Gen es ideal para explotar la campaña visualmente, pero debe medirse con KPIs de consideración y no compararse linealmente contra Search.</div></td>
+          <td><div class="krc">Ángulos: “Mundial caro vs Curazao incluido”, “Curazao debuta en el mundial”, “activar la suerte”, “fútbol + buena vida”.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip media">Media</span></td>
+          <td><span class="chip medio">YouTube</span></td>
+          <td><div class="kpc">VTR · CPV · Reach · Brand Search Lift · CTR asistido</div></td>
+          <td><div class="krc">Existe una campaña tipo YouTube/Subscribers con $7,34M COP, 6,6M impresiones, CPC $114 COP y CTR 0,97%. No se observa una secuencia clara para construir demanda de la promo.</div></td>
+          <td><div class="krc">Crear secuencia de video: bumper 6s para recordación, 15s para explicar contraste y 30s para dinámica. Remarketing a viewers hacia Search/Demand Gen.</div></td>
+          <td><div class="krc">La campaña Curazao tiene storytelling; YouTube debe abrir el embudo y luego alimentar búsquedas de marca/promoción.</div></td>
+          <td><div class="krc">Guiones con contrastes: “En el mundial haces fila / En Curazao haces playa”; “En Norteamérica pagas en dólares / En Curazao pagamos nosotros”.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip crit">Crítica</span></td>
+          <td><span class="chip medio">Meta Ads · Presupuesto</span></td>
+          <td><div class="kpc">% inversión sin conversión · CPA registro · CPA compra</div></td>
+          <td><div class="krc">Facebook Followers e Instagram Followers acumulan $25,3M COP, equivalente al 12,6% de la inversión Meta analizada, con 0 leads y 0 compras/eventos registrados.</div></td>
+          <td><div class="krc">Pausar o reducir ambas campañas y redirigir presupuesto a campañas con evento de registro, depósito/compra o remarketing con intención clara.</div></td>
+          <td><div class="krc">El objetivo de seguidores no está generando retorno medible. Mantenerlo activo consume presupuesto que podría alimentar aprendizaje de conversión.</div></td>
+          <td><div class="krc">Usar Curazao solo como pieza de alcance si luego alimenta audiencias de video/engagement hacia conversión; no como objetivo aislado de followers.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip crit">Crítica</span></td>
+          <td><span class="chip medio">Meta Ads · Funnel</span></td>
+          <td><div class="kpc">Tasa registro→compra · CPA compra · CVR post-registro</div></td>
+          <td><div class="krc">Complete Registration #Promos invierte $28,3M COP, genera 4.179 leads con CPA lead de $6.768, pero solo 248 compras/eventos; ratio registro→compra aprox. 5,9% y CPA compra $114.052.</div></td>
+          <td><div class="krc">Auditar onboarding, landing, requisitos de promoción y fricciones entre registro, depósito y primera apuesta. Activar remarketing específico a registrados sin compra/depósito.</div></td>
+          <td><div class="krc">La pauta sí está generando registros; la pérdida parece estar después del registro. Optimizar solo creativos no resolvería la fuga principal.</div></td>
+          <td><div class="krc">Mensajes de recuperación: “te falta activar tu participación”, “deposita para entrar por Curazao” y recordatorios de fecha límite.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Meta Ads · Fatiga</span></td>
+          <td><div class="kpc">Frecuencia · CTR decay · CPA · Saturación de audiencia</div></td>
+          <td><div class="krc">La frecuencia promedio es 3,95x y hay campañas sobre zona de riesgo: #CRM# Promotions 8,13x, Facebook Followers 6,65x, Purchase CBO 6,11x, Purchase Ongoing 6,05x y Retargeting CA+LAL 5,74x.</div></td>
+          <td><div class="krc">Rotar creatividades semanalmente en campañas con frecuencia alta, ampliar audiencias LAL/broad y separar mensajes por etapa del funnel.</div></td>
+          <td><div class="krc">La repetición puede aumentar fatiga, bajar CTR y encarecer CPA. La cuenta necesita más variedad real de hooks, formatos y promesas.</div></td>
+          <td><div class="krc">Crear mínimo 5 hooks de Curazao: fútbol + buena vida, mundial caro, Curazao debuta, activar suerte y urgencia por cierre.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Meta Ads · Escalamiento</span></td>
+          <td><div class="kpc">CTR · CPA compra · Volumen de compras/eventos</div></td>
+          <td><div class="krc">Jetx #LC reporta CTR 10,74% y CPA compra $253; Purchase #Ongoing #LC, CTR 10,54% y CPA $221; Binance Pay, CTR 8,44% y CPA $250. Purchase Retargeting CA+LAL registra CPA compra $54.</div></td>
+          <td><div class="krc">Escalar ganadores con incrementos controlados de 20%-30%, replicar estructura de creativo y mantener retargeting protegido con presupuesto independiente.</div></td>
+          <td><div class="krc">Hay señales claras de hooks y audiencias que convierten. La oportunidad es trasladar esa lógica a nuevas promos sin romper el aprendizaje.</div></td>
+          <td><div class="krc">Adaptar los formatos ganadores a Curazao: videos cortos, beneficio claro, CTA directo a registro/depósito y prueba A/B de promesa.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip media">Media</span></td>
+          <td><span class="chip medio">Meta Ads · Reactivación</span></td>
+          <td><div class="kpc">CPA lead · CTR · Aprendizaje por test</div></td>
+          <td><div class="krc">EL DÍA DE MI SUERTE fue pausada con $147K COP de inversión, CPA lead $2.638 y CTR 4,91%; es el CPA de lead más bajo observado en la cuenta.</div></td>
+          <td><div class="krc">Reactivar como test controlado, con presupuesto limitado, umbrales de CPA y ventana mínima de aprendizaje antes de decidir pausa o escalamiento.</div></td>
+          <td><div class="krc">La campaña muestra eficiencia temprana; pausar demasiado pronto puede cortar aprendizajes útiles para promociones futuras.</div></td>
+          <td><div class="krc">Usar “activa tu suerte” como territorio creativo complementario a Curazao, especialmente para audiencias de registro.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip media">Media</span></td>
+          <td><span class="chip medio">Meta Ads · Arquitectura</span></td>
+          <td><div class="kpc">Learning · Señal por campaña · Eficiencia operativa</div></td>
+          <td><div class="krc">La cuenta registra 126 campañas totales, 32 con datos en 2026 y 20 activas. También aparecen duplicidades en líneas como Beneficios, Casino Evolution, Zona de Campeones y Fútbol de Gala.</div></td>
+          <td><div class="krc">Consolidar campañas duplicadas, archivar campañas dormantes y simplificar estructura por objetivo: adquisición, conversión, remarketing y CRM.</div></td>
+          <td><div class="krc">Menos fragmentación mejora el aprendizaje del algoritmo, reduce ruido operativo y facilita leer qué acción mueve cada KPI.</div></td>
+          <td><div class="krc">Crear una línea Curazao por etapa, no múltiples versiones aisladas compitiendo entre sí.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip alta">Alta</span></td>
+          <td><span class="chip medio">Landing / UX</span></td>
+          <td><div class="kpc">CVR landing · Bounce rate · CPA · Tasa de finalización</div></td>
+          <td><div class="krc">La campaña depende de urgencia, claridad legal y dinámica simple. Si el usuario llega a una landing genérica, se pierde intención y baja la tasa de conversión.</div></td>
+          <td><div class="krc">Crear landing dedicada de Curazao con dinámica, fecha límite, requisitos, depósito mínimo, contador, FAQ, legales visibles y CTA sticky.</div></td>
+          <td><div class="krc">La pieza puede generar atención, pero la landing convierte. Menos fricción = mejor CVR y menor CPA.</div></td>
+          <td><div class="krc">Mantener el lenguaje visual de la campaña y reforzar “7 días, todo incluido, fútbol y buena vida”.</div></td>
+        </tr>
+
+        <tr>
+          <td><span class="chip media">Media</span></td>
+          <td><span class="chip medio">Reporting 360</span></td>
+          <td><div class="kpc">CPA por etapa · Incrementalidad · Brand search · Tasa depósito</div></td>
+          <td><div class="krc">Hoy la lectura mezcla canales y objetivos. Para evaluar Curazao hay que separar evergreen vs campaña y tráfico frío vs remarketing.</div></td>
+          <td><div class="krc">Crear tablero semanal con inversión, alcance, CTR, CPC, CVR, CPA registro, CPA depósito, búsquedas de marca, búsquedas promo y audiencias recuperadas.</div></td>
+          <td><div class="krc">El cliente ejecuta; la consultoría necesita un marco claro para priorizar cambios y evitar discusiones de “me gusta/no me gusta”.</div></td>
+          <td><div class="krc">Medir si Curazao levanta búsquedas de marca/promoción y mejora la conversión de audiencias impactadas.</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cbox"><p><strong>Nota de alcance:</strong> la data de Meta permite priorizar acciones de optimización, pero antes de escalar cambios debe validarse la calidad de eventos, deduplicación Pixel/CAPI y correspondencia entre “compras/eventos” y valor real de negocio.</p></div>
+</section>
+
+<section class="sec" id="s-kpis">
+  <div class="sec-eyebrow">02 · KPIs de análisis</div>
+  <h2 class="sec-title">Números que justifican las recomendaciones en Google y Meta.</h2>
+  <p class="sec-desc">Estos indicadores permiten contar la historia sin saturar de tablas: dónde está el gasto, dónde hay eficiencia aparente y dónde hay riesgo operativo en ambos ecosistemas.</p>
+  <div class="krow">
+    <div class="kcard"><div class="kv">$661,8M</div><div class="kl">Google Ads</div><div class="ks">Inversión 2026 consolidada</div></div>
+    <div class="kcard"><div class="kv">77,4%</div><div class="kl">Search</div><div class="ks">Concentración del gasto Google</div></div>
+    <div class="kcard"><div class="kv">422</div><div class="kl">Keywords</div><div class="ks">100% en concordancia amplia</div></div>
+    <div class="kcard"><div class="kv">$200,1M</div><div class="kl">Meta Ads</div><div class="ks">Inversión enero 1 - mayo 12</div></div>
+    <div class="kcard"><div class="kv">54,5M</div><div class="kl">Impresiones Meta</div><div class="ks">CPM promedio $3.672 COP</div></div>
+    <div class="kcard"><div class="kv">13,8M</div><div class="kl">Alcance Meta</div><div class="ks">Frecuencia promedio 3,95x</div></div>
+    <div class="kcard"><div class="kv">19.597</div><div class="kl">Leads Meta</div><div class="ks">CPA registro $10.209 COP</div></div>
+    <div class="kcard"><div class="kv">523K</div><div class="kl">Compras/eventos</div><div class="ks">CPA reportado $382 COP; validar calidad</div></div>
+    <div class="kcard"><div class="kv">$25,3M</div><div class="kl">Meta sin conversión</div><div class="ks">Followers con 0 leads y 0 compras</div></div>
+    <div class="kcard"><div class="kv">10,74%</div><div class="kl">Mejor CTR Meta</div><div class="ks">Jetx #LC como referencia creativa</div></div>
+  </div>
+  <div class="egrid">
+    <div class="ecard rec"><span class="ebadge eb-r">Search</span><div class="etot">77,4% del gasto</div><div class="etl">$512,2M COP · 122.142 clics · CTR 2,89% · CPA $67.644</div><div class="elines"><div class="eline"><span class="eln">Principal riesgo</span><span class="elv">Concentración + estructura</span></div><div class="eline"><span class="eln">Acción base</span><span class="elv">Reordenar por intención</span></div></div></div>
+    <div class="ecard"><span class="ebadge eb-c">PMax + DGen</span><div class="etot">CPAs atípicos</div><div class="etl">PMax CPA agregado $376 COP; Demand Gen CPA agregado $468 COP. No comparable contra Search sin auditar eventos.</div><div class="elines"><div class="eline"><span class="eln">Principal riesgo</span><span class="elv">Conversión no equivalente</span></div><div class="eline"><span class="eln">Acción base</span><span class="elv">Auditar objetivos</span></div></div></div>
+    <div class="ecard"><span class="ebadge eb-a">Keywords</span><div class="etot">422 en amplia</div><div class="etl">100% de keywords reportadas están en concordancia amplia. Hay 11 limitadas por baja calidad con $46,8M COP de inversión.</div><div class="elines"><div class="eline"><span class="eln">Principal riesgo</span><span class="elv">Baja relevancia</span></div><div class="eline"><span class="eln">Acción base</span><span class="elv">Match + negativos</span></div></div></div>
+  </div>
+  <div class="fg" style="margin-top:1.5rem">
+    <div class="fc"><div class="fn">Competitor</div><div class="fd">$95,1M COP, CTR 0,62%, CPC $7.290 y CPA $118.413. Debe limitarse y evaluarse por competidor, no como bolsa general.</div></div>
+    <div class="fc"><div class="fn">Promotions</div><div class="fd">$152,2M COP, CTR 5,66%, CVR 7,70% y CPA $52.061. Es la línea más natural para activar Curazao en Search.</div></div>
+    <div class="fc"><div class="fn">Brand</div><div class="fd">$203,1M COP y CPA $75.519. Hay $11,0M COP de términos de marca fuera de Brand, lo que distorsiona aprendizaje.</div></div>
+    <div class="fc"><div class="fn">Leagues</div><div class="fd">CTR 0,91% y bajo peso de inversión. Puede servir para momentos deportivos, pero con anuncios y landings de alta relevancia.</div></div>
+  </div>
+  <div class="ibar"><p><strong>Benchmark Google:</strong> reportes de referencia 2025 ubican Search en CTR promedio 6,66% y CVR promedio 7,52%. Frente a eso, Search de YaJuego tiene CTR agregado de 2,89% y CVR de 6,20%; no es una comparación directa por mercado, pero sí una señal de oportunidad en relevancia, estructura y experiencia post clic.</p></div>
+</section>
+
+<section class="sec" id="s-conclusiones">
+  <div class="sec-eyebrow">03 · Conclusiones ejecutivas</div>
+  <h2 class="sec-title">El foco no es hacer más pauta; es mejorar la señal que alimenta la pauta.</h2>
+  <p class="sec-desc">La cuenta tiene oportunidades claras en medición, estructura de Search, control de automatización y lectura accionable de Meta. Curazao debe funcionar como capa transversal de campaña, no como un capítulo aislado.</p>
+  <div class="fg">
+    <div class="fc"><div class="fn">1. Medición primero</div><div class="fd">Los CPAs de PMax/Demand Gen no son comparables con Search. La prioridad es validar qué evento representa valor real: registro, depósito o primera apuesta.</div></div>
+    <div class="fc"><div class="fn">2. Search con intención</div><div class="fd">La inversión está concentrada en Search. Hay que separar marca, promo, genéricos, competitor y campaña mundial para leer CPA con justicia.</div></div>
+    <div class="fc"><div class="fn">3. Automatización con control</div><div class="fd">PMax y Demand Gen pueden escalar Curazao, pero solo con assets suficientes, URLs controladas y conversiones correctas.</div></div>
+    <div class="fc"><div class="fn">4. Meta: eficiencia y desperdicio</div><div class="fd">Con data 2026, ya se pueden priorizar pausas, reactivaciones, escalamiento creativo, control de frecuencia y recuperación post-registro.</div></div>
+  </div>
+  <div class="ibar"><p><strong>Lectura central:</strong> Meta y YouTube generan atención, Demand Gen desarrolla consideración, Search captura intención, PMax escala aprendizajes y remarketing recupera usuarios que no completaron registro, depósito o primera compra/evento.</p></div>
+</section>
+
+<section class="sec" id="s-google">
+  <div class="sec-eyebrow">04 · Diagnóstico Google Ads</div>
+  <h2 class="sec-title">Google debe pasar de volumen a calidad de aprendizaje.</h2>
+  <p class="sec-desc">La prioridad no es únicamente bajar CPA, sino asegurar que cada campaña optimice hacia acciones comparables y de valor para negocio.</p>
+  <div class="fg two">
+    <div class="fc"><div class="fn">Buenas prácticas detectadas</div><div class="fd">Uso de Search para capturar intención, presencia de PMax/Demand Gen para cobertura visual y automatización, campañas promocionales con buen CPA relativo y audiencias deportivas en Demand Gen/YouTube.</div></div>
+    <div class="fc"><div class="fn">Malas prácticas / riesgos</div><div class="fd">Medición posiblemente contaminada, 100% keywords en amplia, términos de marca fuera de Brand, competitor con CPA alto y baja calidad, y automatización sin evidencia clara de control por landing/asset group.</div></div>
+  </div>
+  <div class="egrid" style="margin-top:1.5rem">
+    <div class="ecard"><span class="ebadge eb-c">PMax</span><div class="etot">Asset groups</div><div class="etl">Crear grupo de Curazao con señales, URL dedicada, assets por formato y exclusiones de páginas no relevantes.</div></div>
+    <div class="ecard rec"><span class="ebadge eb-r">Demand Gen</span><div class="etot">Visual funnel</div><div class="etl">Usar la campaña como motor de demanda con videos, carruseles y piezas 9:16/4:5 por ángulo creativo.</div></div>
+    <div class="ecard"><span class="ebadge eb-a">Search</span><div class="etot">Captura</div><div class="etl">Crear estructura “Mundial/Curazao” y proteger Brand/Promo con exacta, frase y negativos.</div></div>
+  </div>
+  <div class="ibar"><p><strong>Buenas prácticas Google:</strong> Performance Max depende de textos, imágenes y videos revisados/actualizados con frecuencia; Google recomienda mínimo 7 imágenes para PMax y diversidad de assets. Para Demand Gen, Google recomienda alcanzar Ad Strength “Excellent” con al menos 3 assets únicos por aspecto: cuadrado, horizontal y vertical.</p></div>
+</section>
+
+<section class="sec" id="s-meta">
+  <div class="sec-eyebrow">05 · Diagnóstico Meta Ads</div>
+  <h2 class="sec-title">Meta ya no debe leerse solo por benchmarks: hay señales claras de eficiencia, desperdicio y fatiga.</h2>
+  <p class="sec-desc">El nuevo HTML permite pasar de recomendaciones generales a decisiones concretas. No se replica la tabla de campañas; se resume la lectura en hallazgos, acciones y KPIs de control.</p>
+  <div class="krow">
+    <div class="kcard"><div class="kv">$200,1M</div><div class="kl">Inversión Meta</div><div class="ks">Enero 1 - mayo 12 de 2026</div></div>
+    <div class="kcard"><div class="kv">1,51%</div><div class="kl">CTR promedio</div><div class="ks">823K clics totales</div></div>
+    <div class="kcard"><div class="kv">3,95x</div><div class="kl">Frecuencia</div><div class="ks">Promedio cercano a zona de fatiga</div></div>
+    <div class="kcard"><div class="kv">$10.209</div><div class="kl">CPA lead</div><div class="ks">19.597 registros reportados</div></div>
+    <div class="kcard"><div class="kv">$382</div><div class="kl">CPA compra/evento</div><div class="ks">Validar equivalencia con valor real</div></div>
+  </div>
+  <div class="egrid">
+    <div class="ecard rec"><span class="ebadge eb-r">Riesgo</span><div class="etot">$25,3M sin conversión</div><div class="etl">Facebook Followers e Instagram Followers registran 0 leads y 0 compras/eventos. Acción: pausar, reducir o justificar con estudio de incrementalidad.</div><div class="elines"><div class="eline"><span class="eln">KPI de control</span><span class="elv">% gasto sin conversión</span></div><div class="eline"><span class="eln">Decisión</span><span class="elv">Redirigir a performance</span></div></div></div>
+    <div class="ecard"><span class="ebadge eb-c">Funnel</span><div class="etot">5,9% registro→compra</div><div class="etl">Complete Registration #Promos genera 4.179 leads, pero solo 248 compras/eventos. Acción: auditar onboarding, landing y remarketing de registrados sin depósito.</div><div class="elines"><div class="eline"><span class="eln">KPI de control</span><span class="elv">CVR post-registro</span></div><div class="eline"><span class="eln">Decisión</span><span class="elv">Optimizar flujo</span></div></div></div>
+    <div class="ecard"><span class="ebadge eb-a">Oportunidad</span><div class="etot">CTR hasta 10,74%</div><div class="etl">Jetx, Purchase Ongoing y Binance Pay muestran alto CTR y CPA compra bajo. Acción: escalar controlado y replicar estructura creativa.</div><div class="elines"><div class="eline"><span class="eln">KPI de control</span><span class="elv">CTR + CPA compra</span></div><div class="eline"><span class="eln">Decisión</span><span class="elv">Escalar ganadores</span></div></div></div>
+  </div>
+  <div class="fg three">
+    <div class="fc"><div class="fn">1. Pausar lo que no convierte</div><div class="fd"><strong>Acción:</strong> reducir Followers y reasignar inversión. <strong>KPI:</strong> inversión sin conversión, CPA lead y CPA compra/evento.</div></div>
+    <div class="fc"><div class="fn">2. Recuperar el post-registro</div><div class="fd"><strong>Acción:</strong> flujo específico para registrados sin depósito/compra. <strong>KPI:</strong> tasa registro→depósito, tasa registro→compra y CPA compra.</div></div>
+    <div class="fc"><div class="fn">3. Controlar fatiga</div><div class="fd"><strong>Acción:</strong> rotación creativa y expansión de audiencias en campañas con frecuencia superior a 5x. <strong>KPI:</strong> frecuencia, CTR decay y CPA.</div></div>
+  </div>
+  <div class="fg three">
+    <div class="fc"><div class="fn">4. Escalar ganadores</div><div class="fd"><strong>Acción:</strong> subir presupuesto 20%-30% en Jetx, Purchase Ongoing, Binance y retargeting eficiente. <strong>KPI:</strong> CTR, CPA compra y volumen.</div></div>
+    <div class="fc"><div class="fn">5. Reactivar aprendizajes</div><div class="fd"><strong>Acción:</strong> reactivar “El Día de Mi Suerte” como test controlado. <strong>KPI:</strong> CPA lead $2.638, CTR 4,91% y calidad de lead.</div></div>
+    <div class="fc"><div class="fn">6. Simplificar arquitectura</div><div class="fd"><strong>Acción:</strong> consolidar duplicados y archivar campañas dormantes. <strong>KPI:</strong> campañas activas útiles, learning estable y lectura por objetivo.</div></div>
+  </div>
+  <div class="ibar"><p><strong>Lectura Meta:</strong> la cuenta no necesita más complejidad, sino separar claramente adquisición, conversión, remarketing y CRM. Curazao debe entrar como sistema de piezas por etapa, con eventos auditados y creatividad suficiente para que el algoritmo encuentre combinaciones ganadoras.</p></div>
+</section>
+
+<section class="sec" id="s-cierre">
+  <div class="sec-eyebrow">06 · Cierre consultivo</div>
+  <h2 class="sec-title">La recomendación central: medir mejor, controlar mejor y crear más señales creativas.</h2>
+  <p class="sec-desc">Para mejorar rendimiento, YaJuego necesita una cuenta que aprenda de eventos correctos, campañas de búsqueda más limpias y una campaña creativa integrada al embudo.</p>
+  <p class="quote">Curazao no es un capítulo aparte: es el <em>lenguaje creativo que debe conectar medios, intención y conversión.</em></p>
+  <div class="fg three" style="margin-top:2rem">
+    <div class="fc"><div class="fn">Validar con cliente</div><div class="fd">Conversion actions, Search Terms, Pixel/CAPI, equivalencia de compras/eventos Meta, landings, audiencias y breakdowns por dispositivo, ubicación y horario.</div></div>
+    <div class="fc"><div class="fn">Ejecutar primero</div><div class="fd">Validar medición, limpiar Search, pausar gasto sin conversión, crear landing Curazao y producir assets por medio/formato.</div></div>
+    <div class="fc"><div class="fn">Dar seguimiento</div><div class="fd">Cada acción debe revisarse por KPI: CPA real, CVR post-registro, frecuencia, CTR, CPA compra/evento y calidad de conversión.</div></div>
+  </div>
+  <div class="source-list">
+    <div class="src"><strong>Fuente benchmark Google:</strong><br>Search Engine Journal / WordStream LocaliQ Google Ads Benchmarks 2025: https://www.searchenginejournal.com/what-is-a-good-ctr-for-google-ads/492785/</div>
+    <div class="src"><strong>Fuente benchmark Meta:</strong><br>WordStream Facebook Ads Benchmarks 2025: https://www.wordstream.com/blog/facebook-ads-benchmarks-2025</div>
+    <div class="src"><strong>Buenas prácticas Google PMax:</strong><br>Google Ads Help: https://support.google.com/google-ads/answer/14528221</div>
+    <div class="src"><strong>Buenas prácticas Demand Gen:</strong><br>Google Ads Help: https://support.google.com/google-ads/answer/14693848</div>
+    <div class="src"><strong>Meta Andromeda:</strong><br>Meta Engineering: https://engineering.fb.com/2024/12/02/production-engineering/meta-andromeda-advantage-automation-next-gen-personalized-ads-retrieval-engine/</div>
+  </div>
+  <div class="footer-note">Documento de trabajo para consultoría. La ejecución final debe validar políticas, legales de promoción, fechas vigentes y restricciones de pauta para juegos de azar. Benchmarks usados como referencia direccional. La data Meta 2026 se integra como diagnóstico operativo, sujeto a validación de eventos, tracking y calidad real de conversión.</div>
+</section>
+</main>
+<script>
+const sections=[...document.querySelectorAll('.sec')];const nav=[...document.querySelectorAll('.sb-item')];const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){nav.forEach(a=>a.classList.remove('active'));const a=document.querySelector(`.sb-item[href="#${e.target.id}"]`);if(a)a.classList.add('active')}})},{rootMargin:'-40% 0px -55% 0px'});sections.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

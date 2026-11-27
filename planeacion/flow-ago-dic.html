@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es" data-suelo="tinta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YaJuego | Flow Ago-Dic + Influencers</title>
+<link rel="stylesheet" href="../assets/css/adcom-tokens.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    :root {
+      --y: #ffd400;
+      --b: #111;
+      --w: #fff;
+      --p1: #1a1a1a;
+      --p2: #282828;
+      --muted: #a7a7a7;
+      --line: #333;
+      --green: #26d07c;
+      --red: #ff4d5e;
+      --blue: #5fb3ff;
+      --side: 260px
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box }
+    html { scroll-behavior: smooth }
+    body {
+      min-height: 100vh;
+      background: var(--b);
+      color: var(--w);
+      font-family: 'Poppins', sans-serif;
+      display: flex
+    }
+
+    #sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: var(--side);
+      background: #0d0d0d;
+      border-right: 1px solid #202020;
+      overflow-y: auto;
+      z-index: 20
+    }
+
+    .sb-head {
+      padding: 24px 22px;
+      border-bottom: 1px solid #202020
+    }
+
+    .sb-kicker,
+    .ey,
+    .label {
+      color: var(--y);
+      font-size: 12px;
+      font-weight: 800
+    }
+
+    .sb-title {
+      margin-top: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      line-height: 1.1;
+      font-weight: 800
+    }
+
+    .sb-client {
+      padding: 16px 22px 14px;
+      border-bottom: 1px solid #202020
+    }
+
+    .sb-client-label,
+    .sb-section-label {
+      color:var(--fg-muted);
+      font-size: 12px
+    }
+
+    .sb-client-name {
+      margin-top: 5px;
+      color: var(--y);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 800
+    }
+
+    .sb-client-url {
+      margin-top: 2px;
+      color:var(--fg-muted);
+      font-size: 12px
+    }
+
+    .sb-nav { padding: 16px 0 }
+    .sb-section-label { padding: 12px 22px 6px }
+    .sb-item {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 22px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      position: relative
+    }
+
+    .sb-item:hover { background: rgba(255, 212, 0, .08); color: var(--w) }
+    .sb-item.active { background: rgba(255, 212, 0, .08); color: var(--y) }
+    .sb-item.active::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--y)
+    }
+
+    .sb-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 0;
+      background: var(--p2);
+      color: var(--y);
+      display: grid;
+      place-items: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px
+    }
+
+    .sb-item.active .sb-num {
+      background: var(--y);
+      color: var(--b)
+    }
+
+    .sb-foot {
+      padding: 20px 22px;
+      border-top: 1px solid #202020;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5
+    }
+
+    main {
+      width: calc(100% - var(--side));
+      margin-left: var(--side)
+    }
+
+    section {
+      padding: 64px min(5vw, 64px);
+      border-bottom: 1px solid #1f1f1f
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-content: end;
+      background:
+        linear-gradient(rgba(255, 212, 0, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 212, 0, .045) 1px, transparent 1px),
+        #111;
+      background-size: 64px 64px
+    }
+
+    h1 {
+      max-width: 960px;
+      margin: 18px 0 22px;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(42px, 7vw, 92px);
+      line-height: .94;
+      font-weight: 800;
+      letter-spacing: 0
+    }
+
+    h1 span,
+    h2 span { color: var(--y) }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8
+    }
+
+    .hero-metrics,
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 34px
+    }
+
+    .metric,
+    .panel,
+    .phone-card {
+      background: var(--p1);
+      border: 1px solid var(--p2);
+      border-radius: var(--radius-sm)
+    }
+
+    .metric { padding: 20px }
+    .metric strong {
+      display: block;
+      color: var(--y);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(24px, 3vw, 42px);
+      line-height: 1;
+      margin-bottom: 8px
+    }
+
+    .metric small,
+    .panel p,
+    .source,
+    td,
+    .note {
+      color: var(--muted);
+      line-height: 1.65
+    }
+
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      margin: 10px 0 14px
+    }
+
+    .section-head {
+      max-width: 860px;
+      margin-bottom: 30px
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px
+    }
+
+    .panel {
+      padding: 22px;
+      min-height: 170px
+    }
+
+    .panel h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0
+    }
+
+    .bar {
+      height: 10px;
+      margin: 16px 0 12px;
+      border-radius: 0;
+      background: #252525;
+      overflow: hidden
+    }
+
+    .fill { height: 100%; background: var(--y) }
+    .fill.green { background: var(--green) }
+    .fill.blue { background: var(--blue) }
+    .fill.red { background: var(--red) }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--p2);
+      border-radius: var(--radius-sm)
+    }
+
+    table {
+      width: 100%;
+      min-width: 980px;
+      border-collapse: collapse;
+      background: #151515
+    }
+
+    th {
+      background: var(--y);
+      color: var(--b);
+      padding: 12px 14px;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid #252525;
+      font-size: 13px;
+      vertical-align: top
+    }
+
+    td strong { color: var(--w) }
+    .money { color: var(--y); font-family: 'Poppins', sans-serif; font-weight: 800 }
+    tr.total-row td { background: #1c1c1c; border-top: 1px solid var(--p2) }
+    .monthly-flow th:nth-child(5),
+    .monthly-flow td:nth-child(5) {
+      background: rgba(255, 195, 0, .08);
+      border-left: 1px solid rgba(255, 195, 0, .28);
+      border-right: 1px solid rgba(255, 195, 0, .28)
+    }
+
+    .monthly-flow th:nth-child(5) { background: #ffd24a }
+    .monthly-flow tr.total-row td { background: #202020 }
+    .monthly-flow tr.total-row td:nth-child(5) { background: rgba(255, 195, 0, .16) }
+
+    .monthly-flow tr.optimization-row td {
+      background: rgba(38, 208, 124, .15);
+      border-top: 1px solid rgba(38, 208, 124, .38)
+    }
+
+    .monthly-flow tr.optimization-row td:nth-child(5) {
+      background: rgba(38, 208, 124, .24)
+    }
+
+    .monthly-flow tr.grand-total-row td {
+      background: rgba(255, 195, 0, .18);
+      border-top: 1px solid rgba(255, 195, 0, .5);
+      border-bottom: 1px solid rgba(255, 195, 0, .5)
+    }
+
+    .monthly-flow tr.grand-total-row td:nth-child(5) {
+      background: rgba(255, 195, 0, .3)
+    }
+
+    .mark {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 7px;
+      border-radius: var(--radius);
+      background: rgba(38, 208, 124, .14);
+      color:var(--pos);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      vertical-align: middle;
+      white-space: nowrap
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px
+    }
+
+    .flight {
+      display: grid;
+      grid-template-columns: 200px 1fr 130px;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      background: var(--p1);
+      border: 1px solid var(--p2);
+      border-radius: var(--radius-sm)
+    }
+
+    .flight strong {
+      font-family: 'Poppins', sans-serif;
+      color: var(--w)
+    }
+
+    .flight .bar { margin: 0 }
+    .flight small { color: var(--muted); display: block; margin-top: 4px }
+
+    .topview-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 18px;
+      align-items: stretch
+    }
+
+    .topview-detail {
+      display: grid;
+      gap: 16px
+    }
+
+    .phone-card {
+      padding: 18px;
+      display: grid;
+      gap: 16px
+    }
+
+    .phone {
+      width: min(100%, 260px);
+      aspect-ratio: 9 / 16;
+      margin: 0 auto;
+      border: 8px solid #050505;
+      border-radius: var(--radius);
+      background: #101010;
+      overflow: hidden;
+      position: relative;
+      box-shadow: none
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      width: 72px;
+      height: 18px;
+      transform: translateX(-50%);
+      border-radius: var(--radius);
+      background: #000;
+      z-index: 4
+    }
+
+    .creative {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 44px 18px 22px;
+      background:
+        linear-gradient(150deg, rgba(255, 212, 0, .28), transparent 42%),
+        linear-gradient(15deg, rgba(38, 208, 124, .25), transparent 48%),
+        #151515
+    }
+
+    .creative.final {
+      background:
+        linear-gradient(150deg, rgba(255, 77, 94, .24), transparent 42%),
+        linear-gradient(15deg, rgba(255, 212, 0, .24), transparent 48%),
+        #151515
+    }
+
+    .creative.semi {
+      background:
+        linear-gradient(150deg, rgba(95, 179, 255, .24), transparent 42%),
+        linear-gradient(15deg, rgba(255, 212, 0, .23), transparent 48%),
+        #151515
+    }
+
+    .phone-logo {
+      width: 74px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 0;
+      background: var(--y);
+      color: var(--b);
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 800
+    }
+
+    .avatar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--y), var(--green));
+      border: 2px solid #fff
+    }
+
+    .avatar-row span {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    .creative h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: 0;
+      margin-top: 16px
+    }
+
+    .creative p {
+      color: #e8e8e8;
+      font-size: 13px;
+      line-height: 1.35;
+      margin-top: 10px
+    }
+
+    .cta {
+      align-self: flex-start;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--w);
+      color: var(--b);
+      font-weight: 800;
+      font-size: 12px
+    }
+
+    .ui-rail {
+      position: absolute;
+      right: 11px;
+      bottom: 84px;
+      display: grid;
+      gap: 11px;
+      z-index: 3
+    }
+
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.88)
+    }
+
+    .caption {
+      position: absolute;
+      left: 18px;
+      right: 54px;
+      bottom: 22px;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.35
+    }
+
+    .badge-18 {
+      position: absolute;
+      top: 40px;
+      right: 14px;
+      z-index: 4;
+      background: rgba(0,0,0,.6);
+      color: var(--w);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 0;
+      padding: 3px 6px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em
+    }
+
+    .phone-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px
+    }
+
+    .spec-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 26px
+    }
+
+    .preview-card {
+      background: var(--p1);
+      border: 1px solid var(--p2);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: grid;
+      gap: 14px
+    }
+
+    .preview-card .plat { color: var(--y) }
+    .preview-card h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px
+    }
+
+    .preview-card .phone {
+      width: min(100%, 190px);
+      border-width: 6px;
+      border-radius: var(--radius)
+    }
+
+    .preview-card .creative { padding: 40px 14px 18px }
+    .preview-card .creative h3 { font-size: 22px }
+    .preview-card .creative p { font-size:var(--fs-body-min); margin-top: 8px }
+
+    .banner-mock {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--p2);
+      background:
+        linear-gradient(135deg, rgba(255,212,0,.22), transparent 55%),
+        linear-gradient(315deg, rgba(38,208,124,.16), transparent 50%),
+        #101010;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px
+    }
+
+    .banner-mock .b-logo {
+      align-self: flex-start;
+      background: var(--y);
+      color: var(--b);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 4px 9px;
+      border-radius: 0
+    }
+
+    .banner-mock .b-head {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      line-height: 1.05;
+      color: var(--w)
+    }
+
+    .banner-mock .b-cta {
+      align-self: flex-start;
+      background: var(--w);
+      color: var(--b);
+      font-weight: 800;
+      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: var(--radius-sm)
+    }
+
+    .source {
+      margin-top: 22px;
+      font-size:var(--fs-body-min)}
+
+    .source a { color: var(--y) }
+
+    .pill {
+      display: inline-block;
+      margin: 0 6px 6px 0;
+      padding: 5px 10px;
+      border-radius: var(--radius);
+      background: var(--p2);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700
+    }
+
+    @media (max-width: 980px) {
+      body { display: block }
+      #sidebar { position: static; width: 100% }
+      .sb-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) }
+      .sb-section-label { display: none }
+      main { width: 100%; margin-left: 0 }
+      .hero-metrics, .kpis, .grid-3, .topview-grid, .spec-list, .preview-grid { grid-template-columns: 1fr }
+      .flight { grid-template-columns: 1fr }
+    }
+
+    @media (max-width: 620px) {
+      section { padding: 42px 22px }
+      .sb-nav { grid-template-columns: 1fr }
+      .hero { min-height: auto; padding-top: 86px }
+    }
+  </style>
+</head>
+<body>
+  <aside id="sidebar">
+    <div class="sb-head">
+      <div class="sb-kicker">YaJuego</div>
+      <div class="sb-title">Flow Ago-Dic 2026 + Influencers</div>
+    </div>
+    <div class="sb-client">
+      <div class="sb-client-label">Cliente</div>
+      <div class="sb-client-name">YaJuego</div>
+      <div class="sb-client-url">sports.yajuego.co</div>
+    </div>
+    <nav class="sb-nav" aria-label="Indice del flow">
+      <div class="sb-section-label">Contenido</div>
+      <a class="sb-item active" href="#resumen"><span class="sb-num">00</span>Portada</a>
+      <a class="sb-item" href="#inversion"><span class="sb-num">01</span>Inversion</a>
+      <a class="sb-item" href="#momentos"><span class="sb-num">02</span>Momentos</a>
+      <div class="sb-section-label">Medios</div>
+      <a class="sb-item" href="#canales"><span class="sb-num">03</span>Canales</a>
+      <a class="sb-item" href="#influencers"><span class="sb-num">04</span>Influencers</a>
+      <div class="sb-section-label">Operativo</div>
+      <a class="sb-item" href="#specs"><span class="sb-num">05</span>Specs</a>
+    </nav>
+    <div class="sb-foot">
+      Ventana: <strong>2da semana agosto - 2da semana diciembre 2026</strong><br>
+      Base: flow reciclado Programmatic + TikTok.
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero" id="resumen">
+      <div class="ey">Plan de medios - Segundo semestre 2026</div>
+      <h1>Flow continuo con <span>picos deportivos</span> hacia fin de año.</h1>
+      <p class="lead">
+        Plan de medios para YaJuego desde la segunda semana de agosto hasta la segunda semana de diciembre de 2026.
+        Media enfocada en performance (Programmatic sin DOOH y TikTok solo conversion) mas un nuevo eje de Influencers
+        deportivos con una inversion total de 40 millones COP, concentrada en los dos meses pico: noviembre y diciembre,
+        con mayor foco de mensaje en las definiciones Conmebol de noviembre y el cierre
+        de la Liga BetPlay en diciembre.
+      </p>
+      <div class="hero-metrics">
+        <div class="metric"><strong>$144.5MM</strong><small>Inversion total ventana, sin IVA.</small></div>
+        <div class="metric"><strong>$104.5MM</strong><small>Media Programmatic + TikTok, foco conversion.</small></div>
+        <div class="metric"><strong>$40MM</strong><small>Influencers: 20 millones COP en noviembre y 20 millones COP en diciembre.</small></div>
+        <div class="metric"><strong>18 sem</strong><small>10 agosto - 13 diciembre 2026.</small></div>
+      </div>
+    </section>
+
+    <section id="inversion">
+      <div class="section-head">
+        <div class="ey">Distribucion mensual</div>
+        <h2>Base continua con <span>inversion concentrada</span> en los picos.</h2>
+        <p class="lead">
+          Programmatic (Display, Remarketing y Push) y TikTok (Conversion Ads) mantienen un ritmo mensual constante,
+          con agosto y diciembre prorrateados por ser meses parciales. Influencers concentra sus 40 millones COP en
+          noviembre y diciembre, con 20 millones COP en cada mes, para priorizar las definiciones Conmebol y el cierre
+          de la Liga BetPlay.
+        </p>
+      </div>
+      <div class="grid-3">
+        <article class="panel">
+          <div class="label">Agosto - Septiembre</div>
+          <h3>Arranque</h3>
+          <div class="bar"><div class="fill" style="width: 55%"></div></div>
+          <p>Reconstruccion de audiencias post-Mundial y arranque de Liga BetPlay II + Champions. Onboarding de creators.</p>
+        </article>
+        <article class="panel">
+          <div class="label">Octubre - Noviembre</div>
+          <h3>Temporada alta</h3>
+          <div class="bar"><div class="fill green" style="width: 100%"></div></div>
+          <p>Consideracion y conversion alrededor de Champions, Liga y las finales de Copa Libertadores y Sudamericana.</p>
+        </article>
+        <article class="panel">
+          <div class="label">Diciembre (1-13)</div>
+          <h3>Cierre Liga</h3>
+          <div class="bar"><div class="fill red" style="width: 68%"></div></div>
+          <p>Definiciones y cuadrangulares de la Liga BetPlay II: push intenso de conversion en dos semanas de alta apuesta.</p>
+        </article>
+      </div>
+      <div class="table-wrap" style="margin-top: 18px;">
+        <table class="monthly-flow">
+          <thead>
+            <tr>
+              <th>Mes</th>
+              <th>Programmatic</th>
+              <th>TikTok</th>
+              <th>Influencers</th>
+              <th>Total mensual</th>
+              <th>Rol del mes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Agosto (10-31)*</strong></td>
+              <td class="money">$13.7MM</td>
+              <td class="money">$4.3MM</td>
+              <td class="money">$0.0MM</td>
+              <td class="money">$18.0MM</td>
+              <td>Arranque post-Mundial: retomar registros y reconstruir audiencias.</td>
+            </tr>
+            <tr>
+              <td><strong>Septiembre</strong></td>
+              <td class="money">$19.3MM</td>
+              <td class="money">$6.0MM</td>
+              <td class="money">$0.0MM</td>
+              <td class="money">$25.3MM</td>
+              <td>Sostenimiento + arranque Liga BetPlay II y Champions League.</td>
+            </tr>
+            <tr>
+              <td><strong>Octubre</strong></td>
+              <td class="money">$19.3MM</td>
+              <td class="money">$6.0MM</td>
+              <td class="money">$0.0MM</td>
+              <td class="money">$25.3MM</td>
+              <td>Consideracion: fase de grupos Champions y jornadas de Liga.</td>
+            </tr>
+            <tr>
+              <td><strong>Noviembre</strong><span class="mark">Pico Conmebol</span></td>
+              <td class="money">$19.3MM</td>
+              <td class="money">$6.0MM</td>
+              <td class="money">$20.0MM</td>
+              <td class="money">$45.3MM</td>
+              <td>Pico finales Conmebol (Libertadores / Sudamericana): foco de mensaje.</td>
+            </tr>
+            <tr>
+              <td><strong>Diciembre (1-13)*</strong><span class="mark">Pico Liga</span></td>
+              <td class="money">$8.1MM</td>
+              <td class="money">$2.5MM</td>
+              <td class="money">$20.0MM</td>
+              <td class="money">$30.6MM</td>
+              <td>Pico cierre Liga BetPlay II: push de conversion sobre audiencias construidas.</td>
+            </tr>
+            <tr class="total-row">
+              <td><strong>Total ventana</strong></td>
+              <td class="money">$79.7MM</td>
+              <td class="money">$24.8MM</td>
+              <td class="money">$40.0MM</td>
+              <td class="money">$144.5MM</td>
+              <td>No incluye IVA. Agosto y diciembre son meses parciales (*).</td>
+            </tr>
+            <tr class="total-row optimization-row">
+              <td><strong>Optimizacion 15%</strong></td>
+              <td class="money">$12.0MM</td>
+              <td class="money">$3.7MM</td>
+              <td class="money">$15.0MM</td>
+              <td class="money">$30.7MM</td>
+              <td>Calculado sobre el total de la ventana.</td>
+            </tr>
+            <tr class="total-row grand-total-row">
+              <td><strong>Total + 15%</strong></td>
+              <td class="money">$91.7MM</td>
+              <td class="money">$28.5MM</td>
+              <td class="money">$115.0MM</td>
+              <td class="money">$235.2MM</td>
+              <td>Total ventana con optimizacion incluida. No incluye IVA.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="momentos">
+      <div class="section-head">
+        <div class="ey">Calendario deportivo</div>
+        <h2>Flights por momento de la temporada.</h2>
+        <p class="lead">Programmatic y TikTok mantienen un presupuesto mensual constante, mientras Influencers concentra su inversión en los dos meses pico. Fechas exactas de finales Conmebol y Liga por confirmar segun calendario oficial.</p>
+      </div>
+      <div class="timeline">
+        <div class="flight"><div><strong>Arranque</strong><small>10-31 agosto</small></div><div class="bar"><div class="fill" style="width: 40%"></div></div><div class="money">$18.0MM</div></div>
+        <div class="flight"><div><strong>Sostenimiento</strong><small>septiembre</small></div><div class="bar"><div class="fill blue" style="width: 56%"></div></div><div class="money">$25.3MM</div></div>
+        <div class="flight"><div><strong>Consideracion</strong><small>octubre</small></div><div class="bar"><div class="fill blue" style="width: 56%"></div></div><div class="money">$25.3MM</div></div>
+        <div class="flight"><div><strong>Pico Conmebol</strong><small>noviembre - finales Libertadores / Sudamericana</small></div><div class="bar"><div class="fill green" style="width: 100%"></div></div><div class="money">$45.3MM</div></div>
+        <div class="flight"><div><strong>Cierre Liga</strong><small>1-13 diciembre - cuadrangulares / final BetPlay II</small></div><div class="bar"><div class="fill red" style="width: 68%"></div></div><div class="money">$30.6MM</div></div>
+      </div>
+    </section>
+
+    <section id="canales">
+      <div class="section-head">
+        <div class="ey">Flow por canal</div>
+        <h2>Media de <span>performance</span> + eje de influencers.</h2>
+        <p class="lead">Programmatic se concentra en Display, Remarketing y Push (sin DOOH) y TikTok solo en Conversion Ads (sin Reach). Influencers entra como tercer canal con 20 millones COP en noviembre y 20 millones COP en diciembre. Las cifras de Programmatic y TikTok se presentan a tarifa mensual full; agosto y diciembre se prorratean por dias activos.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Canal</th>
+              <th>Medio</th>
+              <th>Objetivo</th>
+              <th>Inv. mensual / distribucion</th>
+              <th>Total ventana</th>
+              <th>Rol</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Programmatic</strong></td><td>Display contextual</td><td>CPM</td><td class="money">$4.57MM</td><td class="money">$18.9MM</td><td>Alcance contextual en contenido deportivo y futbolero.</td></tr>
+            <tr><td><strong>Programmatic</strong></td><td>Remarketing</td><td>CPA</td><td class="money">$6.09MM</td><td class="money">$25.1MM</td><td>Convertir usuarios expuestos por Liga y torneos Conmebol.</td></tr>
+            <tr><td><strong>Programmatic</strong></td><td>Push</td><td>CPA</td><td class="money">$6.09MM</td><td class="money">$25.1MM</td><td>Activaciones tacticas antes de partidos y ventanas live.</td></tr>
+            <tr><td><strong>Programmatic</strong></td><td>Fee optimizacion 15%</td><td>-</td><td class="money">$2.51MM</td><td class="money">$10.4MM</td><td>Gestion, optimizacion y reporte de la compra programatica.</td></tr>
+            <tr><td><strong>TikTok</strong></td><td>Conversion Ads</td><td>CPA</td><td class="money">$5.22MM</td><td class="money">$21.5MM</td><td>Performance sobre usuarios impactados por creators y contenido.</td></tr>
+            <tr><td><strong>TikTok</strong></td><td>Fee optimizacion 15%</td><td>-</td><td class="money">$0.78MM</td><td class="money">$3.3MM</td><td>Gestion y optimizacion de campañas de conversion.</td></tr>
+            <tr><td><strong>Influencers</strong></td><td>Macro deportivo</td><td>Awareness</td><td class="money">40%</td><td class="money">$16.0MM</td><td>Voz de autoridad: previas, picks y activaciones de marca.</td></tr>
+            <tr><td><strong>Influencers</strong></td><td>Mid creators</td><td>Consideracion</td><td class="money">30%</td><td class="money">$12.0MM</td><td>Contenido recurrente de apuestas, bonos y cuotas del dia.</td></tr>
+            <tr><td><strong>Influencers</strong></td><td>Micro / UGC + whitelisting</td><td>Conversion</td><td class="money">17%</td><td class="money">$6.8MM</td><td>Volumen de creators + amplificacion pagada (Spark Ads) en TikTok.</td></tr>
+            <tr><td><strong>Influencers</strong></td><td>Fee gestion 15%</td><td>-</td><td class="money">13%</td><td class="money">$5.2MM</td><td>Casting, negociacion, calendario, aprobaciones y reporte.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 14px;">
+        <span class="pill">Programmatic ~COP 19.3MM/mes</span>
+        <span class="pill">TikTok ~COP 6MM/mes</span>
+        <span class="pill">Influencers: 20MM noviembre + 20MM diciembre</span>
+        <span class="pill">Sin DOOH ni Reach</span>
+        <span class="pill">Incluye fee 15%</span>
+      </div>
+    </section>
+
+    <section id="influencers">
+      <div class="section-head">
+        <div class="ey">Nuevo eje</div>
+        <h2>Influencers deportivos: <span>40 millones COP en total</span>.</h2>
+        <p class="lead">
+          El eje de influencers convierte la conversacion deportiva en registros y depositos. Mix de macro + mid + micro
+          creators de futbol y apuestas, con amplificacion pagada (whitelisting / Spark Ads) que conecta directo con el
+          canal de TikTok. Todo el contenido cumple lineamientos de juego responsable y +18.
+        </p>
+      </div>
+      <div class="topview-grid">
+        <article class="phone-card">
+          <div class="phone">
+            <div class="creative">
+              <div>
+                <div class="phone-logo">YaJuego</div>
+                <div class="avatar-row"><span class="avatar"></span><span>@creator.deportes</span></div>
+                <h3>Pick del dia</h3>
+                <p>Previa, cuota y codigo del creator. Sound-on, vertical 9:16, con call to action a registro.</p>
+              </div>
+              <div class="cta">Registrate y juega</div>
+            </div>
+            <div class="badge-18">+18</div>
+            <div class="ui-rail"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <div class="caption">@YaJuego Juega con responsabilidad. #Ad</div>
+          </div>
+          <h3>Contenido tipo</h3>
+          <p class="note">Previas de partido, picks, reacciones live y bonos. Cada creator lleva codigo/UTM propio para medir registros y depositos.</p>
+        </article>
+        <div class="topview-detail">
+          <article class="panel">
+            <div class="label">Activacion en meses pico</div>
+            <h3>Macro + Mid + Micro</h3>
+            <p>La activacion se ejecuta en noviembre y diciembre. En cada mes se combina un macro deportivo como cara de campaña, mid creators para contenido recurrente y una capa de micro/UGC para volumen y prueba social. Las mejores piezas se amplifican via Spark Ads.</p>
+          </article>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mes</th>
+                  <th>Inversion influencers</th>
+                  <th>Foco</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Agosto*</strong></td><td class="money">0 millones COP</td><td>Planeacion, casting y negociacion, sin inversion en influencers.</td></tr>
+                <tr><td><strong>Septiembre</strong></td><td class="money">0 millones COP</td><td>Seleccion de perfiles y definicion de contenidos, sin inversion en influencers.</td></tr>
+                <tr><td><strong>Octubre</strong></td><td class="money">0 millones COP</td><td>Preparacion de las activaciones, sin inversion en influencers.</td></tr>
+                <tr><td><strong>Noviembre</strong><span class="mark">Pico</span></td><td class="money">20 millones COP</td><td>Finales Conmebol: foco en previas y live.</td></tr>
+                <tr><td><strong>Diciembre*</strong><span class="mark">Pico</span></td><td class="money">20 millones COP</td><td>Cierre Liga BetPlay: push de conversion.</td></tr>
+                <tr class="total-row"><td><strong>Total</strong></td><td class="money">40 millones COP</td><td>Inversion concentrada en los dos meses pico.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <article class="panel">
+            <div class="label">Conexion con paid</div>
+            <h3>Whitelisting / Spark Ads</h3>
+            <p>Las piezas de creators se corren como Spark Ads desde el handle del influencer para sumar frecuencia y performance dentro del presupuesto de TikTok, sin canibalizar el flow base.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="specs">
+      <div class="section-head">
+        <div class="ey">Ejemplos y requisitos</div>
+        <h2>Como se ve por canal + <span>lo que debe quedar listo</span>.</h2>
+        <p class="lead">Previews de referencia por canal (mockups, no piezas finales) y lineamientos operativos para arrancar.</p>
+      </div>
+      <div class="preview-grid">
+        <article class="preview-card">
+          <div>
+            <div class="plat label">Programmatic</div>
+            <h3>Display contextual</h3>
+          </div>
+          <div class="banner-mock">
+            <div class="b-logo">YaJuego</div>
+            <div class="b-head">Cuotas que <span style="color:var(--y)">mueven</span> el partido</div>
+            <div class="b-cta">Registrate y juega</div>
+          </div>
+          <small class="note">Banner en sitios deportivos + Remarketing y Push. CPM/CPA, con mensajes de juego responsable y +18.</small>
+        </article>
+        <article class="preview-card">
+          <div>
+            <div class="plat label">TikTok</div>
+            <h4>Conversion Ad</h4>
+          </div>
+          <div class="phone">
+            <div class="creative final">
+              <div>
+                <div class="phone-logo">YaJuego</div>
+                <h3>Apuesta el clasico</h3>
+                <p>Vertical 9:16, sound-on, CTA directo a registro.</p>
+              </div>
+              <div class="cta">Registrate</div>
+            </div>
+            <div class="badge-18">+18</div>
+            <div class="ui-rail"><div class="dot"></div><div class="dot"></div></div>
+            <div class="caption">@YaJuego Juega con responsabilidad.</div>
+          </div>
+          <small class="note">Conversion Ads sobre audiencias calientes; sin Reach. Optimizacion a registro/deposito.</small>
+        </article>
+        <article class="preview-card">
+          <div>
+            <div class="plat label">Influencers</div>
+            <h4>Spark Ad / Pick del dia</h4>
+          </div>
+          <div class="phone">
+            <div class="creative semi">
+              <div>
+                <div class="phone-logo">YaJuego</div>
+                <div class="avatar-row"><span class="avatar"></span><span>@creator.deportes</span></div>
+                <h3>Pick del dia</h3>
+                <p>Previa, cuota y codigo del creator. #Ad</p>
+              </div>
+              <div class="cta">Usa mi codigo</div>
+            </div>
+            <div class="badge-18">+18</div>
+            <div class="ui-rail"><div class="dot"></div><div class="dot"></div></div>
+            <div class="caption">@creator Juega con responsabilidad. #Ad</div>
+          </div>
+          <small class="note">Contenido nativo del creator, amplificado como Spark Ad en TikTok con codigo/UTM propio.</small>
+        </article>
+      </div>
+      <div class="spec-list">
+        <article class="panel">
+          <h3>Juego responsable y +18</h3>
+          <p>Todo el contenido (paid y creators) debe llevar mensajes de juego responsable, restriccion +18 y disclaimers segun lineamientos de Coljuegos y las condiciones de YaJuego.</p>
+        </article>
+        <article class="panel">
+          <h3>Formato creativo</h3>
+          <p>Piezas verticales 9:16, sound-on, con mensaje principal en safe zones. Creators graban en su estilo nativo; se aprueban guiones y CTA antes de publicar.</p>
+        </article>
+        <article class="panel">
+          <h3>Medicion</h3>
+          <p>Codigo/UTM y promo code por creator, eventos de registro y deposito en GA4 y pixel de TikTok, para atribuir el aporte de cada influencer al funnel.</p>
+        </article>
+        <article class="panel">
+          <h3>Operativo influencers</h3>
+          <p>Casting y contratos, calendario de publicaciones alineado al fixture, cesion de derechos para Spark Ads y ventana de aprobacion previa antes de cada pico.</p>
+        </article>
+      </div>
+      <p class="source">
+        Ventana del plan: segunda semana de agosto (10-ago) a segunda semana de diciembre (13-dic) de 2026.
+        Media reciclada del flow YaJuego enfocada en performance: Programmatic sin DOOH (~COP 19.3MM/mes) y TikTok solo
+        Conversion Ads (~COP 6MM/mes), mas Influencers con un total de 40 millones COP concentrado en noviembre y diciembre
+        (20 millones COP por mes). Cifras sin IVA; la pauta de agosto y diciembre se prorratea por dias activos.
+      </p>
+    </section>
+  </main>
+  <script>
+    const sections = document.querySelectorAll("main section[id]");
+    const navItems = document.querySelectorAll(".sb-item");
+
+    const setActiveItem = () => {
+      let current = "resumen";
+      sections.forEach((section) => {
+        const box = section.getBoundingClientRect();
+        if (box.top <= 130) current = section.id
+      });
+
+      navItems.forEach((item) => {
+        item.classList.toggle("active", item.getAttribute("href") === `#${current}`)
+      })
+    };
+
+    window.addEventListener("scroll", setActiveItem, { passive: true });
+    setActiveItem();
+  </script>
+</body>
+</html>

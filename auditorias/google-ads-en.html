@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Google Ads account audit for YaJuego: the problem in each part of the account, the action that fixes it, and how the structure should look." />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>YaJuego | Google Ads Audit (English)</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/css/adcom.css">
+  <script defer src="../assets/js/adcom.js"></script>
+  <style>
+    /* Only addition to the system: the sortable table header, which adcom.css
+       does not cover. */
+    th.orden{padding:0 18px 12px 0}
+    thead th.orden + th.orden{padding-inline:18px 0}
+    th.orden button{
+      font:inherit; color:inherit; background:none; border:0; padding:0;
+      display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+      letter-spacing:inherit}
+    thead th + th.orden button{flex-direction:row-reverse}
+    th.orden button:hover{color:var(--ink)}
+    th.orden .ico{opacity:0; transition:opacity .15s var(--ease)}
+    th.orden button:hover .ico{opacity:.45}
+    th.orden[aria-sort] button{color:var(--ink)}
+    th.orden[aria-sort] .ico{opacity:1}
+    th.orden[aria-sort="ascending"] .ico{transform:rotate(180deg)}
+    @media (prefers-reduced-motion:reduce){ th.orden .ico{transition:none} }
+    td.terminos{text-align:left; color:var(--ink-secondary)}
+  
+    /* Desplegables: el sistema compartido no los cubre. Solo tokens, sin colores propios. */
+    details{border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding-block:14px; margin-top:var(--s-4)}
+    details>summary{cursor:pointer; list-style:none; display:flex; align-items:center; gap:10px; font-weight:700; font-size:.95rem}
+    details>summary::-webkit-details-marker{display:none}
+    details>summary .menos{display:none}
+    details[open]>summary .mas{display:none}
+    details[open]>summary .menos{display:inline-block}
+    details>*:not(summary){margin-top:var(--s-4)}
+    details>summary:focus-visible{outline:2px solid var(--ink); outline-offset:4px}
+  
+    /* Espaciado de subtitulos y tarjetas; los tres paneles en tres columnas fijas. */
+    .grupo>h3{margin-top:var(--s-5)}
+    .grupo>.note{margin-top:var(--s-3)}
+    .panel-hi+.rules{margin-top:var(--s-5)}
+    .duo-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:900px){.duo-3{grid-template-columns:1fr}}
+      /* En pantallas angostas el ancho minimo de una tabla o diagrama se propagaba al contenedor y
+       desbordaba la pagina; con min-width:0 cada uno desplaza dentro de su propio contenedor. */
+    .app-main{min-width:0}
+    .app-content{min-width:0; max-width:100%}
+  </style>
+</head>
+<body class="con-shell">
+  <a class="skip-link" href="#contenido">Skip to content</a>
+
+  <nav class="app-sidebar">
+    <div class="app-sidebar-top">
+      <a class="app-sidebar-brand" href="../index.html"><i></i>Adcom</a>
+      <div class="app-sidebar-client">
+        <span class="app-sidebar-client-label">Client</span>
+        <strong class="app-sidebar-client-name">YaJuego Colombia</strong>
+        <span class="app-sidebar-client-period">26 Aug - 24 Sep 2026</span>
+      </div>
+    </div>
+    <div class="app-sidebar-nav">
+      <span class="app-sidebar-nav-title">Contents</span>
+      <a href="#summary"><b></b>On one page<small>01</small></a>
+      <a href="#glossary"><b></b>Five terms<small>02</small></a>
+      <a href="#target"><b></b>How it should look<small>03</small></a>
+      <a href="#measurement"><b></b>New customers and FTD<small>04</small></a>
+      <a href="#allocation"><b></b>Where money goes<small>05</small></a>
+      <a href="#brand"><b></b>The brand<small>06</small></a>
+      <a href="#negatives"><b></b>Match types and exclusions<small>07</small></a>
+      <a href="#competitors"><b></b>Competitors<small>08</small></a>
+      <a href="#market"><b></b>Market and forecast<small>09</small></a>
+      <a href="#funnel"><b></b>Registration<small>10</small></a>
+      <a href="#plan"><b></b>Action plan<small>11</small></a>
+    </div>
+    <div class="app-sidebar-foot">Internal use, do not share without authorization. <a href="google-ads.html">Versión en español</a></div>
+  </nav>
+
+  <div class="app-main">
+    <div class="app-topbar">
+      <span class="app-topbar-crumb">Google Ads Audit</span>
+      <span class="app-topbar-section">On one page</span>
+    </div>
+
+    <main class="app-content wrap" id="contenido">
+      <header class="opening">
+        <h1>The account works. What is broken is <em>how it is built</em>.</h1>
+        <p class="lede">Google Ads is bringing in registrations at a cost that holds up, and improving month over month. The problem is how it is built: four campaigns buy the same searches from each other, the brand campaign spends half its money outside the brand, and the account does not tell new customers from returning ones, which is what matters when the goal is FTD. Each section states a problem and the action that fixes it.</p>
+        <div class="opening-meta">
+          <div><b>26 August - 24 September 2026</b><span>Period</span></div>
+          <div><b>Completed registration</b><span>Result being measured</span></div>
+          <div><b>805-135-2839</b><span>Account</span></div>
+          <div><b>Colombian pesos, unconverted</b><span>Currency</span></div>
+        </div>
+      </header>
+
+      <hr class="divider">
+
+      <section class="grupo" id="summary">
+        <div class="head">
+          <h2>Six corrections to lower cost per registration</h2>
+          <p class="lede"><b>The idea:</b> the account works and is improving, but it buys expensively and does not know who it is talking to. These are the six things holding that progress back, each with its correction.</p>
+        </div>
+
+        <dl class="tira-cifras"><div><dt>Monthly spend</dt><dd>268.9M</dd></div><div><dt>Registrations per month</dt><dd>3,762</dd></div><div><dt>Cost per registration</dt><dd>71,495<small>In Search, 13% lower than in January</small></dd></div><div><dt>Best campaign</dt><dd>46,732</dd></div></dl>
+
+        <div class="table-scroll">
+          <table>
+            <caption>The six corrections. Each one is detailed in its own section. All figures in Colombian pesos.</caption>
+            <thead><tr><th scope="col">Problem</th><th scope="col">Action</th><th scope="col">What it frees or gains</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">The account does not tell new customers from returning ones: three campaigns bid on <code>purchase</code>, which counts every bet</th><td>Separate acquisition from retention and test «only new customers»</td><td>Acquisition measured by new customers</td></tr>
+              <tr><th scope="row">The brand campaign spends 49% of its money on searches that do not say «yajuego»</th><td>Close the exit with exclusions and match types</td><td><b>32.4M a month</b></td></tr>
+              <tr><th scope="row">The brand campaign shows the weakest ad to the warmest audience</th><td>Give it the offer-led ad Promotions already uses</td><td>Registration rate from 4.5% toward 8.3%</td></tr>
+              <tr><th scope="row">Four campaigns buy the same searches from each other</th><td>Split the territory with cross-exclusions</td><td>Makes 91% of the spend comparable</td></tr>
+              <tr><th scope="row">The competitor campaign pays up to five times the market price</th><td>Pause it; the others already capture that demand better</td><td><b>21.7M a month</b></td></tr>
+              <tr><th scope="row">The cheapest campaigns run out of budget</th><td>Move the freed money to them, in steps</td><td>Registrations at 46,000 instead of 152,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h3>And a warning about something that looks like a problem and is not.</h3>
+          <p><b>We went through the account looking for searches with no commercial value</b> (support, play for free, «is it trustworthy», PDFs, jobs). Intuition said money was being lost there; the data says the opposite: almost all of them convert better than average. What is genuinely waste comes to 140,408 pesos a month.</p>
+        </div>
+      </section>
+
+      <section class="grupo" id="glossary">
+        <div class="head">
+          <h2>Five terms to read the rest</h2>
+          <p class="lede">With these five concepts the whole document makes sense. Any other term is explained where it appears.</p>
+        </div>
+
+        <div class="duo">
+          <div class="panel">
+            <h3>Keyword and search term</h3>
+            <p>The <b>keyword</b> is what we tell Google we want to buy. The <b>search term</b> is what the person actually typed. They are not the same thing, and the distance between the two is where the money is lost.</p>
+          </div>
+          <div class="panel">
+            <h3>Match type</h3>
+            <p>How close what the person types has to be to what we bought. <b>Exact</b>: almost identical. <b>Phrase</b>: with words around it. <b>Broad</b>: Google decides by topic and may pull in distant things. 85% of the account is on broad.</p>
+          </div>
+          <div class="panel">
+            <h3>Impression share</h3>
+            <p>Out of the times someone searched where we could have appeared, how often we did. Google also says why we missed: <b>lost to budget</b> or <b>lost to rank</b>, and each needs a different fix.</p>
+          </div>
+          <div class="panel">
+            <h3>Quality Score</h3>
+            <p>A 1-to-10 grade Google gives each keyword based on how relevant the ad and the landing page are to that search. A low grade means paying more for the same click. It is a surcharge, not a label.</p>
+          </div>
+          <div class="panel">
+            <h3>Cost per registration</h3>
+            <p>How much has to be spent for one person to finish signing up. It is the number this entire audit is read against. The account is at 71,495 pesos today, and its best campaign at 46,732.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="grupo" id="target">
+        <div class="head">
+          <h2>How it should look: three campaigns and one paused</h2>
+          <p class="lede"><b>The idea:</b> today the four search campaigns buy the same things and step on each other; the proposal is to give each a closed territory and one message per intent.</p>
+        </div>
+
+        <h3>Today</h3>
+        <p class="note">Four campaigns, one ad group each, zero exclusions and almost everything on broad. <b>How to read this chart.</b> Each bar is a campaign and its colors show what people typed: own brand, competitors or generic. A healthy campaign would be almost one color; today all of them are mixed.</p>
+        <figure class="figure grow">
+          <figcaption>What each campaign buys, according to what the person typed.</figcaption>
+          <div class="legend"><span><i class="is-accent"></i>Own brand</span><span><i class="is-neg"></i>Competitors</span><span><i></i>Generic</span></div>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-head"><span class="name">Brand</span><span class="val">66.1M</span></div><div class="bar-track" style="display:flex"><i style="width:51.0%;background:var(--accent-deep)"></i><i style="width:18.3%;background:var(--neg)"></i><i style="width:30.7%;background:var(--ink)"></i></div><div class="bar-foot"><span>51% brand</span><span>18% competitors</span><span>31% generic</span></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Promotions</span><span class="val">54.3M</span></div><div class="bar-track" style="display:flex"><i style="width:11.3%;background:var(--accent-deep)"></i><i style="width:23.4%;background:var(--neg)"></i><i style="width:65.3%;background:var(--ink)"></i></div><div class="bar-foot"><span>11% brand</span><span>23% competitors</span><span>65% generic</span></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Betting Terms</span><span class="val">33.8M</span></div><div class="bar-track" style="display:flex"><i style="width:11.2%;background:var(--accent-deep)"></i><i style="width:20.6%;background:var(--neg)"></i><i style="width:68.2%;background:var(--ink)"></i></div><div class="bar-foot"><span>11% brand</span><span>21% competitors</span><span>68% generic</span></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Competitor</span><span class="val">19.8M</span></div><div class="bar-track" style="display:flex"><i style="width:0.4%;background:var(--accent-deep)"></i><i style="width:85.3%;background:var(--neg)"></i><i style="width:14.3%;background:var(--ink)"></i></div><div class="bar-foot"><span>0.4% brand</span><span>85% competitors</span><span>14% generic</span></div></div>
+          </div>
+        </figure>
+
+        <h3>The search terms behind each percentage</h3>
+        <p class="note"><b>These are search terms, not keywords:</b> what the person typed, not what the account bought. On broad match, a single keyword such as «casino» is triggered by thousands of terms, which is why Brand buys 3,140 competitor terms. How to stop it is in the <a href="#negatives">match types and exclusions section</a>.</p>
+        <details>
+          <summary><svg class="ico ico-sm mas" aria-hidden="true"><use href="#i-mas"></use></svg><svg class="ico ico-sm menos" aria-hidden="true"><use href="#i-menos"></use></svg>See the terms in each cell (24,509 terms, 174.1 million pesos)</summary>
+          <p class="note"><b>The rule.</b> Applied in this order: if the term names a rival operator or a celebrity-fronted casino, it is a competitor; if not, and it names YaJuego or Betjuego, it is own brand; the rest is generic.</p>
+          <div class="table-scroll">
+          <table>
+            <caption>Search terms in each cell. The first one, in bold, is the highest-spending.</caption>
+            <thead><tr><th scope="col">Campaign</th><th scope="col">Category</th><th scope="col">Spend</th><th scope="col">% of campaign</th><th scope="col">Distinct terms</th><th scope="col" style="text-align:left">The six highest-spending terms</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Brand</th><td>Own brand</td><td>33,694,975</td><td>51.0%</td><td>117</td><td class="terminos" style="text-align:left"><b>yajuego</b>, yajuego apuestas, ya juegos, ya juego com, yajuegos, ya juego casino</td></tr>
+              <tr><th scope="row">Brand</th><td>Competitors</td><td>12,075,034</td><td>18.3%</td><td>3,140</td><td class="terminos" style="text-align:left"><b>cossio casino</b>, bwin, triunfobet, rivalo, 1xbet, casino cossio</td></tr>
+              <tr><th scope="row">Brand</th><td>Generic</td><td>20,344,400</td><td>30.8%</td><td>7,751</td><td class="terminos" style="text-align:left"><b>nequi casino</b>, casas de apuestas colombia, casino, juegos de casino para ganar dinero, baloto casino, apuestas</td></tr>
+              <tr><th scope="row">Promotions</th><td>Own brand</td><td>6,159,146</td><td>11.3%</td><td>87</td><td class="terminos" style="text-align:left"><b>yajuego</b>, ya juegos, yajuego apuestas, ya juego com, yajuego bono de bienvenida, ya juego casino</td></tr>
+              <tr><th scope="row">Promotions</th><td>Competitors</td><td>12,697,967</td><td>23.4%</td><td>3,655</td><td class="terminos" style="text-align:left"><b>rushbet</b>, cossio casino, casino cossio, bwin, zamba, doradobet</td></tr>
+              <tr><th scope="row">Promotions</th><td>Generic</td><td>35,464,263</td><td>65.3%</td><td>9,756</td><td class="terminos" style="text-align:left"><b>nequi casino</b>, casino, app para ganar dinero y retirar por nequi, casino online, juegos para ganar dinero real gratis, casas de apuestas colombia</td></tr>
+              <tr><th scope="row">Betting Terms</th><td>Own brand</td><td>3,784,782</td><td>11.2%</td><td>92</td><td class="terminos" style="text-align:left"><b>yajuego</b>, ya juegos, yajuego apuestas, yajuego bono sin deposito, yajuegos, yajuego registro</td></tr>
+              <tr><th scope="row">Betting Terms</th><td>Competitors</td><td>6,974,171</td><td>20.6%</td><td>2,923</td><td class="terminos" style="text-align:left"><b>rushbet</b>, luis diaz casino, cossio casino, casino cossio, betsson bono de bienvenida sin deposito, win999</td></tr>
+              <tr><th scope="row">Betting Terms</th><td>Generic</td><td>23,080,336</td><td>68.2%</td><td>8,528</td><td class="terminos" style="text-align:left"><b>apuestas deportivas</b>, casino online, bono sin deposito, casino, bono de bienvenida, casas de apuestas con bonos de bienvenida sin deposito colombia</td></tr>
+              <tr><th scope="row">Competitor</th><td>Own brand</td><td>72,117</td><td>0.4%</td><td>7</td><td class="terminos" style="text-align:left"><b>yajuego</b>, yajuegos, bet juego, betjuego, betjuegos, descargar ya juego apk</td></tr>
+              <tr><th scope="row">Competitor</th><td>Competitors</td><td>16,874,064</td><td>85.3%</td><td>2,067</td><td class="terminos" style="text-align:left"><b>rushbet</b>, betplay, betsson, wplay, codere, bwin</td></tr>
+              <tr><th scope="row">Competitor</th><td>Generic</td><td>2,842,507</td><td>14.4%</td><td>2,004</td><td class="terminos" style="text-align:left"><b>jugar baloto en linea</b>, baloto casino, winmax, bet builder, chicken road, betk</td></tr>
+            </tbody>
+          </table>
+        </div>
+          <p class="note"><b>Two calls.</b> Betjuego counts as own brand: it is the name of the GA4 property. Celebrity-fronted casinos count as competitors: they are rival operators with a famous face. If either does not match the commercial criterion, the percentages are recalculated in minutes.</p>
+        </details>
+
+        <h3>How it should look</h3>
+        <p class="note">Three campaigns with a boundary, each with intent-based ad groups and its own ad. The fourth is paused. Budgets are a starting point, not a destination: they move in steps while cost per registration is checked.</p>
+        <div class="rules">
+          <div class="rule-col is-yes">
+            <h3>Brand</h3>
+            <span class="note">1.3M a day. It has 2.5M today</span>
+            <ol>
+              <li><div><b>Buys</b><p>«yajuego» and its variants, on exact and phrase match. A single ad group: the brand territory is small and needs no more.</p></div></li>
+              <li><div><b>Excludes</b><p>Every competitor brand, every celebrity-fronted casino, and the generic casino and betting terms.</p></div></li>
+              <li><div><b>Message</b><p>The live offer, not institutional copy. This is the highest-return change in the whole audit.</p></div></li>
+            </ol>
+          </div>
+          <div class="rule-col is-yes">
+            <h3>Promotions</h3>
+            <span class="note">2.9M a day. Unchanged</span>
+            <ol>
+              <li><div><b>Buys</b><p>No-deposit bonus, Nequi payments, games that pay out, live casino and roulette. Five ad groups, one per theme. And it picks up the competitor traffic it already converts well, at 51,496.</p></div></li>
+              <li><div><b>Excludes</b><p>The own brand, which moves to Brand. Competitors stay: here they convert at 51,496, not at 85,095 as in Brand.</p></div></li>
+              <li><div><b>Message</b><p>One ad per group, written around the specific offer that person searched for. Today all five share a single ad.</p></div></li>
+            </ol>
+          </div>
+          <div class="rule-col is-yes">
+            <h3>Generic</h3>
+            <span class="note">1.5M a day. Unchanged</span>
+            <ol>
+              <li><div><b>Buys</b><p>Sports betting, bookmakers and football. Three ad groups. This is the campaign currently called Betting Terms.</p></div></li>
+              <li><div><b>Excludes</b><p>The own brand and the promotional terms, which belong to Promotions. Competitors stay: here they convert at 63,604.</p></div></li>
+              <li><div><b>Message</b><p>Category plus differentiator: why YaJuego and not anyone else. Distinct from the promotional message.</p></div></li>
+            </ol>
+          </div>
+          <div class="rule-col is-no">
+            <h3>Competitors</h3>
+            <span class="note">Paused. It has 720K a day today</span>
+            <ol>
+              <li><div><b>Why</b><p>It pays up to five times the market price because of its Quality Score of 1, and delivers registrations at 169,991 pesos.</p></div></li>
+              <li><div><b>What happens to that demand</b><p>Promotions and Generic already capture it incidentally, and convert it at 51,496 and 63,604 pesos.</p></div></li>
+              <li><div><b>When it would come back</b><p>Only with its own ads and landing page lifting the Quality Score. Not before that.</p></div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="panel panel-hi">
+          <h3>The boundary between campaigns does not exist today, and that is what makes nothing comparable.</h3>
+          <p>Today there is no boundary: all four campaigns enter the same auction for the same search and Google picks one. That is why 91.3% of spend is contested between the account’s own campaigns and no cost per registration is comparable with another.</p>
+        </div>
+      </section>
+
+      <section class="grupo" id="measurement">
+        <div class="head">
+          <h2>The problem: the account does not tell new customers from returning ones</h2>
+          <p class="lede"><b>The idea:</b> we need to bid for people who have not made their first deposit (FTD), and the account does not do that today. Three campaigns bid on <code>purchase</code> (every bet from anyone) and eleven on registration, which does not set returning users aside. Google has a mode to bid only for new customers and no campaign uses it.</p>
+        </div>
+
+        <dl class="tira-cifras"><div><dt>counted bets per 100 clicks in Brand</dt><dd>107</dd></div><div><dt>registrations per 100 clicks in Brand</dt><dd>5.2</dd></div><div><dt>campaigns with «only new customers»</dt><dd>0 of 16</dd></div><div><dt>existing-customer lists</dt><dd>0</dd></div></dl>
+
+        <div class="duo duo-3">
+          <div class="panel">
+            <h3>A common argument, and what is true in it</h3>
+            <p>«If we drop <code>purchase</code>, we stop targeting people who are already inside YaJuego». True: <code>purchase</code> optimizes toward people who already bet. It works for retention, not for acquisition.</p>
+          </div>
+          <div class="panel">
+            <h3>What it does not solve</h3>
+            <p>Leaving only registration does not remove returning users either: they keep seeing and clicking the ads, they just do not «convert». By default, Google «bids equally for new and existing customers».</p>
+          </div>
+          <div class="panel">
+            <h3>And the real goal is FTD</h3>
+            <p>Registration is a proxy. Until first deposit reaches Google Ads, it is the best indicator; the target is to bid for the FTD of new customers.</p>
+          </div>
+        </div>
+
+        <h3>What the account data says</h3>
+        <p class="note"><b>How to read this chart.</b> Each campaign has two bars: bets per 100 clicks (dark) and registrations per 100 clicks (yellow). Many bets and few registrations point to clicks from people who already have an account. Competitor, which targets new people, is the control.</p>
+        <figure class="figure grow">
+          <figcaption>Counted bets and registrations per 100 clicks, over the last 30 days.</figcaption>
+          <div class="legend">
+            <span><i></i>Bets (<code>purchase</code>) per 100 clicks</span>
+            <span><i class="is-accent"></i>Registrations per 100 clicks</span>
+          </div>
+          <div class="share">
+            <div class="share-row"><span>Brand</span><div class="share-bar"><i style="width:97.2%"></i></div><b>106.9</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:4.7%"></i></div><b>5.2</b></div>
+            <div class="share-row"><span>Betting Terms</span><div class="share-bar"><i style="width:39.2%"></i></div><b>43.1</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:7.2%"></i></div><b>7.9</b></div>
+            <div class="share-row"><span>Promotions</span><div class="share-bar"><i style="width:22.6%"></i></div><b>24.9</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:10.0%"></i></div><b>11.0</b></div>
+            <div class="share-row"><span>Competitor</span><div class="share-bar"><i style="width:1.6%"></i></div><b>1.8</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:5.2%"></i></div><b>5.7</b></div>
+          </div>
+          <p class="chart-foot">An indication, not proof: a new person also bets several times after registering. But 20 bets per registration in Brand cannot be explained by new customers alone.</p>
+        </figure>
+
+        <div class="panel">
+          <h3>Returning users do not arrive through «log in»</h3>
+          <p>Existing-customer searches that name the brand (log in, withdraw, verify) add up to only 67,033 pesos a month, 0.04%. Most likely they arrive searching plain «yajuego». That is why excluding terms is not enough: Google has to be told who they are.</p>
+        </div>
+
+        <h3>What Google Ads offers: bid only for new customers</h3>
+        <p class="note">It exists in Search, Performance Max and Demand Gen. Quotes are drawn from Google’s documentation.</p>
+        <div class="table-scroll">
+          <table>
+            <caption>The three possible behaviors and where the account stands.</caption>
+            <thead><tr><th scope="col">Mode</th><th scope="col" style="text-align:left">What it does</th><th scope="col" style="text-align:left">When it fits</th><th scope="col">Campaigns</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">No goal</th><td style="text-align:left">«By default, your campaign bids equally for new and existing customers»</td><td style="text-align:left">When customer type does not matter</td><td class="is-neg"><b>16 of 16</b></td></tr>
+              <tr><th scope="row">Bid higher for new</th><td style="text-align:left">Reaches everyone, but bids higher for new customers</td><td style="text-align:left">Acquiring without losing returning sales</td><td>0 of 16</td></tr>
+              <tr><th scope="row">Bid only for new</th><td style="text-align:left">«Optimized to bid exclusively for new customers»</td><td style="text-align:left">Strict acquisition budgets, or goals that are not purchases, such as registrations</td><td>0 of 16</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="duo duo-3">
+          <div class="panel">
+            <h3>It asks for a customer list</h3>
+            <p>It accepts Customer Match (direct upload, CRM or API), Analytics audiences and website or app lists. A minimum of 100 active members; below 1,000 it may perform worse.</p>
+          </div>
+          <div class="panel">
+            <h3>It reduces, it does not eliminate</h3>
+            <p>Google also detects customers on its own (up to 540 days), but admits it is «less comprehensive because users can remove cookies and opt out».</p>
+          </div>
+          <div class="panel">
+            <h3>Returning users, separately</h3>
+            <p>Google recommends «a separate campaign to reach existing customers» when using this mode. That is where Manifesto / Purchase and Bono #Purchase fit, if their role is retention.</p>
+          </div>
+        </div>
+        <p class="note"><b>Account status, according to the API.</b> No campaign has an acquisition goal. There are four audience lists, none of customers, all with a reported size of 0: it may be closed or unpopulated lists, worth confirming in the interface.</p>
+        <p class="note">Sources: <a href="https://support.google.com/google-ads/answer/12080169" target="_blank" rel="noopener">lifecycle goals</a>, <a href="https://support.google.com/google-ads/answer/14005876" target="_blank" rel="noopener">segment detection</a>, <a href="https://support.google.com/google-ads/answer/14007601" target="_blank" rel="noopener">customer lists</a>, <a href="https://support.google.com/google-ads/answer/15864743" target="_blank" rel="noopener">bidding preferences</a> and <a href="https://developers.google.com/google-ads/api/docs/conversions/goals/lifecycle-goals" target="_blank" rel="noopener">the API</a>.</p>
+
+        <h3>How it would look: two roles</h3>
+        <p class="note"><b>How to read this diagram.</b> Each row is a role and reads left to right: which campaigns they are, which event they bid on, who they speak to and how they are measured. Boxes with a yellow border are what is new: telling Google who each campaign bids for.</p>
+        <div class="table-scroll"><svg viewBox="0 0 980 250" role="img" aria-label="Two roles. Acquisition: bids on registration today and FTD later, only for new customers, measured by cost per registration. Retention: bids on purchase, for existing customers, measured separately." style="width:100%;min-width:720px;height:auto;font-family:inherit"><defs><marker id="ahB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink-muted)"/></marker></defs><rect x="10" y="14" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="115.0" y="44" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Acquisition</text><text x="115.0" y="68" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">Brand, Promotions,</text><text x="115.0" y="87" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">Generic</text><rect x="260" y="14" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="365.0" y="44" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Bids on</text><text x="365.0" y="68" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">registration today,</text><text x="365.0" y="87" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">FTD later</text><rect x="510" y="14" width="210" height="90" rx="10" style="fill:var(--paper);stroke:var(--accent-deep);stroke-width:3"/><text x="615.0" y="44" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">For whom</text><text x="615.0" y="68" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">only new customers</text><text x="615.0" y="87" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">(Google mode)</text><rect x="760" y="14" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="865.0" y="44" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Measured by</text><text x="865.0" y="68" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">cost per registration</text><text x="865.0" y="87" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">then by FTD</text><line x1="224" y1="59.0" x2="256" y2="59.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahB)"/><line x1="474" y1="59.0" x2="506" y2="59.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahB)"/><line x1="724" y1="59.0" x2="756" y2="59.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahB)"/><rect x="10" y="136" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="115.0" y="166" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Retention</text><text x="115.0" y="190" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">The purchase campaigns,</text><text x="115.0" y="209" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">if that is their role</text><rect x="260" y="136" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="365.0" y="166" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Bids on</text><text x="365.0" y="190" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">purchase</text><text x="365.0" y="209" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">(bets)</text><rect x="510" y="136" width="210" height="90" rx="10" style="fill:var(--paper);stroke:var(--accent-deep);stroke-width:3"/><text x="615.0" y="166" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">For whom</text><text x="615.0" y="190" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">existing customers</text><text x="615.0" y="209" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">(using the list)</text><rect x="760" y="136" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="865.0" y="166" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Measured</text><text x="865.0" y="190" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">separately, not added to</text><text x="865.0" y="209" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">cost per registration</text><line x1="224" y1="181.0" x2="256" y2="181.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahB)"/><line x1="474" y1="181.0" x2="506" y2="181.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahB)"/><line x1="724" y1="181.0" x2="756" y2="181.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahB)"/></svg></div>
+
+        <div class="panel panel-hi">
+          <h3>The action: separate acquisition from retention, and have acquisition bid only for new customers.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Define the role of each campaign: acquisition (registration today, FTD later) or retention (<code>purchase</code>).</p></li><li><p>Build the list of existing customers from the CRM or a GA4 audience of people who already deposited.</p></li><li><p>Test «only new customers» on a single acquisition campaign, Brand, and compare at 14 days.</p></li><li><p>With the commercial data, bring FTD in as a conversion and bid on FTD from new customers.</p></li></ol></div>
+          <div class="rule-col"><h3>How to verify and what to watch</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">Bets per 100 clicks on the test campaign fall and registrations per 100 clicks rise.</p><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">Google lists the mode as compatible with Search and with goals that are not purchases, but it has not been tested on this account: that is why it is tested on one campaign before being extended.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="allocation">
+        <div class="head">
+          <h2>The problem: 17% of the budget brings 6% of the registrations</h2>
+          <p class="lede"><b>The idea:</b> the budget sits where it returns least. Promotions and the promotional Performance Max campaigns bring registrations in at 46,000 to 51,000 pesos; Demand Gen, YouTube, App and Competitor together spend 46.9 million a month and deliver 213 registrations across the six.</p>
+        </div>
+
+        <p class="note"><b>How to read this chart.</b> Each campaign has two bars. The dark one is what percentage of the budget it takes; the yellow one, what percentage of the registrations it returns. If the yellow bar is longer than the dark one, that campaign delivers above what it costs. If it is shorter, it delivers below.</p>
+        <figure class="figure grow">
+          <figcaption>Share of spend against share of registrations.</figcaption>
+          <div class="legend">
+            <span><i></i>Of the budget</span>
+            <span><i class="is-accent"></i>Of the registrations</span>
+          </div>
+          <div class="share">
+            <div class="share-row"><span>Promotions</span><div class="share-bar"><i style="width:27.4%"></i></div><b>27.4%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:41.6%"></i></div><b>41.6%</b></div>
+            <div class="share-row"><span>Brand</span><div class="share-bar"><i style="width:28.8%"></i></div><b>28.8%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:23.5%"></i></div><b>23.5%</b></div>
+            <div class="share-row"><span>Betting Terms</span><div class="share-bar"><i style="width:17.1%"></i></div><b>17.1%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:19.9%"></i></div><b>19.9%</b></div>
+            <div class="share-row"><span>Performance Max</span><div class="share-bar"><i style="width:9.3%"></i></div><b>9.3%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:9.4%"></i></div><b>9.4%</b></div>
+            <div class="share-row"><span>Demand Gen and YouTube</span><div class="share-bar"><i style="width:9.0%"></i></div><b>9.0%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:1.9%"></i></div><b>1.9%</b></div>
+            <div class="share-row"><span>Competitor</span><div class="share-bar"><i style="width:8.1%"></i></div><b>8.1%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:3.8%"></i></div><b>3.8%</b></div>
+            <div class="share-row"><span>App Installs</span><div class="share-bar"><i style="width:0.4%"></i></div><b>0.4%</b></div>
+            <div class="share-row is-accent"><span></span><div class="share-bar"><i style="width:0%"></i></div><b>0%</b></div>
+          </div>
+          <p class="chart-foot">Promotions is the only large line that clearly returns more than it consumes. Demand Gen takes 9% of the budget and returns 1.9%.</p>
+        </figure>
+
+        <p class="note"><b>How to read this chart.</b> Here the longest bar is the worst, not the best: it measures how much money it costs to bring in one registration. Demand Gen is the longest and all the others are drawn in proportion to it. In yellow, the three cheapest campaigns in the account.</p>
+        <figure class="figure grow">
+          <figcaption>Pesos it costs to bring in one registration, by line.</figcaption>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-head"><span class="name">PMax Juégala Toda</span><span class="val">46,732</span></div><div class="bar-track"><i class="is-best" style="width:13.7%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Search Promotions</span><span class="val">47,050</span></div><div class="bar-track"><i class="is-best" style="width:13.8%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">PMax Bono Activa tu Suerte</span><span class="val">50,528</span></div><div class="bar-track"><i class="is-best" style="width:14.8%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Search Betting Terms</span><span class="val">61,306</span></div><div class="bar-track"><i style="width:18.0%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Search Brand</span><span class="val">87,497</span></div><div class="bar-track"><i style="width:25.7%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Search Competitor</span><span class="val">152,963</span></div><div class="bar-track"><i class="is-over" style="width:45.0%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Demand Gen and YouTube</span><span class="val">340,297</span></div><div class="bar-track"><i class="is-over" style="width:100%"></i></div></div>
+          </div>
+          <p class="chart-foot">Demand Gen appears aggregated because separately it stops being legible: Manifesto / Purchase spent 7.5 million and produced one registration.</p>
+        </figure>
+
+        <details>
+          <summary><svg class="ico ico-sm mas" aria-hidden="true"><use href="#i-mas"></use></svg><svg class="ico ico-sm menos" aria-hidden="true"><use href="#i-menos"></use></svg>See all 16 campaigns, with their cost per registration</summary>
+          <div class="table-scroll">
+          <table data-ordenable>
+            <caption>All sixteen campaigns with spend, in Colombian pesos. Sortable by any column; a third click restores the original order.</caption>
+            <thead><tr><th scope="col">Campaign</th><th scope="col">Spend</th><th scope="col">Registrations</th><th scope="col">Cost per registration</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Search Brand</th><td data-v="77353740">77.4M</td><td data-v="884">884</td><td data-v="87497"><b>87,497</b></td></tr>
+              <tr><th scope="row">Search Promotions</th><td data-v="73590717">73.6M</td><td data-v="1564">1,564</td><td data-v="47050"><b>47,050</b></td></tr>
+              <tr><th scope="row">Search Betting Terms</th><td data-v="45957463">46.0M</td><td data-v="750">750</td><td data-v="61306"><b>61,306</b></td></tr>
+              <tr><th scope="row">Search Competitor</th><td data-v="21683739">21.7M</td><td data-v="142">142</td><td data-v="152963" class="is-neg"><b>152,963</b></td></tr>
+              <tr><th scope="row">PMax Bono Activa tu Suerte</th><td data-v="10565416">10.6M</td><td data-v="209">209</td><td data-v="50528"><b>50,528</b></td></tr>
+              <tr><th scope="row">Demand Gen Manifesto / Regs</th><td data-v="9062487">9.1M</td><td data-v="56">56</td><td data-v="162020" class="is-neg"><b>162,020</b></td></tr>
+              <tr><th scope="row">Demand Gen Manifesto / Purchase</th><td data-v="7548240">7.5M</td><td data-v="1">1</td><td data-v="7548240" class="is-neg"><b>7,548,240</b></td></tr>
+              <tr><th scope="row">PMax Beneficios YaJuego (new videos)</th><td data-v="6075143">6.1M</td><td data-v="2">2</td><td data-v="3037571" class="is-neg"><b>3,037,571</b></td></tr>
+              <tr><th scope="row">Demand Gen Bono Activa tu Suerte</th><td data-v="6040835">6.0M</td><td data-v="12">12</td><td data-v="503403" class="is-neg"><b>503,403</b></td></tr>
+              <tr><th scope="row">PMax Casino Evolution</th><td data-v="2298406">2.3M</td><td data-v="34">34</td><td data-v="68125"><b>68,125</b></td></tr>
+              <tr><th scope="row">PMax Juégala Toda</th><td data-v="1688468">1.7M</td><td data-v="36">36</td><td data-v="46732"><b>46,732</b></td></tr>
+              <tr><th scope="row">PMax Beneficios YaJuego</th><td data-v="1520890">1.5M</td><td data-v="26">26</td><td data-v="59216"><b>59,216</b></td></tr>
+              <tr><th scope="row">YouTube Subscribers</th><td data-v="1509546">1.5M</td><td data-v="2">2</td><td data-v="754773" class="is-neg"><b>754,773</b></td></tr>
+              <tr><th scope="row">PMax Bre-B</th><td data-v="1508010">1.5M</td><td data-v="26">26</td><td data-v="58781"><b>58,781</b></td></tr>
+              <tr><th scope="row">PMax New Casino July2026</th><td data-v="1492048">1.5M</td><td data-v="20">20</td><td data-v="74515"><b>74,515</b></td></tr>
+              <tr><th scope="row">App Installs</th><td data-v="1077466">1.1M</td><td data-v="0">0</td><td data-v="99999999" class="is-neg"><b>none</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        </details>
+
+        <div class="panel panel-hi">
+          <h3>The action: move money from where it does not buy registrations to where it is running out.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Raise PMax Bono Activa tu Suerte (out of budget in 87.7% of its auctions) and PMax Juégala Toda (42.7%) by 30% a week, using what Competitor frees.</p></li><li><p>Give Promotions nothing more: it does not even spend what it has.</p></li></ol></div>
+          <div class="rule-col"><h3>How to verify</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">Cost per registration stays below 55,000 at each step; if it rises, roll back the step.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="brand">
+        <div class="head">
+          <h2>The problem: Brand pays double for «yajuego»</h2>
+          <p class="lede"><b>The idea:</b> the same search costs 85,959 pesos per registration in Brand and 41,661 in Promotions, and half the Brand budget goes on searches that do not name it. «yajuego» takes 32.9 million a month and four campaigns buy it at once.</p>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <caption>The search «yajuego» by capturing campaign. Registration rate is how many out of every hundred clicks end up signing up.</caption>
+            <thead><tr><th scope="col">Campaign</th><th scope="col">Spend</th><th scope="col">Cost per click</th><th scope="col">Registration rate</th><th scope="col">Cost per registration</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Promotions</th><td>3,884,523</td><td>3,465</td><td><b>8.3%</b></td><td><b>41,661</b></td></tr>
+              <tr><th scope="row">Betting Terms</th><td>2,607,289</td><td>2,819</td><td>4.7%</td><td>59,506</td></tr>
+              <tr><th scope="row">Brand</th><td>26,305,817</td><td>3,889</td><td>4.5%</td><td class="is-neg"><b>85,959</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <h3>The click costs about the same. What changes is what happens next.</h3>
+          <p>Between 2,819 and 3,889 pesos per click across all three. What changes is how many sign up: 8.3% in Promotions against 4.5% in Brand (and 14.2% against 6.3% on «yajuego apuestas»). Most likely it is the ad and the landing page, which is why the action is a fourteen-day test.</p>
+        </div>
+
+        <p class="note"><b>How to read this chart.</b> Each row is a campaign and its bar runs from the lowest to the highest cost per registration it had across search types (brand, competitor or generic). A short bar means what the person typed barely changes the cost.</p>
+        <figure class="figure grow">
+          <figcaption>Cost per registration by search type, within each campaign.</figcaption>
+          <div class="axis"><span>0</span><span>100,000 pesos per registration</span></div>
+          <div class="ranges">
+            <div>
+              <div class="range-head"><span class="name">Promotions</span><span class="span">38,445 to 51,496</span></div>
+              <div class="range-track"><span class="range-fill" style="left:38.4%;width:13.1%"></span></div>
+              <div class="range-foot"><span>Brand 38,445 · Promotional 46,718 · Generic 49,560 · Competitors 51,496</span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">Betting Terms</span><span class="span">57,494 to 63,604</span></div>
+              <div class="range-track"><span class="range-fill" style="left:57.5%;width:6.1%"></span></div>
+              <div class="range-foot"><span>Generic 57,494 · Brand 59,463 · Competitors 63,604</span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">Brand</span><span class="span">85,095 to 90,625</span></div>
+              <div class="range-track"><span class="range-fill" style="left:85.1%;width:5.5%"></span></div>
+              <div class="range-foot"><span>Competitors 85,095 · Brand 85,433 · Generic 90,625</span></div>
+            </div>
+          </div>
+          <p class="chart-foot">Within each campaign the bar is short: what the person typed barely changes the cost. Between campaigns the difference is double. What sets the cost is the campaign, meaning the ad and the page, not the search.</p>
+        </figure>
+
+        <p class="note"><b>How to read this chart.</b> It shows what the brand campaign spends on, based on what the person actually typed. The first bar is what does name YaJuego. The two red ones are searches a brand campaign should not be buying.</p>
+        <figure class="figure grow">
+          <figcaption>The 66.1 million of the Brand campaign that is visible in the search terms report.</figcaption>
+          <div class="bars">
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Says «yajuego»</span><span class="val">33.7M</span></div>
+              <div class="bar-track"><i class="is-best" style="width:51.0%"></i></div>
+              <div class="bar-foot"><span>51.0% of the spend</span><span>394 registrations at 85,433</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Generic casino and betting</span><span class="val">20.3M</span></div>
+              <div class="bar-track"><i class="is-over" style="width:30.8%"></i></div>
+              <div class="bar-foot"><span>30.8% of the spend</span><span>225 registrations at 90,625</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Competitor brands</span><span class="val">12.1M</span></div>
+              <div class="bar-track"><i class="is-over" style="width:18.3%"></i></div>
+              <div class="bar-foot"><span>18.3% of the spend</span><span>142 registrations at 85,095</span></div>
+            </div>
+          </div>
+          <p class="chart-foot">«casino cossio», «kkbrio», «mundo win», «betsson colombia», «juegabet», «luckstar». All bought by the brand campaign.</p>
+        </figure>
+
+        <div class="panel panel-hi">
+          <h3>The action: give Brand the Promotions ad and close its exit.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Duplicate the validated Promotions ads inside Brand, leaving the current ones to compare. No additional spend.</p></li><li><p>Move the brand variants from broad to phrase and exclude competitors and generics: frees 32.4 million a month inside the campaign.</p></li></ol></div>
+          <div class="rule-col"><h3>How to verify</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">At 14 days, the registration rate on «yajuego» rises above 4.5% and non-brand spend falls from 49% to under 10%.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="negatives">
+        <div class="head">
+          <h2>The problem: nothing limits what the account buys</h2>
+          <p class="lede"><b>The idea:</b> there are two controls and the account uses neither. Match type decides which searches can trigger a keyword; exclusions decide which cannot. And the thematic list that looks obvious (free, support, «is it trustworthy») is not the right one: it converts better than average.</p>
+        </div>
+
+        <h3>The two controls</h3>
+        <p class="note"><b>How to read this diagram.</b> A search goes through two doors before becoming a paid click. Boxes with a yellow border are the controls, and below each one, where the account stands today.</p>
+        <div class="table-scroll"><svg viewBox="0 0 980 175" role="img" aria-label="Path of a search: the person types, match type decides whether it triggers the keyword, exclusions decide whether it is blocked and, if it gets through, the click is bought." style="width:100%;min-width:720px;height:auto;font-family:inherit"><defs><marker id="ahA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink-muted)"/></marker></defs><rect x="10" y="36" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="115.0" y="66" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">The person types</text><text x="115.0" y="90" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">«casino cossio»</text><text x="115.0" y="109" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">(search term)</text><rect x="260" y="36" width="210" height="90" rx="10" style="fill:var(--paper);stroke:var(--accent-deep);stroke-width:3"/><text x="365.0" y="26" text-anchor="middle" style="fill:var(--ink-muted);font-size:11px;font-weight:700;letter-spacing:.08em">CONTROL 1</text><text x="365.0" y="66" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Match type</text><text x="365.0" y="90" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">Can it trigger</text><text x="365.0" y="109" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">the keyword?</text><rect x="510" y="36" width="210" height="90" rx="10" style="fill:var(--paper);stroke:var(--accent-deep);stroke-width:3"/><text x="615.0" y="26" text-anchor="middle" style="fill:var(--ink-muted);font-size:11px;font-weight:700;letter-spacing:.08em">CONTROL 2</text><text x="615.0" y="66" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">Exclusions</text><text x="615.0" y="90" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">Is it blocked</text><text x="615.0" y="109" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">for this campaign?</text><rect x="760" y="36" width="210" height="90" rx="10" style="fill:var(--sunken);stroke:var(--rule-strong);stroke-width:1.5"/><text x="865.0" y="66" text-anchor="middle" style="fill:var(--ink);font-size:15px;font-weight:700">The click is bought</text><text x="865.0" y="90" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">The ad is shown</text><text x="865.0" y="109" text-anchor="middle" style="fill:var(--ink-secondary);font-size:13px">and paid for</text><line x1="224" y1="81.0" x2="256" y2="81.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahA)"/><line x1="474" y1="81.0" x2="506" y2="81.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahA)"/><line x1="724" y1="81.0" x2="756" y2="81.0" style="stroke:var(--ink-muted);stroke-width:2" marker-end="url(#ahA)"/><text x="365.0" y="154" text-anchor="middle" style="fill:var(--neg);font-size:13px;font-weight:700">Today: 612 of 617 on broad</text><text x="615.0" y="154" text-anchor="middle" style="fill:var(--neg);font-size:13px;font-weight:700">Today: 0 exclusions</text></svg></div>
+        <div class="duo duo-3">
+          <div class="panel">
+            <h3>Match type</h3>
+            <p>On broad, «casino» is triggered by thousands of different searches. 612 of the 617 keywords are on broad. On brand, the Google forecast gives 601 clicks on exact and 2,548 on broad: the extra clicks are not more people searching for YaJuego.</p>
+          </div>
+          <div class="panel">
+            <h3>Exclusions</h3>
+            <p>They tell Google that even if a search looks similar, the ad must not show. The account has zero. Without them, not even the strictest match type stops Brand from buying competitors.</p>
+          </div>
+          <div class="panel">
+            <h3>Be sharper</h3>
+            <p>Brand on exact and phrase; broad only in tests with a capped budget; and exclusion lists cross-applied between campaigns. The table assigns each flow its control.</p>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <caption>What gets in today through the wrong door, what it costs and what stops it. Spend in pesos per month.</caption>
+            <thead><tr><th scope="col">What gets in today</th><th scope="col">Distinct terms</th><th scope="col">Spend</th><th scope="col" style="text-align:left">What stops it</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Competitors inside Brand</th><td>3,140</td><td>12,075,034</td><td style="text-align:left;text-align:left">Phrase match on brand, and a competitor exclusion in Brand</td></tr>
+              <tr><th scope="row">Generics inside Brand</th><td>7,751</td><td>20,344,400</td><td style="text-align:left;text-align:left">Phrase match on brand, and a generic exclusion in Brand</td></tr>
+              <tr><th scope="row">Own brand inside Promotions and Generic</th><td>87 and 92</td><td>9,943,928</td><td style="text-align:left;text-align:left">Own-brand exclusion in those two campaigns</td></tr>
+              <tr><th scope="row">Generics inside Competitor</th><td>2,004</td><td>2,842,507</td><td style="text-align:left;text-align:left">Pause the campaign</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>The list that looked obvious</h3>
+        <p class="note"><b>How to read this chart.</b> Each bar is a theme that looked like waste, and its length is what a registration costs in it. The vertical line is the account average (71,495): anything to its left converts better and excluding it would be a mistake. In red, the only theme with no registrations.</p>
+        <figure class="figure grow">
+          <figcaption>Cost per registration in each theme that looked like waste.</figcaption>
+          <div class="bars">
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Play for free, no money, demo</span><span class="val">49,866</span></div>
+              <div class="bar-track"><i class="is-best" style="width:66.5%"></i><span class="bar-mark" style="left:95.4%"></span></div>
+              <div class="bar-foot"><span>822,795 a month</span><span>16.5 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Support: log in, recover account, complaints</span><span class="val">55,226</span></div>
+              <div class="bar-track"><i class="is-best" style="width:73.7%"></i><span class="bar-mark" style="left:95.4%"></span></div>
+              <div class="bar-foot"><span>902,026 a month</span><span>16.3 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Doubts: «is it trustworthy», «is it real», «does it pay»</span><span class="val">63,058</span></div>
+              <div class="bar-track"><i class="is-best" style="width:84.1%"></i><span class="bar-mark" style="left:95.4%"></span></div>
+              <div class="bar-foot"><span>2,630,242 a month</span><span>41.7 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Regulatory: Coljuegos, taxes, licensing</span><span class="val">74,988</span></div>
+              <div class="bar-track"><i style="width:100%"></i><span class="bar-mark" style="left:95.4%"></span></div>
+              <div class="bar-foot"><span>1,349,580 a month</span><span>18.0 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">PDFs, jobs, cheats, watching football</span><span class="val">no registrations</span></div>
+              <div class="bar-track"><i class="is-over" style="width:100%"></i></div>
+              <div class="bar-foot"><span>140,408 a month</span><span>0 registrations</span></div>
+            </div>
+          </div>
+          <p class="chart-foot">Four of the five themes land left of the line: they convert better than the account average.</p>
+        </figure>
+
+        <div class="duo duo-3">
+          <div class="panel">
+            <h3>«Is it trustworthy» is not a complaint</h3>
+            <p>«nequi casino es legal», «yajuego es confiable»: someone verifying before signing up. 2.6 million a month at 63,058 per registration, better than average.</p>
+          </div>
+          <div class="panel">
+            <h3>«Free» almost never means free</h3>
+            <p>The real searches are «juegos gratis para ganar dinero real»: free to enter, not free of deposits. It is the best-converting theme (49,866). Excluding «gratis» wholesale would be the worst change.</p>
+          </div>
+          <div class="panel">
+            <h3>What is genuinely waste: 140,408 pesos</h3>
+            <p>31 terms with not one registration: «trucos para jugar en casinos», «hack mines 1win», «donde ver cali vs santa fe femenino», «términos y condiciones bono yajuego». It is 0.08% of spend: housekeeping, not a lever.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>A fifth of the spend cannot be audited this way</h3>
+          <p>The search campaigns spend 218.6 million a month and the search terms report shows 174.1. The other 44.5 million (20.4%) falls below the Google’s reporting threshold, and no exclusion touches it. That is why the structure gets fixed, not the terms.</p>
+        </div>
+
+        <div class="panel panel-hi">
+          <h3>The action: strict match types on brand and cross-exclusions, not a thematic list.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Move brand to exact and phrase; broad only in tests with a capped budget.</p></li><li><p>Create four shared exclusion lists and cross-apply them: own brand out of Promotions and Generic; generics out of Brand; promotional terms out of Generic.</p></li><li><p>Take competitors out of Brand, where they convert at 85,095; they stay in Promotions and Generic (51,496 and 63,604).</p></li><li><p>Apply the short list of 31 valueless terms, as housekeeping.</p></li></ol></div>
+          <div class="rule-col"><h3>How to verify</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">Spend on contested searches falls from 91.3% to under 30% in next month’s report.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="competitors">
+        <div class="head">
+          <h2>The problem: Competitor pays 5 times the market price</h2>
+          <p class="lede"><b>The idea:</b> it is the most expensive line in the account (169,991 pesos per registration on competitor searches) and the cause is its Quality Score of 1: a low score is a surcharge on every click. Competitor spends 21.7 million a month and brings in 142 registrations, at 152,963 each.</p>
+        </div>
+
+        <p class="note"><b>How to read this chart.</b> The grey bar on each row is the market price range: from what the cheapest advertiser pays to what the most expensive pays to appear at the top of that search. The black dot is what YaJuego pays. When the dot sits to the right of the bar, we are paying more than anyone else in that market.</p>
+        <figure class="figure grow">
+          <figcaption>Market price against what Competitor pays, by search.</figcaption>
+          <div class="axis"><span>0</span><span>13,000 pesos per click</span></div>
+          <div class="ranges">
+            <div>
+              <div class="range-head"><span class="name">betplay</span><span class="span">3,350,000 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:0.4%;width:15.7%"></span><span class="range-pin" style="left:78.1%"><em>10,151</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>48 and 2,089</b></span><span class="is-neg"><b>4.9x the ceiling</b></span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">rushbet</span><span class="span">1,220,000 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:0.3%;width:19.2%"></span><span class="range-pin" style="left:86.2%"><em>11,204</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>34 and 2,530</b></span><span class="is-neg"><b>4.4x the ceiling</b></span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">wplay</span><span class="span">1,500,000 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:0.3%;width:18.4%"></span><span class="range-pin" style="left:67.3%"><em>8,755</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>45 and 2,425</b></span><span class="is-neg"><b>3.6x the ceiling</b></span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">codere colombia</span><span class="span">8,100 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:17.2%;width:36.6%"></span><span class="range-pin" style="left:97.7%"><em>12,707</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>2,238 and 6,990</b></span><span class="is-neg"><b>1.8x the ceiling</b></span></div>
+            </div>
+          </div>
+          <p class="chart-foot">Part of the gap is normal: whoever conquests competitors pays more than the brand owner. But five times the ceiling of the range is the Quality Score 1 surcharge.</p>
+        </figure>
+
+        <p class="note"><b>How to read this chart.</b> All four campaigns buy competitor brand searches. Three do it without meaning to, through broad match. The bar measures what a registration costs in each one, and the campaign built for this is the longest.</p>
+        <figure class="figure grow">
+          <figcaption>The 48.6 million a month the account spends on competitor searches.</figcaption>
+          <div class="bars">
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Promotions</span><span class="val">51,496</span></div>
+              <div class="bar-track"><i class="is-best" style="width:30.3%"></i></div>
+              <div class="bar-foot"><span>12.7M spent</span><span>247 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Betting Terms</span><span class="val">63,604</span></div>
+              <div class="bar-track"><i style="width:37.4%"></i></div>
+              <div class="bar-foot"><span>7.0M spent</span><span>110 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Brand</span><span class="val">85,095</span></div>
+              <div class="bar-track"><i style="width:50.1%"></i></div>
+              <div class="bar-foot"><span>12.1M spent</span><span>142 registrations</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">Competitor</span><span class="val">169,991</span></div>
+              <div class="bar-track"><i class="is-over" style="width:100%"></i></div>
+              <div class="bar-foot"><span>16.9M spent</span><span>99 registrations</span></div>
+            </div>
+          </div>
+          <p class="chart-foot">Same demand, same month, same account. The only campaign built to conquest competitors is the one doing it worst.</p>
+        </figure>
+
+        <div class="panel panel-hi">
+          <h3>The action: pause it, and spend a month checking whether it was needed.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Pause Search Competitor and free 21.7 million a month. Pause rather than repair: fixing the Quality Score needs new ads and a new landing page.</p></li><li><p>Watch for four weeks whether competitor spend and registrations hold up in Promotions and Generic.</p></li></ol></div>
+          <div class="rule-col"><h3>How to read the result</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">If they hold, the campaign contributed nothing of its own. If they fall, rebuild it with its own ads and landing page before switching it back on.</p><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">Do not add money: it already loses 76.2% of its impressions to budget and would only scale the problem.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="market">
+        <div class="head">
+          <h2>The context: YaJuego competes for 2% of brand demand</h2>
+          <p class="lede"><b>The idea:</b> two queries to Google's own tools put a ceiling on ambition. Keyword Planner shows the brand is small next to BetPlay, and the forecasting tool shows that raising the Promotions budget does not buy more clicks.</p>
+        </div>
+
+        <p class="note"><b>How to read this chart.</b> How many times a month people search each brand by name in Colombia. BetPlay is the full bar and the others are drawn in proportion to it. In yellow, YaJuego.</p>
+        <figure class="figure grow">
+          <figcaption>Monthly searches by brand name in Colombia, twelve-month average.</figcaption>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-head"><span class="name">BetPlay</span><span class="val">13,887,360</span></div><div class="bar-track"><i style="width:100%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Rushbet</span><span class="val">2,474,600</span></div><div class="bar-track"><i style="width:17.8%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">WPlay</span><span class="val">1,689,270</span></div><div class="bar-track"><i style="width:12.2%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">YaJuego</span><span class="val">262,060</span></div><div class="bar-track"><i class="is-best" style="width:1.9%"></i></div></div>
+          </div>
+          <p class="chart-foot">Sum of all variants of each brand; variants overlap, so this compares magnitudes rather than giving exact counts. The practical conclusion: the brand is not the growth lever, it is the asset that has to be bought cheaply.</p>
+        </figure>
+
+        <h3>Is the own brand being overpaid for?</h3>
+        <p class="note"><b>How to read this chart.</b> Same as the competitor one: the grey bar is the market price range and the dot is what YaJuego pays. Here the answer is reassuring, because the dot lands around the middle of the range in almost every case.</p>
+        <figure class="figure grow">
+          <div class="axis"><span>0</span><span>8,000 pesos per click</span></div>
+          <div class="ranges">
+            <div>
+              <div class="range-head"><span class="name">yajuego</span><span class="span">246,000 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:21.4%;width:54.3%"></span><span class="range-pin" style="left:46.5%"><em>3,723</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>1,712 and 6,054</b></span><span>We sit at <b>46%</b> of the range</span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">yajuego apuestas</span><span class="span">2,400 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:23.5%;width:59.0%"></span><span class="range-pin" style="left:61.9%"><em>4,954</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>1,880 and 6,597</b></span><span>We sit at <b>65%</b> of the range</span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">yajuego casino</span><span class="span">1,300 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:19.8%;width:52.1%"></span><span class="range-pin" style="left:72.3%"><em>5,787</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>1,585 and 5,751</b></span><span class="is-neg"><b>Above the ceiling</b></span></div>
+            </div>
+            <div>
+              <div class="range-head"><span class="name">yajuego iniciar sesión</span><span class="span">1,600 searches/month</span></div>
+              <div class="range-track"><span class="range-fill" style="left:16.5%;width:34.9%"></span><span class="range-pin" style="left:31.4%"><em>2,514</em></span></div>
+              <div class="range-foot"><span>The market pays between <b>1,317 and 4,112</b></span><span>We sit at <b>43%</b> of the range</span></div>
+            </div>
+          </div>
+          <p class="chart-foot">The answer is no: the brand is bought at market price, except for «yajuego casino» which is paid above the ceiling. The brand campaign's problem is not the price of the click, it is what it does with it.</p>
+        </figure>
+
+        <h3>Would raising the Promotions budget help?</h3>
+        <p class="note"><b>How to read this chart.</b> Each bar is a different budget scenario, from lowest to highest, measuring how many clicks it would buy per month. If raising the budget worked, the bars would grow from top to bottom. They are flat.</p>
+        <figure class="figure grow">
+          <figcaption>Monthly clicks the promotional keyword set buys, by budget level.</figcaption>
+          <div class="bars">
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">2,453,024 a day</span><span class="val">1,599</span></div>
+              <div class="bar-track"><i style="width:99.4%"></i></div>
+              <div class="bar-foot"><span>Today's budget</span><span>Would spend 4.09M a month</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">3,176,148 a day</span><span class="val">1,599</span></div>
+              <div class="bar-track"><i style="width:99.4%"></i></div>
+              <div class="bar-foot"><span>Plus what Competitor frees</span><span>Would spend 4.09M a month</span></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-head"><span class="name">4,000,000 a day</span><span class="val">1,608</span></div>
+              <div class="bar-track"><i style="width:100%"></i></div>
+              <div class="bar-foot"><span>63% more budget</span><span>Would spend 4.10M a month</span></div>
+            </div>
+          </div>
+          <p class="chart-foot">63% more budget buys nine more clicks a month: promotional demand runs out long before budget becomes the constraint. It matches what already happens, since Promotions only uses 85% of what it is allocated.</p>
+        </figure>
+
+        <div class="panel panel-hi">
+          <h3>The action: grow through coverage, not budget.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Widen Promotions to online roulette, the mines game and Nequi payments, on phrase: real demand and low competition.</p></li><li><p>Move the budget freed from Brand and Competitor to the Performance Max campaigns, which genuinely are money-limited.</p></li></ol></div>
+          <div class="rule-col"><h3>How to verify</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">Promotions moves to using more than 95% of its budget after the keyword expansion.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="funnel">
+        <div class="head">
+          <h2>The problem: only 9 in 100 finish registering</h2>
+          <p class="lede"><b>The idea:</b> the leak is in the first screen. Advertising brings 43,164 people a month to start the form and 3,762 finish it; 86% leave before the second step. It is not fixed with advertising, but it caps everything advertising can achieve.</p>
+        </div>
+
+        <p class="note"><b>How to read this chart.</b> Each bar is a step of the registration, and its length is how many people reach it. The first bar is everyone who started. The drop between the first and the second is the leak.</p>
+        <figure class="figure grow">
+          <figcaption>From starting the registration to finishing it, over the last 30 days.</figcaption>
+          <div class="bars">
+            <div class="bar-row"><div class="bar-head"><span class="name">Starts the registration</span><span class="val">43,164</span></div><div class="bar-track"><i style="width:100%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Reaches step 2</span><span class="val">6,038</span></div><div class="bar-track"><i class="is-over" style="width:14.0%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Reaches step 3</span><span class="val">4,790</span></div><div class="bar-track"><i style="width:11.1%"></i></div></div>
+            <div class="bar-row"><div class="bar-head"><span class="name">Completes the registration</span><span class="val">3,762</span></div><div class="bar-track"><i class="is-best" style="width:8.7%"></i></div></div>
+          </div>
+          <p class="chart-foot">From step 2 onward the form holds up well: 62.3% of those who reach step 2 finish. The entire leak is in the first screen.</p>
+        </figure>
+
+        <div class="panel panel-hi">
+          <h3>The action: review the first screen with the product team, before tuning bids further.</h3>
+        </div>
+        <div class="rules">
+          <div class="rule-col is-yes"><h3>What gets done</h3><ol><li><p>Review the first screen of the form with the product team.</p></li><li><p>Lifting step 1 to step 2 from 14% to 17% would add roughly 800 registrations a month (21% more), with no spend.</p></li></ol></div>
+          <div class="rule-col"><h3>Why there is room</h3><p style="margin-top:22px;color:var(--ink-secondary);font-size:.9rem;line-height:1.5">In Promotions 14.4% of those who start finish the registration; in Brand, 7.3%. Same form: what changes is the expectation the person arrives with.</p></div>
+        </div>
+      </section>
+
+      <section class="grupo" id="plan">
+        <div class="head">
+          <h2>Action plan: eleven moves in four weeks</h2>
+          <p class="lede"><b>The idea:</b> the same actions from each section, in order of dependency rather than importance. Each line says why, how and what gets touched.</p>
+        </div>
+
+        <dl class="tira-cifras"><div><dt>Measurement and the Brand ad</dt><dd>Week 1</dd></div><div><dt>Boundary, exclusions and pausing Competitor</dt><dd>Week 2</dd></div><div><dt>Groups by intent and budget</dt><dd>Week 3</dd></div><div><dt>Bidding ceiling, coverage and decisions</dt><dd>Week 4</dd></div></dl>
+
+        <ol class="orders">
+          <li>
+            <div>
+              <h3>Separate acquisition from retention</h3>
+              <p class="note">Week 1 · Measurement</p>
+              <p><b>Why.</b> The account mixes new and returning customers in a single cost per registration.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Give each campaign a role: acquisition (registration, then FTD) or retention (<code>purchase</code>).</p>
+              <p><b>What gets touched.</b> Goal of the three <code>purchase</code> campaigns (19.7M a month) and the <code>purchase</code> count to «one per person».</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Give Brand the Promotions ad</h3>
+              <p class="note">Week 1 · Brand</p>
+              <p><b>Why.</b> The same term converts at 8.3% with an offer and 4.5% without one.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Duplicate the validated ads and leave the current ones to compare.</p>
+              <p><b>What gets touched.</b> Brand ads. No cost; at 14 days compare the registration rate on «yajuego».</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Build the customer list and test «only new customers»</h3>
+              <p class="note">Weeks 2 and 3 · Measurement</p>
+              <p><b>Why.</b> Registration alone does not set returning users aside: Brand has 107 bets and 5 registrations per 100 clicks.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Upload the list and switch the mode on in a single acquisition campaign.</p>
+              <p><b>What gets touched.</b> Customer Match or GA4 audience (minimum 100, ideally over 1,000); mode on Brand; compare at 14 days.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Close Brand’s exit</h3>
+              <p class="note">Week 2 · Brand</p>
+              <p><b>Why.</b> Brand spends 32.4M a month on searches that do not name it and loses 27.8% of its own name.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Tighten match types and set the boundary.</p>
+              <p><b>What gets touched.</b> Brand variants to phrase; competitor and generic exclusions in Brand.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Split the territory between campaigns</h3>
+              <p class="note">Week 2 · Structure</p>
+              <p><b>Why.</b> 91.3% of search spend is contested between the account’s own campaigns.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Four cross-applied exclusion lists, one per territory.</p>
+              <p><b>What gets touched.</b> Own brand out of Promotions and Generic; competitors out of Brand; generics out of Brand; promotional terms out of Generic; plus 31 valueless terms.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Pause the competitor campaign</h3>
+              <p class="note">Week 2 · Budget</p>
+              <p><b>Why.</b> It pays up to five times the market price and delivers at 169,991 against 51,496 in Promotions.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Pause rather than repair, and use four weeks as the test.</p>
+              <p><b>What gets touched.</b> Search Competitor (frees 21.7M a month); watch competitors in Promotions and Generic.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Split the single ad groups by intent</h3>
+              <p class="note">Week 3 · Structure</p>
+              <p><b>Why.</b> Three campaigns worth 196.9M a month have one ad group and one ad.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Use the groups Keyword Planner already validated as real demand.</p>
+              <p><b>What gets touched.</b> Promotions into five groups, Generic into three, and one ad per group.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Move the freed budget</h3>
+              <p class="note">Week 3 onward · Budget</p>
+              <p><b>Why.</b> The cheapest campaigns run out of money and Promotions does not spend its own.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Steps of 30% a week, only where impressions are lost to budget.</p>
+              <p><b>What gets touched.</b> PMax Bono from 350,000 to 455,000 a day; PMax Juégala Toda from 50,000 to 65,000; nothing to Promotions. Cost below 55,000 at each step.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Put a ceiling on brand bidding</h3>
+              <p class="note">Week 4 · Brand</p>
+              <p><b>Why.</b> With no target cost the bidding does not stop; on «yajuego casino» it already pays above the market ceiling.</p>
+            </div>
+            <div>
+              <p><b>How.</b> A target cost per registration, stepped down.</p>
+              <p><b>What gets touched.</b> Start at 70,000 (25% below today’s 87,497) toward 41,661; roll back the step if delivery falls more than 15%.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Widen the Promotions territory</h3>
+              <p class="note">Week 4 · Coverage</p>
+              <p><b>Why.</b> It converts best and cannot spend what it has: its limit is territory.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Move into territories with real demand and low competition.</p>
+              <p><b>What gets touched.</b> Online roulette, the mines game and Nequi payments, on phrase. Goal: use more than 95% of its budget.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Decide what happens to what does not deliver</h3>
+              <p class="note">Week 4 · Budget</p>
+              <p><b>Why.</b> A line with no result is not a long-term bet until someone has decided it is.</p>
+            </div>
+            <div>
+              <p><b>How.</b> Set a deadline and a criterion, not inertia. The decision is the client.</p>
+              <p><b>What gets touched.</b> Demand Gen, YouTube and App (25.2M a month, 71 registrations): a goal with four weeks, or closure. Ruta del Campeón closes now.</p>
+            </div>
+          </li>
+        </ol>
+
+        <h3>What is not solved inside Google Ads</h3>
+        <ol class="orders">
+          <li>
+            <h3>The first screen of the registration</h3>
+            <p>86% never reach the second screen. Three points of improvement are worth roughly 800 registrations a month, at no media cost. Worth reviewing with the product team before tuning bids further.</p>
+          </li>
+          <li>
+            <h3>Bring FTD into Google Ads</h3>
+            <p>Until first deposit arrives as a conversion, registration is a proxy. With the commercial data, FTD is imported and bidding moves to it together with «only new customers». It will probably change the order between Promotions and Generic.</p>
+          </li>
+        </ol>
+      </section>
+
+      <footer class="footer">
+        <span>YaJuego &middot; Google Ads Audit &middot; September 2026</span>
+        <span>Account 805-135-2839. Data from 26 August to 24 September 2026, read from the Google Ads API. All amounts in Colombian pesos</span>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+  (function sortableTables(){
+    var tables = document.querySelectorAll('table[data-ordenable]');
+    if (!tables.length) return;
+
+    // The sort value is not read from the text: "77.4M" and "1.1M" compare
+    // badly as strings. Each cell carries data-v with the raw number.
+    function value(row, i){
+      var c = row.children[i];
+      var v = c && c.getAttribute('data-v');
+      return v === null || v === undefined ? c.textContent.trim().toLowerCase() : parseFloat(v);
+    }
+
+    Array.prototype.forEach.call(tables, function(table){
+      var headers = table.querySelectorAll('thead th');
+      var body = table.tBodies[0];
+      var original = Array.prototype.slice.call(body.rows);
+
+      Array.prototype.forEach.call(headers, function(th, i){
+        th.classList.add('orden');
+        var label = th.textContent.trim();
+        th.innerHTML = '<button type="button">' + label +
+          '<svg class="ico ico-sm" aria-hidden="true"><use href="#i-abajo"></use></svg></button>';
+
+        th.querySelector('button').addEventListener('click', function(){
+          var current = th.getAttribute('aria-sort');
+          // Third click: back to the source order, which says something itself.
+          if (current === 'ascending'){
+            Array.prototype.forEach.call(headers, function(o){ o.removeAttribute('aria-sort'); });
+            original.forEach(function(r){ body.appendChild(r); });
+            return;
+          }
+          var desc = current !== 'descending';
+          Array.prototype.forEach.call(headers, function(o){ o.removeAttribute('aria-sort'); });
+          th.setAttribute('aria-sort', desc ? 'descending' : 'ascending');
+
+          Array.prototype.slice.call(body.rows).sort(function(a, b){
+            var x = value(a, i), y = value(b, i);
+            if (x < y) return desc ? 1 : -1;
+            if (x > y) return desc ? -1 : 1;
+            return 0;
+          }).forEach(function(r){ body.appendChild(r); });
+        });
+      });
+    });
+  })();
+  </script>
+  <script>window.addEventListener('beforeprint',function(){document.querySelectorAll('details').forEach(function(d){d.open=true})})</script>
+</body>
+</html>

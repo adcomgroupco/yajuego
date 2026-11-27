@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="es" data-suelo="tinta">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YaJuego | Auditoría general GTM</title>
+<link rel="stylesheet" href="../assets/css/adcom-tokens.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    :root {
+      --bg: #111;
+      --paper: #181818;
+      --ink: #f7f7f7;
+      --muted: #a7a7a7;
+      --line: #2d2d2d;
+      --brand: #ffd400;
+      --accent: #ffd400;
+      --accent2: #6fd3ff;
+      --ok: #64d48c;
+      --warn: #ffc857;
+      --bad: #ff7770;
+      --softbad: rgba(255,119,112,.14);
+      --softwarn: rgba(255,200,87,.14);
+      --softok: rgba(100,212,140,.14);
+      --card: #1a1a1a;
+      --sidebar: 260px
+    }
+    * { box-sizing: border-box }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45
+    }
+    .hero {
+      padding: 56px 6vw 34px;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,212,0,.16), transparent 28%),
+        radial-gradient(circle at 88% 20%, rgba(111,211,255,.10), transparent 32%),
+        linear-gradient(135deg, #171717, #111);
+      border-bottom: 1px solid var(--line)
+    }
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px
+    }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,212,0,.35);
+      border-radius: var(--radius-sm);
+      background: rgba(255,212,0,.08);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800
+    }
+    .nav-link:hover {
+      background: var(--accent);
+      color: #111
+    }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px
+    }
+    h1 {
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: .95;
+      margin: 0 0 18px;
+      letter-spacing: -.02em;
+      max-width: 980px
+    }
+    .subtitle {
+      max-width: 880px;
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px
+    }
+    .pill {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      font-size: 13px;
+      color: var(--muted)
+    }
+    main {
+      padding: 32px 6vw 80px;
+      max-width: 1440px;
+      margin: auto
+    }
+    section {
+      margin: 34px 0
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 16px
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 38px);
+      letter-spacing: -.02em
+    }
+    h3 {
+      margin: 26px 0 12px;
+      font-size: 20px;
+      letter-spacing: -.02em
+    }
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 840px
+    }
+    .grid {
+      display: grid;
+      gap: 16px
+    }
+    .cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr))
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      box-shadow: none
+    }
+    .stat {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: 4px
+    }
+    .stat-label {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px
+    }
+    .stat-help {
+      font-size: 13px;
+      color: var(--muted)
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      box-shadow: none
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 14px
+    }
+    th {
+      text-align: left;
+      padding: 13px 14px;
+      background: #222;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top
+    }
+    tr:last-child td { border-bottom: 0 }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      white-space: nowrap
+    }
+    .badge.high { background: var(--softbad); color: var(--bad); border-color: #e5b9b9 }
+    .badge.medium { background: var(--softwarn); color: var(--warn); border-color: #e8c890 }
+    .badge.low { background: var(--softok); color: var(--ok); border-color: #bad8c7 }
+    .badge.neutral { background: #222; color: var(--muted); border-color: var(--line) }
+    .badge.ok { background: var(--softok); color: var(--ok); border-color: #bad8c7 }
+    .badge.review { background: var(--softwarn); color: var(--warn); border-color: #e8c890 }
+    .callout {
+      background: rgba(255,212,0,.08);
+      padding: 18px 20px;
+      border-radius: var(--radius);
+      color: #f5f5f5;
+      border-top: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);border:1px solid var(--accent)}
+    .bar-row {
+      display: grid;
+      grid-template-columns: 190px 1fr 60px;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0;
+      font-size: 14px
+    }
+    .bar-label {
+      color: var(--muted);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis
+    }
+    .bar-track {
+      height: 10px;
+      background: #2a2a2a;
+      border-radius: 999px;
+      overflow: hidden
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px
+    }
+    .bar-value {
+      font-weight: 800;
+      text-align: right
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      margin: 14px 0;
+      overflow: hidden
+    }
+    summary {
+      cursor: pointer;
+      padding: 16px 18px;
+      font-weight: 800;
+      background: #202020;
+      border-bottom: 1px solid var(--line)
+    }
+    details:not([open]) summary { border-bottom: 0 }
+    .details-body { padding: 16px 18px 20px }
+    .searchbox {
+      width: 100%;
+      max-width: 460px;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: #191919;
+      color: var(--ink);
+      font-size: 14px;
+      outline: none
+    }
+    .small {
+      font-size: 12px;
+      color: var(--muted)
+    }
+    code {
+      background: #252525;
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-size:var(--fs-body-min)}
+    .footer {
+      margin-top: 48px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      font-size: 13px
+    }
+    @media (max-width: 980px) {
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+      .two-col, .three-col { grid-template-columns: 1fr }
+      .bar-row { grid-template-columns: 140px 1fr 44px }
+    }
+    @media (max-width: 620px) {
+      main, .hero { padding-left: 20px; padding-right: 20px }
+      .cards { grid-template-columns: 1fr }
+      .stat { font-size: 30px }
+    }
+    /* Mini landing layout inspired by ruta.html */
+    html { scroll-behavior: smooth }
+    body {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      background: #111;
+      background-image: none
+    }
+    #sidebar {
+      width: var(--sidebar);
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 100;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: #0d0d0d;
+      border-right: 1px solid #1e1e1e
+    }
+    .sb-head {
+      padding: 1.5rem 1.4rem 1.2rem;
+      border-bottom: 1px solid #1e1e1e
+    }
+    .sb-brand {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .06em
+    }
+    .sb-brand small {
+      display: block;
+      margin-top: 3px;
+      color: #999;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 700
+    }
+    .sb-client {
+      padding: 1rem 1.4rem .9rem;
+      border-bottom: 1px solid #1e1e1e
+    }
+    .sb-client-label {
+      color:var(--fg-muted);
+      font-size: 12px;
+      margin-bottom: 5px
+    }
+    .sb-client-name {
+      color: var(--accent);
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 800
+    }
+    .sb-client-url {
+      color:var(--fg-muted);
+      font-size: 12px;
+      margin-top: 2px
+    }
+    .sb-nav { padding: 1rem 0; flex: 1 }
+    .sb-section-label {
+      color:var(--fg-muted);
+      font-size: 12px;
+      padding: .8rem 1.4rem .3rem
+    }
+    .sb-item {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .55rem 1.4rem;
+      color: #999;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      position: relative
+    }
+    .sb-item:hover { background: rgba(255,255,255,.04); color: #fff }
+    .sb-item.primary { color: var(--accent); background: rgba(255,212,0,.08) }
+    .sb-item.primary::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent)
+    }
+    .sb-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 0;
+      background: #282828;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0
+    }
+    .sb-item.primary .sb-num { background: var(--accent); color: #111 }
+    .sb-footer {
+      padding: 1rem 1.4rem;
+      border-top: 1px solid #1e1e1e
+    }
+    .sb-total-label {
+      color:var(--fg-muted);
+      font-size: 12px
+    }
+    .sb-total-val {
+      color: var(--accent);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800
+    }
+    .hero,
+    main {
+      width: calc(100% - var(--sidebar));
+      margin-left: var(--sidebar)
+    }
+    .hero {
+      min-height: 72vh;
+      padding: 4rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: #111;
+      position: relative;
+      overflow: hidden
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,212,0,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,212,0,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -12%;
+      right: -8%;
+      width: 58vw;
+      height: 72vh;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      background: radial-gradient(ellipse at 60% 40%, rgba(255,212,0,.10) 0%, transparent 70%);
+      pointer-events: none
+    }
+    .hero > * { position: relative; z-index: 1 }
+    main {
+      max-width: none;
+      padding: 0
+    }
+    main > section {
+      margin: 0;
+      padding: 3.5rem;
+      border-bottom: 1px solid #1a1a1a
+    }
+    main > section:nth-of-type(even) { background: #0e0e0e }
+    main > section:nth-of-type(odd) { background: #111 }
+    section[id], header[id] { scroll-margin-top: 20px }
+    h1, h2, h3, .stat, .sb-brand, .sb-total-val {
+      font-family: 'Poppins', sans-serif
+    }
+    h1 {
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: .9;
+      letter-spacing: -.02em;
+      color: var(--accent)
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.05;
+      letter-spacing: -.02em
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .18em;
+      display: flex;
+      align-items: center;
+      gap: .55rem
+    }
+    .eyebrow::before {
+      content: '';
+      height: 1px;color:var(--fg-muted);font-size:var(--fs-body-min)}
+    .subtitle {
+      max-width: 820px;
+      font-weight: 300;
+      line-height: 1.75
+    }
+    .cards {
+      gap: 1rem;
+      margin: 0
+    }
+    .card {
+      box-shadow: none;
+      position: relative;
+      overflow: hidden
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: var(--accent)
+    }
+    .callout {
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #171717 0%, #171717 65%, #241f06 100%);
+      box-shadow: none
+    }
+    .top-actions {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 120;
+      margin: 0
+    }
+    @media (max-width: 980px) {
+      body { display: block }
+      #sidebar { display: none }
+      .hero, main {
+        width: 100%;
+        margin-left: 0
+      }
+      .hero, main > section { padding: 2.2rem 1.4rem }
+      .top-actions {
+        position: static;
+        padding: 1rem 1.4rem 0;
+        background: #111
+      }
+    }
+    @media print {
+      :root {
+        --bg: #fff;
+        --ink: #1b1b1b;
+        --muted: #555;
+        --line: #d8d8d8;
+        --card: #fff
+      }
+      #sidebar { display: none }
+      body { display: block }
+      .hero, main { width: 100%; margin-left: 0 }
+      body { background: white }
+      .hero { background: white; padding-top: 30px }
+      .card, .table-wrap, details { box-shadow: none }
+      .searchbox, .top-actions { display: none }
+      section { break-inside: avoid }
+      details { break-inside: avoid }
+      details:not([open]) .details-body { display: block }
+    }
+  </style>
+</head>
+<body>
+  <aside id="sidebar" aria-label="Índice de auditoría general GTM">
+    <div class="sb-head">
+      <div class="sb-brand">YaJuego<small>Auditoría GTM</small></div>
+    </div>
+    <div class="sb-client">
+      <div class="sb-client-label">Documento</div>
+      <div class="sb-client-name">Auditoría general</div>
+      <div class="sb-client-url">GTM-NQ9S7TN</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Navegación</div>
+      <a class="sb-item primary" href="#inicio"><span class="sb-num">00</span>Resumen</a>
+      <a class="sb-item" href="#metricas"><span class="sb-num">01</span>Métricas</a>
+      <a class="sb-item" href="#lectura"><span class="sb-num">02</span>Lectura ejecutiva</a>
+      <a class="sb-item" href="#hallazgos"><span class="sb-num">03</span>Hallazgos</a>
+      <a class="sb-item" href="#inventario"><span class="sb-num">04</span>Inventario</a>
+      <a class="sb-item" href="#plataformas"><span class="sb-num">05</span>Plataformas</a>
+      <a class="sb-item" href="#ga4"><span class="sb-num">06</span>Medición GA4</a>
+      <a class="sb-item" href="#conversiones"><span class="sb-num">07</span>Conversiones</a>
+      <a class="sb-item" href="#taxonomia"><span class="sb-num">08</span>Taxonomía</a>
+      <a class="sb-item" href="#validacion"><span class="sb-num">09</span>Validación</a>
+      <div class="sb-section-label">Accesos</div>
+      <a class="sb-item" href="gtm-plan-accion.html"><span class="sb-num">↗</span>Plan de acción</a>
+      <a class="sb-item" href="../index.html"><span class="sb-num">↩</span>Hub</a>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-total-label">Tags auditados</div>
+      <div class="sb-total-val">383</div>
+    </div>
+  </aside>
+  <header class="hero" id="inicio">
+    <nav class="top-actions" aria-label="Navegación de auditoría">
+      <a class="nav-link" href="../index.html">Volver al hub</a>
+      <a class="nav-link" href="gtm-plan-accion.html">Ver plan de acción</a>
+    </nav>
+    <div class="eyebrow">Auditoría de medición · Google Tag Manager</div>
+    <h1>Informe de calidad de medición para GTM-NQ9S7TN</h1>
+    <p class="subtitle">Revisión del contenedor exportado para identificar estado de instalación, consistencia de eventos, riesgos de consentimiento, conversiones clave y oportunidades de mejora en dataLayer / GA4 / medios.</p>
+    <div class="meta">
+      <span class="pill">Contenedor: <strong>GTM-NQ9S7TN</strong></span>
+      <span class="pill">Nombre: <strong>CO</strong></span>
+      <span class="pill">Exportado: <strong>2026-05-26 14:17:10</strong></span>
+      <span class="pill">Informe generado: <strong>2026-05-27</strong></span>
+    </div>
+  </header>
+
+  <main>
+    <section id="metricas">
+      <div class="grid cards">
+        <div class="card"><div class="stat">383</div><div class="stat-label">Tags totales</div><div class="stat-help">Inventario de etiquetas del contenedor.</div></div><div class="card"><div class="stat">321</div><div class="stat-label">GA4 Event tags</div><div class="stat-help">Mayor bloque de medición.</div></div><div class="card"><div class="stat">419</div><div class="stat-label">Triggers</div><div class="stat-help">Reglas de activación configuradas.</div></div><div class="card"><div class="stat">30</div><div class="stat-label">Variables</div><div class="stat-help">Variables personalizadas del contenedor.</div></div><div class="card"><div class="stat">42</div><div class="stat-label">Tags pausados</div><div class="stat-help">Requieren depuración o documentación.</div></div><div class="card"><div class="stat">383</div><div class="stat-label">Consent NOT_SET</div><div class="stat-help">Riesgo de gobernanza/privacidad.</div></div><div class="card"><div class="stat">54</div><div class="stat-label">Eventos GA4 únicos</div><div class="stat-help">Eventos distintos detectados.</div></div><div class="card"><div class="stat">48</div><div class="stat-label">Eventos GA4 a revisar</div><div class="stat-help">Naming con caracteres no recomendados.</div></div>
+      </div>
+    </section>
+
+    <section id="lectura">
+      <div class="section-head">
+        <div>
+          <h2>Lectura ejecutiva</h2>
+          <p class="note">El contenedor tiene buena cobertura de medición, especialmente en GA4, registro, login, apuestas deportivas y eventos de interfaz. La oportunidad principal está en ordenar la taxonomía, fortalecer el consentimiento y migrar los eventos críticos a una capa de datos menos dependiente de selectores visuales.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Conclusión:</strong> la medición parece amplia, pero está muy atomizada. Hay muchos tags individuales para clics y una alta dependencia de triggers de interfaz. Para que el dato sea más útil en performance y analítica, conviene pasar de “un tag por clic” a un modelo de eventos canónicos con parámetros claros.
+      </div>
+    </section>
+
+    <section id="hallazgos">
+      <h2>Hallazgos priorizados</h2>
+      <p class="note">Lista de oportunidades detectadas a partir de la configuración del contenedor.</p>
+      <div class="table-wrap">
+        <table class=""><thead><tr><th>Prioridad</th><th>Hallazgo</th><th>Evidencia</th><th>Impacto</th><th>Recomendación</th></tr></thead><tbody><tr><td><span class="badge high">Alta</span></td><td>Configurar consentimiento por tipo de tag</td><td>383 de 383 tags aparecen con consentStatus NOT_SET.</td><td>Riesgo de cumplimiento y disparo de tags publicitarios/analíticos sin control explícito desde GTM.</td><td>Clasificar tags por analytics_storage, ad_storage, ad_user_data, ad_personalization y consentimiento funcional/marketing según corresponda.</td></tr>
+<tr><td><span class="badge high">Alta</span></td><td>Normalizar nombres de eventos GA4</td><td>48 nombres únicos de evento GA4 presentan caracteres no recomendados; 305 tags GA4 quedan impactados.</td><td>Dificulta reportes, mantenimiento, audiencias y documentación. Puede generar inconsistencias entre GA4, BigQuery y equipos.</td><td>Migrar a snake_case y usar parámetros para device, sección, texto del botón y tipo de interacción.</td></tr>
+<tr><td><span class="badge high">Alta</span></td><td>Revisar conversiones avanzadas de Google Ads</td><td>Existe un tag HTML que captura email/teléfono para registro avanzado, pero la conversión de Google Ads Registro completo tiene enableEnhancedConversion=false.</td><td>Implementación potencialmente incompleta o captura de datos innecesaria.</td><td>Definir si Enhanced Conversions se usará. Si sí, activarlo correctamente; si no, retirar el HTML de captura.</td></tr>
+<tr><td><span class="badge medium">Media</span></td><td>Reducir dependencia de triggers por clic/CSS</td><td>360 triggers son de tipo Click.</td><td>La medición se puede romper si cambia el DOM, clases, textos o estructura del front.</td><td>Migrar eventos clave a dataLayer.push desde el sitio/app: registro, login, apuesta, depósito, error, navegación crítica.</td></tr>
+<tr><td><span class="badge medium">Media</span></td><td>Consolidar tags GA4 repetitivos</td><td>Hay 321 tags GA4 Event y solo 54 nombres únicos de evento.</td><td>Mayor complejidad operativa, difícil QA y mantenimiento.</td><td>Agrupar interacciones bajo eventos canónicos como ui_interaction, menu_click, registration_step, sign_up, login, sport_bet_placed.</td></tr>
+<tr><td><span class="badge medium">Media</span></td><td>Enriquecer eventos de negocio</td><td>Eventos clave como registro y apuesta existen, pero varios envían pocos parámetros o usan parámetros genéricos como click.</td><td>Limita análisis de calidad, funnel, atribución y optimización de pauta.</td><td>Agregar parámetros de negocio: step_number, step_name, method, status, bet_amount, currency, bet_type, sport, market, odds, num_selections.</td></tr>
+<tr><td><span class="badge low">Baja</span></td><td>Depurar tags pausados e históricos</td><td>42 tags están pausados.</td><td>Ruido operativo y riesgo de reactivaciones accidentales.</td><td>Documentar motivo, dueño, fecha y decisión: mantener, eliminar o archivar.</td></tr>
+</tbody></table>
+      </div>
+    </section>
+
+    <section id="inventario">
+      <h2>Inventario técnico</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Tags por tipo</h3>
+          
+        <div class="bar-row">
+          <div class="bar-label">GA4 Event</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+          <div class="bar-value">321</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Custom HTML</div>
+          <div class="bar-track"><div class="bar-fill" style="width:16.8%"></div></div>
+          <div class="bar-value">54</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Custom Template / Mixpanel</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">3</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Hotjar</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Conversion Linker</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Google Ads Conversion</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Google Ads Remarketing</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Google Tag / GA4 Config</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        </div>
+        <div class="card">
+          <h3>Triggers por tipo</h3>
+          
+        <div class="bar-row">
+          <div class="bar-label">Click</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+          <div class="bar-value">360</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Custom Event</div>
+          <div class="bar-track"><div class="bar-fill" style="width:9.4%"></div></div>
+          <div class="bar-value">34</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Window Loaded</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.2%"></div></div>
+          <div class="bar-value">15</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Pageview</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">4</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">History Change</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">2</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Element Visibility</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">2</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">DOM Ready</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Initialization</div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.0%"></div></div>
+          <div class="bar-value">1</div>
+        </div>
+        </div>
+      </div>
+      <div class="two-col" style="margin-top:18px;">
+        <div class="table-wrap">
+          <table class=""><thead><tr><th>Tipo de tag</th><th>Cantidad</th><th>%</th></tr></thead><tbody><tr><td>GA4 Event</td><td>321</td><td>83.8%</td></tr>
+<tr><td>Custom HTML</td><td>54</td><td>14.1%</td></tr>
+<tr><td>Custom Template / Mixpanel</td><td>3</td><td>0.8%</td></tr>
+<tr><td>Hotjar</td><td>1</td><td>0.3%</td></tr>
+<tr><td>Conversion Linker</td><td>1</td><td>0.3%</td></tr>
+<tr><td>Google Ads Conversion</td><td>1</td><td>0.3%</td></tr>
+<tr><td>Google Ads Remarketing</td><td>1</td><td>0.3%</td></tr>
+<tr><td>Google Tag / GA4 Config</td><td>1</td><td>0.3%</td></tr>
+</tbody></table>
+        </div>
+        <div class="table-wrap">
+          <table class=""><thead><tr><th>Tipo de trigger</th><th>Cantidad</th><th>%</th></tr></thead><tbody><tr><td>Click</td><td>360</td><td>85.9%</td></tr>
+<tr><td>Custom Event</td><td>34</td><td>8.1%</td></tr>
+<tr><td>Window Loaded</td><td>15</td><td>3.6%</td></tr>
+<tr><td>Pageview</td><td>4</td><td>1.0%</td></tr>
+<tr><td>History Change</td><td>2</td><td>0.5%</td></tr>
+<tr><td>Element Visibility</td><td>2</td><td>0.5%</td></tr>
+<tr><td>DOM Ready</td><td>1</td><td>0.2%</td></tr>
+<tr><td>Initialization</td><td>1</td><td>0.2%</td></tr>
+</tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="plataformas">
+      <h2>Plataformas detectadas</h2>
+      <p class="note">Clasificación estimada por nombre del tag, tipo de template y scripts incluidos.</p>
+      <div class="table-wrap">
+        <table class=""><thead><tr><th>Plataforma</th><th>Tags totales</th><th>Activos</th><th>Pausados</th></tr></thead><tbody><tr><td>GA4</td><td>322</td><td>309</td><td>13</td></tr>
+<tr><td>Zendesk</td><td>12</td><td>12</td><td>0</td></tr>
+<tr><td>Notification SDK</td><td>9</td><td>9</td><td>0</td></tr>
+<tr><td>Otros</td><td>9</td><td>3</td><td>6</td></tr>
+<tr><td>Connextra</td><td>8</td><td>0</td><td>8</td></tr>
+<tr><td>Google Ads</td><td>6</td><td>5</td><td>1</td></tr>
+<tr><td>Xandr</td><td>5</td><td>0</td><td>5</td></tr>
+<tr><td>Sportradar</td><td>4</td><td>0</td><td>4</td></tr>
+<tr><td>Meta</td><td>3</td><td>3</td><td>0</td></tr>
+<tr><td>Mixpanel</td><td>3</td><td>0</td><td>3</td></tr>
+<tr><td>Hotjar</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>Ad Masters</td><td>1</td><td>0</td><td>1</td></tr>
+</tbody></table>
+      </div>
+    </section>
+
+    <section id="ga4">
+      <h2>Medición GA4</h2>
+      <div class="three-col">
+        <div class="card">
+          <div class="stat">321</div>
+          <div class="stat-label">Tags GA4 Event</div>
+          <div class="stat-help">Todos apuntan principalmente a <code>G-NTGBS31E46</code>.</div>
+        </div>
+        <div class="card">
+          <div class="stat">54</div>
+          <div class="stat-label">Eventos GA4 únicos</div>
+          <div class="stat-help">Se repiten en múltiples tags por zona, device y acción.</div>
+        </div>
+        <div class="card">
+          <div class="stat">305</div>
+          <div class="stat-label">Tags GA4 con naming a revisar</div>
+          <div class="stat-help">Principalmente por guiones, espacios, paréntesis o capitalización inconsistente.</div>
+        </div>
+      </div>
+
+      <details open>
+        <summary>Eventos GA4 únicos principales</summary>
+        <div class="details-body">
+          <div class="table-wrap">
+            <table class=""><thead><tr><th>Evento actual</th><th>Nº de tags</th><th>Estado</th><th>Sugerencia</th><th>Parámetros de muestra</th></tr></thead><tbody><tr><td>mobile-home_page</td><td>22</td><td>Revisar</td><td>mobile_home_page</td><td>click</td></tr>
+<tr><td>mobile-soccer_page(Ligas)</td><td>18</td><td>Revisar</td><td>mobile_soccer_pageligas</td><td>click</td></tr>
+<tr><td>mobile-soccer_page(coupons)</td><td>17</td><td>Revisar</td><td>mobile_soccer_pagecoupons</td><td>click</td></tr>
+<tr><td>mobile-main_menu</td><td>17</td><td>Revisar</td><td>mobile_main_menu</td><td>click</td></tr>
+<tr><td>desktop-live_betting</td><td>15</td><td>Revisar</td><td>desktop_live_betting</td><td>click</td></tr>
+<tr><td>mobile-live_event_details</td><td>15</td><td>Revisar</td><td>mobile_live_event_details</td><td>click</td></tr>
+<tr><td>mobile-betslip</td><td>14</td><td>Revisar</td><td>mobile_betslip</td><td>click</td></tr>
+<tr><td>mobile-sidebar_push_menu</td><td>11</td><td>Revisar</td><td>mobile_sidebar_push_menu</td><td>click</td></tr>
+<tr><td>mobile-soccer_league_view</td><td>11</td><td>Revisar</td><td>mobile_soccer_league_view</td><td>click</td></tr>
+<tr><td>new_registration_steps</td><td>11</td><td>OK</td><td>new_registration_steps</td><td>click, type</td></tr>
+<tr><td>desktop-betslip</td><td>10</td><td>Revisar</td><td>desktop_betslip</td><td>click</td></tr>
+<tr><td>mobile-multiple_builder</td><td>10</td><td>Revisar</td><td>mobile_multiple_builder</td><td>click</td></tr>
+<tr><td>Partidos-de-hoy</td><td>10</td><td>Revisar</td><td>partidos_de_hoy</td><td>click</td></tr>
+<tr><td>mobile-event_details</td><td>9</td><td>Revisar</td><td>mobile_event_details</td><td>click, path_page</td></tr>
+<tr><td>zoom-mobile</td><td>8</td><td>Revisar</td><td>zoom_mobile</td><td>click</td></tr>
+<tr><td>desktop-soccer_page(coupons)</td><td>7</td><td>Revisar</td><td>desktop_soccer_pagecoupons</td><td>competiciones_button</td></tr>
+<tr><td>mobile-bottom_menu</td><td>7</td><td>Revisar</td><td>mobile_bottom_menu</td><td>click</td></tr>
+<tr><td>mobile-bet_notification</td><td>7</td><td>Revisar</td><td>mobile_bet_notification</td><td>click</td></tr>
+<tr><td>mobile-casino_bottom_menu</td><td>7</td><td>Revisar</td><td>mobile_casino_bottom_menu</td><td>click</td></tr>
+<tr><td>mobile-my_account</td><td>7</td><td>Revisar</td><td>mobile_my_account</td><td>click</td></tr>
+<tr><td>desktop-main_menu</td><td>6</td><td>Revisar</td><td>desktop_main_menu</td><td>header</td></tr>
+<tr><td>mobile-header</td><td>6</td><td>Revisar</td><td>mobile_header</td><td>click</td></tr>
+<tr><td>mobile-live_betting-sports</td><td>6</td><td>Revisar</td><td>mobile_live_betting_sports</td><td>click</td></tr>
+<tr><td>mobile-mybets</td><td>6</td><td>Revisar</td><td>mobile_mybets</td><td>click</td></tr>
+<tr><td>mobile-all_sports</td><td>5</td><td>Revisar</td><td>mobile_all_sports</td><td>PML filter</td></tr>
+<tr><td>mobile-live_streaming</td><td>5</td><td>Revisar</td><td>mobile_live_streaming</td><td>bottom_menu</td></tr>
+<tr><td>desktop-mi_cuenta_drop_down</td><td>4</td><td>Revisar</td><td>desktop_mi_cuenta_drop_down</td><td>Bono Deportes</td></tr>
+<tr><td>desktop-soccer_page</td><td>4</td><td>Revisar</td><td>desktop_soccer_page</td><td>competiciones_show_leagues</td></tr>
+<tr><td>mobile-footer</td><td>4</td><td>Revisar</td><td>mobile_footer</td><td>click</td></tr>
+<tr><td>desktop-prematch</td><td>3</td><td>Revisar</td><td>desktop_prematch</td><td>odds</td></tr>
+<tr><td>desktop-side_menu</td><td>3</td><td>Revisar</td><td>desktop_side_menu</td><td>click</td></tr>
+<tr><td>mobile-live_calendar</td><td>3</td><td>Revisar</td><td>mobile_live_calendar</td><td>click</td></tr>
+<tr><td>mobile - casino - game</td><td>3</td><td>Revisar</td><td>mobile_casino_game</td><td>click</td></tr>
+<tr><td>desktop-prematch_event</td><td>2</td><td>Revisar</td><td>desktop_prematch_event</td><td>the_i_icon</td></tr>
+<tr><td>desktop-side_banner</td><td>2</td><td>Revisar</td><td>desktop_side_banner</td><td>click</td></tr>
+<tr><td>desktop-sports_side_menu</td><td>2</td><td>Revisar</td><td>desktop_sports_side_menu</td><td>time_filter</td></tr>
+<tr><td>mobile-live_betting-quick_bet</td><td>2</td><td>Revisar</td><td>mobile_live_betting_quick_bet</td><td>click</td></tr>
+<tr><td>mobile-sidebar_menu</td><td>2</td><td>Revisar</td><td>mobile_sidebar_menu</td><td>click</td></tr>
+<tr><td>registration-step_1</td><td>2</td><td>Revisar</td><td>registration_step_1</td><td>click, type</td></tr>
+<tr><td>registration-step_2</td><td>2</td><td>Revisar</td><td>registration_step_2</td><td>click, type</td></tr>
+<tr><td>registration-step_3</td><td>2</td><td>Revisar</td><td>registration_step_3</td><td>click, type</td></tr>
+<tr><td>registration-complete</td><td>2</td><td>Revisar</td><td>sign_up</td><td>click, type, user_id</td></tr>
+<tr><td>user_value_id</td><td>1</td><td>OK</td><td>user_value_id</td><td>userId</td></tr>
+<tr><td>all_pages</td><td>1</td><td>OK</td><td>all_pages</td><td>page, anonymizeIp, userId</td></tr>
+<tr><td>desktop-live_event</td><td>1</td><td>Revisar</td><td>desktop_live_event</td><td>streaming</td></tr>
+<tr><td>desktop-sports_side</td><td>1</td><td>Revisar</td><td>desktop_sports_side</td><td>menu_item</td></tr>
+<tr><td>mobile-banner</td><td>1</td><td>Revisar</td><td>mobile_banner</td><td>click</td></tr>
+<tr><td>mobile-casino_main_menu</td><td>1</td><td>Revisar</td><td>mobile_casino_main_menu</td><td>click</td></tr>
+<tr><td>yajuego_Racing</td><td>1</td><td>OK</td><td>yajuego_Racing</td><td>click</td></tr>
+<tr><td>loggedIn</td><td>1</td><td>OK</td><td>loggedIn</td><td>loggedIn</td></tr>
+<tr><td>new registration</td><td>1</td><td>Revisar</td><td>new_registration</td><td>step, type</td></tr>
+<tr><td>sport_bet_placed</td><td>1</td><td>OK</td><td>sport_bet_placed</td><td>value</td></tr>
+<tr><td>{{Event}}</td><td>1</td><td>Revisar</td><td>event</td><td>—</td></tr>
+<tr><td>desktop-header-login</td><td>1</td><td>Revisar</td><td>desktop_header_login</td><td>click</td></tr>
+</tbody></table>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Nombres de evento que conviene normalizar</summary>
+        <div class="details-body">
+          <p class="note">La recomendación no necesariamente implica crear un evento distinto por cada nombre. En muchos casos conviene unificar eventos y mover el detalle a parámetros.</p>
+          <div class="table-wrap">
+            <table class=""><thead><tr><th>Evento actual</th><th>Tags afectados</th><th>Problema</th><th>Nombre sugerido</th></tr></thead><tbody><tr><td>mobile-home_page</td><td>22</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_home_page</td></tr>
+<tr><td>mobile-soccer_page(Ligas)</td><td>18</td><td>usa guion medio, usa paréntesis, caracteres no recomendados</td><td>mobile_soccer_pageligas</td></tr>
+<tr><td>mobile-soccer_page(coupons)</td><td>17</td><td>usa guion medio, usa paréntesis, caracteres no recomendados</td><td>mobile_soccer_pagecoupons</td></tr>
+<tr><td>mobile-main_menu</td><td>17</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_main_menu</td></tr>
+<tr><td>desktop-live_betting</td><td>15</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_live_betting</td></tr>
+<tr><td>mobile-live_event_details</td><td>15</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_live_event_details</td></tr>
+<tr><td>mobile-betslip</td><td>14</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_betslip</td></tr>
+<tr><td>mobile-sidebar_push_menu</td><td>11</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_sidebar_push_menu</td></tr>
+<tr><td>mobile-soccer_league_view</td><td>11</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_soccer_league_view</td></tr>
+<tr><td>desktop-betslip</td><td>10</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_betslip</td></tr>
+<tr><td>mobile-multiple_builder</td><td>10</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_multiple_builder</td></tr>
+<tr><td>Partidos-de-hoy</td><td>10</td><td>usa guion medio, caracteres no recomendados</td><td>partidos_de_hoy</td></tr>
+<tr><td>mobile-event_details</td><td>9</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_event_details</td></tr>
+<tr><td>zoom-mobile</td><td>8</td><td>usa guion medio, caracteres no recomendados</td><td>zoom_mobile</td></tr>
+<tr><td>desktop-soccer_page(coupons)</td><td>7</td><td>usa guion medio, usa paréntesis, caracteres no recomendados</td><td>desktop_soccer_pagecoupons</td></tr>
+<tr><td>mobile-bottom_menu</td><td>7</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_bottom_menu</td></tr>
+<tr><td>mobile-bet_notification</td><td>7</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_bet_notification</td></tr>
+<tr><td>mobile-casino_bottom_menu</td><td>7</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_casino_bottom_menu</td></tr>
+<tr><td>mobile-my_account</td><td>7</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_my_account</td></tr>
+<tr><td>desktop-main_menu</td><td>6</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_main_menu</td></tr>
+<tr><td>mobile-header</td><td>6</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_header</td></tr>
+<tr><td>mobile-live_betting-sports</td><td>6</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_live_betting_sports</td></tr>
+<tr><td>mobile-mybets</td><td>6</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_mybets</td></tr>
+<tr><td>mobile-all_sports</td><td>5</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_all_sports</td></tr>
+<tr><td>mobile-live_streaming</td><td>5</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_live_streaming</td></tr>
+<tr><td>desktop-mi_cuenta_drop_down</td><td>4</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_mi_cuenta_drop_down</td></tr>
+<tr><td>desktop-soccer_page</td><td>4</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_soccer_page</td></tr>
+<tr><td>mobile-footer</td><td>4</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_footer</td></tr>
+<tr><td>desktop-prematch</td><td>3</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_prematch</td></tr>
+<tr><td>desktop-side_menu</td><td>3</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_side_menu</td></tr>
+<tr><td>mobile-live_calendar</td><td>3</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_live_calendar</td></tr>
+<tr><td>mobile - casino - game</td><td>3</td><td>usa guion medio, usa espacios, caracteres no recomendados</td><td>mobile_casino_game</td></tr>
+<tr><td>desktop-prematch_event</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_prematch_event</td></tr>
+<tr><td>desktop-side_banner</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_side_banner</td></tr>
+<tr><td>desktop-sports_side_menu</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_sports_side_menu</td></tr>
+<tr><td>mobile-live_betting-quick_bet</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_live_betting_quick_bet</td></tr>
+<tr><td>mobile-sidebar_menu</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_sidebar_menu</td></tr>
+<tr><td>registration-step_1</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>registration_step_1</td></tr>
+<tr><td>registration-step_2</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>registration_step_2</td></tr>
+<tr><td>registration-step_3</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>registration_step_3</td></tr>
+<tr><td>registration-complete</td><td>2</td><td>usa guion medio, caracteres no recomendados</td><td>sign_up</td></tr>
+<tr><td>desktop-live_event</td><td>1</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_live_event</td></tr>
+<tr><td>desktop-sports_side</td><td>1</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_sports_side</td></tr>
+<tr><td>mobile-banner</td><td>1</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_banner</td></tr>
+<tr><td>mobile-casino_main_menu</td><td>1</td><td>usa guion medio, caracteres no recomendados</td><td>mobile_casino_main_menu</td></tr>
+<tr><td>new registration</td><td>1</td><td>usa espacios, caracteres no recomendados</td><td>new_registration</td></tr>
+<tr><td>{{Event}}</td><td>1</td><td>no inicia con letra, caracteres no recomendados</td><td>event</td></tr>
+<tr><td>desktop-header-login</td><td>1</td><td>usa guion medio, caracteres no recomendados</td><td>desktop_header_login</td></tr>
+</tbody></table>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="conversiones">
+      <h2>Conversiones y eventos de negocio</h2>
+      <p class="note">Tags relacionados con registro, login, compra/apuesta, remarketing o conversiones publicitarias.</p>
+      <div class="table-wrap">
+        <table class=""><thead><tr><th>Tag</th><th>Plataforma</th><th>Tipo</th><th>Estado</th><th>Triggers</th><th>Consentimiento</th></tr></thead><tbody><tr><td>Facebook Tag - All Pages</td><td>Meta</td><td>Custom HTML</td><td>Activo</td><td>2147479553</td><td>NOT_SET</td></tr>
+<tr><td>Facebook - SportsBetPlaced</td><td>Meta</td><td>Custom HTML</td><td>Activo</td><td>SportsBetPlaced Trigger</td><td>NOT_SET</td></tr>
+<tr><td>Facebook - RegistrationComplete</td><td>Meta</td><td>Custom HTML</td><td>Activo</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>Connextra - RegistrationStart</td><td>Connextra</td><td>Custom HTML</td><td>Pausado</td><td>RegistrationStart Trigger, DesktopCasinoRegisterClick Trigger, MobileRegisterClick Trigger, DesktopSportsRegisterClick Trigger</td><td>NOT_SET</td></tr>
+<tr><td>Connextra - RegistrationComplete</td><td>Connextra</td><td>Custom HTML</td><td>Pausado</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>Connextra - LoggedIn</td><td>Connextra</td><td>Custom HTML</td><td>Pausado</td><td>LoggedIn Trigger</td><td>NOT_SET</td></tr>
+<tr><td>Vinculación de conversiones</td><td>Google Ads</td><td>Conversion Linker</td><td>Activo</td><td>2147479553</td><td>NOT_SET</td></tr>
+<tr><td>Registro completo</td><td>Google Ads</td><td>Google Ads Conversion</td><td>Activo</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>Remarketing de Google Ads</td><td>Google Ads</td><td>Google Ads Remarketing</td><td>Activo</td><td>2147479553</td><td>NOT_SET</td></tr>
+<tr><td>Prime - Registration page view and registration complete</td><td>Xandr</td><td>Custom HTML</td><td>Pausado</td><td>Registration page view, GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>Connextra - SportsBetPlaced</td><td>Connextra</td><td>Custom HTML</td><td>Pausado</td><td>SportsBetPlaced Trigger</td><td>NOT_SET</td></tr>
+<tr><td>Sportradar - LoggedIn</td><td>Sportradar</td><td>Custom HTML</td><td>Pausado</td><td>LoggedIn Trigger</td><td>NOT_SET</td></tr>
+<tr><td>Sportradar - RegistrationComplete</td><td>Sportradar</td><td>Custom HTML</td><td>Pausado</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>Sportradar - RegistrationStart</td><td>Sportradar</td><td>Custom HTML</td><td>Pausado</td><td>RegistrationStart Trigger</td><td>NOT_SET</td></tr>
+<tr><td>[Production] - Eonf Holdings - Registration Pixel</td><td>Otros</td><td>Custom HTML</td><td>Pausado</td><td>Registration page view, MobileHome Trigger, DesktopSportHome / Trigger</td><td>NOT_SET</td></tr>
+<tr><td>[Production] Xandr Universal Pixel - Complete Registration Success</td><td>Xandr</td><td>Custom HTML</td><td>Pausado</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>HTML inicio registro avanzado</td><td>Google Ads</td><td>Custom HTML</td><td>Activo</td><td>DOM preparado</td><td>NOT_SET</td></tr>
+<tr><td>GA - NewRegistration - Form Time Listener</td><td>Otros</td><td>Custom HTML</td><td>Pausado</td><td>GA - NewRegistration - Button ClickTrigger, GA - NewRegistration - Button Click2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - global - login - user_id</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>LoggedIn Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - custom event - LoggedIn</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>LoggedIn Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - New Registration - Step</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>New Registration Message Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Desktop Back to Step 1</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Desktop Back to Step 1Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Desktop Back to Step 2</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Desktop Back to Step 2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Desktop Drop from Step 1</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Desktop Drop from Step 1Trigger, GA - NewRegistration - Desktop Drop from Step 1-1Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Desktop Drop from Step 2</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration -DesktopDrop from Step 2Trigger, GA - NewRegistration -DesktopDrop from Step 2-2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Desktop Drop from Step 3</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Desktop Drop from Step 3Trigger, GA - NewRegistration - Desktop Drop from Step 3-2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Desktop Registrarse</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Desktop RegistrarseClickTrigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Desktop Step 1</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Desktop step 1Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Desktop Step 2</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Desktop step 2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Desktop Step 3</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Desktop Step 3Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration - Desktop Step Complete</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - NewRegistration - Desktop Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Mobile Back to Step 1</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Mobile Back to Step 1Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Mobile Back to Step 2</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Mobile Back to Step 2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Mobile Drop from Step 1</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Mobile Drop from Step 1Trigger, GA - NewRegistration - Mobile Drop from Step 1-2Trigger, GA - NewRegistration - Mobile Drop from Step 1-3Trigger, GA - NewRegistration - Mobile Drop from Step 1-4Trigger, GA - NewRegistration - Mobile Drop from Step 1-5Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Mobile Drop from Step 2</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration -Mobile Drop from Step 2Trigger, GA - NewRegistration -Mobile Drop from Step 2-2Trigger, GA - NewRegistration -Mobile Drop from Step 2-3Trigger, GA - NewRegistration -Mobile Drop from Step 2-4Trigger, GA - NewRegistration -Mobile Drop from Step 2-5Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - new registration steps - Mobile Drop from Step 3</td><td>GA4</td><td>GA4 Event</td><td>Pausado</td><td>GA - NewRegistration - Mobile Drop from Step 3Trigger, GA - NewRegistration - Mobile Drop from Step 3-3Trigger, GA - NewRegistration - Mobile Drop from Step 3-2Trigger, GA - NewRegistration - Mobile Drop from Step 3-4Trigger, GA - NewRegistration - Mobile Drop from Step 3-5Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Mobile Step 1</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Mobile Step 1Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Mobile Step 2</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Mobile Step 2Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Mobile Step 3</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Mobile Step 3Trigger</td><td>NOT_SET</td></tr>
+<tr><td>GA4 - registration steps - Mobile Step Complete</td><td>GA4</td><td>GA4 Event</td><td>Activo</td><td>GA - registration - Mobile Step CompleteTrigger</td><td>NOT_SET</td></tr>
+<tr><td>Mixpanel - login</td><td>Mixpanel</td><td>Custom Template / Mixpanel</td><td>Pausado</td><td>LoggedIn Trigger</td><td>NOT_SET</td></tr>
+<tr><td>Mixpanel - sportsBetPlaced</td><td>Mixpanel</td><td>Custom Template / Mixpanel</td><td>Pausado</td><td>SportsBetPlaced Trigger</td><td>NOT_SET</td></tr>
+<tr><td>custom - pixel - Conversion Tracking &amp; Retargeting Kubico</td><td>Google Ads</td><td>Custom HTML</td><td>Pausado</td><td>2147479553</td><td>NOT_SET</td></tr>
+</tbody></table>
+      </div>
+    </section>
+
+    <section id="taxonomia">
+      <h2>Taxonomía recomendada</h2>
+      <p class="note">Propuesta para simplificar medición y hacerla más útil para análisis, audiencias y optimización de campañas.</p>
+      <div class="table-wrap">
+        <table class=""><thead><tr><th>Evento recomendado</th><th>Parámetros sugeridos</th><th>Uso</th></tr></thead><tbody><tr><td>page_view</td><td>page_type, section, device_type, user_status</td><td>Carga de páginas o vistas virtuales.</td></tr>
+<tr><td>ui_interaction</td><td>section, element_name, element_text, interaction_type, device_type</td><td>Clics de navegación y elementos de interfaz.</td></tr>
+<tr><td>registration_step</td><td>step_number, step_name, status, flow_type</td><td>Avance del flujo de registro.</td></tr>
+<tr><td>sign_up</td><td>method, status, user_id / user_pseudo_id</td><td>Registro completo. Puede mapearse a conversión.</td></tr>
+<tr><td>login</td><td>method, status, user_id / user_pseudo_id</td><td>Inicio de sesión completo.</td></tr>
+<tr><td>sport_bet_placed</td><td>bet_amount, currency, bet_type, sport, market, odds, num_selections, bet_status</td><td>Apuesta deportiva exitosa.</td></tr>
+<tr><td>deposit_started</td><td>amount, currency, payment_method, status</td><td>Inicio de depósito o recarga.</td></tr>
+<tr><td>deposit_completed</td><td>amount, currency, payment_method, transaction_id, status</td><td>Depósito exitoso.</td></tr>
+<tr><td>error_message</td><td>section, error_code, error_message, step_name</td><td>Errores de formularios, pago o registro.</td></tr>
+</tbody></table>
+      </div>
+
+      <h3>Ejemplo de dataLayer recomendado para registro</h3>
+      <div class="card">
+<pre><code>dataLayer.push({
+  event: "registration_step",
+  step_number: 2,
+  step_name: "personal_info",
+  flow_type: "signup",
+  status: "complete",
+  device_type: "mobile"
+});
+
+dataLayer.push({
+  event: "sign_up",
+  method: "email",
+  status: "success",
+  user_id: "HASH_OR_INTERNAL_ID"
+});</code></pre>
+      </div>
+
+      <h3>Ejemplo de dataLayer recomendado para apuesta deportiva</h3>
+      <div class="card">
+<pre><code>dataLayer.push({
+  event: "sport_bet_placed",
+  bet_amount: 50000,
+  currency: "COP",
+  num_selections: 3,
+  bet_type: "multiple",
+  sport: "football",
+  market: "match_winner",
+  odds: 2.15,
+  bet_status: "success"
+});</code></pre>
+      </div>
+    </section>
+
+    <section id="validacion">
+      <h2>Plan de validación recomendado</h2>
+      <p class="note">El JSON permite revisar configuración, pero la confirmación real requiere pruebas de disparo en navegador, Preview, DebugView y Network.</p>
+      <div class="table-wrap">
+        <table class=""><thead><tr><th>Herramienta / prueba</th><th>Qué validar</th><th>Prioridad</th></tr></thead><tbody><tr><td>GA4 DebugView</td><td>Validar que sign_up, login, registration_step y sport_bet_placed lleguen con parámetros completos.</td><td>Alta</td></tr>
+<tr><td>Tag Assistant / Preview GTM</td><td>Confirmar triggers correctos en mobile y desktop.</td><td>Alta</td></tr>
+<tr><td>Network</td><td>Revisar requests a google-analytics.com/g/collect, facebook.com/tr y Google Ads.</td><td>Alta</td></tr>
+<tr><td>Consent mode</td><td>Probar antes y después de aceptar cookies.</td><td>Alta</td></tr>
+<tr><td>Registro completo</td><td>Comparar disparo simultáneo en GA4, Google Ads y Meta.</td><td>Alta</td></tr>
+<tr><td>Apuesta deportiva</td><td>Validar value, currency, bet_amount, num_selections y deduplicación.</td><td>Media</td></tr>
+<tr><td>Cambios de SPA/history</td><td>Validar page_view y eventos en History Change.</td><td>Media</td></tr>
+</tbody></table>
+      </div>
+    </section>
+
+    <section id="tags">
+      <h2>Inventario completo de tags</h2>
+      <p class="note">Usa el buscador para filtrar por plataforma, estado, nombre de tag o trigger.</p>
+      <input class="searchbox" id="tagSearch" placeholder="Buscar en inventario: GA4, Registro, Facebook, Pausado..." />
+      <div class="table-wrap" style="margin-top:14px;">
+        <table id="inventoryTable">
+          <thead>
+            <tr>
+              <th>ID</th><th>Tag</th><th>Plataforma</th><th>Tipo</th><th>Carpeta</th><th>Estado</th><th>Consentimiento</th><th>Triggers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Zendesk Tag - Desktop Pages</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>DesktopPages Trigger</td></tr><tr><td>3</td><td>Hotjar Tag - All Pages</td><td>Hotjar</td><td>Hotjar</td><td>All Pages Tags</td><td>Pausado</td><td>NOT_SET</td><td>2147479553, HistoryChange Trigger</td></tr><tr><td>8</td><td>Facebook Tag - All Pages</td><td>Meta</td><td>Custom HTML</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>9</td><td>Facebook - SportsBetPlaced</td><td>Meta</td><td>Custom HTML</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>SportsBetPlaced Trigger</td></tr><tr><td>10</td><td>Facebook - RegistrationComplete</td><td>Meta</td><td>Custom HTML</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>11</td><td>Connextra - DesktopSportsHome</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>DesktopSportHome / Trigger, DesktopSportHome host / Trigger</td></tr><tr><td>12</td><td>Connextra - MobileHome</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>MobileHome Trigger</td></tr><tr><td>13</td><td>Connextra - RegistrationStart</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>RegistrationStart Trigger, DesktopCasinoRegisterClick Trigger, MobileRegisterClick Trigger, DesktopSportsRegisterClick Trigger</td></tr><tr><td>14</td><td>Connextra - RegistrationComplete</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>15</td><td>Connextra - LoggedIn</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>LoggedIn Trigger</td></tr><tr><td>18</td><td>Zendesk Mobile Pages V2</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>MobilePages Production Zendesk Trigger 1, MobilePages Production Zendesk Trigger 2, MobilePages UAT Zendesk Trigger 1, MobilePages UAT Zendesk Trigger 2, MobilePages UAT yajuego Zendesk Trigger 1, MobilePages UAT yajuego Zendesk Trigger 2, MobilePages PROD yajuego Zendesk Trigger 1, MobilePages PROD yajuego Zendesk Trigger 2, Zendesk Window Loaded with query</td></tr><tr><td>83</td><td>Vinculación de conversiones</td><td>Google Ads</td><td>Conversion Linker</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>84</td><td>Registro completo</td><td>Google Ads</td><td>Google Ads Conversion</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>87</td><td>[Integration] Notification SDK V2.0.0 - Base script</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>[Integration] Sports pages, [Integration] Casino pages</td></tr><tr><td>90</td><td>[Integration] Notification SDK 2.0.0 - setUser</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>[Integration] LoggedIn Trigger</td></tr><tr><td>91</td><td>[Integration] Notification SDK 2.0.0 - checkLastMessage</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>—</td></tr><tr><td>92</td><td>Remarketing de Google Ads</td><td>Google Ads</td><td>Google Ads Remarketing</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>93</td><td>[Staging] Notification SDK V2.0.0 - Base script</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>[Staging] Sports pages, [Staging] Casino pages</td></tr><tr><td>94</td><td>[Staging] Notification SDK 2.0.0 - setUser</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>[Staging] LoggedIn Trigger</td></tr><tr><td>95</td><td>[Staging] Notification SDK 2.0.0 - checkLastMessage</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>—</td></tr><tr><td>105</td><td>Prime - Registration page view and registration complete</td><td>Xandr</td><td>Custom HTML</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>Registration page view, GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>106</td><td>Notification SDK 2.0.0 - checkLastMessage</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>—</td></tr><tr><td>107</td><td>Notification SDK 2.0.0 - setUser</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>LoggedIn Trigger</td></tr><tr><td>108</td><td>Notification SDK V2.0.0 - Base script</td><td>Notification SDK</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Casino pages, Sports pages</td></tr><tr><td>111</td><td>Connextra - SportsBetPlaced</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>SportsBetPlaced Trigger</td></tr><tr><td>112</td><td>Connextra - LandingPage</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>Landing Pages</td></tr><tr><td>115</td><td>Connextra - SelfExclusion</td><td>Connextra</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>Self Exclusion Trigger</td></tr><tr><td>116</td><td>Zendesk INT Authenticate</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>—</td></tr><tr><td>216</td><td>Zendesk INT Desktop Pages V2</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>DesktopPages INT yajuego Zendesk Trigger</td></tr><tr><td>223</td><td>Zendesk Logged Out</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>userLoggedout Trigger</td></tr><tr><td>224</td><td>Zendesk INT Mobile Pages V2</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>ActivateZenDesk(Load) Mobile Trigger</td></tr><tr><td>227</td><td>Sportradar - LoggedIn</td><td>Sportradar</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>LoggedIn Trigger</td></tr><tr><td>228</td><td>Sportradar - RegistrationComplete</td><td>Sportradar</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>229</td><td>Sportradar - RegistrationStart</td><td>Sportradar</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>RegistrationStart Trigger</td></tr><tr><td>230</td><td>Sportradar Tag - All Pages</td><td>Sportradar</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>231</td><td>[Production] - Eonf Holdings - Registration Pixel</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>Registration page view, MobileHome Trigger, DesktopSportHome / Trigger</td></tr><tr><td>232</td><td>[Production] Xandr Universal Pixel - LandingPage Event</td><td>Xandr</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>Production all pages Trigger</td></tr><tr><td>233</td><td>[Production] Xandr Universal Pixel - Reg Start Event</td><td>Xandr</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>RegistrationStart Trigger</td></tr><tr><td>236</td><td>Zendesk STG Desktop Pages V2</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>DesktopPages STG yajuego Zendesk Trigger</td></tr><tr><td>237</td><td>Zendesk STG Mobile Pages V2</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>ActivateZenDesk(Load) Mobile Trigger</td></tr><tr><td>238</td><td>Zendesk STG Authenticate</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>—</td></tr><tr><td>241</td><td>Zendesk Authenticate</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>—</td></tr><tr><td>261</td><td>[Production] Xandr Universal Pixel - Full Reg Continue Page 1/2</td><td>Xandr</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>RegistrationContinueSecondComplete Trigger</td></tr><tr><td>262</td><td>[Production] Xandr Universal Pixel - Complete Registration Success</td><td>Xandr</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Step CompleteTrigger, GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>408</td><td>GA4 - mobile - sidebar push menu - Clear Search-Borrar</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push click Trigger - Clear Search-BorrarTrigger</td></tr><tr><td>573</td><td>GA4 - mobile - soccer league view - Event</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - Event ClicksTrigger</td></tr><tr><td>620</td><td>GA4 - desktop - live betting - Match Winner odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Match Winner oddsTrigger</td></tr><tr><td>764</td><td>Ad Masters Tag</td><td>Ad Masters</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>784</td><td>HTML inicio registro avanzado</td><td>Google Ads</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>DOM preparado</td></tr><tr><td>818</td><td>Twitter tag mktg</td><td>Google Ads</td><td>Custom HTML</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>882</td><td>GA - NewRegistration - Form Time Listener</td><td>Otros</td><td>Custom HTML</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Button ClickTrigger, GA - NewRegistration - Button Click2Trigger</td></tr><tr><td>900</td><td>GA4 Configuration Tag</td><td>GA4</td><td>Google Tag / GA4 Config</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>2147479553, HistoryChange Trigger</td></tr><tr><td>902</td><td>GA4 - desktop - betslip - quick amount buttons</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Trigger GA4 - desktop - betslip - quick amount buttons</td></tr><tr><td>904</td><td>GA4 - global - login - user_id</td><td>GA4</td><td>GA4 Event</td><td>All Pages Tags</td><td>Activo</td><td>NOT_SET</td><td>LoggedIn Trigger</td></tr><tr><td>923</td><td>GA4 - desktop - betslip - Clear Betslip(Borrar Tiquete)</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click -Remove all(Eliminar todo)Trigger</td></tr><tr><td>925</td><td>GA4 - desktop - betslip - multiple bet tab</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA4 - desktop - betslip - click - multiple bet trigger</td></tr><tr><td>927</td><td>GA4 - desktop - betslip - Place bet (Colocar Apuesta)</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click - Place bet (Colocar Apuesta)Trigger</td></tr><tr><td>928</td><td>GA4 - desktop - betslip - Prefill Average Stake(Usar apuesta promedio)</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click - Prefill Average Stake(Usar apuesta promedio)Trigger</td></tr><tr><td>929</td><td>GA4 - desktop - betslip - Stake input(Monto)</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click - Stake Input(Monto)Trigger</td></tr><tr><td>930</td><td>GA4 - desktop - betslip - The tick on/off checkbox</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip clkick - The tick on/off checkboxTrigger</td></tr><tr><td>931</td><td>GA4 - desktop - betslip - The X button</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click - The X buttonTrigger</td></tr><tr><td>932</td><td>GA4 - desktop - betslip - Use bonus funds(Utilizar fondos del Bono)</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click - Use bonus fundsTrigger</td></tr><tr><td>934</td><td>GA4 - desktop - main menu - header</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop main menu click - HeaderTrigger</td></tr><tr><td>935</td><td>GA4 - desktop - main menu - logo</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop main menu click - LogoTrigger</td></tr><tr><td>936</td><td>GA4 - desktop - main menu - Mi Cuenta</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop main menu click -Mi CuentaTrigger</td></tr><tr><td>937</td><td>GA4 - desktop - main menu - Mi historial de apuestas</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop main menu click -Mi historial de apuestasTrigger</td></tr><tr><td>938</td><td>GA4 - desktop - main menu - Recargar</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop main menu click -RecargarTrigger</td></tr><tr><td>939</td><td>GA4 - desktop - main menu - Sub Header</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop main menu click - SubheaderTrigger</td></tr><tr><td>940</td><td>GA4 - desktop - mi cuenta drop down - Bono Deportes</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Mi Cuenta drop down menu - Bono DeportesTrigger</td></tr><tr><td>941</td><td>GA4 - desktop - mi cuenta drop down - Bottom Account</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Mi Cuenta drop down menu - Bottom AccountTrigger</td></tr><tr><td>942</td><td>GA4 - desktop - mi cuenta drop down menu - Hide balance</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Mi Cuenta drop down menu - Hide balanceTrigger</td></tr><tr><td>943</td><td>GA4 - desktop - mi cuenta drop down menu - Refresh</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Mi Cuenta drop down menu - RefreshTrigger</td></tr><tr><td>944</td><td>GA4 - desktop - prematch - Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Prematch event clicks - OddsTrigger</td></tr><tr><td>945</td><td>GA4 - desktop - prematch - Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Prematch event clicks - StatsTrigger</td></tr><tr><td>946</td><td>GA4 - desktop - prematch - The i icon</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Prematch event clicks - The i iconTrigger</td></tr><tr><td>947</td><td>GA4 - desktop - prematch - Market toggles</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Prematch event clicks - Market togglesTrigger, GA - Desktop Prematch event clicks - Market toggles2Trigger</td></tr><tr><td>948</td><td>GA4 - desktop - prematch - Markets</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Prematch event clicks - MarketsTrigger</td></tr><tr><td>949</td><td>GA4 - all pages - tag</td><td>GA4</td><td>GA4 Event</td><td>All Pages Tags</td><td>Pausado</td><td>NOT_SET</td><td>HistoryChange Trigger, 2147479553</td></tr><tr><td>950</td><td>GA4 - desktop - live event - streaming</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>[Prod] Desktop - Live Streaming Click Trigger</td></tr><tr><td>951</td><td>GA4 - desktop - live betting - Even/Odd odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Even/Odd oddsTrigger</td></tr><tr><td>952</td><td>GA4 - desktop - live betting - Event clicks</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Event clicksTrigger</td></tr><tr><td>953</td><td>GA4 - desktop - live betting - Filtrar competiciones</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Filtrar competicionesTrigger</td></tr><tr><td>956</td><td>GA4 - desktop - live betting - sport categories</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA4 - desktop - live betting - sports live category trigger</td></tr><tr><td>957</td><td>GA4 - desktop - live betting - Markets Filter</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Markets FilterTrigger</td></tr><tr><td>958</td><td>GA4 - desktop - live betting - O/U points odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -O/U points oddsTrigger</td></tr><tr><td>959</td><td>GA4 - desktop - live betting - Programa</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -ProgramaTrigger</td></tr><tr><td>960</td><td>GA4 - desktop - live betting - Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -StatsTrigger</td></tr><tr><td>961</td><td>GA4 - desktop - live betting - 12 odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -12 oddsTrigger</td></tr><tr><td>962</td><td>GA4 - desktop - live betting -1X2 odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -1X2 oddsTrigger</td></tr><tr><td>963</td><td>GA4 - desktop - live betting - Asian HND odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Asian HND oddsTrigger</td></tr><tr><td>964</td><td>GA4 - desktop - live betting - Double chance odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -Double chance oddsTrigger</td></tr><tr><td>965</td><td>GA4 - desktop - live betting - O/U Games odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -O/U Games oddsTrigger</td></tr><tr><td>966</td><td>GA4 - desktop - live betting - O/U odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Live betting clicks -O/U oddsTrigger</td></tr><tr><td>967</td><td>GA4 - desktop - side banner - Flash Yuegos</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop side menu - FlashYuegosTrigger</td></tr><tr><td>968</td><td>GA4 - desktop - side banner - Flash Yuegos casino</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop side menu - FlashYuegosTrigger casino</td></tr><tr><td>969</td><td>GA4 - desktop - sports side menu - Item</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop Sports side menu Trigger</td></tr><tr><td>970</td><td>GA4 - desktop - sports side menu - Time filters</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop Sports side menu - Time filtersTrigger</td></tr><tr><td>971</td><td>GA4 - desktop - sports side menu - Time filters icon</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop Sports side menu - Time filters icon Trigger</td></tr><tr><td>972</td><td>GA4 - desktop - soccer page(coupons) - Competiciones Button</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) -Competiciones ButtonsTrigger</td></tr><tr><td>973</td><td>GA4 - desktop - soccer page(coupons) - Competiciones Checkbox</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) -Competiciones CheckboxTrigger</td></tr><tr><td>974</td><td>GA4 - desktop - soccer page(coupons) - Competiciones Show Leagues</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) -Competiciones Show LeaguesTrigger</td></tr><tr><td>975</td><td>GA4 - desktop - soccer page(coupons) - Destacados - Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) - Destacados - Odds cliscksTrigger</td></tr><tr><td>976</td><td>GA4 - desktop - soccer page(coupons) - Destacados - Event</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) - Destacados -Event clicksTrigger</td></tr><tr><td>977</td><td>GA4 - desktop - soccer page(coupons) - Proximo Partidos tabs</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) - Proximo Partidos tabsTrigger</td></tr><tr><td>978</td><td>GA4 - desktop - soccer page(coupons) - Coupons Tabs</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(coupons) - tabsTrigger</td></tr><tr><td>979</td><td>GA4 - desktop - side menu - Clear Search-Borrar</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop side menu clicks - Clear Search-BorrarTrigger</td></tr><tr><td>980</td><td>GA4 - desktop - side menu - Featured leagues</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop side menu clicks - Featured leagues Trigger</td></tr><tr><td>981</td><td>GA4 - desktop - side menu - Search</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop side menu clicks - Search Trigger</td></tr><tr><td>982</td><td>GA4 - mobile - bottom menu - A-Z Menu</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - A-Z Menu</td></tr><tr><td>983</td><td>GA4 - mobile - bottom menu - Chat en Vivo</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - Chat en Vivo</td></tr><tr><td>984</td><td>GA4 - mobile - bottom menu - Depositar</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - Depositar</td></tr><tr><td>985</td><td>GA4 - mobile - bottom menu - Iniciar Sesión</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - Iniciar Sesión</td></tr><tr><td>986</td><td>GA4 - mobile - bottom menu - Mis Apuestas</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - Mis Apuestas</td></tr><tr><td>987</td><td>GA4 - mobile - bottom menu - Registrarse</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - Registrarse</td></tr><tr><td>988</td><td>GA4 - mobile - bottom menu - Tiquete de apuestas</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bottom menu click Trigger - Betslip</td></tr><tr><td>989</td><td>GA4 - mobile - all sports - PML filter</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sport click Trigger - Select Sport PML Filter</td></tr><tr><td>990</td><td>GA4 - mobile - all sports - Select Sport</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile all sport click Trigger - Select Sport</td></tr><tr><td>991</td><td>GA4 - mobile - all sports - Sport Category</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sport click Trigger - Select Sport Category</td></tr><tr><td>992</td><td>GA4 - mobile - all sports - Sport Category Creador Yajuego Nuevo!</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sport click Trigger - Select Sport CategoryCreador Yajuego Nuevo!</td></tr><tr><td>993</td><td>GA4 - mobile - all sports - Sport Category Item</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sport click Trigger - Select Sport Category Item</td></tr><tr><td>994</td><td>GA4 - mobile - bet notification - Account</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks - Account</td></tr><tr><td>995</td><td>GA4 - mobile - bet notification - Back</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks - Back Trigger</td></tr><tr><td>996</td><td>GA4 - mobile - bet notification - Show More ( Ver todo el tiquete)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks - Show more (Ver todo el tiquete)Trigger</td></tr><tr><td>1000</td><td>GA4 - mobile - bet notification - Print Coupon</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks - Print Coupon</td></tr><tr><td>1001</td><td>GA4 - mobile - bet notification - Reutilizar apuesta</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks - Reutilizar apuesta</td></tr><tr><td>1004</td><td>GA4 - mobile - betslip - quick amount</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - amount Trigger</td></tr><tr><td>1005</td><td>GA4 - mobile - betslip - Ticket type tab</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - tab</td></tr><tr><td>1006</td><td>GA4 - mobile - betslip - Account(Mi Cuenta)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Account(Mi Cuenta) Trigger</td></tr><tr><td>1007</td><td>GA4 - mobile - betslip - Back</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Back Trigger</td></tr><tr><td>1008</td><td>GA4 - mobile - betslip - Clear betslip (Borrar Tiquete)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Clear betslip icon Trigger, Mobile betslip click - Clear Balance text trigger</td></tr><tr><td>1009</td><td>GA4 - mobile - betslip - Expand Lines</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click Trigger - Expand Lines</td></tr><tr><td>1010</td><td>GA4 - mobile - betslip - Use bonus funds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Use bonus fundsTrigger</td></tr><tr><td>1011</td><td>GA4 - mobile - betslip - Place bet(Colocar Apuesta)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Place bet Trigger</td></tr><tr><td>1012</td><td>GA4 - mobile - betslip - Logo</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Logo trigger</td></tr><tr><td>1013</td><td>GA4 - mobile - betslip - The tick on/off checkbox</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click -The tick on/off checkbox Trigger</td></tr><tr><td>1014</td><td>GA4 - mobile - betslip - The X button</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - The X button Trigger</td></tr><tr><td>1015</td><td>GA4 - mobile - event details - Back</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Back</td></tr><tr><td>1020</td><td>GA4 - mobile - event details - League</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - League</td></tr><tr><td>1021</td><td>GA4 - mobile - event details - Market Bar</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Market Bar</td></tr><tr><td>1023</td><td>GA4 - mobile - event details - Accordion</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Accordion</td></tr><tr><td>1024</td><td>GA4 - mobile - event details - Market Switcher</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Market Switcher</td></tr><tr><td>1028</td><td>GA4 - desktop - soccer page - Competiciones Show Leagues</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(Competiciones ) -Competiciones Show LeaguesTrigger</td></tr><tr><td>1029</td><td>GA4 - desktop - soccer page - Competiciones Button</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(Competiciones) -Competiciones ButtonsTrigger</td></tr><tr><td>1030</td><td>GA4 - desktop - soccer page - Competiciones Tabs</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(Competiciones) - tabsTrigger</td></tr><tr><td>1031</td><td>GA4 - desktop - soccer page - Competiciones Checkbox</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA - Desktop Soccer page(Competiciones) -Competiciones CheckboxTrigger</td></tr><tr><td>1033</td><td>GA4 - mobile - betslip - Usar apuesta promedio (Prefill Average Stake)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Usar apuesta promedio (Prefill Average Stake)</td></tr><tr><td>1035</td><td>GA4 - mobile - home page - Event</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Event Trigger</td></tr><tr><td>1037</td><td>GA4 - mobile - home page - Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Stats Trigger</td></tr><tr><td>1039</td><td>GA4 - mobile - home page - Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Odds Trigger</td></tr><tr><td>1041</td><td>GA4 - mobile - home page - Navigation item</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Navigation item Trigger</td></tr><tr><td>1042</td><td>GA4 - mobile - home page - Navigation Market</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile home page clicks - NavigationMarketTrigger</td></tr><tr><td>1046</td><td>GA4 - mobile - live betting - quick bet - Add to betslip (Incluir con Apuesta)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>mobile live bet quick bet - Add to betslip Trigger</td></tr><tr><td>1047</td><td>GA4 - mobile - live betting - quick bet - Prefill Average Stake (Usar apuesta promedio)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>mobile live bet quick bet - Prefill Average Stake (Usar apuesta promedio)Trigger</td></tr><tr><td>1049</td><td>GA4 - mobile - footer - click</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile footer clicksTrigger</td></tr><tr><td>1050</td><td>GA4 - mobile - footer - Back to top</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile footer clicks - Back to topTrigger</td></tr><tr><td>1051</td><td>GA4 - mobile - footer - Coljuegos Logo</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile footer clicks - Coljuegos Logotrigger</td></tr><tr><td>1052</td><td>GA4 - mobile - footer - Payment Logos</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile footer clicks - Payment LogosTrigger</td></tr><tr><td>1053</td><td>GA4 - mobile - header - Lightning</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile header Trigger - Lightning</td></tr><tr><td>1054</td><td>GA4 - mobile - header - Mi Cuenta</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile header Trigger - Mi Cuenta</td></tr><tr><td>1055</td><td>GA4 - mobile - header - Iniciar Sesion</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile header click Trigger - Iniciar Sesion</td></tr><tr><td>1056</td><td>GA4 - mobile - header - Registrarse</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile header Registrarse Trigger</td></tr><tr><td>1057</td><td>GA4 - mobile - header - Search in the header</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile header Search in the header Trigger</td></tr><tr><td>1059</td><td>GA4 - mobile - live event details - Market Bar</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Market Bar</td></tr><tr><td>1060</td><td>GA4 - mobile - live event details - Change Match - (Cambiar Partido)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Change Match</td></tr><tr><td>1061</td><td>GA4 - mobile - live event details - Sports Bar</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Sports Bar</td></tr><tr><td>1062</td><td>GA4 - mobile - live event details - Market Switcher - Markets</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Market Switcher Markets</td></tr><tr><td>1063</td><td>GA4 - mobile - live event details - Accordion</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Accordion</td></tr><tr><td>1064</td><td>GA4 - mobile - live event details - Streaming</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>[Prod] Mobile - Live Streaming Click Trigger</td></tr><tr><td>1067</td><td>GA4 - mobile - banner - click</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA- Mobile banner trigger</td></tr><tr><td>1068</td><td>GA4 - mobile - soccer page(coupons) - Destacado Events</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Destacado Events ClicksTrigger, GA - Mobile soccer page (coupons) - Destacado Events Clicks2Trigger</td></tr><tr><td>1069</td><td>GA4 - mobile - soccer page(coupons) - Destacado Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Destacado Odds ClicksTrigger, GA - Mobile soccer page (coupons) - Destacado Odds Clicks2Trigger</td></tr><tr><td>1070</td><td>GA4 - mobile - soccer page(coupons) - En Vivo Button</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - En Vivo ButtonTrigger, GA - Mobile soccer page (coupons) - En Vivo Button2Trigger</td></tr><tr><td>1071</td><td>GA4 - mobile - soccer page(coupons) - En Vivo Events</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - En Vivo Events ClicksTrigger, GA - Mobile soccer page (coupons) - En Vivo Events Clicks2Trigger</td></tr><tr><td>1072</td><td>GA4 - mobile - soccer page(coupons) - En Vivo Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - En Vivo Odds Clicks2Trigger, GA - Mobile soccer page (coupons) - En Vivo Odds ClicksTrigger</td></tr><tr><td>1073</td><td>GA4 - mobile - soccer page(coupons) - Ofertas diarias Toggle</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) -Ofertas diariasTrigger, GA - Mobile soccer page (coupons) -Ofertas diarias2Trigger</td></tr><tr><td>1074</td><td>GA4 - mobile - soccer page(coupons) - Ofertas diarias Matches</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) -Ofertas diariasMatchesTrigger, GA - Mobile soccer page (coupons) -Ofertas diariasMatches2Trigger</td></tr><tr><td>1075</td><td>GA4 - mobile - soccer page(coupons) - Por empezar Toggle</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) -Por empezar ToggleTrigger, GA - Mobile soccer page (coupons) -Por empezar Toggle2Trigger</td></tr><tr><td>1076</td><td>GA4 - mobile - soccer page(coupons) - Por empezar Events</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Por empezar EventsTrigger, GA - Mobile soccer page (coupons) - Por empezar Events2Trigger</td></tr><tr><td>1077</td><td>GA4 - mobile - soccer page(coupons) - Por empezar Markets</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Por empezar MarketsTrigger, GA - Mobile soccer page (coupons) - Por empezar Markets2Trigger</td></tr><tr><td>1078</td><td>GA4 - mobile - soccer page(coupons) - Por empezar Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Por empezar OddsTrigger, GA - Mobile soccer page (coupons) - Por empezar Odds2Trigger</td></tr><tr><td>1079</td><td>GA4 - mobile - soccer page(coupons) - Top bar</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Top barTrigger, GA - Mobile soccer page (coupons) - Top bar2Trigger</td></tr><tr><td>1080</td><td>GA4 - mobile - casino main menu - click</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino main menu clicks Trigger</td></tr><tr><td>1081</td><td>GA4 - mobile - sidebar menu - Icons</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar menu clicks Trigger - Icons</td></tr><tr><td>1082</td><td>GA4 - mobile - sidebar menu - PML filter</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar click Trigger - PML filter</td></tr><tr><td>1083</td><td>GA4 - mobile - sidebar menu - Search Button</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar click Trigger - Search Button</td></tr><tr><td>1084</td><td>GA4 - mobile - sidebar menu - Search Text</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar click Trigger - Search Text</td></tr><tr><td>1085</td><td>GA4 - mobile - sidebar push menu - Apuestas en Vivo</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push menu click Trigger - Apuestas en Vivo</td></tr><tr><td>1086</td><td>GA4 - mobile - sidebar push menu - Filter</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push click Trigger - Filter</td></tr><tr><td>1087</td><td>GA4 - mobile - sidebar push menu - Localizador de puntos de servicio</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push menu click Trigger - Localizador de puntos de servicio</td></tr><tr><td>1088</td><td>GA4 - mobile - sidebar push menu - Navigation items</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push menu click Trigger - Navigation items</td></tr><tr><td>1089</td><td>GA4 - mobile - sidebar push menu - Redes Sociales</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push click Trigger - Redes Sociales</td></tr><tr><td>1090</td><td>GA4 - mobile - sidebar push menu - Top Navigation</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push click Trigger - Top nav</td></tr><tr><td>1093</td><td>GA4 - mobile - casino bottom menu - Buscar</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - BuscarTrigger, Mobile casino bottom menu - Buscar2Trigger</td></tr><tr><td>1094</td><td>GA4 - mobile - casino bottom menu - Deportes</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - Deportes2Trigger</td></tr><tr><td>1095</td><td>GA4 - mobile - casino bottom menu - Filtro</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - FiltroTrigger, Mobile casino bottom menu - Filtro2Trigger</td></tr><tr><td>1096</td><td>GA4 - mobile - casino bottom menu - Live Chat</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - Live ChatTrigger, Mobile casino bottom menu - Live Chat2Trigger</td></tr><tr><td>1097</td><td>GA4 - mobile - casino bottom menu - Menu</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - MenuTrigger, Mobile casino bottom menu - Menu2Trigger</td></tr><tr><td>1098</td><td>GA4 - mobile - casino bottom menu - Recargar</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - RecargarTrigger, Mobile casino bottom menu - Recargar2Trigger</td></tr><tr><td>1099</td><td>GA4 - mobile - casino bottom menu - Registrarse</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile casino bottom menu - RegistrarseTrigger, Mobile casino bottom menu - Registrarse2Trigger</td></tr><tr><td>1100</td><td>GA4 - mobile - live streaming - Bottom menu</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Streaming clicks - Bottom menu clicksTrigger</td></tr><tr><td>1101</td><td>GA4 - mobile - live streaming - Event Odds</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Streaming clicks - Event OddsTrigger</td></tr><tr><td>1102</td><td>GA4 - mobile - live streaming - Events</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Streaming clicks - Events clicksTrigger</td></tr><tr><td>1103</td><td>GA4 - mobile - live streaming - Streaming Logo</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Streaming clicks - Streaming LogoTrigger</td></tr><tr><td>1105</td><td>GA4 - mobile - live streaming - Top bar sports</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - live streaming - Top bar sports Trigger</td></tr><tr><td>1108</td><td>GA4 - mobile - main menu - Ayuda</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Ayuda</td></tr><tr><td>1109</td><td>GA4 - mobile - main menu - Baloncesto</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Baloncesto</td></tr><tr><td>1110</td><td>GA4 - mobile - main menu - Casino</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Casino</td></tr><tr><td>1111</td><td>GA4 - mobile - main menu - Casino en vivo</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Casino en vivo</td></tr><tr><td>1112</td><td>GA4 - mobile - main menu - Contacto</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Contacto</td></tr><tr><td>1113</td><td>GA4 - mobile - main menu - Copa Del Mundo</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Copa Del Mundo</td></tr><tr><td>1114</td><td>GA4 - mobile - main menu - En vivo</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - En vivo</td></tr><tr><td>1115</td><td>GA4 - mobile - main menu - Filtro de Cuotas</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Filtro de Cuotas</td></tr><tr><td>1116</td><td>GA4 - mobile - main menu - Flash juegos</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Flash juegos</td></tr><tr><td>1117</td><td>GA4 - mobile - main menu - Fútbol</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Fútbol</td></tr><tr><td>1118</td><td>GA4 - mobile - main menu - Partidos de hoy</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Partidos de hoy</td></tr><tr><td>1119</td><td>GA4 - mobile - main menu - Recargas</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Recargas</td></tr><tr><td>1120</td><td>GA4 - mobile - main menu - Retiros</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Retiros</td></tr><tr><td>1121</td><td>GA4 - mobile - main menu - Tiendas</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Tiendas</td></tr><tr><td>1122</td><td>GA4 - mobile - main menu - Verifica tu apuestat</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Verifica tu apuesta</td></tr><tr><td>1123</td><td>GA4 - mobile - main menu - yajuego League</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - yajuego League</td></tr><tr><td>1124</td><td>GA4 - mobile - main menu - yajuego Racing</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click - yajuego Racing Trigger</td></tr><tr><td>1125</td><td>GA4 - mobile - live calendar - Mis Apuestas</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Caledar - Mis ApuestasTrigger</td></tr><tr><td>1126</td><td>GA4 - mobile - live calendar - Sport Accordion</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Caledar - Sport AccordionTrigger</td></tr><tr><td>1127</td><td>GA4 - mobile - live calendar - Tiquete de apuestas</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Live Caledar - Tiquete de apuestasTrigger</td></tr><tr><td>1128</td><td>GA4 - mobile - my account - Flash juegos</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - Flash juegosTrigger</td></tr><tr><td>1129</td><td>GA4 - mobile - my account - Mensajes</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - MensajesTrigger</td></tr><tr><td>1130</td><td>GA4 - mobile - my account - Recargas</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - RecargaTrigger</td></tr><tr><td>1131</td><td>GA4 - mobile - my account - Refresh</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - RefreshTrigger</td></tr><tr><td>1132</td><td>GA4 - mobile - my account - Table</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - TableTrigger</td></tr><tr><td>1133</td><td>GA4 - mobile - my account - X</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - XTrigger</td></tr><tr><td>1134</td><td>GA4 - mobile - my account - Yajuego logo</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile my account clicks - Yajuego logoTrigger</td></tr><tr><td>1135</td><td>GA4 - mobile - multiple builder - Agrega más selecciones...</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Agrega más selecciones...Trigger</td></tr><tr><td>1136</td><td>GA4 - mobile - multiple builder - Agregar a tu tiquete de apuestas</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Agregar a tu tiquete de apuestasTrigger</td></tr><tr><td>1137</td><td>GA4 - mobile - multiple builder - Borar todo</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Borar todoTrigger</td></tr><tr><td>1138</td><td>GA4 - mobile - multiple builder - Generar selecciones</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Generar seleccionesTrigger</td></tr><tr><td>1139</td><td>GA4 - mobile - multiple builder - Más información</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Más informaciónTrigger</td></tr><tr><td>1140</td><td>GA4 - mobile - multiple builder - Odds</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Odss clickTrigger</td></tr><tr><td>1141</td><td>GA4 - mobile - multiple builder - Odds selection box(Escoje el número)</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Odds selection box(Escoje el número)</td></tr><tr><td>1142</td><td>GA4 - mobile - multiple builder - Odds Slider(Escoje el número)</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Odds Slider(Escoje el número)Trigger</td></tr><tr><td>1143</td><td>GA4 - mobile - multiple builder - Selection box(Generar selecciones)</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - Selection box(Generar selecciones)Trigger</td></tr><tr><td>1144</td><td>GA4 - mobile - multiple builder - X Button</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile multiple builder - X ButtonTrigger</td></tr><tr><td>1145</td><td>GA4 - mobile - soccer league view - Back</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - BackTrigger</td></tr><tr><td>1146</td><td>GA4 - mobile - soccer league view - Cambiar Competición</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - Cambiar CompeticiónTrigger</td></tr><tr><td>1147</td><td>GA4 - mobile - soccer league view - Cambiar Mercado</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - Cambiar MercadoTrigger, GA - Mobile Soccer League View - Cambiar Mercado2Trigger</td></tr><tr><td>1148</td><td>GA4 - mobile - soccer league view - Estadísticas</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View -Estadísticas2Trigger, GA - Mobile Soccer League View - EstadísticasrTrigger</td></tr><tr><td>1149</td><td>GA4 - mobile - soccer league view - Event odds</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - Event odds clicksTrigger</td></tr><tr><td>1150</td><td>GA4 - mobile - soccer league view - Event Stats</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - Event stats clicksTrigger</td></tr><tr><td>1151</td><td>GA4 - mobile - soccer league view - Filtrar</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - FiltrarTrigger, GA - Mobile Soccer League View - Filtrar2Trigger</td></tr><tr><td>1152</td><td>GA4 - mobile - soccer league view - Logo</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - LogoTrigger</td></tr><tr><td>1153</td><td>GA4 - mobile - soccer league view - Market Filter</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - Market FilterTrigger</td></tr><tr><td>1154</td><td>GA4 - mobile - soccer league view - The i icon</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile Soccer League View - The i iconTrigger</td></tr><tr><td>1155</td><td>GA4 - mobile - soccer page(Ligas) - Other Leagues</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) -Ligas Trigger, GA - Mobile soccer page (Ligas) -Ligas 2Trigger</td></tr><tr><td>1156</td><td>GA4 - mobile - soccer page(Ligas) - Borrar Todo</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - BorrarTodoTrigger</td></tr><tr><td>1157</td><td>GA4 - mobile - soccer page(Ligas) - Other Leagues Checkbox</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) -LigasCheckboxTrigger</td></tr><tr><td>1158</td><td>GA4 - mobile - soccer page(Ligas) - Ligas Populares</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) -Ligas PopularesTrigger</td></tr><tr><td>1159</td><td>GA4 - mobile - soccer page(Ligas) - Todos A-Z</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Todos A-ZTrigger</td></tr><tr><td>1160</td><td>GA4 - mobile - soccer page(Ligas) - Top bar</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Top barTrigger</td></tr><tr><td>1161</td><td>GA4 - custom event - LoggedIn</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>LoggedIn Trigger</td></tr><tr><td>1166</td><td>GA4 - New Registration - Step</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Pausado</td><td>NOT_SET</td><td>New Registration Message Trigger</td></tr><tr><td>1167</td><td>GA4 - custom event - SportBetPlaced</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>SportsBetPlaced Trigger</td></tr><tr><td>1168</td><td>GA4 - new registration steps - Desktop Back to Step 1</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Back to Step 1Trigger</td></tr><tr><td>1169</td><td>GA4 - new registration steps - Desktop Back to Step 2</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Back to Step 2Trigger</td></tr><tr><td>1170</td><td>GA4 - new registration steps - Desktop Drop from Step 1</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Drop from Step 1Trigger, GA - NewRegistration - Desktop Drop from Step 1-1Trigger</td></tr><tr><td>1171</td><td>GA4 - new registration steps - Desktop Drop from Step 2</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration -DesktopDrop from Step 2Trigger, GA - NewRegistration -DesktopDrop from Step 2-2Trigger</td></tr><tr><td>1172</td><td>GA4 - new registration steps - Desktop Drop from Step 3</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Drop from Step 3Trigger, GA - NewRegistration - Desktop Drop from Step 3-2Trigger</td></tr><tr><td>1173</td><td>GA4 - new registration steps - Desktop Registrarse</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop RegistrarseClickTrigger</td></tr><tr><td>1174</td><td>GA4 - registration steps - Desktop Step 1</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Desktop step 1Trigger</td></tr><tr><td>1175</td><td>GA4 - registration steps - Desktop Step 2</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Desktop step 2Trigger</td></tr><tr><td>1176</td><td>GA4 - registration steps - Desktop Step 3</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Desktop Step 3Trigger</td></tr><tr><td>1177</td><td>GA4 - registration - Desktop Step Complete</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - NewRegistration - Desktop Step CompleteTrigger</td></tr><tr><td>1178</td><td>GA4 - new registration steps - Mobile Back to Step 1</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Mobile Back to Step 1Trigger</td></tr><tr><td>1179</td><td>GA4 - new registration steps - Mobile Back to Step 2</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Mobile Back to Step 2Trigger</td></tr><tr><td>1180</td><td>GA4 - new registration steps - Mobile Drop from Step 1</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Mobile Drop from Step 1Trigger, GA - NewRegistration - Mobile Drop from Step 1-2Trigger, GA - NewRegistration - Mobile Drop from Step 1-3Trigger, GA - NewRegistration - Mobile Drop from Step 1-4Trigger, GA - NewRegistration - Mobile Drop from Step 1-5Trigger</td></tr><tr><td>1181</td><td>GA4 - new registration steps - Mobile Drop from Step 2</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration -Mobile Drop from Step 2Trigger, GA - NewRegistration -Mobile Drop from Step 2-2Trigger, GA - NewRegistration -Mobile Drop from Step 2-3Trigger, GA - NewRegistration -Mobile Drop from Step 2-4Trigger, GA - NewRegistration -Mobile Drop from Step 2-5Trigger</td></tr><tr><td>1182</td><td>GA4 - new registration steps - Mobile Drop from Step 3</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>GA - NewRegistration - Mobile Drop from Step 3Trigger, GA - NewRegistration - Mobile Drop from Step 3-3Trigger, GA - NewRegistration - Mobile Drop from Step 3-2Trigger, GA - NewRegistration - Mobile Drop from Step 3-4Trigger, GA - NewRegistration - Mobile Drop from Step 3-5Trigger</td></tr><tr><td>1183</td><td>GA4 - registration steps - Mobile Step 1</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Mobile Step 1Trigger</td></tr><tr><td>1184</td><td>GA4 - registration steps - Mobile Step 2</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Mobile Step 2Trigger</td></tr><tr><td>1185</td><td>GA4 - registration steps - Mobile Step 3</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Mobile Step 3Trigger</td></tr><tr><td>1186</td><td>GA4 - registration steps - Mobile Step Complete</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - registration - Mobile Step CompleteTrigger</td></tr><tr><td>1187</td><td>GA4 - mobile - live betting - sports - Filter Market</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Live Betting sports click - Filter Market</td></tr><tr><td>1190</td><td>GA4 - mobile - live betting - sports - Items</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Live Betting sports click - Item Icon, Mobile Live Betting sports click - Item Name</td></tr><tr><td>1193</td><td>GA4 - mobile - live betting - sports - League accordion</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Live Betting sports click - Toggle League, Refactor Mobile Live Betting sports click - Toggle League</td></tr><tr><td>1196</td><td>GA4 - mobile - live betting - sports - Market Switcher</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Live Betting sports click - Market Switcher</td></tr><tr><td>1198</td><td>GA4 - mobile - live betting - sports - Match Name</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Live Betting sports click - Match Name</td></tr><tr><td>1200</td><td>GA4 - mobile - live betting - sports - Odds</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Live Betting sports click - Odds</td></tr><tr><td>1201</td><td>GA4 - mobile - main menu - Promos</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile main nav click Trigger - Promos</td></tr><tr><td>1203</td><td>GA4 - desktop - betslip - Betslip navigation tab</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Desktop betslip click - Betslip navigation tabTrigger</td></tr><tr><td>1205</td><td>GA4 - mobile - betslip - La Tapa 1</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - La Tapa 1</td></tr><tr><td>1207</td><td>GA4 - mobile - betslip - Stake Input</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile betslip click - Stake Input</td></tr><tr><td>1209</td><td>GA4 - mobile - bet notification - Betslip (Tiquete de apuestas)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks -Betslip (Tiquete de apuestas)Trigger</td></tr><tr><td>1210</td><td>GA4 - mobile - bet notification - Show Less ( Ver menos)</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile bet notification clicks - Show less (Ver menos)Trigger</td></tr><tr><td>1213</td><td>GA4 - mobile - soccer page(coupons) - Tab arrow</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Tab arrow2Trigger, GA - Mobile soccer page (coupons) - Tab arrowTrigger</td></tr><tr><td>1216</td><td>GA4 - mobile - soccer page(coupons) - Ofertas diarias ShowMore/Less</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) -Ofertas diariasShow More2Trigger, GA - Mobile soccer page (coupons) -Ofertas diariasShow MoreTrigger, GA - Mobile soccer page (coupons) -Ofertas diariasShow LessTrigger, GA - Mobile soccer page (coupons) -Ofertas diariasShow Less 2Trigger</td></tr><tr><td>1219</td><td>GA4 - mobile - soccer page(coupons) - Offertas Populares Toggle</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Offertas PopularesToggle2Trigger, GA - Mobile soccer page (coupons) - Offertas PopularesToggleTrigger</td></tr><tr><td>1222</td><td>GA4 - mobile - soccer page(coupons) - Ofertas Populares Matches</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) -Ofertas Populares MatchesTrigger, GA - Mobile soccer page (coupons) -Ofertas Populares Matches2Trigger</td></tr><tr><td>1225</td><td>GA4 - mobile - soccer page(coupons) - Por empezar Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (coupons) - Por empezar Stats2Trigger, GA - Mobile soccer page (coupons) - Por empezar StatsTrigger</td></tr><tr><td>1230</td><td>GA4 - Mobile - My bets - Accept Cashout Changes (¿Aceptar cambios en Cashout? )</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Mobile - My Bets - Accept Cashout ChangesTrigger</td></tr><tr><td>1232</td><td>GA4 - Mobile - My bets - Info button</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Mobile - My Bets -Info buttonTrigger</td></tr><tr><td>1234</td><td>GA4 - Mobile - My bets - Betslip Accordion</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Mobile - My Bets -Betslip AccordionTrigger</td></tr><tr><td>1236</td><td>GA4 - Mobile - My bets - Cashout Button</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Mobile - My Bets - Cashout ButtonTrigger</td></tr><tr><td>1238</td><td>GA4 - Mobile - My bets - Event Card</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Mobile - My Bets - Event CardTrigger</td></tr><tr><td>1240</td><td>GA4 - Mobile - My bets - Reload Selections(Volver a cargar selecciones abiertas)</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>Mobile - My Bets -Reload Selections(Volver a cargar selecciones abiertas)Trigger</td></tr><tr><td>1242</td><td>GA4 - mobile - Partidos de hoy - Sort</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - SortTrigger</td></tr><tr><td>1244</td><td>GA4 - mobile - Partidos de hoy - Back Arrow</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy -Back ArrowTrigger</td></tr><tr><td>1246</td><td>GA4 - mobile - Partidos de hoy - Forward Arrow</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy -Forward ArrowTrigger</td></tr><tr><td>1248</td><td>GA4 - mobile - Partidos de hoy - Odds Toggle</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - Odds ToggleTrigger</td></tr><tr><td>1250</td><td>GA4 - mobile - Partidos de hoy - Markets Filter</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - Markets Filter ToggleTrigger</td></tr><tr><td>1252</td><td>GA4 - mobile - Partidos de hoy - Markets Switcher</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - Markets SwitcherTrigger</td></tr><tr><td>1254</td><td>GA4 - mobile - Partidos de hoy - Markets Switcher - Markets</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - Markets SwitcherMarketsTrigger</td></tr><tr><td>1256</td><td>GA4 - mobile - Partidos de hoy - Stats</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - StatsTrigger</td></tr><tr><td>1258</td><td>GA4 - mobile - Partidos de hoy - Event Card</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - Event CardTrigger</td></tr><tr><td>1260</td><td>GA4 - mobile - Partidos de hoy - Odds</td><td>GA4</td><td>GA4 Event</td><td>Google Analytics Tags</td><td>Activo</td><td>NOT_SET</td><td>Mobile - Partidos de hoy - OddsTrigger</td></tr><tr><td>1262</td><td>GA4 - mobile - live event details - League</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - League</td></tr><tr><td>1264</td><td>GA4 - mobile - live event details - Match View - Vista del Partido</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Match View-Vista del partido</td></tr><tr><td>1266</td><td>GA4 - mobile - live event details - The i icon</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - The i icon</td></tr><tr><td>1268</td><td>GA4 - mobile - live event details - Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Odds</td></tr><tr><td>1270</td><td>GA4 - mobile - live event details - Market Switcher</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Market Switcher</td></tr><tr><td>1272</td><td>GA4 - mobile - live event details - Event Card</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Event Card</td></tr><tr><td>1274</td><td>GA4 - mobile - live event details - See All Live matches</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - See All lilve matches</td></tr><tr><td>1278</td><td>GA4 - mobile - live event details - Change Match Close</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Change Match Close</td></tr><tr><td>1280</td><td>GA4 - mobile - soccer page(Ligas) - Verificar Liga</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Verificar LigaTrigger</td></tr><tr><td>1282</td><td>GA4 - mobile - soccer page(Ligas) - Mis Favoritos</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) -Mis FavoritosTrigger</td></tr><tr><td>1284</td><td>GA4 - mobile - soccer page(Ligas) - Ligas Populares Checkbox</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) -Ligas Populares CheckboxTrigger</td></tr><tr><td>1286</td><td>GA4 - mobile - soccer page(Ligas) - Mis Favoritos Checkbox</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) -Mis Favoritos CheckboxTrigger</td></tr><tr><td>1288</td><td>GA4 - mobile - soccer page(Ligas) - ON Star</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - ON StarTrigger</td></tr><tr><td>1290</td><td>GA4 - mobile - soccer page(Ligas) - OFF Star</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - OFF StarTrigger</td></tr><tr><td>1292</td><td>GA4 - mobile - soccer page(Ligas) - Remove League</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Remove LeagueTrigger</td></tr><tr><td>1294</td><td>GA4 - mobile - soccer page(Ligas) - Remove League Accordion</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Remove LeagueAccordionTrigger</td></tr><tr><td>1296</td><td>GA4 - mobile - soccer page(Ligas) - Selected League Odds</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Selected League Odds Trigger</td></tr><tr><td>1298</td><td>GA4 - mobile - soccer page(Ligas) - Selected League Stats</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Selected League Stats Trigger</td></tr><tr><td>1300</td><td>GA4 - mobile - soccer page(Ligas) - Selected League Event</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>GA - Mobile soccer page (Ligas) - Selected League Event Trigger</td></tr><tr><td>1302</td><td>GA4 - mobile - soccer page(Ligas) - Change Market (Cambiar Mercado)</td><td>GA4</td><td>GA4 Event</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>Copy of GA - Mobile soccer page (Ligas) - Cambiar Mercado Trigger</td></tr><tr><td>1304</td><td>GA4 - mobile - event details - Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Odds</td></tr><tr><td>1306</td><td>GA4 - mobile - event details - The i icon</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - The i icon</td></tr><tr><td>1308</td><td>GA4 - mobile - event details - Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Stats</td></tr><tr><td>1310</td><td>GA4 - mobile - event details - Market Switcher - Markets</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile event details click Trigger - Market Switcher - Markets</td></tr><tr><td>1312</td><td>GA4 - mobile - live event details - Back</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile live event details click Trigger - Back</td></tr><tr><td>1324</td><td>GA4 - mobile - sidebar push menu - Volver a Inicio</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push menu click Trigger - Volver a Inicio</td></tr><tr><td>1326</td><td>GA4 - mobile - sidebar push menu - Close - X</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>Mobile sidebar push menu click Trigger - Close - X</td></tr><tr><td>1329</td><td>GA4 - mobile - casino - game - Game details</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Casino Game - Game details</td></tr><tr><td>1333</td><td>GA4 - mobile - casino - game - Play Now</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Casino Game - Play Now</td></tr><tr><td>1335</td><td>GA4 - mobile - casino - game - Demo</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile Casino Game - Demo</td></tr><tr><td>1340</td><td>Zendesk automatically open</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>Zendesk automatically open Trigger</td></tr><tr><td>1344</td><td>Mobile app share coupon Id</td><td>Otros</td><td>Custom HTML</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>Mobile share coupon id Trigger</td></tr><tr><td>1345</td><td>GA4 - mobile - header - Logo</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - Mobile header Logo Trigger</td></tr><tr><td>1350</td><td>Mixpanel - page_view</td><td>Mixpanel</td><td>Custom Template / Mixpanel</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>All pages - with user_id, HistoryChange - with user_id</td></tr><tr><td>1351</td><td>Mixpanel - login</td><td>Mixpanel</td><td>Custom Template / Mixpanel</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>LoggedIn Trigger</td></tr><tr><td>1352</td><td>Mixpanel - sportsBetPlaced</td><td>Mixpanel</td><td>Custom Template / Mixpanel</td><td>Sin carpeta</td><td>Pausado</td><td>NOT_SET</td><td>SportsBetPlaced Trigger</td></tr><tr><td>1353</td><td>GA4 - mobile - Zoom - General Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - General StatsTrigger</td></tr><tr><td>1355</td><td>GA4 - mobile - Zoom - More Info</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - More InfoTrigger</td></tr><tr><td>1357</td><td>GA4 - mobile - Zoom - Flags</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - FlagsTrigger</td></tr><tr><td>1359</td><td>GA4 - mobile - Zoom - Market Switcher</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - Market SwitcherTrigger</td></tr><tr><td>1361</td><td>GA4 - mobile - Zoom - Markets</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - MarketsTrigger</td></tr><tr><td>1363</td><td>GA4 - mobile - Zoom - Zoom Event</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - Zoom EventTrigger</td></tr><tr><td>1365</td><td>GA4 - mobile - Zoom - Zoom Event Stats</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - Zoom Event StatsTrigger</td></tr><tr><td>1367</td><td>GA4 - mobile - Zoom - Zoom Event Bets</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA - Zoom Mobile - Zoom Event BetsTrigger</td></tr><tr><td>1369</td><td>custom - pixel - Conversion Tracking &amp; Retargeting Kubico</td><td>Google Ads</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>1370</td><td>GAYAJUEGOCO pixel</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>1371</td><td>script - pixel - 1001cup pixel tracker</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>1372</td><td>GA4 - mobile - home page - Download App</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Download App Trigger</td></tr><tr><td>1375</td><td>GA4 - mobile - home page - Market Switcher</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Market Switcher Trigger</td></tr><tr><td>1378</td><td>GA4 - mobile - home page - Highlights View More</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page -Highlights View MoreTrigger</td></tr><tr><td>1380</td><td>GA4 - mobile - home page - Promo buttons</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page -Promo buttons Trigger</td></tr><tr><td>1381</td><td>GA4 - mobile - home page - Games</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Games Trigger</td></tr><tr><td>1383</td><td>GA4 - mobile - home page - Games View More</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Games View MoreTrigger</td></tr><tr><td>1385</td><td>GA4 - mobile - home page - Navigation Sports</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Navigation Sport Trigger</td></tr><tr><td>1388</td><td>GA4 - mobile - home page - Navigation Sports Market</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Navigation Sport Market Trigger</td></tr><tr><td>1390</td><td>GA4 - mobile - home page - Sports Event</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Sports Event Trigger</td></tr><tr><td>1392</td><td>GA4 - mobile - home page - Sports Odds</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Sports Odds Trigger</td></tr><tr><td>1394</td><td>GA4 - mobile - home page - Sports View More</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Sports View MoreTrigger</td></tr><tr><td>1396</td><td>GA4 - mobile - home page - Banner#2</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Banner#2 Trigger</td></tr><tr><td>1398</td><td>GA4 - mobile - home page - Banner#1</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Banner#1 Trigger</td></tr><tr><td>1400</td><td>GA4 - mobile - home page - Sports Market Switcher</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page - Sports Market Switcher Trigger</td></tr><tr><td>1403</td><td>GA4 - custom - all ecommerce events</td><td>GA4</td><td>GA4 Event</td><td>Sin carpeta</td><td>Activo</td><td>NOT_SET</td><td>all_ecommerce-Trigger</td></tr><tr><td>1404</td><td>[Production] RT pixel tracker</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>1406</td><td>GA4 - mobile - home page - League Quick Links</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page -League Quick LinksTrigger</td></tr><tr><td>1408</td><td>GA4 - mobile - home page - League Quick Links Selector</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page -League Quick Links SelectorTrigger</td></tr><tr><td>1410</td><td>GA4 - mobile - home page - League Quick Links Inside Selector</td><td>GA4</td><td>GA4 Event</td><td>GA4 mobile</td><td>Activo</td><td>NOT_SET</td><td>GA4 - mobile - home page -League Quick Links Inside SelectorTrigger</td></tr><tr><td>1411</td><td>GA4 - desktop - Log In</td><td>GA4</td><td>GA4 Event</td><td>GA4 desktop</td><td>Activo</td><td>NOT_SET</td><td>GA4 - Desktop - Log In</td></tr><tr><td>1413</td><td>script - pixel - stalkoda</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Pausado</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>1424</td><td>Zendesk Authenticate V2</td><td>Zendesk</td><td>Custom HTML</td><td>Zendesk Desktop Tag</td><td>Activo</td><td>NOT_SET</td><td>CE - zendesk_jwt_ready</td></tr><tr><td>1425</td><td>custom - pixel - gambling affiliation</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>2147479553</td></tr><tr><td>1426</td><td>pixel - GamblingAffRet3</td><td>Otros</td><td>Custom HTML</td><td>Pixels</td><td>Activo</td><td>NOT_SET</td><td>2147479553</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="proximos">
+      <h2>Próximos pasos sugeridos</h2>
+      <div class="three-col">
+        <div class="card">
+          <h3>1. QA de conversiones</h3>
+          <p>Validar registro completo, login y apuesta deportiva en Preview/DebugView, separando mobile y desktop.</p>
+        </div>
+        <div class="card">
+          <h3>2. Rediseño de taxonomía</h3>
+          <p>Definir eventos canónicos y parámetros obligatorios para reducir tags repetidos y mejorar reportabilidad.</p>
+        </div>
+        <div class="card">
+          <h3>3. Gobernanza</h3>
+          <p>Documentar consentimiento, tags pausados, responsables y reglas para nuevas implementaciones.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Fuente: exportación JSON del contenedor GTM-NQ9S7TN. Este informe evalúa configuración, estructura y oportunidades de mejora; no reemplaza una prueba funcional de disparo en sitio.
+    </div>
+  </main>
+
+  <script>
+    const input = document.getElementById('tagSearch');
+    const table = document.getElementById('inventoryTable');
+    if (input && table) {
+      input.addEventListener('input', () => {
+        const q = input.value.toLowerCase().trim();
+        [...table.querySelectorAll('tbody tr')].forEach(row => {
+          row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none'
+        })
+      })
+    }
+  </script>
+</body>
+</html>
