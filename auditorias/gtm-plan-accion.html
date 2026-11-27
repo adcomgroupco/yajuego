@@ -1,787 +1,318 @@
 <!DOCTYPE html>
-<html lang="es" data-suelo="tinta">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plan de acción de la auditoría de medición del contenedor GTM-NQ9S7TN de YaJuego: hallazgos priorizados, roadmap, checklist de validación y modelo de eventos.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Plan de acción GTM</title>
-<link rel="stylesheet" href="../assets/css/adcom-tokens.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/ds/fonts.css">
+  <link rel="stylesheet" href="../assets/css/adcom-v2.css?v=20261127">
+  <link rel="icon" type="image/png" href="../assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="../assets/ds/logos/apple-touch-icon.png">
   <style>
-    :root {
-      --bg: #111;
-      --paper: #1a1a1a;
-      --ink: #f7f7f7;
-      --muted: #a7a7a7;
-      --line: #2d2d2d;
-      --accent: #ffd400;
-      --accent2: #6fd3ff;
-      --good: #64d48c;
-      --warn: #ffc857;
-      --bad: #ff7770;
-      --soft-green: rgba(100,212,140,.14);
-      --soft-warn: rgba(255,200,87,.14);
-      --soft-red: rgba(255,119,112,.14);
-      --chip: #242424;
-      --sidebar: 260px
-    }
-    * { box-sizing: border-box }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.48
-    }
-    .page {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 44px 24px 72px
-    }
-    header {
-      display: grid;
-      grid-template-columns: 1.4fr 0.6fr;
-      gap: 32px;
-      align-items: end;
-      margin-bottom: 28px;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 28px
-    }
-    .eyebrow {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent2);
-      margin-bottom: 10px
-    }
-    h1 {
-      font-size: clamp(34px, 6vw, 62px);
-      line-height: .96;
-      letter-spacing: -.02em;
-      margin: 0 0 18px;
-      color: var(--accent)
-    }
-    h2 {
-      font-size: 28px;
-      letter-spacing: -.02em;
-      margin: 48px 0 14px;
-      color: var(--accent)
-    }
-    h3 {
-      font-size: 18px;
-      margin: 0 0 8px;
-      color: var(--accent)
-    }
-    p { margin: 0 0 12px }
-    .lead {
-      font-size: 18px;
-      color: #d6d6d6;
-      max-width: 840px
-    }
-    .meta {
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 20px;
-      box-shadow: none
-    }
-    .meta div {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      border-bottom: 1px dashed var(--line);
-      padding: 8px 0;
-      font-size: 13px
-    }
-    .meta div:last-child { border-bottom: 0 }
-    .meta span:first-child { color: var(--muted) }
-    .meta span:last-child { font-weight: 700; text-align: right }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin: 26px 0 12px
-    }
-    .card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 18px;
-      box-shadow: none
-    }
-    .card .num {
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: -.02em;
-      color: var(--accent)
-    }
-    .card .label {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 6px
-    }
-    .diagnosis {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-top: 18px
-    }
-    .panel {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 22px;
-      box-shadow: none
-    }
-    .panel.bad {border:1px solid var(--bad)}
-    .panel.warn {border:1px solid var(--warn)}
-    .panel.good {border:1px solid var(--good)}
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .02em;
-      margin-bottom: 10px
-    }
-    .badge.bad { background: var(--soft-red); color: var(--bad) }
-    .badge.warn { background: var(--soft-warn); color: var(--warn) }
-    .badge.good { background: var(--soft-green); color: var(--good) }
-    ul.clean {
-      padding-left: 18px;
-      margin: 8px 0 0
-    }
-    ul.clean li { margin: 6px 0 }
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      box-shadow: none
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 920px;
-      font-size: 13.5px
-    }
-    th {
-      background: #222;
-      color: var(--accent);
-      text-align: left;
-      padding: 14px 14px;
-      font-size: 12px;
-      white-space: nowrap
-    }
-    td {
-      border-top: 1px solid var(--line);
-      padding: 14px;
-      vertical-align: top
-    }
-    tr:nth-child(even) td { background: rgba(255,255,255,.025) }
-    .p0, .p1, .p2 {
-      font-weight: 800;
-      text-align: center;
-      border-radius: var(--radius);
-      white-space: nowrap
-    }
-    td.p0 { color: var(--bad) }
-    td.p1 { color: var(--warn) }
-    td.p2 { color: var(--good) }
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 16px
-    }
-    .phase {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 18px;
-      position: relative;
-      min-height: 210px
-    }
-    .phase .kicker {
-      font-size: 12px;
-      color: var(--accent2);
-      font-weight: 800;
-      margin-bottom: 8px
-    }
-    .phase h3 { font-size: 18px }
-    .phase p { font-size: 13.5px; color: #d2d2d2 }
-    .callout {
-      background: linear-gradient(135deg, #191919, #242008);
-      color: #fff9ee;
-      border: 1px solid rgba(255,212,0,.35);
-      border-radius: var(--radius-sm);
-      padding: 24px;
-      margin: 34px 0;
-      box-shadow: none
-    }
-    .callout h2 {
-      color: #fff9ee;
-      margin-top: 0
-    }
-    .callout p { color: #f5ead9 }
-    .chips {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:12px
-    }
-    .chip {
-      background: var(--chip);
-      color: var(--accent);
-      border:1px solid var(--line);
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700
-    }
-    .source {
-      margin-top: 42px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      font-size:var(--fs-body-min);
-      color: var(--muted)
-    }
-    .print {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      border: 0;
-      background: var(--accent);
-      color: #111;
-      border-radius: var(--radius-sm);
-      padding: 12px 18px;
-      font-weight: 800;
-      box-shadow: 0 4px 12px rgba(0,0,0,.18);
-      cursor: pointer
-    }
-    .top-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 26px
-    }
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 9px 13px;
-      border: 1px solid rgba(255,212,0,.35);
-      border-radius: var(--radius-sm);
-      background: rgba(255,212,0,.08);
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800
-    }
-    .nav-link:hover {
-      background: var(--accent);
-      color: #111
-    }
-    /* Mini landing layout inspired by ruta.html */
-    html { scroll-behavior: smooth }
-    body {
-      display: flex;
-      font-family: 'Poppins', sans-serif;
-      background: #111
-    }
-    #sidebar {
-      width: var(--sidebar);
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 100;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      background: #0d0d0d;
-      border-right: 1px solid #1e1e1e
-    }
-    .sb-head {
-      padding: 1.5rem 1.4rem 1.2rem;
-      border-bottom: 1px solid #1e1e1e
-    }
-    .sb-brand {
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: .06em
-    }
-    .sb-brand small {
-      display: block;
-      margin-top: 3px;
-      color: #999;
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 700
-    }
-    .sb-client {
-      padding: 1rem 1.4rem .9rem;
-      border-bottom: 1px solid #1e1e1e
-    }
-    .sb-client-label {
-      color:var(--fg-muted);
-      font-size: 12px;
-      margin-bottom: 5px
-    }
-    .sb-client-name {
-      color: var(--accent);
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      font-weight: 800
-    }
-    .sb-client-url {
-      color:var(--fg-muted);
-      font-size: 12px;
-      margin-top: 2px
-    }
-    .sb-nav { padding: 1rem 0; flex: 1 }
-    .sb-section-label {
-      color:var(--fg-muted);
-      font-size: 12px;
-      padding: .8rem 1.4rem .3rem
-    }
-    .sb-item {
-      display: flex;
-      align-items: center;
-      gap: .7rem;
-      padding: .55rem 1.4rem;
-      color: #999;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      position: relative
-    }
-    .sb-item:hover { background: rgba(255,255,255,.04); color: #fff }
-    .sb-item.primary { color: var(--accent); background: rgba(255,212,0,.08) }
-    .sb-item.primary::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--accent)
-    }
-    .sb-num {
-      width: 20px;
-      height: 20px;
-      border-radius: 0;
-      background: #282828;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      flex-shrink: 0
-    }
-    .sb-item.primary .sb-num { background: var(--accent); color: #111 }
-    .sb-footer {
-      padding: 1rem 1.4rem;
-      border-top: 1px solid #1e1e1e
-    }
-    .sb-total-label {
-      color:var(--fg-muted);
-      font-size: 12px
-    }
-    .sb-total-val {
-      color: var(--accent);
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800
-    }
-    .page {
-      width: calc(100% - var(--sidebar));
-      max-width: none;
-      margin: 0 0 0 var(--sidebar);
-      padding: 0
-    }
-    header {
-      min-height: 72vh;
-      margin: 0;
-      padding: 4rem 3.5rem;
-      background: #111;
-      position: relative;
-      overflow: hidden
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,212,0,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,212,0,.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      top: -12%;
-      right: -8%;
-      width: 58vw;
-      height: 72vh;
-      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-      background: radial-gradient(ellipse at 60% 40%, rgba(255,212,0,.10) 0%, transparent 70%);
-      pointer-events: none
-    }
-    header > * { position: relative; z-index: 1 }
-    header section { margin: 0 }
-    .page > section {
-      margin: 0;
-      padding: 3.5rem;
-      border-bottom: 1px solid #1a1a1a
-    }
-    .page > section:nth-of-type(even) { background: #0e0e0e }
-    .page > section:nth-of-type(odd) { background: #111 }
-    section[id] { scroll-margin-top: 20px }
-    h1, h2, h3, .card .num, .sb-brand, .sb-total-val {
-      font-family: 'Poppins', sans-serif
-    }
-    h1 {
-      font-size: clamp(3rem, 6vw, 6rem);
-      line-height: .9;
-      letter-spacing: -.02em
-    }
-    h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      line-height: 1.05;
-      letter-spacing: -.02em;
-      margin-top: 0
-    }
-    .eyebrow {
-      color: var(--accent);
-      font-size: 12px;
-      letter-spacing: .18em;
-      display: flex;
-      align-items: center;
-      gap: .55rem
-    }
-    .eyebrow::before {
-      content: '';
-      height: 1px;color:var(--fg-muted);font-size:var(--fs-body-min)}
-    .lead {
-      font-weight: 300;
-      line-height: 1.75
-    }
-    .cards {
-      gap: 1rem;
-      margin: 0
-    }
-    .card {
-      padding: 1.3rem 1.2rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: none
-    }
-    .card::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 3px;
-      background: var(--accent)
-    }
-    .callout {
-      margin: 0;
-      padding: 2.2rem;
-      background: linear-gradient(135deg, #171717 0%, #171717 65%, #241f06 100%);
-      box-shadow: none
-    }
-    .top-actions {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 120;
-      margin: 0
-    }
-    @media (max-width: 900px) {
-      body { display: block }
-      #sidebar { display: none }
-      .page { width: 100%; margin-left: 0 }
-      header, .page > section { padding: 2.2rem 1.4rem }
-      header, .diagnosis, .timeline { grid-template-columns: 1fr }
-      .cards { grid-template-columns: repeat(2, 1fr) }
-      .print { display:none }
-      .top-actions {
-        position: static;
-        padding: 1rem 1.4rem 0;
-        background: #111
-      }
-    }
-    @media (max-width: 620px) {
-      .cards { grid-template-columns: 1fr }
-      h1 { font-size: 3rem }
-    }
-    @media print {
-      :root {
-        --bg: #fff;
-        --paper: #fff;
-        --ink: #202020;
-        --muted: #555;
-        --line: #d8d8d8
-      }
-      #sidebar { display:none }
-      body { display:block }
-      body { background: #fff }
-      .page { max-width: none; padding: 24px }
-      .print, .top-actions { display:none }
-      .card, .panel, .phase, .table-wrap, .callout { box-shadow:none }
-      table { font-size: 12px }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-padding-top:var(--nav-height)}
+    body{margin:0;background:var(--washi);color:var(--sumi)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:var(--crema);padding:1px 6px;border-radius:var(--radius-input)}
+    .ad-sec--papel code{background:var(--washi)}
+    .ad-sec--oscuro code{background:rgba(247,246,242,.12);color:var(--sobre-oscuro-100)}
+    .ad-hero__acciones .ad-link,.ad-foot__in a{display:inline-flex;align-items:center;min-height:var(--target-min)}
+
+    /* Plan de acción GTM · solo lo particular de la página. Prefijo gp-, todo sale de tokens. */
+    .gp-cab{max-width:none}
+    .gp-cab h2{max-width:26ch}
+    .gp-cab .ad-lead{max-width:64ch}
+    .gp-bloque{margin-block-start:var(--space-12)}
+    .gp-resumen{margin-block-start:var(--space-4)}
+    .gp-portada{margin-block-start:var(--space-8)}
+    .gp-texto{display:flex;flex-direction:column;gap:var(--space-4);max-width:62ch}
+    .gp-texto p{margin:0;color:var(--tinta-secundaria)}
+    .gp-card{gap:var(--space-4)}
+    .gp-card .ad-estado{align-self:flex-start}
+    .gp-card h3{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.015em}
+    .gp-card p{margin:0;font-size:16px;color:var(--tinta-secundaria)}
+    .gp-lista{margin:0;padding-left:1.1em;font-size:15px;color:var(--tinta-secundaria)}
+    .gp-lista li+li{margin-block-start:var(--space-2)}
+    .gp-tabla th[scope="row"]{font-weight:500;text-align:left}
+    .gp-tabla td:nth-child(n+3){min-width:200px}
+    .ad-ficha dd{overflow-wrap:anywhere}
+    .ad-paso p{margin:0}
+    .ad-pasos{row-gap:var(--space-12)}
+    .gp-kicker{font-size:14px;color:var(--tinta-suave)}
+    .gp-chips{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-block-start:auto;padding-block-start:var(--space-2)}
+    .gp-chips .ad-tag--line{padding:2px 10px}
+    .gp-nota{margin:0;max-width:80ch}
+    .gp-evitar{display:flex;flex-direction:column;gap:var(--space-4);max-width:62ch;padding:var(--space-8);border:1px solid rgba(247,246,242,.24);border-radius:var(--radius-panel)}
+    .gp-evitar .ad-estado{align-self:flex-start}
+    .gp-evitar h3{margin:0;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em}
+    .gp-evitar p{margin:0;color:var(--sobre-oscuro-200)}
+    .gp-acciones{margin-block-start:var(--space-8)}
+    @media (max-width:900px){
+      .ad-nav__links{display:none}
+    }
+    @media print{
+      .ad-nav{position:static}
+      .gp-imprimir{display:none}
     }
   </style>
 </head>
 <body>
-  <aside id="sidebar" aria-label="Índice del plan de acción GTM">
-    <div class="sb-head">
-      <div class="sb-brand">YaJuego<small>Auditoría GTM</small></div>
-    </div>
-    <div class="sb-client">
-      <div class="sb-client-label">Documento</div>
-      <div class="sb-client-name">Plan de acción</div>
-      <div class="sb-client-url">GTM-NQ9S7TN</div>
-    </div>
-    <nav class="sb-nav">
-      <div class="sb-section-label">Navegación</div>
-      <a class="sb-item primary" href="#inicio"><span class="sb-num">00</span>Resumen</a>
-      <a class="sb-item" href="#diagnostico"><span class="sb-num">01</span>Diagnóstico central</a>
-      <a class="sb-item" href="#lectura"><span class="sb-num">02</span>Lectura ejecutiva</a>
-      <a class="sb-item" href="#hallazgos"><span class="sb-num">03</span>Hallazgos</a>
-      <a class="sb-item" href="#plan"><span class="sb-num">04</span>Plan recomendado</a>
-      <a class="sb-item" href="#roadmap"><span class="sb-num">05</span>Roadmap</a>
-      <a class="sb-item" href="#checklist"><span class="sb-num">06</span>Checklist</a>
-      <a class="sb-item" href="#modelo"><span class="sb-num">07</span>Modelo eventos</a>
-      <div class="sb-section-label">Accesos</div>
-      <a class="sb-item" href="gtm.html"><span class="sb-num">↗</span>Auditoría general</a>
-      <a class="sb-item" href="../index.html"><span class="sb-num">↩</span>Hub</a>
-    </nav>
-    <div class="sb-footer">
-      <div class="sb-total-label">Tags auditados</div>
-      <div class="sb-total-val">383</div>
-    </div>
-  </aside>
-  <button class="print" onclick="window.print()">Guardar / imprimir PDF</button>
-  <main class="page">
-    <nav class="top-actions" aria-label="Navegación de auditoría">
-      <a class="nav-link" href="../index.html">Volver al hub</a>
-      <a class="nav-link" href="gtm.html">Ver auditoría general GTM</a>
-    </nav>
-    <header id="inicio">
-      <section>
-        <div class="eyebrow">Auditoría de medición · Diagnóstico y plan de acción</div>
-        <h1>GTM GTM-NQ9S7TN</h1>
-        <p class="lead">
-          Este documento prioriza los hallazgos que afectan la calidad de medición, atribución y gobernanza del contenedor.
-          El foco no es inventariar cada tag, sino definir qué revisar primero, qué corregir y cómo llevar la medición a un modelo más estable.
-        </p>
-      </section>
-      <aside class="meta">
-        <div><span>Contenedor</span><span>CO · GTM-NQ9S7TN</span></div>
-        <div><span>Exportación</span><span>2026-05-26 14:17:10</span></div>
-        <div><span>Contexto</span><span>WEB</span></div>
-        <div><span>Fuente</span><span>GTM-NQ9S7TN_workspace1000243.json</span></div>
-      </aside>
-    </header>
+<a class="skip-link" href="#inicio">Ir al plan de acción</a>
 
-    <section class="cards" id="metricas">
-      <div class="card"><div class="num">383</div><div class="label">Tags instalados</div></div>
-      <div class="card"><div class="num">321</div><div class="label">Eventos GA4</div></div>
-      <div class="card"><div class="num">360</div><div class="label">Triggers de clic</div></div>
-      <div class="card"><div class="num">383</div><div class="label">Tags sin consentimiento clasificado</div></div>
-    </section>
+<header class="ad-nav">
+  <nav class="ad-nav__in" aria-label="Secciones del plan de acción">
+    <a class="ad-marca" href="../index.html"><img src="../assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · Plan de acción GTM</i></a>
+    <div class="ad-nav__links"><a href="#diagnostico">Diagnóstico</a><a href="#lectura">Lectura</a><a href="#hallazgos">Hallazgos</a><a href="#plan">Plan</a><a href="#roadmap">Roadmap</a><a href="#checklist">Checklist</a><a href="#modelo">Modelo</a><a href="#decisiones">Decisiones</a></div>
+  </nav>
+</header>
 
-    <section class="callout" id="diagnostico">
-      <h2>Diagnóstico central</h2>
-      <p>
-        La medición tiene cobertura amplia, especialmente en GA4, registro, navegación, apuesta deportiva, Meta y Google Ads.
-        Sin embargo, el contenedor muestra señales de crecimiento acumulativo: muchos tags por interacción, naming inconsistente,
-        dependencia alta de selectores CSS y ausencia de clasificación explícita de consentimiento dentro de GTM.
-      </p>
-      <p>
-        La prioridad no debería ser crear más eventos, sino estabilizar las conversiones críticas, limpiar el modelo de datos y
-        convertir la medición en un sistema gobernable para pauta, analítica y producto.
-      </p>
-    </section>
+<main id="inicio">
 
-    <section id="lectura">
-      <h2>Lectura ejecutiva del diagnóstico</h2>
-      <div class="diagnosis">
-        <div class="panel bad">
-          <span class="badge bad">Riesgo alto</span>
+  <section class="ad-sec ad-hero" id="resumen" aria-labelledby="titulo">
+    <div class="ad-wrap">
+      <p class="ad-eyebrow">Auditoría de medición · Diagnóstico y plan de acción</p>
+      <h1 id="titulo" class="ad-t-display-hero">
+        <span class="ad-ln">GTM</span>
+        <span class="ad-ln"><span class="ad-hl">GTM-NQ9S7TN</span></span>
+      </h1>
+      <div class="ad-split ad-split--arriba gp-portada">
+        <div>
+          <p class="ad-lead">Este documento prioriza los hallazgos que afectan la calidad de medición, atribución y gobernanza del contenedor. El foco no es inventariar cada tag, sino definir qué revisar primero, qué corregir y cómo llevar la medición a un modelo más estable.</p>
+          <div class="ad-hero__acciones">
+            <a class="ad-btn ad-btn--accent" href="gtm.html">Ver auditoría general GTM</a>
+            <a class="ad-link" href="../index.html">Volver al hub</a>
+            <button class="ad-btn ad-btn--outline gp-imprimir" type="button" onclick="window.print()">Guardar / imprimir PDF</button>
+          </div>
+        </div>
+        <dl class="ad-ficha">
+          <div><dt>Contenedor</dt><dd>CO · GTM-NQ9S7TN</dd></div>
+          <div><dt>Exportación</dt><dd>2026-05-26 14:17:10</dd></div>
+          <div><dt>Contexto</dt><dd>WEB</dd></div>
+          <div><dt>Fuente</dt><dd>GTM-NQ9S7TN_workspace1000243.json</dd></div>
+          <div><dt>Tags auditados</dt><dd>383</dd></div>
+        </dl>
+      </div>
+      <p class="ad-eyebrow gp-bloque">00 · Resumen</p>
+      <div class="ad-kpis gp-resumen" id="metricas" role="list" aria-label="Métricas del contenedor">
+        <div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Tags instalados</span><span class="ad-kpi__n">383</span></div>
+        <div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Eventos GA4</span><span class="ad-kpi__n">321</span></div>
+        <div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Triggers de clic</span><span class="ad-kpi__n">360</span></div>
+        <div class="ad-kpi ad-kpi--on" role="listitem"><span class="ad-kpi__l">Tags sin consentimiento clasificado</span><span class="ad-kpi__n">383</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-sec ad-sec--papel" id="diagnostico" aria-labelledby="t-diagnostico">
+    <div class="ad-wrap ad-split ad-split--arriba">
+      <header class="ad-sec-cab ad-sec-cab--grande">
+        <p class="ad-eyebrow">01 · Diagnóstico central</p>
+        <h2 id="t-diagnostico">Diagnóstico central</h2>
+      </header>
+      <div class="gp-texto">
+        <p>La medición tiene cobertura amplia, especialmente en GA4, registro, navegación, apuesta deportiva, Meta y Google Ads. Sin embargo, el contenedor muestra señales de crecimiento acumulativo: muchos tags por interacción, naming inconsistente, dependencia alta de selectores CSS y ausencia de clasificación explícita de consentimiento dentro de GTM.</p>
+        <p>La prioridad no debería ser crear más eventos, sino estabilizar las conversiones críticas, limpiar el modelo de datos y convertir la medición en un sistema gobernable para pauta, analítica y producto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="lectura" aria-labelledby="t-lectura">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <p class="ad-eyebrow">02 · Lectura ejecutiva</p>
+        <h2 id="t-lectura">Lectura ejecutiva del diagnóstico</h2>
+      </header>
+      <div class="ad-grid" style="--col:440px" role="list" aria-label="Riesgos priorizados">
+        <article class="ad-card gp-card" role="listitem">
+          <span class="ad-estado ad-estado--alerta">Riesgo alto</span>
           <h3>Consentimiento y datos personales</h3>
-          <p>
-            Todos los tags aparecen con consentimiento no configurado en GTM. Además, existe un HTML asociado a registro avanzado
-            que captura email/teléfono, mientras Google Ads tiene conversiones avanzadas desactivadas.
-          </p>
-          <ul class="clean">
+          <p>Todos los tags aparecen con consentimiento no configurado en GTM. Además, existe un HTML asociado a registro avanzado que captura email/teléfono, mientras Google Ads tiene conversiones avanzadas desactivadas.</p>
+          <ul class="gp-lista">
             <li>Acción inmediata: confirmar si la CMP controla el disparo antes de GTM o si se requiere configurar Consent Mode en el contenedor.</li>
             <li>Definir si Enhanced Conversions se implementa bien o se retira la captura de datos.</li>
           </ul>
-        </div>
-        <div class="panel bad">
-          <span class="badge bad">Riesgo alto</span>
+        </article>
+        <article class="ad-card gp-card" role="listitem">
+          <span class="ad-estado ad-estado--alerta">Riesgo alto</span>
           <h3>Conversiones principales sin validación funcional</h3>
-          <p>
-            El JSON muestra tags para registro completo, apuesta exitosa, login y remarketing, pero no confirma que disparen sin duplicidad
-            ni que lleguen correctamente a cada plataforma.
-          </p>
-          <ul class="clean">
+          <p>El JSON muestra tags para registro completo, apuesta exitosa, login y remarketing, pero no confirma que disparen sin duplicidad ni que lleguen correctamente a cada plataforma.</p>
+          <ul class="gp-lista">
             <li>Acción inmediata: prueba end-to-end con GTM Preview, GA4 DebugView, Network, Meta y Google Ads.</li>
             <li>Primero validar registro completo y apuesta exitosa; después interacciones secundarias.</li>
           </ul>
-        </div>
-        <div class="panel warn">
-          <span class="badge warn">Riesgo medio</span>
+        </article>
+        <article class="ad-card gp-card" role="listitem">
+          <span class="ad-estado ad-estado--parcial">Riesgo medio</span>
           <h3>Modelo GA4 atomizado</h3>
-          <p>
-            Hay 321 tags GA4 Event y 54 nombres únicos de evento. Muchos nombres mezclan dispositivo, sección y acción en el nombre del evento,
-            lo que complica reportes y evolución del modelo.
-          </p>
-          <ul class="clean">
+          <p>Hay 321 tags GA4 Event y 54 nombres únicos de evento. Muchos nombres mezclan dispositivo, sección y acción en el nombre del evento, lo que complica reportes y evolución del modelo.</p>
+          <ul class="gp-lista">
             <li>Acción: migrar gradualmente a eventos canónicos con parámetros.</li>
             <li>Menos eventos, más contexto en parámetros.</li>
           </ul>
-        </div>
-        <div class="panel warn">
-          <span class="badge warn">Riesgo medio</span>
+        </article>
+        <article class="ad-card gp-card" role="listitem">
+          <span class="ad-estado ad-estado--parcial">Riesgo medio</span>
           <h3>Fragilidad por selectores CSS</h3>
-          <p>
-            Hay 323 triggers con CSS_SELECTOR. Esta estructura funciona mientras el frontend no cambie; si cambia una clase,
-            se puede caer la medición sin aviso.
-          </p>
-          <ul class="clean">
+          <p>Hay 323 triggers con CSS_SELECTOR. Esta estructura funciona mientras el frontend no cambie; si cambia una clase, se puede caer la medición sin aviso.</p>
+          <ul class="gp-lista">
             <li>Acción: pasar eventos críticos a dataLayer.</li>
             <li>Mantener clicks CSS solo para tracking secundario o exploratorio.</li>
           </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="hallazgos">
-      <h2>Matriz de hallazgos priorizados</h2>
-      <div class="table-wrap"><table><thead><tr><th>Prioridad</th><th>Hallazgo</th><th>Evidencia en el JSON</th><th>Impacto</th><th>Plan de acción</th></tr></thead><tbody><tr><td class="p0">P0</td><td>Gobernanza de consentimiento incompleta en GTM</td><td>383 tags aparecen con consentStatus: NOT_SET.</td><td>Riesgo de activación de tags publicitarios/analítica sin clasificación explícita dentro del contenedor.</td><td>Definir mapa de consentimiento por tipo de tag y configurar checks por analytics_storage, ad_storage, ad_user_data y ad_personalization.</td></tr><tr><td class="p0">P0</td><td>Conversión de registro requiere validación funcional</td><td>Registro completo existe en Google Ads, Meta y GA4; los disparadores relevantes usan eventos/variables de registro.</td><td>Puede haber medición correcta, pero el JSON no confirma que el evento llegue completo a cada plataforma ni que no haya duplicidad.</td><td>Validar en Preview/DebugView/Network el flujo completo de registro en desktop y mobile, con usuarios de prueba.</td></tr><tr><td class="p0">P0</td><td>Enhanced Conversions está inconsistente</td><td>El tag de Google Ads Registro completo tiene enableEnhancedConversion=false, mientras existe un HTML de inicio de registro avanzado que captura email/teléfono.</td><td>Posible implementación incompleta o captura innecesaria de datos personales en localStorage.</td><td>Decidir si se implementa Enhanced Conversions formalmente o se elimina/desactiva el HTML de captura.</td></tr><tr><td class="p1">P1</td><td>Modelo GA4 muy atomizado y difícil de analizar</td><td>321 tags GA4 Event con 54 nombres únicos; 305 eventos no siguen una convención limpia por caracteres/estructura.</td><td>Reportes menos gobernables, duplicación semántica y dificultad para comparar funnels o secciones.</td><td>Migrar a una taxonomía de menos eventos y más parámetros: ui_interaction, registration_step, sign_up, login, sport_bet_placed.</td></tr><tr><td class="p1">P1</td><td>Alta dependencia de clics y selectores CSS</td><td>360 triggers de clic y 323 triggers con CSS_SELECTOR.</td><td>La medición se puede romper por cambios de frontend sin que el equipo de marketing lo note.</td><td>Mover eventos críticos a dataLayer.push() desde producto/desarrollo y dejar CSS solo para eventos secundarios.</td></tr><tr><td class="p1">P1</td><td>Parámetro genérico click usado como contenedor de información</td><td>El parámetro click aparece en 274 tags GA4.</td><td>El dato queda legible para operación, pero débil para análisis estructurado.</td><td>Separar en element_text, element_name, section, interaction_type, device_type y page_type.</td></tr><tr><td class="p2">P2</td><td>Medición de apuesta exitosa poco enriquecida</td><td>sport_bet_placed en GA4 envía value; Meta Purchase incluye value, num_items, currency y content_type.</td><td>Sirve para conversión, pero limita análisis de calidad de apuesta, deporte, mercado, tipo de apuesta o live/pre-match.</td><td>Agregar bet_amount, currency, num_selections, bet_type, sport, market, odds, bet_status y event_id.</td></tr><tr><td class="p2">P2</td><td>Histórico de tags pausados y ambientes mezclados</td><td>42 tags pausados; aparecen referencias a producción, staging e integration.</td><td>Carga cognitiva, riesgo de reactivaciones accidentales y baja trazabilidad de campañas cerradas.</td><td>Crear matriz de limpieza: mantener, archivar o eliminar, con responsable y motivo.</td></tr></tbody></table></div>
-    </section>
-
-    <section id="plan">
-      <h2>Plan de acción recomendado</h2>
-      <p>
-        El plan está diseñado para evitar una “cirugía mayor” innecesaria: primero se valida lo crítico,
-        luego se corrige lo que afecta atribución y cumplimiento, y después se rediseña la taxonomía.
-      </p>
-      <div class="table-wrap"><table><thead><tr><th>Fase</th><th>Tiempo</th><th>Acción</th><th>Entregable</th><th>Responsable sugerido</th></tr></thead><tbody><tr><td>0. Preparación</td><td>Día 1</td><td>Congelar alcance de auditoría</td><td>Listado de flujos críticos: home, registro inicio, pasos de registro, registro completo, login, apuesta exitosa, recarga/depósito si aplica, casino, sports home.</td><td>Cuentas / Data / Producto</td></tr><tr><td>1. Validación funcional P0</td><td>Días 2-4</td><td>Confirmar conversiones principales</td><td>Probar registro completo desktop/mobile, apuesta exitosa y login con Preview de GTM, GA4 DebugView, Network, Meta Pixel Helper y Google Ads Tag Assistant.</td><td>Data / Paid Media</td></tr><tr><td>1. Validación funcional P0</td><td>Días 2-4</td><td>Validar duplicidad</td><td>Confirmar si page_view, registration_complete/sign_up, Purchase y sport_bet_placed se disparan una sola vez por acción real.</td><td>Data</td></tr><tr><td>1. Validación funcional P0</td><td>Días 3-5</td><td>Revisión de consentimiento</td><td>Probar escenario sin aceptar cookies, aceptando analítica, aceptando marketing y rechazo total.</td><td>Data / Legal / Dev</td></tr><tr><td>2. Remediación crítica</td><td>Semana 2</td><td>Resolver Enhanced Conversions</td><td>Activar correctamente con datos hasheados vía configuración soportada o retirar HTML que guarda email/teléfono si no se usará.</td><td>Data / Dev / Legal</td></tr><tr><td>2. Remediación crítica</td><td>Semana 2</td><td>Clasificar tags por consentimiento</td><td>Separar GA4, Google Ads, Meta, Xandr, Hotjar, Zendesk, SDK y pixeles de terceros por categoría de consentimiento.</td><td>Data / Legal</td></tr><tr><td>3. Modelo de medición</td><td>Semanas 3-4</td><td>Rediseñar taxonomía GA4</td><td>Pasar de eventos por zona/dispositivo a eventos canónicos con parámetros. Documentar diccionario de eventos.</td><td>Data / BI / Paid Media</td></tr><tr><td>3. Modelo de medición</td><td>Semanas 3-4</td><td>Priorizar dataLayer para eventos críticos</td><td>Definir contrato de dataLayer para registro, login, apuesta, depósito y funnels críticos.</td><td>Producto / Dev / Data</td></tr><tr><td>4. Limpieza y gobernanza</td><td>Mes 2</td><td>Ordenar contenedor</td><td>Depurar tags pausados, tags sin trigger, tags de staging/integration y campañas inactivas.</td><td>Data / Cuentas</td></tr><tr><td>5. Optimización continua</td><td>Mes 2-3</td><td>Reporting y QA recurrente</td><td>Dashboard de salud de medición, checklist mensual y alertas por caída de eventos críticos.</td><td>BI / Data</td></tr></tbody></table></div>
-    </section>
-
-    <section id="roadmap">
-      <h2>Roadmap 30 / 60 / 90 días</h2>
-      <div class="timeline">
-        <article class="phase">
-          <div class="kicker">Primeros 7 días</div>
-          <h3>Validación y control</h3>
-          <p>Confirmar si las conversiones críticas disparan y llegan bien. Identificar duplicidades y brechas de consentimiento.</p>
-          <div class="chips">
-            <span class="chip">Registro completo</span>
-            <span class="chip">Apuesta exitosa</span>
-            <span class="chip">Consentimiento</span>
-          </div>
-        </article>
-        <article class="phase">
-          <div class="kicker">Días 8-30</div>
-          <h3>Remediación crítica</h3>
-          <p>Corregir conversiones, decidir Enhanced Conversions, clasificar tags por consentimiento y documentar eventos críticos.</p>
-          <div class="chips">
-            <span class="chip">Google Ads</span>
-            <span class="chip">Meta</span>
-            <span class="chip">GA4</span>
-          </div>
-        </article>
-        <article class="phase">
-          <div class="kicker">Días 31-60</div>
-          <h3>Taxonomía y dataLayer</h3>
-          <p>Reducir atomización, migrar eventos críticos a dataLayer y convertir interacciones en eventos con parámetros consistentes.</p>
-          <div class="chips">
-            <span class="chip">Diccionario de eventos</span>
-            <span class="chip">DataLayer contract</span>
-            <span class="chip">QA técnico</span>
-          </div>
-        </article>
-        <article class="phase">
-          <div class="kicker">Días 61-90</div>
-          <h3>Gobernanza y optimización</h3>
-          <p>Implementar monitoreo recurrente, limpiar histórico, crear dashboard de salud y establecer proceso de cambios.</p>
-          <div class="chips">
-            <span class="chip">Dashboard</span>
-            <span class="chip">QA mensual</span>
-            <span class="chip">Control de cambios</span>
-          </div>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="checklist">
-      <h2>Checklist de validación funcional</h2>
-      <div class="table-wrap"><table><thead><tr><th>Flujo</th><th>Plataformas</th><th>Criterio de éxito</th><th>Herramienta de validación</th></tr></thead><tbody><tr><td>Registro completo</td><td>GA4, Google Ads, Meta</td><td>1 evento por registro exitoso, sin duplicidad entre mobile/desktop.</td><td>DebugView, Google Ads Tag Assistant, Meta Pixel Helper, Network</td></tr><tr><td>Inicio de registro</td><td>GA4 / terceros activos</td><td>Evento al iniciar flujo, con step_number=1 o equivalente.</td><td>Preview GTM + DebugView</td></tr><tr><td>Pasos de registro</td><td>GA4</td><td>Secuencia consistente step_1, step_2, step_3, complete.</td><td>DebugView + exploración de funnel</td></tr><tr><td>Apuesta exitosa</td><td>GA4, Meta, partners activos</td><td>Evento solo cuando sportsBetStatus=success y con valor/currency.</td><td>Preview GTM + Network</td></tr><tr><td>Login</td><td>GA4 / SDK / partners si aplica</td><td>Evento posterior a autenticación real, no solo apertura de modal.</td><td>Preview GTM + consola</td></tr><tr><td>Page view</td><td>GA4, Meta, Google Ads remarketing</td><td>1 page_view por carga/SPA view, controlando history change.</td><td>Network + DebugView</td></tr><tr><td>Consentimiento</td><td>Todos los tags</td><td>Diferencia clara entre rechazo, analytics-only y marketing accepted.</td><td>CMP + Consent Overview GTM + Network</td></tr></tbody></table></div>
-    </section>
+  <section class="ad-sec ad-sec--papel" id="hallazgos" aria-labelledby="t-hallazgos">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <p class="ad-eyebrow">03 · Hallazgos</p>
+        <h2 id="t-hallazgos">Matriz de hallazgos priorizados</h2>
+      </header>
+<div class="ad-tabla gp-tabla ">
+<table style="min-width:1040px">
+<caption>Matriz de hallazgos priorizados · contenedor GTM-NQ9S7TN · exportación del 2026-05-26 14:17:10</caption>
+<thead><tr><th scope="col">Prioridad</th><th scope="col">Hallazgo</th><th scope="col">Evidencia en el JSON</th><th scope="col">Impacto</th><th scope="col">Plan de acción</th></tr></thead>
+<tbody>
+<tr><td><span class="ad-estado ad-estado--alerta">P0</span></td><td>Gobernanza de consentimiento incompleta en GTM</td><td>383 tags aparecen con consentStatus: NOT_SET.</td><td>Riesgo de activación de tags publicitarios/analítica sin clasificación explícita dentro del contenedor.</td><td>Definir mapa de consentimiento por tipo de tag y configurar checks por analytics_storage, ad_storage, ad_user_data y ad_personalization.</td></tr>
+<tr><td><span class="ad-estado ad-estado--alerta">P0</span></td><td>Conversión de registro requiere validación funcional</td><td>Registro completo existe en Google Ads, Meta y GA4; los disparadores relevantes usan eventos/variables de registro.</td><td>Puede haber medición correcta, pero el JSON no confirma que el evento llegue completo a cada plataforma ni que no haya duplicidad.</td><td>Validar en Preview/DebugView/Network el flujo completo de registro en desktop y mobile, con usuarios de prueba.</td></tr>
+<tr><td><span class="ad-estado ad-estado--alerta">P0</span></td><td>Enhanced Conversions está inconsistente</td><td>El tag de Google Ads Registro completo tiene enableEnhancedConversion=false, mientras existe un HTML de inicio de registro avanzado que captura email/teléfono.</td><td>Posible implementación incompleta o captura innecesaria de datos personales en localStorage.</td><td>Decidir si se implementa Enhanced Conversions formalmente o se elimina/desactiva el HTML de captura.</td></tr>
+<tr><td><span class="ad-estado ad-estado--parcial">P1</span></td><td>Modelo GA4 muy atomizado y difícil de analizar</td><td>321 tags GA4 Event con 54 nombres únicos; 305 eventos no siguen una convención limpia por caracteres/estructura.</td><td>Reportes menos gobernables, duplicación semántica y dificultad para comparar funnels o secciones.</td><td>Migrar a una taxonomía de menos eventos y más parámetros: ui_interaction, registration_step, sign_up, login, sport_bet_placed.</td></tr>
+<tr><td><span class="ad-estado ad-estado--parcial">P1</span></td><td>Alta dependencia de clics y selectores CSS</td><td>360 triggers de clic y 323 triggers con CSS_SELECTOR.</td><td>La medición se puede romper por cambios de frontend sin que el equipo de marketing lo note.</td><td>Mover eventos críticos a dataLayer.push() desde producto/desarrollo y dejar CSS solo para eventos secundarios.</td></tr>
+<tr><td><span class="ad-estado ad-estado--parcial">P1</span></td><td>Parámetro genérico click usado como contenedor de información</td><td>El parámetro click aparece en 274 tags GA4.</td><td>El dato queda legible para operación, pero débil para análisis estructurado.</td><td>Separar en element_text, element_name, section, interaction_type, device_type y page_type.</td></tr>
+<tr><td><span class="ad-estado ad-estado--pendiente">P2</span></td><td>Medición de apuesta exitosa poco enriquecida</td><td>sport_bet_placed en GA4 envía value; Meta Purchase incluye value, num_items, currency y content_type.</td><td>Sirve para conversión, pero limita análisis de calidad de apuesta, deporte, mercado, tipo de apuesta o live/pre-match.</td><td>Agregar bet_amount, currency, num_selections, bet_type, sport, market, odds, bet_status y event_id.</td></tr>
+<tr><td><span class="ad-estado ad-estado--pendiente">P2</span></td><td>Histórico de tags pausados y ambientes mezclados</td><td>42 tags pausados; aparecen referencias a producción, staging e integration.</td><td>Carga cognitiva, riesgo de reactivaciones accidentales y baja trazabilidad de campañas cerradas.</td><td>Crear matriz de limpieza: mantener, archivar o eliminar, con responsable y motivo.</td></tr>
+</tbody></table></div>
+    </div>
+  </section>
 
-    <section id="modelo">
-      <h2>Modelo de eventos sugerido</h2>
-      <p>
-        La mejora más importante para análisis no es medir más clics, sino crear un lenguaje común de medición.
-        Esta taxonomía permite mantener la riqueza del dato sin multiplicar tags por cada botón.
-      </p>
-      <div class="table-wrap"><table><thead><tr><th>Evento recomendado</th><th>Parámetros clave</th><th>Uso</th></tr></thead><tbody><tr><td>page_view</td><td>page_type, section, device_type, user_status</td><td>Vistas de página o cambios reales de SPA.</td></tr><tr><td>ui_interaction</td><td>section, element_name, element_text, interaction_type, device_type</td><td>Clics de navegación, menús, botones secundarios.</td></tr><tr><td>registration_step</td><td>step_number, step_name, status, device_type, flow_type</td><td>Avance, retroceso o abandono dentro del registro.</td></tr><tr><td>sign_up</td><td>method, status, user_id, device_type</td><td>Registro completo exitoso. Reemplaza registration-complete.</td></tr><tr><td>login</td><td>method, status, user_id</td><td>Login exitoso.</td></tr><tr><td>sport_bet_placed</td><td>bet_amount, currency, num_selections, bet_type, sport, market, odds, bet_status</td><td>Apuesta deportiva exitosa.</td></tr><tr><td>purchase</td><td>value, currency, transaction_id, product_type</td><td>Usar solo si se definirá como conversión monetaria equivalente.</td></tr></tbody></table></div>
-    </section>
+  <section class="ad-sec" id="plan" aria-labelledby="t-plan">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <p class="ad-eyebrow">04 · Plan recomendado</p>
+        <h2 id="t-plan">Plan de acción recomendado</h2>
+        <p class="ad-lead">El plan está diseñado para evitar una “cirugía mayor” innecesaria: primero se valida lo crítico, luego se corrige lo que afecta atribución y cumplimiento, y después se rediseña la taxonomía.</p>
+      </header>
+<div class="ad-tabla gp-tabla ">
+<table style="min-width:980px">
+<caption>Plan de acción recomendado · por fase, tiempo, entregable y responsable sugerido</caption>
+<thead><tr><th scope="col">Fase</th><th scope="col">Tiempo</th><th scope="col">Acción</th><th scope="col">Entregable</th><th scope="col">Responsable sugerido</th></tr></thead>
+<tbody>
+<tr><th scope="row">0. Preparación</th><td>Día 1</td><td>Congelar alcance de auditoría</td><td>Listado de flujos críticos: home, registro inicio, pasos de registro, registro completo, login, apuesta exitosa, recarga/depósito si aplica, casino, sports home.</td><td>Cuentas / Data / Producto</td></tr>
+<tr><th scope="row">1. Validación funcional P0</th><td>Días 2-4</td><td>Confirmar conversiones principales</td><td>Probar registro completo desktop/mobile, apuesta exitosa y login con Preview de GTM, GA4 DebugView, Network, Meta Pixel Helper y Google Ads Tag Assistant.</td><td>Data / Paid Media</td></tr>
+<tr><th scope="row">1. Validación funcional P0</th><td>Días 2-4</td><td>Validar duplicidad</td><td>Confirmar si page_view, registration_complete/sign_up, Purchase y sport_bet_placed se disparan una sola vez por acción real.</td><td>Data</td></tr>
+<tr><th scope="row">1. Validación funcional P0</th><td>Días 3-5</td><td>Revisión de consentimiento</td><td>Probar escenario sin aceptar cookies, aceptando analítica, aceptando marketing y rechazo total.</td><td>Data / Legal / Dev</td></tr>
+<tr><th scope="row">2. Remediación crítica</th><td>Semana 2</td><td>Resolver Enhanced Conversions</td><td>Activar correctamente con datos hasheados vía configuración soportada o retirar HTML que guarda email/teléfono si no se usará.</td><td>Data / Dev / Legal</td></tr>
+<tr><th scope="row">2. Remediación crítica</th><td>Semana 2</td><td>Clasificar tags por consentimiento</td><td>Separar GA4, Google Ads, Meta, Xandr, Hotjar, Zendesk, SDK y pixeles de terceros por categoría de consentimiento.</td><td>Data / Legal</td></tr>
+<tr><th scope="row">3. Modelo de medición</th><td>Semanas 3-4</td><td>Rediseñar taxonomía GA4</td><td>Pasar de eventos por zona/dispositivo a eventos canónicos con parámetros. Documentar diccionario de eventos.</td><td>Data / BI / Paid Media</td></tr>
+<tr><th scope="row">3. Modelo de medición</th><td>Semanas 3-4</td><td>Priorizar dataLayer para eventos críticos</td><td>Definir contrato de dataLayer para registro, login, apuesta, depósito y funnels críticos.</td><td>Producto / Dev / Data</td></tr>
+<tr><th scope="row">4. Limpieza y gobernanza</th><td>Mes 2</td><td>Ordenar contenedor</td><td>Depurar tags pausados, tags sin trigger, tags de staging/integration y campañas inactivas.</td><td>Data / Cuentas</td></tr>
+<tr><th scope="row">5. Optimización continua</th><td>Mes 2-3</td><td>Reporting y QA recurrente</td><td>Dashboard de salud de medición, checklist mensual y alertas por caída de eventos críticos.</td><td>BI / Data</td></tr>
+</tbody></table></div>
+    </div>
+  </section>
 
-    <section id="decisiones">
-      <h2>Decisiones que necesita tomar el equipo</h2>
-      <div class="diagnosis">
-        <div class="panel">
-          <h3>1. ¿Qué será conversión principal?</h3>
-          <p>Definir si optimización paid se enfocará en registro completo, primer depósito, apuesta exitosa o una combinación jerarquizada.</p>
-        </div>
-        <div class="panel">
-          <h3>2. ¿Cómo se tratará el valor de apuesta?</h3>
-          <p>Decidir si el valor enviado a Meta/GA4 representa stake, revenue, GGR estimado u otro concepto. Esto evita lecturas infladas de ROAS.</p>
-        </div>
-        <div class="panel">
-          <h3>3. ¿Se implementarán Enhanced Conversions?</h3>
-          <p>Si la respuesta es sí, debe hacerse con consentimiento, hashing y configuración formal. Si no, retirar captura heredada.</p>
-        </div>
-        <div class="panel">
-          <h3>4. ¿Qué eventos se migran a dataLayer?</h3>
-          <p>Priorizar registro, login, apuesta, depósito y errores críticos. Los clics secundarios pueden esperar.</p>
-        </div>
+  <section class="ad-sec ad-sec--papel" id="roadmap" aria-labelledby="t-roadmap">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <p class="ad-eyebrow">05 · Roadmap</p>
+        <h2 id="t-roadmap">Roadmap 30 / 60 / 90 días</h2>
+      </header>
+      <ol class="ad-pasos" aria-label="Roadmap en cuatro tramos">
+        <li class="ad-paso"><span class="ad-n ad-n--lg" aria-hidden="true">01</span><span class="gp-kicker">Primeros 7 días</span><h3>Validación y control</h3><p>Confirmar si las conversiones críticas disparan y llegan bien. Identificar duplicidades y brechas de consentimiento.</p><span class="gp-chips"><span class="ad-tag ad-tag--line">Registro completo</span><span class="ad-tag ad-tag--line">Apuesta exitosa</span><span class="ad-tag ad-tag--line">Consentimiento</span></span></li>
+        <li class="ad-paso"><span class="ad-n ad-n--lg" aria-hidden="true">02</span><span class="gp-kicker">Días 8-30</span><h3>Remediación crítica</h3><p>Corregir conversiones, decidir Enhanced Conversions, clasificar tags por consentimiento y documentar eventos críticos.</p><span class="gp-chips"><span class="ad-tag ad-tag--line">Google Ads</span><span class="ad-tag ad-tag--line">Meta</span><span class="ad-tag ad-tag--line">GA4</span></span></li>
+        <li class="ad-paso"><span class="ad-n ad-n--lg" aria-hidden="true">03</span><span class="gp-kicker">Días 31-60</span><h3>Taxonomía y dataLayer</h3><p>Reducir atomización, migrar eventos críticos a dataLayer y convertir interacciones en eventos con parámetros consistentes.</p><span class="gp-chips"><span class="ad-tag ad-tag--line">Diccionario de eventos</span><span class="ad-tag ad-tag--line">DataLayer contract</span><span class="ad-tag ad-tag--line">QA técnico</span></span></li>
+        <li class="ad-paso"><span class="ad-n ad-n--lg" aria-hidden="true">04</span><span class="gp-kicker">Días 61-90</span><h3>Gobernanza y optimización</h3><p>Implementar monitoreo recurrente, limpiar histórico, crear dashboard de salud y establecer proceso de cambios.</p><span class="gp-chips"><span class="ad-tag ad-tag--line">Dashboard</span><span class="ad-tag ad-tag--line">QA mensual</span><span class="ad-tag ad-tag--line">Control de cambios</span></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="checklist" aria-labelledby="t-checklist">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <p class="ad-eyebrow">06 · Checklist</p>
+        <h2 id="t-checklist">Checklist de validación funcional</h2>
+      </header>
+<div class="ad-tabla gp-tabla ">
+<table style="min-width:900px">
+<caption>Checklist de validación funcional · flujo, plataformas, criterio de éxito y herramienta</caption>
+<thead><tr><th scope="col">Flujo</th><th scope="col">Plataformas</th><th scope="col">Criterio de éxito</th><th scope="col">Herramienta de validación</th></tr></thead>
+<tbody>
+<tr><th scope="row">Registro completo</th><td>GA4, Google Ads, Meta</td><td>1 evento por registro exitoso, sin duplicidad entre mobile/desktop.</td><td>DebugView, Google Ads Tag Assistant, Meta Pixel Helper, Network</td></tr>
+<tr><th scope="row">Inicio de registro</th><td>GA4 / terceros activos</td><td>Evento al iniciar flujo, con step_number=1 o equivalente.</td><td>Preview GTM + DebugView</td></tr>
+<tr><th scope="row">Pasos de registro</th><td>GA4</td><td>Secuencia consistente step_1, step_2, step_3, complete.</td><td>DebugView + exploración de funnel</td></tr>
+<tr><th scope="row">Apuesta exitosa</th><td>GA4, Meta, partners activos</td><td>Evento solo cuando sportsBetStatus=success y con valor/currency.</td><td>Preview GTM + Network</td></tr>
+<tr><th scope="row">Login</th><td>GA4 / SDK / partners si aplica</td><td>Evento posterior a autenticación real, no solo apertura de modal.</td><td>Preview GTM + consola</td></tr>
+<tr><th scope="row">Page view</th><td>GA4, Meta, Google Ads remarketing</td><td>1 page_view por carga/SPA view, controlando history change.</td><td>Network + DebugView</td></tr>
+<tr><th scope="row">Consentimiento</th><td>Todos los tags</td><td>Diferencia clara entre rechazo, analytics-only y marketing accepted.</td><td>CMP + Consent Overview GTM + Network</td></tr>
+</tbody></table></div>
+    </div>
+  </section>
+
+  <section class="ad-sec ad-sec--papel" id="modelo" aria-labelledby="t-modelo">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <p class="ad-eyebrow">07 · Modelo eventos</p>
+        <h2 id="t-modelo">Modelo de eventos sugerido</h2>
+        <p class="ad-lead">La mejora más importante para análisis no es medir más clics, sino crear un lenguaje común de medición. Esta taxonomía permite mantener la riqueza del dato sin multiplicar tags por cada botón.</p>
+      </header>
+<div class="ad-tabla gp-tabla ">
+<table style="min-width:760px">
+<caption>Modelo de eventos sugerido · evento, parámetros clave y uso</caption>
+<thead><tr><th scope="col">Evento recomendado</th><th scope="col">Parámetros clave</th><th scope="col">Uso</th></tr></thead>
+<tbody>
+<tr><th scope="row">page_view</th><td>page_type, section, device_type, user_status</td><td>Vistas de página o cambios reales de SPA.</td></tr>
+<tr><th scope="row">ui_interaction</th><td>section, element_name, element_text, interaction_type, device_type</td><td>Clics de navegación, menús, botones secundarios.</td></tr>
+<tr><th scope="row">registration_step</th><td>step_number, step_name, status, device_type, flow_type</td><td>Avance, retroceso o abandono dentro del registro.</td></tr>
+<tr><th scope="row">sign_up</th><td>method, status, user_id, device_type</td><td>Registro completo exitoso. Reemplaza registration-complete.</td></tr>
+<tr><th scope="row">login</th><td>method, status, user_id</td><td>Login exitoso.</td></tr>
+<tr><th scope="row">sport_bet_placed</th><td>bet_amount, currency, num_selections, bet_type, sport, market, odds, bet_status</td><td>Apuesta deportiva exitosa.</td></tr>
+<tr><th scope="row">purchase</th><td>value, currency, transaction_id, product_type</td><td>Usar solo si se definirá como conversión monetaria equivalente.</td></tr>
+</tbody></table></div>
+    </div>
+  </section>
+
+  <section class="ad-sec" id="decisiones" aria-labelledby="t-decisiones">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <h2 id="t-decisiones">Decisiones que necesita tomar el equipo</h2>
+      </header>
+      <div class="ad-grid" style="--col:250px" role="list" aria-label="Decisiones pendientes">
+        <article class="ad-card gp-card" role="listitem"><h3>1. ¿Qué será conversión principal?</h3><p>Definir si optimización paid se enfocará en registro completo, primer depósito, apuesta exitosa o una combinación jerarquizada.</p></article>
+        <article class="ad-card gp-card" role="listitem"><h3>2. ¿Cómo se tratará el valor de apuesta?</h3><p>Decidir si el valor enviado a Meta/GA4 representa stake, revenue, GGR estimado u otro concepto. Esto evita lecturas infladas de ROAS.</p></article>
+        <article class="ad-card gp-card" role="listitem"><h3>3. ¿Se implementarán Enhanced Conversions?</h3><p>Si la respuesta es sí, debe hacerse con consentimiento, hashing y configuración formal. Si no, retirar captura heredada.</p></article>
+        <article class="ad-card gp-card" role="listitem"><h3>4. ¿Qué eventos se migran a dataLayer?</h3><p>Priorizar registro, login, apuesta, depósito y errores críticos. Los clics secundarios pueden esperar.</p></article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="evitar">
-      <h2>Qué no debe hacerse de inmediato</h2>
-      <div class="panel good">
-        <span class="badge good">Recomendación operativa</span>
+  <section class="ad-sec ad-sec--oscuro" id="evitar" aria-labelledby="t-evitar">
+    <div class="ad-wrap">
+      <header class="ad-sec-cab gp-cab">
+        <h2 id="t-evitar">Qué no debe hacerse de inmediato</h2>
+      </header>
+      <div class="gp-evitar">
+        <span class="ad-estado ad-estado--ok">Recomendación operativa</span>
         <h3>Evitar limpiar todo sin validar primero</h3>
-        <p>
-          No conviene eliminar tags o renombrar eventos masivamente sin antes tener una medición base validada.
-          El primer objetivo es asegurar continuidad de conversiones y atribución; después se depura y estandariza.
-        </p>
+        <p>No conviene eliminar tags o renombrar eventos masivamente sin antes tener una medición base validada. El primer objetivo es asegurar continuidad de conversiones y atribución; después se depura y estandariza.</p>
       </div>
-    </section>
+      <div class="ad-hero__acciones gp-acciones">
+        <a class="ad-btn ad-btn--accent" href="gtm.html">Ver auditoría general GTM</a>
+        <a class="ad-link ad-link--dark" href="../index.html">Volver al hub</a>
+      </div>
+    </div>
+  </section>
 
-    <section class="source">
-      <p>
-        Fuente analizada: exportación JSON de Google Tag Manager GTM-NQ9S7TN, generada el 2026-05-26 14:17:10.
-        Este diagnóstico se basa en la configuración exportada; la validación definitiva requiere pruebas en sitio, Preview de GTM y verificación en plataformas de destino.
-      </p>
-    </section>
-  </main>
+  <section class="ad-sec" id="fuente" aria-label="Fuente analizada">
+    <div class="ad-wrap">
+      <p class="ad-aviso gp-nota">Fuente analizada: exportación JSON de Google Tag Manager GTM-NQ9S7TN, generada el 2026-05-26 14:17:10. Este diagnóstico se basa en la configuración exportada; la validación definitiva requiere pruebas en sitio, Preview de GTM y verificación en plataformas de destino.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="ad-foot">
+  <div class="ad-foot__in"><span>YaJuego · Auditoría GTM · Plan de acción</span><a href="../index.html">Volver al hub</a></div>
+</footer>
 </body>
 </html>
