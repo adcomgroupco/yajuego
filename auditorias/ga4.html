@@ -1,666 +1,170 @@
-<!doctype html>
-<html lang="es" data-suelo="tinta">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Auditoría GA4</title>
-<link rel="stylesheet" href="../assets/css/adcom-tokens.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/ds/fonts.css">
+  <link rel="stylesheet" href="../assets/css/adcom-v2.css?v=20261127">
+  <link rel="icon" type="image/png" href="../assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="../assets/ds/logos/apple-touch-icon.png">
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #111;
-      --paper: #181818;
-      --ink: #f7f7f7;
-      --muted: #a7a7a7;
-      --line: #2d2d2d;
-      --brand: #ffd400;
-      --brand-2: #6fd3ff;
-      --warn: #ffc857;
-      --bad: #ff7770;
-      --good: #64d48c;
-      --soft: #1a1a1a;
-      --softwarn: rgba(255,200,87,.14);
-      --softbad: rgba(255,119,112,.14);
-      --softgood: rgba(100,212,140,.14);
-      --sidebar: 260px
-    }
-
-    * { box-sizing: border-box }
-
-    html { scroll-behavior: smooth }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--bg);
-      font: 14px/1.55 'Poppins', sans-serif
-    }
-
-    main {
-      max-width: 1440px;
-      margin: auto;
-      padding: 0 6vw 72px
-    }
-
-    header.hero {
-      position: relative;
-      min-height: 68vh;
-      padding: 56px 6vw 38px;
-      border-bottom: 1px solid var(--line);
-      background:
-        radial-gradient(circle at 10% 10%, rgba(255,212,0,.16), transparent 28%),
-        radial-gradient(circle at 88% 20%, rgba(111,211,255,.10), transparent 32%),
-        linear-gradient(135deg, #171717, #111);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end
-    }
-
-    header.hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,212,0,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,212,0,.045) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none
-    }
-
-    header.hero > * {
-      position: relative;
-      z-index: 1
-    }
-
-    .top-actions {
-      position: absolute;
-      top: 24px;
-      left: 6vw;
-      right: 6vw;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center
-    }
-
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 9px 13px;
-      border: 1px solid rgba(255,212,0,.35);
-      border-radius: var(--radius-sm);
-      background: rgba(255,212,0,.08);
-      color: var(--brand);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800
-    }
-
-    .nav-link:hover {
-      background: var(--brand);
-      color: #111
-    }
-
-    .eyebrow {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--brand);
-      margin-bottom: 14px
-    }
-
-    h1, h2, h3 { margin: 0; letter-spacing: 0 }
-
-    h1 {
-      max-width: 980px;
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(38px, 6vw, 72px);
-      line-height: .95;
-      letter-spacing: -.02em;
-      margin-bottom: 18px
-    }
-
-    h2 {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(24px, 3vw, 38px);
-      letter-spacing: -.02em;
-      margin-bottom: 16px
-    }
-
-    h3 {
-      font-size: 16px;
-      line-height: 1.25;
-      margin-bottom: 10px
-    }
-
-    .sub {
-      color: var(--muted);
-      margin: 0;
-      max-width: 880px;
-      font-size: 18px
-    }
-
-    section {
-      padding: 34px 0;
-      border-bottom: 1px solid var(--line)
-    }
-
-    .grid {
-      display: grid;
-      gap: 14px
-    }
-
-    .kpis {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      margin-top: 28px
-    }
-
-    .kpi {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 18px;
-      background: rgba(26,26,26,.9);
-      box-shadow: none
-    }
-
-    .kpi span {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 5px
-    }
-
-    .kpi strong {
-      display: block;
-      color: var(--brand);
-      font-family: 'Poppins', sans-serif;
-      font-size: 28px;
-      letter-spacing: -.02em;
-      line-height: 1.15
-    }
-
-    .cards {
-      grid-template-columns: repeat(3, minmax(0, 1fr))
-    }
-
-    .card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 20px;
-      background: var(--soft);
-      transition: transform .2s ease, border-color .2s ease, background .2s ease
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,212,0,.35);
-      background: #1e1e1e
-    }
-
-    .card p { margin: 0; color: var(--muted) }
-
-    .callout {
-      padding: 16px 18px;
-      background: rgba(255,212,0,.08);
-      margin-top: 14px;
-      border-radius: var(--radius-sm);
-      color: var(--ink);border:1px solid var(--brand)}
-
-    .warn {
-      border-left-color: var(--warn);
-      background: var(--softwarn)
-    }
-
-    .bad {
-      border-left-color: var(--bad);
-      background: var(--softbad)
-    }
-
-    .bar-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 8px
-    }
-
-    .bar-row {
-      display: grid;
-      grid-template-columns: 230px 1fr 92px;
-      gap: 12px;
-      align-items: center
-    }
-
-    .bar-label {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--ink)
-    }
-
-    .bar-track {
-      height: 12px;
-      background: #2a2a2a;
-      border-radius: 999px;
-      overflow: hidden
-    }
-
-    .bar {
-      height: 100%;
-      background: var(--brand-2);
-      border-radius: inherit
-    }
-
-    .bar.alt { background: var(--accent-fg) }
-    .bar.warnbar { background: var(--warn) }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px
-    }
-
-    th, td {
-      padding: 9px 10px;
-      border-bottom: 1px solid var(--line);
-      text-align: right;
-      vertical-align: top
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: #222;
-      color: var(--brand);
-      font-weight: 800
-    }
-
-    td:first-child, th:first-child {
-      text-align: left;
-      min-width: 240px
-    }
-
-    .table-wrap {
-      max-height: 620px;
-      overflow: auto;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: var(--soft)
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(255,212,0,.1);
-      color: var(--brand);
-      font-size: 12px;
-      font-weight: 700;
-      margin-right: 6px
-    }
-
-    .cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px
-    }
-
-    ul {
-      margin: 8px 0 0;
-      padding-left: 18px
-    }
-
-    li { margin: 7px 0 }
-
-    strong { color: var(--ink) }
-
-    footer {
-      padding: 24px 0 0;
-      color: var(--muted);
-      font-size:var(--fs-body-min)}
-
-    #sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 100;
-      width: var(--sidebar);
-      background: #0d0d0d;
-      border-right: 1px solid #1f1f1f;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto
-    }
-
-    .sb-head {
-      padding: 1.5rem 1.4rem 1.2rem;
-      border-bottom: 1px solid #1f1f1f
-    }
-
-    .sb-brand {
-      color: var(--ink);
-      font-family: 'Poppins', sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -.02em
-    }
-
-    .sb-brand small {
-      display: block;
-      margin-top: 3px;
-      color:var(--fg-muted);
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 700
-    }
-
-    .sb-client {
-      padding: 1rem 1.4rem;
-      border-bottom: 1px solid #1f1f1f
-    }
-
-    .sb-client-label,
-    .sb-section-label,
-    .sb-total-label {
-      color:var(--fg-muted);
-      font-size: 12px;
-      font-weight: 700
-    }
-
-    .sb-client-name {
-      margin-top: 4px;
-      color: var(--brand);
-      font-size: 13px;
-      font-weight: 800
-    }
-
-    .sb-client-url {
-      margin-top: 2px;
-      color:var(--fg-muted);
-      font-size: 12px
-    }
-
-    .sb-nav {
-      flex: 1;
-      padding: 1rem 0
-    }
+    /* Auditoría GA4 · solo lo particular de la página. Todo sale de tokens (prefijo ga4-). */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-padding-top:calc(var(--nav-height) + var(--space-2))}
+    body{margin:0;background:var(--washi);color:var(--sumi)}
+    .ga4 main:focus{outline:none}
+    .ga4 b,.ga4 strong{font-weight:500}
+
+    /* encabezado: los enlaces de sección en una sola fila con desplazamiento propio */
+    .ga4 .ad-nav__in{flex-wrap:nowrap}
+    .ga4 .ad-marca{max-width:100%}
+    @media (min-width:901px){.ga4 .ad-marca{flex:none}}
+    .ga4 .ad-nav__links{flex:1 1 auto;min-width:0;flex-wrap:nowrap;justify-content:flex-start;gap:var(--space-2);margin-inline-start:var(--space-6);font-size:13px;overflow-x:auto;scrollbar-width:thin}
+    .ga4 .ad-nav__links a{flex:none;white-space:nowrap;padding:0 12px;border-radius:var(--radius-pill)}
+    .ga4 .ad-nav__links a[aria-current="true"]{background:var(--lima);color:var(--sumi)}
+    @media (max-width:900px){
+      .ga4 .ad-nav{position:static}
+      .ga4 .ad-nav__in{flex-wrap:wrap;gap:0}
+      .ga4 .ad-nav__links{flex-basis:100%;margin:0 0 var(--space-2)}
+    }
+
+    /* ritmo del contenido de cada sección */
+    .ga4-flow>*+*{margin-block-start:var(--space-8)}
+    .ga4-cab{max-width:none}
+    .ga4-cab h2{max-width:28ch}
+    .ga4-h1{font-size:clamp(40px,6vw,84px)}
+    .ga4-lead{max-width:68ch}
+    .ga4-ficha{margin-block-start:var(--space-12)}
+    .ga4-kpis{margin-block-start:var(--space-12)}
+    .ga4-flow>.ga4-kpis{margin-block-start:var(--space-8)}
+    .ga4-kpis .ad-kpi__n{font-size:clamp(26px,2.7vw,34px)}
+    .ad-hero .ad-hero__acciones{margin-block-start:var(--space-6)}
+    .ga4-h3{margin:0 0 var(--space-2);font-size:clamp(20px,2vw,24px);line-height:1.2;letter-spacing:-.02em}
+
+    /* tarjetas informativas: no se pulsan, el título va arriba */
+    .ga4-grid{--col:300px}
+    .ga4-card{cursor:default}
+    .ga4-card .ad-card__t{margin:0;padding:0;font-size:clamp(20px,2vw,24px)}
+    .ga4-card .ad-card__d{margin:0}
+    .ga4-card.ad-card--dark .ad-card__d{color:var(--sobre-oscuro-200)}
+    .ga4-card strong,.ga4-card b{color:inherit}
+    .ga4-lista{display:grid;gap:var(--space-2);margin:var(--space-2) 0 0;padding:0 0 0 1.2em;font-size:15px;color:var(--tinta-secundaria)}
+    .ga4-lista li{margin:0;padding-inline-start:var(--space-2)}
+    .ga4-lista li::marker{color:var(--sumi)}
+    .ga4-lista strong{color:var(--sumi)}
+    .ad-card--dark .ga4-lista{color:var(--sobre-oscuro-200)}
+    .ad-card--dark .ga4-lista li::marker,.ad-card--dark .ga4-lista strong{color:var(--sobre-oscuro-100)}
+    .ad-card.is-on .ga4-lista,.ad-card.is-on .ga4-lista strong,.ga4-card.is-on .ad-card__t{color:var(--sumi)}
+    .ga4-card.ad-card--dark .ad-card__t{color:var(--sobre-oscuro-100)}
+
+    /* lecturas y avisos */
+    .ga4-lectura,.ga4-aviso{max-width:none}
+    .ga4-lectura p,.ga4-aviso p{margin:0}
+    .ga4-aviso--warn{border-color:var(--warn)}
+    .ga4-aviso--neg{border-color:var(--neg)}
+    .ga4-aviso strong,.ga4-lectura strong{color:var(--sumi)}
+    .ga4-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-8) var(--space-12);align-items:start}
+    .ga4-cols>*>*+*{margin-block-start:var(--space-4)}
+    .ga4-par{margin:0;font-size:15px}
+    .ga4-par+.ga4-par{margin-block-start:var(--space-2)}
+    .ga4-par .ad-tag{margin-inline-end:var(--space-2)}
+    @media (max-width:900px){.ga4-cols{grid-template-columns:minmax(0,1fr)}}
+
+    /* barras: etiqueta, pista y cifra en una fila */
+    .ga4-barras{display:grid;gap:var(--space-4)}
+    .ga4-fila{display:grid;grid-template-columns:minmax(120px,240px) minmax(0,1fr) minmax(72px,auto);gap:var(--space-4);align-items:center;font-size:14px}
+    .ga4-fila__l{overflow-wrap:anywhere}
+    .ga4-fila__v{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .ga4-fila .ad-barra{height:12px}
+    .ga4-barra--alt>span{background:var(--tinta-tenue)}
+    .ga4-barra--warn>span{background:var(--warn)}
+    @media (max-width:620px){
+      .ga4-fila{grid-template-columns:minmax(0,1fr) auto;gap:var(--space-2) var(--space-4)}
+      .ga4-fila .ad-barra{grid-column:1/-1;grid-row:2}
+    }
+
+    /* tablas: desplazamiento propio con encabezado fijo */
+    .ga4-tabla{max-height:620px;overflow:auto}
+    .ga4-tabla table{min-width:760px;font-size:13px}
+    .ga4-tabla th,.ga4-tabla td{padding:8px 12px}
+    .ga4-tabla thead th{position:sticky;top:0;z-index:2;background:var(--papel)}
+    .ga4-tabla th{text-align:left}
+    .ga4-tabla tbody th{font-weight:500}
+    .ga4-tabla th:first-child{min-width:240px}
+    .ga4-tabla--corta{max-height:420px}
+    @media (max-width:640px){.ga4-tabla th:first-child{min-width:160px}}
+
+    .ga4 .ad-foot__in>span{min-width:0;overflow-wrap:anywhere}
+
+    /* cierre: plan de acción sobre fondo oscuro */
+    .ad-sec--oscuro .ga4-cab h2{color:var(--sobre-oscuro-100)}
+
+    @media print{.ga4 .ad-nav__links{display:none}.ga4-tabla{max-height:none;overflow:visible}.ga4-tabla thead th{position:static}}
 
-    .sb-section-label {
-      padding: .8rem 1.4rem .35rem
-    }
-
-    .sb-item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: .7rem;
-      padding: .58rem 1.4rem;
-      color: #999;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1.25
-    }
-
-    .sb-item:hover {
-      background: rgba(255,255,255,.04);
-      color: #fff
-    }
-
-    .sb-item.primary {
-      color: var(--brand);
-      background: rgba(255,212,0,.08)
-    }
-
-    .sb-item.primary::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--brand)
-    }
-
-    .sb-num {
-      width: 20px;
-      height: 20px;
-      border-radius: 0;
-      background: #282828;
-      color: #999;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-family: 'Poppins', sans-serif;
-      font-size: 12px;
-      font-weight: 800
-    }
-
-    .sb-item.primary .sb-num {
-      background: var(--brand);
-      color: #111
-    }
-
-    .sb-footer {
-      padding: 1rem 1.4rem;
-      border-top: 1px solid #1e1e1e
-    }
-
-    .sb-total-val {
-      color: var(--brand);
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800
-    }
-
-    .hero,
-    main {
-      width: calc(100% - var(--sidebar));
-      margin-left: var(--sidebar)
-    }
-
-    header.hero {
-      padding: 4rem 3.5rem
-    }
-
-    main {
-      max-width: none;
-      padding: 0
-    }
-
-    main > section {
-      padding: 3.5rem;
-      margin: 0
-    }
-
-    main > section:nth-of-type(even) { background: #0e0e0e }
-    main > section:nth-of-type(odd) { background: #111 }
-    section[id], header[id] { scroll-margin-top: 20px }
-
-    .top-actions {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      left: auto;
-      z-index: 120
-    }
-
-    @media (max-width: 980px) {
-      #sidebar { display: none }
-      .hero, main { width: 100%; margin-left: 0 }
-      main > section, header.hero { padding: 2.2rem 1.4rem }
-      .top-actions {
-        position: static;
-        padding: 1rem 1.4rem 0;
-        background: #111
-      }
-      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-      .cards, .cols { grid-template-columns: 1fr }
-      .bar-row { grid-template-columns: 150px 1fr 82px }
-    }
-
-    @media (max-width: 620px) {
-      header.hero { min-height: auto }
-      .kpis { grid-template-columns: 1fr }
-      .bar-row { grid-template-columns: 1fr; gap: 5px }
-      .bar-row strong { text-align: left }
-    }
-
-    @media print {
-      #sidebar { display: none }
-      body { background: #fff }
-      main { width: 100%; margin: 0; box-shadow: none; border: 0; padding: 0 }
-      header.hero { min-height: auto; background: #fff; color: #111; padding: 24px 0 }
-      .top-actions { display: none }
-      .table-wrap { max-height: none; overflow: visible }
-      th { position: static }
-    }
   </style>
 </head>
-<body>
-<aside id="sidebar" aria-label="Índice de auditoría GA4">
-  <div class="sb-head">
-    <div class="sb-brand">YaJuego<small>Auditoría GA4</small></div>
-  </div>
-  <div class="sb-client">
-    <div class="sb-client-label">Documento</div>
-    <div class="sb-client-name">Fuente / medio</div>
-    <div class="sb-client-url">GA4 327864867</div>
-  </div>
-  <nav class="sb-nav">
-    <div class="sb-section-label">Navegación</div>
-    <a class="sb-item primary" href="#inicio"><span class="sb-num">00</span>Resumen</a>
-    <a class="sb-item" href="#lectura"><span class="sb-num">01</span>Lectura ejecutiva</a>
-    <a class="sb-item" href="#embudo"><span class="sb-num">02</span>Embudo registro</a>
-    <a class="sb-item" href="#purchase"><span class="sb-num">03</span>Purchase / sesión</a>
-    <a class="sb-item" href="#registro"><span class="sb-num">04</span>Registro / sesión</a>
-    <a class="sb-item" href="#afiliados"><span class="sb-num">05</span>Afiliados</a>
-    <a class="sb-item" href="#atribucion"><span class="sb-num">06</span>Atribución</a>
-    <a class="sb-item" href="#flujo"><span class="sb-num">07</span>Flujo</a>
-    <a class="sb-item" href="#journey"><span class="sb-num">08</span>Journey</a>
-    <a class="sb-item" href="#tablas"><span class="sb-num">09</span>Tablas</a>
-    <a class="sb-item" href="#detalle"><span class="sb-num">10</span>Detalle top 50</a>
-    <a class="sb-item" href="#acciones"><span class="sb-num">11</span>Acciones</a>
-    <a class="sb-item" href="#conclusiones"><span class="sb-num">12</span>Conclusiones</a>
-    <a class="sb-item" href="#recomendaciones"><span class="sb-num">13</span>Recomendaciones</a>
-    <a class="sb-item" href="#plan"><span class="sb-num">14</span>Plan</a>
-    <div class="sb-section-label">Accesos</div>
-    <a class="sb-item" href="gtm.html"><span class="sb-num">↗</span>Auditoría GTM</a>
-    <a class="sb-item" href="../index.html"><span class="sb-num">↩</span>Hub</a>
-  </nav>
-  <div class="sb-footer">
-    <div class="sb-total-label">Registros completos</div>
-    <div class="sb-total-val">7,982</div>
-  </div>
-</aside>
-<header class="hero" id="inicio">
-  <nav class="top-actions" aria-label="Navegación de auditoría">
-    <a class="nav-link" href="../index.html">Volver al hub</a>
-    <a class="nav-link" href="gtm.html">Ver auditoría GTM</a>
-  </nav>
-  <div class="eyebrow">Auditoría de medición · Google Analytics 4</div>
-  <h1>Informe GA4 de fuente / medio, purchase y registro</h1>
-  <p class="sub">Propiedad GA4 327864867 | Rango: 27 abr 2026 - 27 may 2026 | Fuente: Google Analytics Data API</p>
-  <div class="grid kpis">
-    <div class="kpi"><span>Sesiones top 50</span><strong>614,435</strong></div>
-    <div class="kpi"><span>Usuarios top 50</span><strong>202,551</strong></div>
-    <div class="kpi"><span>Purchase events</span><strong>415,519</strong></div>
-    <div class="kpi"><span>Registros completos</span><strong>7,982</strong></div>
-    <div class="kpi"><span>Revenue purchase</span><strong>15,752.8M</strong></div>
-  </div>
-</header>
-<main>
+<body class="ga4">
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-  <section id="lectura">
-    <h2>Lectura Ejecutiva</h2>
-    <div class="grid cards">
-      <div class="card">
-        <h3>Purchase es retorno, no solo adquisicion</h3>
-        <p><strong>affiliates / 102199</strong> cierra 97,223 purchases por fuente de sesion, pero solo 1,068 por first user source. Actua como canal de cierre/reactivacion.</p>
-      </div>
-      <div class="card">
-        <h3>Registro depende de pocas fuentes</h3>
-        <p><strong>Direct</strong>, <strong>google / cpc</strong> y <strong>affiliates / 101964</strong> concentran la mayor parte de registros completos.</p>
-      </div>
-      <div class="card">
-        <h3>La fuga esta al inicio</h3>
-        <p>El salto de <strong>registration-step_1</strong> a <strong>step_2</strong> es solo 12.24%. Despues del step 2, el embudo se comporta bien.</p>
-      </div>
-    </div>
-    <div class="callout warn">
-      <strong>Nota metodologica:</strong> purchase / sesion puede superar 100% porque un usuario puede realizar varias compras dentro de una sesion.
+  <header class="ad-nav">
+    <nav class="ad-nav__in" aria-label="Índice de auditoría GA4">
+      <a class="ad-marca" href="../index.html"><img src="../assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · Auditoría GA4</i></a>
+      <div class="ad-nav__links"><a href="#inicio">Resumen</a><a href="#lectura">Lectura ejecutiva</a><a href="#embudo">Embudo registro</a><a href="#purchase">Purchase / sesión</a><a href="#registro">Registro / sesión</a><a href="#afiliados">Afiliados</a><a href="#atribucion">Atribución</a><a href="#flujo">Flujo</a><a href="#journey">Journey</a><a href="#tablas">Tablas</a><a href="#detalle">Detalle top 50</a><a href="#acciones">Acciones</a><a href="#conclusiones">Conclusiones</a><a href="#recomendaciones">Recomendaciones</a><a href="#plan">Plan</a><a href="gtm.html">Auditoría GTM</a></div>
+    </nav>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+  <section class="ad-sec ad-hero" id="inicio">
+    <div class="ad-wrap">
+      <p class="ad-eyebrow">Auditoría de medición · Google Analytics 4</p>
+      <h1 class="ga4-h1"><span class="ad-ln">Informe GA4 de <span class="ad-hl">fuente / medio</span>, purchase y registro</span></h1>
+      <p class="ad-lead ga4-lead">Propiedad GA4 327864867 | Rango: 27 abr 2026 - 27 may 2026 | Fuente: Google Analytics Data API</p>
+      <dl class="ad-ficha ga4-ficha"><div><dt>Documento</dt><dd>Fuente / medio</dd></div><div><dt>Propiedad</dt><dd>GA4 327864867</dd></div><div><dt>Registros completos</dt><dd>7,982</dd></div></dl>
+      <div class="ad-kpis ga4-kpis" role="list"><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Sesiones top 50</span><span class="ad-kpi__n">614,435</span></div><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Usuarios top 50</span><span class="ad-kpi__n">202,551</span></div><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Purchase events</span><span class="ad-kpi__n">415,519</span></div><div class="ad-kpi ad-kpi--on" role="listitem"><span class="ad-kpi__l">Registros completos</span><span class="ad-kpi__n">7,982</span></div><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Revenue purchase</span><span class="ad-kpi__n">15,752.8M</span></div></div>
+      <div class="ad-hero__acciones"><a class="ad-btn ad-btn--outline" href="gtm.html">Ver auditoría GTM</a><a class="ad-link" href="../index.html">Volver al hub ›</a></div>
     </div>
   </section>
 
-  <section id="embudo">
-    <h2>Embudo de Registro</h2>
-    <div class="cols">
+<section class="ad-sec ad-sec--papel" id="lectura"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">01 · Lectura ejecutiva</p><h2>Lectura Ejecutiva</h2></header>
+    <div class="ad-grid ga4-grid"><article class="ad-card ga4-card"><h3 class="ad-card__t">Purchase es retorno, no solo adquisicion</h3><p class="ad-card__d"><strong>affiliates / 102199</strong> cierra 97,223 purchases por fuente de sesion, pero solo 1,068 por first user source. Actua como canal de cierre/reactivacion.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">Registro depende de pocas fuentes</h3><p class="ad-card__d"><strong>Direct</strong>, <strong>google / cpc</strong> y <strong>affiliates / 101964</strong> concentran la mayor parte de registros completos.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">La fuga esta al inicio</h3><p class="ad-card__d">El salto de <strong>registration-step_1</strong> a <strong>step_2</strong> es solo 12.24%. Despues del step 2, el embudo se comporta bien.</p></article></div>
+    <div class="ad-aviso ga4-aviso ga4-aviso--warn"><strong>Nota metodologica:</strong> purchase / sesion puede superar 100% porque un usuario puede realizar varias compras dentro de una sesion.</div>
+</div></section>
+<section class="ad-sec" id="embudo"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">02 · Embudo registro</p><h2>Embudo de Registro</h2></header>
+    <div class="ga4-cols">
       <div>
-        <div class="bar-list">
-          <div class="bar-row"><div class="bar-label">registration-step_1</div><div class="bar-track"><div class="bar alt" style="width:100%"></div></div><strong>105,047</strong></div>
-          <div class="bar-row"><div class="bar-label">registration-step_2</div><div class="bar-track"><div class="bar alt" style="width:12.24%"></div></div><strong>12,856</strong></div>
-          <div class="bar-row"><div class="bar-label">registration-step_3</div><div class="bar-track"><div class="bar alt" style="width:9.44%"></div></div><strong>9,921</strong></div>
-          <div class="bar-row"><div class="bar-label">registration-complete</div><div class="bar-track"><div class="bar alt" style="width:7.60%"></div></div><strong>7,982</strong></div>
-        </div>
+        <div class="ga4-barras"><div class="ga4-fila"><span class="ga4-fila__l">registration-step_1</span><div class="ad-barra ga4-barra--alt" style="--v:100%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">105,047</b></div><div class="ga4-fila"><span class="ga4-fila__l">registration-step_2</span><div class="ad-barra ga4-barra--alt" style="--v:12.24%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">12,856</b></div><div class="ga4-fila"><span class="ga4-fila__l">registration-step_3</span><div class="ad-barra ga4-barra--alt" style="--v:9.44%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">9,921</b></div><div class="ga4-fila"><span class="ga4-fila__l">registration-complete</span><div class="ad-barra ad-barra--on" style="--v:7.60%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">7,982</b></div></div>
       </div>
       <div>
-        <p><span class="pill">step 1 -> 2</span>12.24%</p>
-        <p><span class="pill">step 2 -> 3</span>77.17%</p>
-        <p><span class="pill">step 3 -> complete</span>80.46%</p>
-        <p><span class="pill">step 1 -> complete</span>7.60%</p>
-        <div class="callout bad">
-          Prioridad de CRO: revisar campos, validaciones, tiempos de carga y errores entre step 1 y step 2. La mayor perdida ocurre antes de que el usuario avance.
-        </div>
+        <p class="ga4-par"><span class="ad-tag ad-tag--line">step 1 -> 2</span>12.24%</p>
+        <p class="ga4-par"><span class="ad-tag ad-tag--line">step 2 -> 3</span>77.17%</p>
+        <p class="ga4-par"><span class="ad-tag ad-tag--line">step 3 -> complete</span>80.46%</p>
+        <p class="ga4-par"><span class="ad-tag ad-tag--line">step 1 -> complete</span>7.60%</p>
+        <div class="ad-aviso ga4-aviso ga4-aviso--neg">Prioridad de CRO: revisar campos, validaciones, tiempos de carga y errores entre step 1 y step 2. La mayor perdida ocurre antes de que el usuario avance.</div>
       </div>
     </div>
-  </section>
-
-  <section id="purchase">
-    <h2>Fuentes con Mejor Purchase / Sesion</h2>
-    <div class="bar-list">
-      <div class="bar-row"><div class="bar-label">bing / organic</div><div class="bar-track"><div class="bar" style="width:100%"></div></div><strong>117.76%</strong></div>
-      <div class="bar-row"><div class="bar-label">affiliates / 102199</div><div class="bar-track"><div class="bar" style="width:96%"></div></div><strong>113.48%</strong></div>
-      <div class="bar-row"><div class="bar-label">eu-server-w99.ssgportal.com / referral</div><div class="bar-track"><div class="bar" style="width:82%"></div></div><strong>96.14%</strong></div>
-      <div class="bar-row"><div class="bar-label">google / organic</div><div class="bar-track"><div class="bar" style="width:77%"></div></div><strong>90.08%</strong></div>
-      <div class="bar-row"><div class="bar-label">(not set)</div><div class="bar-track"><div class="bar warnbar" style="width:75%"></div></div><strong>87.97%</strong></div>
-      <div class="bar-row"><div class="bar-label">CRM / Popup</div><div class="bar-track"><div class="bar" style="width:73%"></div></div><strong>86.51%</strong></div>
-    </div>
-  </section>
-
-  <section id="registro">
-    <h2>Fuentes con Mejor Registro / Sesion</h2>
-    <div class="bar-list">
-      <div class="bar-row"><div class="bar-label">affiliates / 100098</div><div class="bar-track"><div class="bar alt" style="width:100%"></div></div><strong>9.93%</strong></div>
-      <div class="bar-row"><div class="bar-label">affiliates / 101962</div><div class="bar-track"><div class="bar alt" style="width:88%"></div></div><strong>8.73%</strong></div>
-      <div class="bar-row"><div class="bar-label">affiliates / 100624</div><div class="bar-track"><div class="bar alt" style="width:85%"></div></div><strong>8.46%</strong></div>
-      <div class="bar-row"><div class="bar-label">affiliates / 101967</div><div class="bar-track"><div class="bar alt" style="width:61%"></div></div><strong>6.02%</strong></div>
-      <div class="bar-row"><div class="bar-label">affiliates / 101964</div><div class="bar-track"><div class="bar alt" style="width:58%"></div></div><strong>5.71%</strong></div>
-      <div class="bar-row"><div class="bar-label">google / cpc</div><div class="bar-track"><div class="bar alt" style="width:29%"></div></div><strong>2.91%</strong></div>
-    </div>
-    <div class="callout">
-      <strong>Lectura:</strong> affiliates / 100624 y 101962 tienen bajo volumen, pero buena eficiencia de registro. Google CPC aporta escala y una conversion step 1 -> complete de 20.39%.
-    </div>
-  </section>
-
-  <section id="afiliados">
-    <h2>Afiliados Agrupados</h2>
-    <div class="grid kpis">
-      <div class="kpi"><span>Fuentes afiliadas</span><strong>19</strong></div>
-      <div class="kpi"><span>Sesiones</span><strong>153,308</strong></div>
-      <div class="kpi"><span>Purchase</span><strong>101,596</strong></div>
-      <div class="kpi"><span>Registros completos</span><strong>1,966</strong></div>
-      <div class="kpi"><span>Revenue</span><strong>5,016.8M</strong></div>
-    </div>
-    <div class="callout">
-      Como grupo, afiliados aportan 24.95% de sesiones, 24.45% de purchases, 24.63% de registros completos y 31.85% del revenue del top 50. El grupo no es homogeneo: algunos afiliados monetizan usuarios existentes y otros generan registros.
-    </div>
-    <div class="cols" style="margin-top:18px">
+</div></section>
+<section class="ad-sec ad-sec--papel" id="purchase"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">03 · Purchase / sesión</p><h2>Fuentes con Mejor Purchase / Sesion</h2></header>
+    <div class="ga4-barras"><div class="ga4-fila"><span class="ga4-fila__l">bing / organic</span><div class="ad-barra" style="--v:100%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">117.76%</b></div><div class="ga4-fila"><span class="ga4-fila__l">affiliates / 102199</span><div class="ad-barra" style="--v:96%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">113.48%</b></div><div class="ga4-fila"><span class="ga4-fila__l">eu-server-w99.ssgportal.com / referral</span><div class="ad-barra" style="--v:82%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">96.14%</b></div><div class="ga4-fila"><span class="ga4-fila__l">google / organic</span><div class="ad-barra" style="--v:77%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">90.08%</b></div><div class="ga4-fila"><span class="ga4-fila__l">(not set)</span><div class="ad-barra ga4-barra--warn" style="--v:75%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">87.97%</b></div><div class="ga4-fila"><span class="ga4-fila__l">CRM / Popup</span><div class="ad-barra" style="--v:73%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">86.51%</b></div></div>
+</div></section>
+<section class="ad-sec" id="registro"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">04 · Registro / sesión</p><h2>Fuentes con Mejor Registro / Sesion</h2></header>
+    <div class="ga4-barras"><div class="ga4-fila"><span class="ga4-fila__l">affiliates / 100098</span><div class="ad-barra ga4-barra--alt" style="--v:100%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">9.93%</b></div><div class="ga4-fila"><span class="ga4-fila__l">affiliates / 101962</span><div class="ad-barra ga4-barra--alt" style="--v:88%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">8.73%</b></div><div class="ga4-fila"><span class="ga4-fila__l">affiliates / 100624</span><div class="ad-barra ga4-barra--alt" style="--v:85%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">8.46%</b></div><div class="ga4-fila"><span class="ga4-fila__l">affiliates / 101967</span><div class="ad-barra ga4-barra--alt" style="--v:61%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">6.02%</b></div><div class="ga4-fila"><span class="ga4-fila__l">affiliates / 101964</span><div class="ad-barra ga4-barra--alt" style="--v:58%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">5.71%</b></div><div class="ga4-fila"><span class="ga4-fila__l">google / cpc</span><div class="ad-barra ga4-barra--alt" style="--v:29%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">2.91%</b></div></div>
+    <div class="ad-lectura ga4-lectura"><p><strong>Lectura:</strong> affiliates / 100624 y 101962 tienen bajo volumen, pero buena eficiencia de registro. Google CPC aporta escala y una conversion step 1 -> complete de 20.39%.</p></div>
+</div></section>
+<section class="ad-sec ad-sec--papel" id="afiliados"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">05 · Afiliados</p><h2>Afiliados Agrupados</h2></header>
+    <div class="ad-kpis ga4-kpis" role="list"><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Fuentes afiliadas</span><span class="ad-kpi__n">19</span></div><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Sesiones</span><span class="ad-kpi__n">153,308</span></div><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Purchase</span><span class="ad-kpi__n">101,596</span></div><div class="ad-kpi ad-kpi--on" role="listitem"><span class="ad-kpi__l">Registros completos</span><span class="ad-kpi__n">1,966</span></div><div class="ad-kpi" role="listitem"><span class="ad-kpi__l">Revenue</span><span class="ad-kpi__n">5,016.8M</span></div></div>
+    <div class="ad-lectura ga4-lectura"><p>Como grupo, afiliados aportan 24.95% de sesiones, 24.45% de purchases, 24.63% de registros completos y 31.85% del revenue del top 50. El grupo no es homogeneo: algunos afiliados monetizan usuarios existentes y otros generan registros.</p></div>
+    <div class="ga4-cols">
       <div>
-        <h3>Afiliados de monetizacion / retorno</h3>
-        <ul>
+        <h3 class="ga4-h3">Afiliados de monetizacion / retorno</h3>
+        <ul class="ga4-lista">
           <li><strong>affiliates / 102199:</strong> 85,677 sesiones, 97,223 purchases, 57,184 revenue/sesion, pero solo 14 registros.</li>
           <li><strong>affiliates / 5337:</strong> 1,617 sesiones, 1,178 purchases, 0 registros.</li>
           <li><strong>affiliates / 100689:</strong> 659 sesiones, 395 purchases, 0 registros.</li>
@@ -668,8 +172,8 @@
         </ul>
       </div>
       <div>
-        <h3>Afiliados de adquisicion / registro</h3>
-        <ul>
+        <h3 class="ga4-h3">Afiliados de adquisicion / registro</h3>
+        <ul class="ga4-lista">
           <li><strong>affiliates / 101964:</strong> 21,279 sesiones, 1,214 registros, 5.71% registro/sesion.</li>
           <li><strong>affiliates / 100098:</strong> 3,574 sesiones, 355 registros, 9.93% registro/sesion.</li>
           <li><strong>affiliates / 100624:</strong> 1,583 sesiones, 134 registros, 32.52% step 1 -> complete.</li>
@@ -677,133 +181,53 @@
         </ul>
       </div>
     </div>
-    <div class="table-wrap" style="margin-top:18px; max-height:420px">
-      <table>
-        <thead>
-          <tr>
-            <th>Afiliado</th>
-            <th>Rol sugerido</th>
-            <th>Sesiones</th>
-            <th>Purchase</th>
-            <th>Purchase / sesion</th>
-            <th>Reg complete</th>
-            <th>Reg / sesion</th>
-            <th>Revenue / sesion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>affiliates / 102199</td><td>Monetizacion / retorno</td><td>85,677</td><td>97,223</td><td>113.48%</td><td>14</td><td>0.02%</td><td>57,184</td></tr>
-          <tr><td>affiliates / 101961</td><td>Baja eficiencia visible</td><td>29,913</td><td>376</td><td>1.26%</td><td>3</td><td>0.01%</td><td>866</td></tr>
-          <tr><td>affiliates / 101964</td><td>Adquisicion / registro</td><td>21,279</td><td>423</td><td>1.99%</td><td>1,214</td><td>5.71%</td><td>598</td></tr>
-          <tr><td>affiliates / 100098</td><td>Adquisicion / registro</td><td>3,574</td><td>521</td><td>14.58%</td><td>355</td><td>9.93%</td><td>3,661</td></tr>
-          <tr><td>affiliates / 101607</td><td>Revisar con costo</td><td>2,529</td><td>245</td><td>9.69%</td><td>7</td><td>0.28%</td><td>687</td></tr>
-          <tr><td>affiliates / 101960</td><td>Adquisicion / registro</td><td>2,044</td><td>224</td><td>10.96%</td><td>86</td><td>4.21%</td><td>1,168</td></tr>
-          <tr><td>affiliates / 5337</td><td>Monetizacion / retorno</td><td>1,617</td><td>1,178</td><td>72.85%</td><td>0</td><td>0.00%</td><td>26,512</td></tr>
-          <tr><td>affiliates / 100624</td><td>Adquisicion / registro</td><td>1,583</td><td>0</td><td>0.00%</td><td>134</td><td>8.46%</td><td>0</td></tr>
-          <tr><td>affiliates / 101962</td><td>Adquisicion / registro</td><td>802</td><td>0</td><td>0.00%</td><td>70</td><td>8.73%</td><td>0</td></tr>
-          <tr><td>affiliates / 100689</td><td>Monetizacion / retorno</td><td>659</td><td>395</td><td>59.94%</td><td>0</td><td>0.00%</td><td>9,237</td></tr>
-          <tr><td>affiliates / 101967</td><td>Adquisicion / registro</td><td>565</td><td>34</td><td>6.02%</td><td>34</td><td>6.02%</td><td>296</td></tr>
-          <tr><td>affiliates / 101314</td><td>Monetizacion / retorno</td><td>535</td><td>388</td><td>72.52%</td><td>0</td><td>0.00%</td><td>13,148</td></tr>
-          <tr><td>affiliates / 100857</td><td>Adquisicion / registro</td><td>157</td><td>0</td><td>0.00%</td><td>32</td><td>20.38%</td><td>0</td></tr>
-          <tr><td>affiliates / 101932</td><td>Mixto</td><td>145</td><td>48</td><td>33.10%</td><td>11</td><td>7.59%</td><td>670</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="callout warn">
-      Recomendacion: negociar y evaluar afiliados por rol. Los de monetizacion deben medirse por revenue incremental y usuarios recurrentes; los de adquisicion por registro completo, CAC y calidad posterior.
-    </div>
-  </section>
-
-  <section id="atribucion">
-    <h2>Atribucion de Eventos Clave</h2>
-    <div class="cols">
+    <div class="ad-tabla ga4-tabla ga4-tabla--corta"><table><caption>Afiliados Agrupados · Rango: 27 abr 2026 - 27 may 2026 · Fuente: Google Analytics Data API</caption><thead><tr><th scope="col">Afiliado</th><th scope="col">Rol sugerido</th><th scope="col" class="valor">Sesiones</th><th scope="col" class="valor">Purchase</th><th scope="col" class="valor">Purchase / sesion</th><th scope="col" class="valor">Reg complete</th><th scope="col" class="valor">Reg / sesion</th><th scope="col" class="valor">Revenue / sesion</th></tr></thead><tbody><tr><th scope="row">affiliates / 102199</th><td>Monetizacion / retorno</td><td class="valor">85,677</td><td class="valor">97,223</td><td class="valor">113.48%</td><td class="valor">14</td><td class="valor">0.02%</td><td class="valor">57,184</td></tr><tr><th scope="row">affiliates / 101961</th><td>Baja eficiencia visible</td><td class="valor">29,913</td><td class="valor">376</td><td class="valor">1.26%</td><td class="valor">3</td><td class="valor">0.01%</td><td class="valor">866</td></tr><tr><th scope="row">affiliates / 101964</th><td>Adquisicion / registro</td><td class="valor">21,279</td><td class="valor">423</td><td class="valor">1.99%</td><td class="valor">1,214</td><td class="valor">5.71%</td><td class="valor">598</td></tr><tr><th scope="row">affiliates / 100098</th><td>Adquisicion / registro</td><td class="valor">3,574</td><td class="valor">521</td><td class="valor">14.58%</td><td class="valor">355</td><td class="valor">9.93%</td><td class="valor">3,661</td></tr><tr><th scope="row">affiliates / 101607</th><td>Revisar con costo</td><td class="valor">2,529</td><td class="valor">245</td><td class="valor">9.69%</td><td class="valor">7</td><td class="valor">0.28%</td><td class="valor">687</td></tr><tr><th scope="row">affiliates / 101960</th><td>Adquisicion / registro</td><td class="valor">2,044</td><td class="valor">224</td><td class="valor">10.96%</td><td class="valor">86</td><td class="valor">4.21%</td><td class="valor">1,168</td></tr><tr><th scope="row">affiliates / 5337</th><td>Monetizacion / retorno</td><td class="valor">1,617</td><td class="valor">1,178</td><td class="valor">72.85%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">26,512</td></tr><tr><th scope="row">affiliates / 100624</th><td>Adquisicion / registro</td><td class="valor">1,583</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">134</td><td class="valor">8.46%</td><td class="valor">0</td></tr><tr><th scope="row">affiliates / 101962</th><td>Adquisicion / registro</td><td class="valor">802</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">70</td><td class="valor">8.73%</td><td class="valor">0</td></tr><tr><th scope="row">affiliates / 100689</th><td>Monetizacion / retorno</td><td class="valor">659</td><td class="valor">395</td><td class="valor">59.94%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">9,237</td></tr><tr><th scope="row">affiliates / 101967</th><td>Adquisicion / registro</td><td class="valor">565</td><td class="valor">34</td><td class="valor">6.02%</td><td class="valor">34</td><td class="valor">6.02%</td><td class="valor">296</td></tr><tr><th scope="row">affiliates / 101314</th><td>Monetizacion / retorno</td><td class="valor">535</td><td class="valor">388</td><td class="valor">72.52%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">13,148</td></tr><tr><th scope="row">affiliates / 100857</th><td>Adquisicion / registro</td><td class="valor">157</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">32</td><td class="valor">20.38%</td><td class="valor">0</td></tr><tr><th scope="row">affiliates / 101932</th><td>Mixto</td><td class="valor">145</td><td class="valor">48</td><td class="valor">33.10%</td><td class="valor">11</td><td class="valor">7.59%</td><td class="valor">670</td></tr></tbody></table></div>
+    <div class="ad-aviso ga4-aviso ga4-aviso--warn">Recomendacion: negociar y evaluar afiliados por rol. Los de monetizacion deben medirse por revenue incremental y usuarios recurrentes; los de adquisicion por registro completo, CAC y calidad posterior.</div>
+</div></section>
+<section class="ad-sec" id="atribucion"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">06 · Atribución</p><h2>Atribucion de Eventos Clave</h2></header>
+    <div class="ga4-cols">
       <div>
-        <h3>Purchase: fuente de sesion vs primer origen</h3>
-        <ul>
+        <h3 class="ga4-h3">Purchase: fuente de sesion vs primer origen</h3>
+        <ul class="ga4-lista">
           <li><strong>affiliates / 102199:</strong> 97,223 purchases por sesion vs 1,068 como primer origen. Es cierre/reactivacion.</li>
           <li><strong>google / cpc:</strong> 32,721 por sesion vs 52,279 como primer origen. Genera usuarios que compran despues por otros canales.</li>
           <li><strong>direct:</strong> 41,063 por sesion vs 131,675 como primer origen. Hay base recurrente o atribucion inicial sin etiquetar.</li>
         </ul>
       </div>
       <div>
-        <h3>Registro: atribucion mas estable</h3>
-        <ul>
+        <h3 class="ga4-h3">Registro: atribucion mas estable</h3>
+        <ul class="ga4-lista">
           <li><strong>direct:</strong> 2,669 por sesion vs 2,709 como primer origen.</li>
           <li><strong>google / cpc:</strong> 2,552 por sesion vs 2,365 como primer origen.</li>
           <li><strong>affiliates / 101964:</strong> 1,214 por sesion vs 1,086 como primer origen.</li>
         </ul>
       </div>
     </div>
-    <div class="callout">
-      El registro suele ocurrir cerca de la sesion de adquisicion. Purchase tiene mas comportamiento de retorno, CRM, afiliados y sesiones posteriores.
-    </div>
-  </section>
-
-  <section id="flujo">
-    <h2>Patrones de Flujo</h2>
-    <div class="grid cards">
-      <div class="card">
-        <h3>Purchase se concentra en mobile</h3>
-        <p>Las rutas con mas purchase son <strong>/Mobile/</strong>, <strong>/mobile/login</strong>, <strong>/mobile</strong>, <strong>/mobile/betslip</strong>, <strong>/mobile/liveBetting</strong> y <strong>/mobile/notifications</strong>.</p>
-      </div>
-      <div class="card">
-        <h3>Registros entran por /mobile/registration</h3>
-        <p>Direct hacia <strong>/mobile/registration</strong> aporta 2,452 registros completos. Google CPC tambien registra con URLs que incluyen btag.</p>
-      </div>
-      <div class="card">
-        <h3>Etiquetado a revisar</h3>
-        <p><strong>(not set)</strong>, <strong>(data not available)</strong>, referencias de Yajuego y variaciones de mayusculas en CPC/Google pueden contaminar lectura de canales.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="journey">
-    <h2>Journey Agregado de Usuarios</h2>
-    <div class="callout warn">
-      GA4 Data API permite ver journeys agregados por landing, pagina y evento. Para reconstruir secuencias usuario por usuario se requiere BigQuery Export con user_pseudo_id y timestamps de eventos.
-    </div>
-    <div class="grid cards" style="margin-top:14px">
-      <div class="card">
-        <h3>Journey de compra</h3>
-        <p>Las landings con mas purchases son <strong>/mobile/login</strong> con 110,340 purchases, <strong>/Mobile/</strong> con 92,566, <strong>/mobile</strong> con 24,706 y <strong>/mobile/betslip</strong> con 14,328.</p>
-      </div>
-      <div class="card">
-        <h3>Journey de registro</h3>
-        <p><strong>/mobile/registration</strong> concentra 2,495 registros completos. Las URLs con <strong>btag</strong> aportan registros eficientes, especialmente variantes de <strong>a_101960b_60c</strong>.</p>
-      </div>
-      <div class="card">
-        <h3>Mobile domina el journey</h3>
-        <p>Mobile concentra 386,767 purchases y 7,614 registros completos. Desktop aporta 29,513 purchases y 438 registros.</p>
-      </div>
-    </div>
-    <div class="cols" style="margin-top:18px">
+    <div class="ad-lectura ga4-lectura"><p>El registro suele ocurrir cerca de la sesion de adquisicion. Purchase tiene mas comportamiento de retorno, CRM, afiliados y sesiones posteriores.</p></div>
+</div></section>
+<section class="ad-sec ad-sec--papel" id="flujo"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">07 · Flujo</p><h2>Patrones de Flujo</h2></header>
+    <div class="ad-grid ga4-grid"><article class="ad-card ga4-card"><h3 class="ad-card__t">Purchase se concentra en mobile</h3><p class="ad-card__d">Las rutas con mas purchase son <strong>/Mobile/</strong>, <strong>/mobile/login</strong>, <strong>/mobile</strong>, <strong>/mobile/betslip</strong>, <strong>/mobile/liveBetting</strong> y <strong>/mobile/notifications</strong>.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">Registros entran por /mobile/registration</h3><p class="ad-card__d">Direct hacia <strong>/mobile/registration</strong> aporta 2,452 registros completos. Google CPC tambien registra con URLs que incluyen btag.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">Etiquetado a revisar</h3><p class="ad-card__d"><strong>(not set)</strong>, <strong>(data not available)</strong>, referencias de Yajuego y variaciones de mayusculas en CPC/Google pueden contaminar lectura de canales.</p></article></div>
+</div></section>
+<section class="ad-sec" id="journey"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">08 · Journey</p><h2>Journey Agregado de Usuarios</h2></header>
+    <div class="ad-aviso ga4-aviso ga4-aviso--warn">GA4 Data API permite ver journeys agregados por landing, pagina y evento. Para reconstruir secuencias usuario por usuario se requiere BigQuery Export con user_pseudo_id y timestamps de eventos.</div>
+    <div class="ad-grid ga4-grid"><article class="ad-card ga4-card"><h3 class="ad-card__t">Journey de compra</h3><p class="ad-card__d">Las landings con mas purchases son <strong>/mobile/login</strong> con 110,340 purchases, <strong>/Mobile/</strong> con 92,566, <strong>/mobile</strong> con 24,706 y <strong>/mobile/betslip</strong> con 14,328.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">Journey de registro</h3><p class="ad-card__d"><strong>/mobile/registration</strong> concentra 2,495 registros completos. Las URLs con <strong>btag</strong> aportan registros eficientes, especialmente variantes de <strong>a_101960b_60c</strong>.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">Mobile domina el journey</h3><p class="ad-card__d">Mobile concentra 386,767 purchases y 7,614 registros completos. Desktop aporta 29,513 purchases y 438 registros.</p></article></div>
+    <div class="ga4-cols">
       <div>
-        <h3>Top landings por purchase</h3>
-        <div class="bar-list">
-          <div class="bar-row"><div class="bar-label">/mobile/login</div><div class="bar-track"><div class="bar" style="width:100%"></div></div><strong>110,340</strong></div>
-          <div class="bar-row"><div class="bar-label">/Mobile/</div><div class="bar-track"><div class="bar" style="width:84%"></div></div><strong>92,566</strong></div>
-          <div class="bar-row"><div class="bar-label">/mobile</div><div class="bar-track"><div class="bar" style="width:22%"></div></div><strong>24,706</strong></div>
-          <div class="bar-row"><div class="bar-label">/mobile/</div><div class="bar-track"><div class="bar" style="width:14%"></div></div><strong>15,655</strong></div>
-          <div class="bar-row"><div class="bar-label">/mobile/betslip</div><div class="bar-track"><div class="bar" style="width:13%"></div></div><strong>14,328</strong></div>
-          <div class="bar-row"><div class="bar-label">/</div><div class="bar-track"><div class="bar" style="width:13%"></div></div><strong>14,170</strong></div>
-        </div>
+        <h3 class="ga4-h3">Top landings por purchase</h3>
+        <div class="ga4-barras"><div class="ga4-fila"><span class="ga4-fila__l">/mobile/login</span><div class="ad-barra" style="--v:100%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">110,340</b></div><div class="ga4-fila"><span class="ga4-fila__l">/Mobile/</span><div class="ad-barra" style="--v:84%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">92,566</b></div><div class="ga4-fila"><span class="ga4-fila__l">/mobile</span><div class="ad-barra" style="--v:22%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">24,706</b></div><div class="ga4-fila"><span class="ga4-fila__l">/mobile/</span><div class="ad-barra" style="--v:14%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">15,655</b></div><div class="ga4-fila"><span class="ga4-fila__l">/mobile/betslip</span><div class="ad-barra" style="--v:13%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">14,328</b></div><div class="ga4-fila"><span class="ga4-fila__l">/</span><div class="ad-barra" style="--v:13%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">14,170</b></div></div>
       </div>
       <div>
-        <h3>Top landings por registro completo</h3>
-        <div class="bar-list">
-          <div class="bar-row"><div class="bar-label">/mobile/registration</div><div class="bar-track"><div class="bar alt" style="width:100%"></div></div><strong>2,495</strong></div>
-          <div class="bar-row"><div class="bar-label">/Mobile/?btag=a_101960...5166</div><div class="bar-track"><div class="bar alt" style="width:27%"></div></div><strong>674</strong></div>
-          <div class="bar-row"><div class="bar-label">/Mobile/</div><div class="bar-track"><div class="bar alt" style="width:17%"></div></div><strong>426</strong></div>
-          <div class="bar-row"><div class="bar-label">/Mobile/?btag=a_101960...5166 + params</div><div class="bar-track"><div class="bar alt" style="width:15%"></div></div><strong>365</strong></div>
-          <div class="bar-row"><div class="bar-label">/Mobile/?btag=a_101960...4916</div><div class="bar-track"><div class="bar alt" style="width:15%"></div></div><strong>364</strong></div>
-          <div class="bar-row"><div class="bar-label">/Mobile/?btag=a_101960...4635</div><div class="bar-track"><div class="bar alt" style="width:10%"></div></div><strong>259</strong></div>
-        </div>
+        <h3 class="ga4-h3">Top landings por registro completo</h3>
+        <div class="ga4-barras"><div class="ga4-fila"><span class="ga4-fila__l">/mobile/registration</span><div class="ad-barra ga4-barra--alt" style="--v:100%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">2,495</b></div><div class="ga4-fila"><span class="ga4-fila__l">/Mobile/?btag=a_101960...5166</span><div class="ad-barra ga4-barra--alt" style="--v:27%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">674</b></div><div class="ga4-fila"><span class="ga4-fila__l">/Mobile/</span><div class="ad-barra ga4-barra--alt" style="--v:17%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">426</b></div><div class="ga4-fila"><span class="ga4-fila__l">/Mobile/?btag=a_101960...5166 + params</span><div class="ad-barra ga4-barra--alt" style="--v:15%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">365</b></div><div class="ga4-fila"><span class="ga4-fila__l">/Mobile/?btag=a_101960...4916</span><div class="ad-barra ga4-barra--alt" style="--v:15%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">364</b></div><div class="ga4-fila"><span class="ga4-fila__l">/Mobile/?btag=a_101960...4635</span><div class="ad-barra ga4-barra--alt" style="--v:10%" aria-hidden="true"><span></span></div><b class="ga4-fila__v">259</b></div></div>
       </div>
     </div>
-    <div class="cols" style="margin-top:18px">
+    <div class="ga4-cols">
       <div>
-        <h3>Paginas donde ocurre purchase</h3>
-        <ul>
+        <h3 class="ga4-h3">Paginas donde ocurre purchase</h3>
+        <ul class="ga4-lista">
           <li><strong>/mobile/notifications:</strong> 284,742 purchases y 9,483M de revenue.</li>
           <li><strong>/mobile/notifications/:</strong> 20,479 purchases.</li>
           <li><strong>/mobile/betslip:</strong> 19,463 purchases.</li>
@@ -811,8 +235,8 @@
         </ul>
       </div>
       <div>
-        <h3>Paginas donde ocurre registro</h3>
-        <ul>
+        <h3 class="ga4-h3">Paginas donde ocurre registro</h3>
+        <ul class="ga4-lista">
           <li><strong>/mobile/registration:</strong> 3,022 registros completos.</li>
           <li><strong>/mobile/registration/?btag=a_101960...5166:</strong> 592 registros.</li>
           <li><strong>/mobile/registration/?btag=a_101960...4916:</strong> 361 registros.</li>
@@ -820,151 +244,20 @@
         </ul>
       </div>
     </div>
-    <div class="callout">
-      Lectura estrategica: el journey de compra parece de usuarios activos que vuelven a notificaciones, login, betslip y live betting. El journey de registro es mas directo y depende de landings de registro y btags especificos.
-    </div>
-  </section>
-
-  <section id="tablas">
-    <h2>Fuente / Medio con Afiliados Agrupados</h2>
-    <div class="callout">
-      Esta es la vista principal recomendada: todos los afiliados se acumulan en una sola fila para comparar contra organico, CPC, direct, CRM y referidos.
-    </div>
-    <div class="table-wrap" style="margin-top:14px">
-      <table>
-        <thead>
-          <tr>
-            <th>Fuente / medio</th>
-            <th>Sesiones</th>
-            <th>Purchase</th>
-            <th>Purchase / sesion</th>
-            <th>Reg complete</th>
-            <th>Reg / sesion</th>
-            <th>Step 1 -> complete</th>
-            <th>Revenue / sesion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>google / organic</td><td>233,023</td><td>209,918</td><td>90.08%</td><td>536</td><td>0.23%</td><td>9.18%</td><td>30,387</td></tr>
-          <tr><td>Affiliates / grouped</td><td>154,647</td><td>101,856</td><td>65.86%</td><td>2,030</td><td>1.31%</td><td>4.48%</td><td>32,483</td></tr>
-          <tr><td>google / cpc</td><td>87,901</td><td>32,730</td><td>37.24%</td><td>2,558</td><td>2.91%</td><td>20.42%</td><td>14,106</td></tr>
-          <tr><td>(direct) / (none)</td><td>87,038</td><td>41,092</td><td>47.21%</td><td>2,672</td><td>3.07%</td><td>7.04%</td><td>18,704</td></tr>
-          <tr><td>CRM / Popup</td><td>18,033</td><td>15,574</td><td>86.36%</td><td>1</td><td>0.01%</td><td>0.28%</td><td>15,223</td></tr>
-          <tr><td>Facebook / CPC</td><td>12,631</td><td>28</td><td>0.22%</td><td>101</td><td>0.80%</td><td>3.78%</td><td>123</td></tr>
-          <tr><td>CRM / Email</td><td>3,780</td><td>1,439</td><td>38.07%</td><td>3</td><td>0.08%</td><td>1.69%</td><td>8,045</td></tr>
-          <tr><td>(not set)</td><td>3,692</td><td>3,223</td><td>87.30%</td><td>46</td><td>1.25%</td><td>18.55%</td><td>27,868</td></tr>
-          <tr><td>yajuego.org / referral</td><td>3,231</td><td>2,842</td><td>87.96%</td><td>9</td><td>0.28%</td><td>7.50%</td><td>21,028</td></tr>
-          <tr><td>bing / organic</td><td>2,206</td><td>2,596</td><td>117.68%</td><td>2</td><td>0.09%</td><td>4.08%</td><td>65,388</td></tr>
-          <tr><td>eu-server-w99.ssgportal.com / referral</td><td>1,636</td><td>1,573</td><td>96.15%</td><td>1</td><td>0.06%</td><td>1.72%</td><td>42,684</td></tr>
-          <tr><td>yajuego.espressogames.com / referral</td><td>1,442</td><td>291</td><td>20.18%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>2,507</td></tr>
-          <tr><td>CRM / SMS</td><td>1,417</td><td>278</td><td>19.62%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>4,442</td></tr>
-          <tr><td>cdnmtc.endorphina.network / referral</td><td>812</td><td>199</td><td>24.51%</td><td>1</td><td>0.12%</td><td>6.67%</td><td>5,387</td></tr>
-          <tr><td>yajuego-api.xpressgaming.net / referral</td><td>803</td><td>456</td><td>56.79%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>7,598</td></tr>
-          <tr><td>(data not available)</td><td>513</td><td>62</td><td>12.09%</td><td>31</td><td>6.04%</td><td>14.03%</td><td>2,218</td></tr>
-          <tr><td>co.search.yahoo.com / referral</td><td>499</td><td>200</td><td>40.08%</td><td>3</td><td>0.60%</td><td>20.00%</td><td>73,234</td></tr>
-          <tr><td>m.facebook.com / referral</td><td>478</td><td>6</td><td>1.26%</td><td>33</td><td>6.90%</td><td>13.04%</td><td>116</td></tr>
-          <tr><td>coljuegos.gov.co / referral</td><td>284</td><td>26</td><td>9.15%</td><td>22</td><td>7.75%</td><td>19.82%</td><td>4,412</td></tr>
-          <tr><td>CRM_PopUp / PopUp</td><td>282</td><td>255</td><td>90.43%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>8,725</td></tr>
-          <tr><td>app-e.insvr.com / referral</td><td>266</td><td>73</td><td>27.44%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>28,630</td></tr>
-          <tr><td>CRM_homepage mobile / Banner</td><td>260</td><td>807</td><td>310.38%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>4,008</td></tr>
-          <tr><td>Google / 101960</td><td>235</td><td>13</td><td>5.53%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>93,065</td></tr>
-          <tr><td>ntp.msn.com / referral</td><td>214</td><td>123</td><td>57.48%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>7,635</td></tr>
-          <tr><td>yajuegoco.evo-games.com / referral</td><td>177</td><td>176</td><td>99.44%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>52,195</td></tr>
-          <tr><td>yajuego.io / referral</td><td>159</td><td>99</td><td>62.26%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>18,207</td></tr>
-          <tr><td>Google / CPC</td><td>148</td><td>3</td><td>2.03%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>227</td></tr>
-          <tr><td>staticcasino.worldmatch.eu / referral</td><td>145</td><td>49</td><td>33.79%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>24,719</td></tr>
-          <tr><td>facebook.com / referral</td><td>126</td><td>0</td><td>0.00%</td><td>9</td><td>7.14%</td><td>10.84%</td><td>0</td></tr>
-          <tr><td>lnkd.in / referral</td><td>118</td><td>0</td><td>0.00%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>0</td></tr>
-          <tr><td>ecosia.org / organic</td><td>103</td><td>55</td><td>53.40%</td><td>1</td><td>0.97%</td><td>12.50%</td><td>12,189</td></tr>
-          <tr><td>vitad.org / referral</td><td>103</td><td>62</td><td>60.19%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>31,185</td></tr>
-          <tr><td>cse.google.com / referral</td><td>101</td><td>40</td><td>39.60%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>16,498</td></tr>
-          <tr><td>search.brave.com / referral</td><td>75</td><td>366</td><td>488.00%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>204,759</td></tr>
-          <tr><td>CRM_Email / Email</td><td>73</td><td>15</td><td>20.55%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>11,945</td></tr>
-          <tr><td>duckduckgo / organic</td><td>55</td><td>29</td><td>52.73%</td><td>1</td><td>1.82%</td><td>33.33%</td><td>29,319</td></tr>
-          <tr><td>chatgpt.com / (not set)</td><td>35</td><td>0</td><td>0.00%</td><td>5</td><td>14.29%</td><td>35.71%</td><td>0</td></tr>
-          <tr><td>linkedin.com / referral</td><td>31</td><td>45</td><td>145.16%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>7,023</td></tr>
-          <tr><td>chatgpt.com / referral</td><td>20</td><td>1</td><td>5.00%</td><td>1</td><td>5.00%</td><td>50.00%</td><td>975</td></tr>
-          <tr><td>l.instagram.com / referral</td><td>15</td><td>0</td><td>0.00%</td><td>4</td><td>26.67%</td><td>20.00%</td><td>0</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="detalle">
-    <h2>Detalle sin Agrupar: Top 50 Fuente / Medio</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Fuente / medio</th>
-            <th>Sesiones</th>
-            <th>Purchase</th>
-            <th>Purchase / sesion</th>
-            <th>Reg complete</th>
-            <th>Reg / sesion</th>
-            <th>Step 1 -> complete</th>
-            <th>Revenue / sesion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>google / organic</td><td>232,813</td><td>209,708</td><td>90.08%</td><td>536</td><td>0.23%</td><td>9.18%</td><td>30,354</td></tr>
-          <tr><td>google / cpc</td><td>87,727</td><td>32,721</td><td>37.30%</td><td>2,552</td><td>2.91%</td><td>20.39%</td><td>14,125</td></tr>
-          <tr><td>(direct) / (none)</td><td>86,982</td><td>41,063</td><td>47.21%</td><td>2,669</td><td>3.07%</td><td>7.04%</td><td>18,703</td></tr>
-          <tr><td>affiliates / 102199</td><td>85,677</td><td>97,223</td><td>113.48%</td><td>14</td><td>0.02%</td><td>0.72%</td><td>57,184</td></tr>
-          <tr><td>affiliates / 101961</td><td>29,913</td><td>376</td><td>1.26%</td><td>3</td><td>0.01%</td><td>0.31%</td><td>866</td></tr>
-          <tr><td>affiliates / 101964</td><td>21,279</td><td>423</td><td>1.99%</td><td>1,214</td><td>5.71%</td><td>3.97%</td><td>598</td></tr>
-          <tr><td>CRM / Popup</td><td>17,990</td><td>15,563</td><td>86.51%</td><td>1</td><td>0.01%</td><td>0.28%</td><td>15,243</td></tr>
-          <tr><td>Facebook / CPC</td><td>12,608</td><td>28</td><td>0.22%</td><td>100</td><td>0.79%</td><td>3.74%</td><td>123</td></tr>
-          <tr><td>CRM / Email</td><td>3,779</td><td>1,439</td><td>38.08%</td><td>3</td><td>0.08%</td><td>1.69%</td><td>8,047</td></tr>
-          <tr><td>(not set)</td><td>3,600</td><td>3,167</td><td>87.97%</td><td>43</td><td>1.19%</td><td>17.48%</td><td>28,126</td></tr>
-          <tr><td>affiliates / 100098</td><td>3,574</td><td>521</td><td>14.58%</td><td>355</td><td>9.93%</td><td>9.77%</td><td>3,661</td></tr>
-          <tr><td>yajuego.org / referral</td><td>3,231</td><td>2,842</td><td>87.96%</td><td>9</td><td>0.28%</td><td>7.50%</td><td>21,028</td></tr>
-          <tr><td>affiliates / 101607</td><td>2,529</td><td>245</td><td>9.69%</td><td>7</td><td>0.28%</td><td>0.32%</td><td>687</td></tr>
-          <tr><td>bing / organic</td><td>2,202</td><td>2,593</td><td>117.76%</td><td>2</td><td>0.09%</td><td>4.08%</td><td>65,371</td></tr>
-          <tr><td>affiliates / 101960</td><td>2,044</td><td>224</td><td>10.96%</td><td>86</td><td>4.21%</td><td>4.63%</td><td>1,168</td></tr>
-          <tr><td>eu-server-w99.ssgportal.com / referral</td><td>1,634</td><td>1,571</td><td>96.14%</td><td>1</td><td>0.06%</td><td>1.79%</td><td>42,735</td></tr>
-          <tr><td>affiliates / 5337</td><td>1,617</td><td>1,178</td><td>72.85%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>26,512</td></tr>
-          <tr><td>affiliates / 100624</td><td>1,583</td><td>0</td><td>0.00%</td><td>134</td><td>8.46%</td><td>32.52%</td><td>0</td></tr>
-          <tr><td>yajuego.espressogames.com / referral</td><td>1,439</td><td>287</td><td>19.94%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>2,489</td></tr>
-          <tr><td>CRM / SMS</td><td>1,413</td><td>278</td><td>19.67%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>4,454</td></tr>
-          <tr><td>affiliates / 45</td><td>899</td><td>44</td><td>4.89%</td><td>2</td><td>0.22%</td><td>0.21%</td><td>2,948</td></tr>
-          <tr><td>cdnmtc.endorphina.network / referral</td><td>807</td><td>199</td><td>24.66%</td><td>1</td><td>0.12%</td><td>7.14%</td><td>5,421</td></tr>
-          <tr><td>yajuego-api.xpressgaming.net / referral</td><td>803</td><td>456</td><td>56.79%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>7,598</td></tr>
-          <tr><td>affiliates / 101962</td><td>802</td><td>0</td><td>0.00%</td><td>70</td><td>8.73%</td><td>22.01%</td><td>0</td></tr>
-          <tr><td>affiliates / 100871</td><td>704</td><td>51</td><td>7.24%</td><td>4</td><td>0.57%</td><td>16.67%</td><td>1,324</td></tr>
-          <tr><td>affiliates / 100689</td><td>659</td><td>395</td><td>59.94%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>9,237</td></tr>
-          <tr><td>affiliates / 101967</td><td>565</td><td>34</td><td>6.02%</td><td>34</td><td>6.02%</td><td>5.38%</td><td>296</td></tr>
-          <tr><td>affiliates / 101314</td><td>535</td><td>388</td><td>72.52%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>13,148</td></tr>
-          <tr><td>(data not available)</td><td>509</td><td>62</td><td>12.18%</td><td>31</td><td>6.09%</td><td>14.03%</td><td>2,236</td></tr>
-          <tr><td>co.search.yahoo.com / referral</td><td>499</td><td>200</td><td>40.08%</td><td>3</td><td>0.60%</td><td>20.00%</td><td>73,234</td></tr>
-          <tr><td>m.facebook.com / referral</td><td>478</td><td>6</td><td>1.26%</td><td>33</td><td>6.90%</td><td>13.04%</td><td>116</td></tr>
-          <tr><td>coljuegos.gov.co / referral</td><td>284</td><td>26</td><td>9.15%</td><td>22</td><td>7.75%</td><td>19.82%</td><td>4,412</td></tr>
-          <tr><td>CRM_PopUp / PopUp</td><td>282</td><td>255</td><td>90.43%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>8,725</td></tr>
-          <tr><td>app-e.insvr.com / referral</td><td>266</td><td>73</td><td>27.44%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>28,630</td></tr>
-          <tr><td>CRM_homepage mobile / Banner</td><td>260</td><td>807</td><td>310.38%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>4,008</td></tr>
-          <tr><td>Google / 101960</td><td>233</td><td>13</td><td>5.58%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>93,864</td></tr>
-          <tr><td>affiliates / 37</td><td>222</td><td>430</td><td>193.69%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>7,701</td></tr>
-          <tr><td>ntp.msn.com / referral</td><td>213</td><td>122</td><td>57.28%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>7,436</td></tr>
-          <tr><td>affiliates / 101601</td><td>210</td><td>16</td><td>7.62%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>660</td></tr>
-          <tr><td>affiliate_36 / 2117</td><td>194</td><td>0</td><td>0.00%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>0</td></tr>
-          <tr><td>yajuegoco.evo-games.com / referral</td><td>177</td><td>176</td><td>99.44%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>52,195</td></tr>
-          <tr><td>yajuego.io / referral</td><td>159</td><td>99</td><td>62.26%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>18,207</td></tr>
-          <tr><td>affiliates / 100857</td><td>157</td><td>0</td><td>0.00%</td><td>32</td><td>20.38%</td><td>17.20%</td><td>0</td></tr>
-          <tr><td>Google / CPC</td><td>148</td><td>3</td><td>2.03%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>227</td></tr>
-          <tr><td>affiliates / 101932</td><td>145</td><td>48</td><td>33.10%</td><td>11</td><td>7.59%</td><td>5.88%</td><td>670</td></tr>
-          <tr><td>staticcasino.worldmatch.eu / referral</td><td>145</td><td>49</td><td>33.79%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>24,719</td></tr>
-          <tr><td>facebook.com / referral</td><td>126</td><td>0</td><td>0.00%</td><td>9</td><td>7.14%</td><td>10.84%</td><td>0</td></tr>
-          <tr><td>lnkd.in / referral</td><td>115</td><td>0</td><td>0.00%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>0</td></tr>
-          <tr><td>vitad.org / referral</td><td>103</td><td>62</td><td>60.19%</td><td>0</td><td>0.00%</td><td>0.00%</td><td>31,185</td></tr>
-          <tr><td>ecosia.org / organic</td><td>102</td><td>55</td><td>53.92%</td><td>1</td><td>0.98%</td><td>12.50%</td><td>12,308</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="acciones">
-    <h2>Acciones Recomendadas</h2>
-    <ul>
+    <div class="ad-lectura ga4-lectura"><p>Lectura estrategica: el journey de compra parece de usuarios activos que vuelven a notificaciones, login, betslip y live betting. El journey de registro es mas directo y depende de landings de registro y btags especificos.</p></div>
+</div></section>
+<section class="ad-sec ad-sec--papel" id="tablas"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">09 · Tablas</p><h2>Fuente / Medio con Afiliados Agrupados</h2></header>
+    <div class="ad-lectura ga4-lectura"><p>Esta es la vista principal recomendada: todos los afiliados se acumulan en una sola fila para comparar contra organico, CPC, direct, CRM y referidos.</p></div>
+    <div class="ad-tabla ga4-tabla"><table><caption>Fuente / Medio con Afiliados Agrupados · Rango: 27 abr 2026 - 27 may 2026 · Fuente: Google Analytics Data API</caption><thead><tr><th scope="col">Fuente / medio</th><th scope="col" class="valor">Sesiones</th><th scope="col" class="valor">Purchase</th><th scope="col" class="valor">Purchase / sesion</th><th scope="col" class="valor">Reg complete</th><th scope="col" class="valor">Reg / sesion</th><th scope="col" class="valor">Step 1 -> complete</th><th scope="col" class="valor">Revenue / sesion</th></tr></thead><tbody><tr><th scope="row">google / organic</th><td class="valor">233,023</td><td class="valor">209,918</td><td class="valor">90.08%</td><td class="valor">536</td><td class="valor">0.23%</td><td class="valor">9.18%</td><td class="valor">30,387</td></tr><tr><th scope="row">Affiliates / grouped</th><td class="valor">154,647</td><td class="valor">101,856</td><td class="valor">65.86%</td><td class="valor">2,030</td><td class="valor">1.31%</td><td class="valor">4.48%</td><td class="valor">32,483</td></tr><tr><th scope="row">google / cpc</th><td class="valor">87,901</td><td class="valor">32,730</td><td class="valor">37.24%</td><td class="valor">2,558</td><td class="valor">2.91%</td><td class="valor">20.42%</td><td class="valor">14,106</td></tr><tr><th scope="row">(direct) / (none)</th><td class="valor">87,038</td><td class="valor">41,092</td><td class="valor">47.21%</td><td class="valor">2,672</td><td class="valor">3.07%</td><td class="valor">7.04%</td><td class="valor">18,704</td></tr><tr><th scope="row">CRM / Popup</th><td class="valor">18,033</td><td class="valor">15,574</td><td class="valor">86.36%</td><td class="valor">1</td><td class="valor">0.01%</td><td class="valor">0.28%</td><td class="valor">15,223</td></tr><tr><th scope="row">Facebook / CPC</th><td class="valor">12,631</td><td class="valor">28</td><td class="valor">0.22%</td><td class="valor">101</td><td class="valor">0.80%</td><td class="valor">3.78%</td><td class="valor">123</td></tr><tr><th scope="row">CRM / Email</th><td class="valor">3,780</td><td class="valor">1,439</td><td class="valor">38.07%</td><td class="valor">3</td><td class="valor">0.08%</td><td class="valor">1.69%</td><td class="valor">8,045</td></tr><tr><th scope="row">(not set)</th><td class="valor">3,692</td><td class="valor">3,223</td><td class="valor">87.30%</td><td class="valor">46</td><td class="valor">1.25%</td><td class="valor">18.55%</td><td class="valor">27,868</td></tr><tr><th scope="row">yajuego.org / referral</th><td class="valor">3,231</td><td class="valor">2,842</td><td class="valor">87.96%</td><td class="valor">9</td><td class="valor">0.28%</td><td class="valor">7.50%</td><td class="valor">21,028</td></tr><tr><th scope="row">bing / organic</th><td class="valor">2,206</td><td class="valor">2,596</td><td class="valor">117.68%</td><td class="valor">2</td><td class="valor">0.09%</td><td class="valor">4.08%</td><td class="valor">65,388</td></tr><tr><th scope="row">eu-server-w99.ssgportal.com / referral</th><td class="valor">1,636</td><td class="valor">1,573</td><td class="valor">96.15%</td><td class="valor">1</td><td class="valor">0.06%</td><td class="valor">1.72%</td><td class="valor">42,684</td></tr><tr><th scope="row">yajuego.espressogames.com / referral</th><td class="valor">1,442</td><td class="valor">291</td><td class="valor">20.18%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">2,507</td></tr><tr><th scope="row">CRM / SMS</th><td class="valor">1,417</td><td class="valor">278</td><td class="valor">19.62%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">4,442</td></tr><tr><th scope="row">cdnmtc.endorphina.network / referral</th><td class="valor">812</td><td class="valor">199</td><td class="valor">24.51%</td><td class="valor">1</td><td class="valor">0.12%</td><td class="valor">6.67%</td><td class="valor">5,387</td></tr><tr><th scope="row">yajuego-api.xpressgaming.net / referral</th><td class="valor">803</td><td class="valor">456</td><td class="valor">56.79%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">7,598</td></tr><tr><th scope="row">(data not available)</th><td class="valor">513</td><td class="valor">62</td><td class="valor">12.09%</td><td class="valor">31</td><td class="valor">6.04%</td><td class="valor">14.03%</td><td class="valor">2,218</td></tr><tr><th scope="row">co.search.yahoo.com / referral</th><td class="valor">499</td><td class="valor">200</td><td class="valor">40.08%</td><td class="valor">3</td><td class="valor">0.60%</td><td class="valor">20.00%</td><td class="valor">73,234</td></tr><tr><th scope="row">m.facebook.com / referral</th><td class="valor">478</td><td class="valor">6</td><td class="valor">1.26%</td><td class="valor">33</td><td class="valor">6.90%</td><td class="valor">13.04%</td><td class="valor">116</td></tr><tr><th scope="row">coljuegos.gov.co / referral</th><td class="valor">284</td><td class="valor">26</td><td class="valor">9.15%</td><td class="valor">22</td><td class="valor">7.75%</td><td class="valor">19.82%</td><td class="valor">4,412</td></tr><tr><th scope="row">CRM_PopUp / PopUp</th><td class="valor">282</td><td class="valor">255</td><td class="valor">90.43%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">8,725</td></tr><tr><th scope="row">app-e.insvr.com / referral</th><td class="valor">266</td><td class="valor">73</td><td class="valor">27.44%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">28,630</td></tr><tr><th scope="row">CRM_homepage mobile / Banner</th><td class="valor">260</td><td class="valor">807</td><td class="valor">310.38%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">4,008</td></tr><tr><th scope="row">Google / 101960</th><td class="valor">235</td><td class="valor">13</td><td class="valor">5.53%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">93,065</td></tr><tr><th scope="row">ntp.msn.com / referral</th><td class="valor">214</td><td class="valor">123</td><td class="valor">57.48%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">7,635</td></tr><tr><th scope="row">yajuegoco.evo-games.com / referral</th><td class="valor">177</td><td class="valor">176</td><td class="valor">99.44%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">52,195</td></tr><tr><th scope="row">yajuego.io / referral</th><td class="valor">159</td><td class="valor">99</td><td class="valor">62.26%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">18,207</td></tr><tr><th scope="row">Google / CPC</th><td class="valor">148</td><td class="valor">3</td><td class="valor">2.03%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">227</td></tr><tr><th scope="row">staticcasino.worldmatch.eu / referral</th><td class="valor">145</td><td class="valor">49</td><td class="valor">33.79%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">24,719</td></tr><tr><th scope="row">facebook.com / referral</th><td class="valor">126</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">9</td><td class="valor">7.14%</td><td class="valor">10.84%</td><td class="valor">0</td></tr><tr><th scope="row">lnkd.in / referral</th><td class="valor">118</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">0</td></tr><tr><th scope="row">ecosia.org / organic</th><td class="valor">103</td><td class="valor">55</td><td class="valor">53.40%</td><td class="valor">1</td><td class="valor">0.97%</td><td class="valor">12.50%</td><td class="valor">12,189</td></tr><tr><th scope="row">vitad.org / referral</th><td class="valor">103</td><td class="valor">62</td><td class="valor">60.19%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">31,185</td></tr><tr><th scope="row">cse.google.com / referral</th><td class="valor">101</td><td class="valor">40</td><td class="valor">39.60%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">16,498</td></tr><tr><th scope="row">search.brave.com / referral</th><td class="valor">75</td><td class="valor">366</td><td class="valor">488.00%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">204,759</td></tr><tr><th scope="row">CRM_Email / Email</th><td class="valor">73</td><td class="valor">15</td><td class="valor">20.55%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">11,945</td></tr><tr><th scope="row">duckduckgo / organic</th><td class="valor">55</td><td class="valor">29</td><td class="valor">52.73%</td><td class="valor">1</td><td class="valor">1.82%</td><td class="valor">33.33%</td><td class="valor">29,319</td></tr><tr><th scope="row">chatgpt.com / (not set)</th><td class="valor">35</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">5</td><td class="valor">14.29%</td><td class="valor">35.71%</td><td class="valor">0</td></tr><tr><th scope="row">linkedin.com / referral</th><td class="valor">31</td><td class="valor">45</td><td class="valor">145.16%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">7,023</td></tr><tr><th scope="row">chatgpt.com / referral</th><td class="valor">20</td><td class="valor">1</td><td class="valor">5.00%</td><td class="valor">1</td><td class="valor">5.00%</td><td class="valor">50.00%</td><td class="valor">975</td></tr><tr><th scope="row">l.instagram.com / referral</th><td class="valor">15</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">4</td><td class="valor">26.67%</td><td class="valor">20.00%</td><td class="valor">0</td></tr></tbody></table></div>
+</div></section>
+<section class="ad-sec" id="detalle"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">10 · Detalle top 50</p><h2>Detalle sin Agrupar: Top 50 Fuente / Medio</h2></header>
+    <div class="ad-tabla ga4-tabla"><table><caption>Detalle sin Agrupar: Top 50 Fuente / Medio · Rango: 27 abr 2026 - 27 may 2026 · Fuente: Google Analytics Data API</caption><thead><tr><th scope="col">Fuente / medio</th><th scope="col" class="valor">Sesiones</th><th scope="col" class="valor">Purchase</th><th scope="col" class="valor">Purchase / sesion</th><th scope="col" class="valor">Reg complete</th><th scope="col" class="valor">Reg / sesion</th><th scope="col" class="valor">Step 1 -> complete</th><th scope="col" class="valor">Revenue / sesion</th></tr></thead><tbody><tr><th scope="row">google / organic</th><td class="valor">232,813</td><td class="valor">209,708</td><td class="valor">90.08%</td><td class="valor">536</td><td class="valor">0.23%</td><td class="valor">9.18%</td><td class="valor">30,354</td></tr><tr><th scope="row">google / cpc</th><td class="valor">87,727</td><td class="valor">32,721</td><td class="valor">37.30%</td><td class="valor">2,552</td><td class="valor">2.91%</td><td class="valor">20.39%</td><td class="valor">14,125</td></tr><tr><th scope="row">(direct) / (none)</th><td class="valor">86,982</td><td class="valor">41,063</td><td class="valor">47.21%</td><td class="valor">2,669</td><td class="valor">3.07%</td><td class="valor">7.04%</td><td class="valor">18,703</td></tr><tr><th scope="row">affiliates / 102199</th><td class="valor">85,677</td><td class="valor">97,223</td><td class="valor">113.48%</td><td class="valor">14</td><td class="valor">0.02%</td><td class="valor">0.72%</td><td class="valor">57,184</td></tr><tr><th scope="row">affiliates / 101961</th><td class="valor">29,913</td><td class="valor">376</td><td class="valor">1.26%</td><td class="valor">3</td><td class="valor">0.01%</td><td class="valor">0.31%</td><td class="valor">866</td></tr><tr><th scope="row">affiliates / 101964</th><td class="valor">21,279</td><td class="valor">423</td><td class="valor">1.99%</td><td class="valor">1,214</td><td class="valor">5.71%</td><td class="valor">3.97%</td><td class="valor">598</td></tr><tr><th scope="row">CRM / Popup</th><td class="valor">17,990</td><td class="valor">15,563</td><td class="valor">86.51%</td><td class="valor">1</td><td class="valor">0.01%</td><td class="valor">0.28%</td><td class="valor">15,243</td></tr><tr><th scope="row">Facebook / CPC</th><td class="valor">12,608</td><td class="valor">28</td><td class="valor">0.22%</td><td class="valor">100</td><td class="valor">0.79%</td><td class="valor">3.74%</td><td class="valor">123</td></tr><tr><th scope="row">CRM / Email</th><td class="valor">3,779</td><td class="valor">1,439</td><td class="valor">38.08%</td><td class="valor">3</td><td class="valor">0.08%</td><td class="valor">1.69%</td><td class="valor">8,047</td></tr><tr><th scope="row">(not set)</th><td class="valor">3,600</td><td class="valor">3,167</td><td class="valor">87.97%</td><td class="valor">43</td><td class="valor">1.19%</td><td class="valor">17.48%</td><td class="valor">28,126</td></tr><tr><th scope="row">affiliates / 100098</th><td class="valor">3,574</td><td class="valor">521</td><td class="valor">14.58%</td><td class="valor">355</td><td class="valor">9.93%</td><td class="valor">9.77%</td><td class="valor">3,661</td></tr><tr><th scope="row">yajuego.org / referral</th><td class="valor">3,231</td><td class="valor">2,842</td><td class="valor">87.96%</td><td class="valor">9</td><td class="valor">0.28%</td><td class="valor">7.50%</td><td class="valor">21,028</td></tr><tr><th scope="row">affiliates / 101607</th><td class="valor">2,529</td><td class="valor">245</td><td class="valor">9.69%</td><td class="valor">7</td><td class="valor">0.28%</td><td class="valor">0.32%</td><td class="valor">687</td></tr><tr><th scope="row">bing / organic</th><td class="valor">2,202</td><td class="valor">2,593</td><td class="valor">117.76%</td><td class="valor">2</td><td class="valor">0.09%</td><td class="valor">4.08%</td><td class="valor">65,371</td></tr><tr><th scope="row">affiliates / 101960</th><td class="valor">2,044</td><td class="valor">224</td><td class="valor">10.96%</td><td class="valor">86</td><td class="valor">4.21%</td><td class="valor">4.63%</td><td class="valor">1,168</td></tr><tr><th scope="row">eu-server-w99.ssgportal.com / referral</th><td class="valor">1,634</td><td class="valor">1,571</td><td class="valor">96.14%</td><td class="valor">1</td><td class="valor">0.06%</td><td class="valor">1.79%</td><td class="valor">42,735</td></tr><tr><th scope="row">affiliates / 5337</th><td class="valor">1,617</td><td class="valor">1,178</td><td class="valor">72.85%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">26,512</td></tr><tr><th scope="row">affiliates / 100624</th><td class="valor">1,583</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">134</td><td class="valor">8.46%</td><td class="valor">32.52%</td><td class="valor">0</td></tr><tr><th scope="row">yajuego.espressogames.com / referral</th><td class="valor">1,439</td><td class="valor">287</td><td class="valor">19.94%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">2,489</td></tr><tr><th scope="row">CRM / SMS</th><td class="valor">1,413</td><td class="valor">278</td><td class="valor">19.67%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">4,454</td></tr><tr><th scope="row">affiliates / 45</th><td class="valor">899</td><td class="valor">44</td><td class="valor">4.89%</td><td class="valor">2</td><td class="valor">0.22%</td><td class="valor">0.21%</td><td class="valor">2,948</td></tr><tr><th scope="row">cdnmtc.endorphina.network / referral</th><td class="valor">807</td><td class="valor">199</td><td class="valor">24.66%</td><td class="valor">1</td><td class="valor">0.12%</td><td class="valor">7.14%</td><td class="valor">5,421</td></tr><tr><th scope="row">yajuego-api.xpressgaming.net / referral</th><td class="valor">803</td><td class="valor">456</td><td class="valor">56.79%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">7,598</td></tr><tr><th scope="row">affiliates / 101962</th><td class="valor">802</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">70</td><td class="valor">8.73%</td><td class="valor">22.01%</td><td class="valor">0</td></tr><tr><th scope="row">affiliates / 100871</th><td class="valor">704</td><td class="valor">51</td><td class="valor">7.24%</td><td class="valor">4</td><td class="valor">0.57%</td><td class="valor">16.67%</td><td class="valor">1,324</td></tr><tr><th scope="row">affiliates / 100689</th><td class="valor">659</td><td class="valor">395</td><td class="valor">59.94%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">9,237</td></tr><tr><th scope="row">affiliates / 101967</th><td class="valor">565</td><td class="valor">34</td><td class="valor">6.02%</td><td class="valor">34</td><td class="valor">6.02%</td><td class="valor">5.38%</td><td class="valor">296</td></tr><tr><th scope="row">affiliates / 101314</th><td class="valor">535</td><td class="valor">388</td><td class="valor">72.52%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">13,148</td></tr><tr><th scope="row">(data not available)</th><td class="valor">509</td><td class="valor">62</td><td class="valor">12.18%</td><td class="valor">31</td><td class="valor">6.09%</td><td class="valor">14.03%</td><td class="valor">2,236</td></tr><tr><th scope="row">co.search.yahoo.com / referral</th><td class="valor">499</td><td class="valor">200</td><td class="valor">40.08%</td><td class="valor">3</td><td class="valor">0.60%</td><td class="valor">20.00%</td><td class="valor">73,234</td></tr><tr><th scope="row">m.facebook.com / referral</th><td class="valor">478</td><td class="valor">6</td><td class="valor">1.26%</td><td class="valor">33</td><td class="valor">6.90%</td><td class="valor">13.04%</td><td class="valor">116</td></tr><tr><th scope="row">coljuegos.gov.co / referral</th><td class="valor">284</td><td class="valor">26</td><td class="valor">9.15%</td><td class="valor">22</td><td class="valor">7.75%</td><td class="valor">19.82%</td><td class="valor">4,412</td></tr><tr><th scope="row">CRM_PopUp / PopUp</th><td class="valor">282</td><td class="valor">255</td><td class="valor">90.43%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">8,725</td></tr><tr><th scope="row">app-e.insvr.com / referral</th><td class="valor">266</td><td class="valor">73</td><td class="valor">27.44%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">28,630</td></tr><tr><th scope="row">CRM_homepage mobile / Banner</th><td class="valor">260</td><td class="valor">807</td><td class="valor">310.38%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">4,008</td></tr><tr><th scope="row">Google / 101960</th><td class="valor">233</td><td class="valor">13</td><td class="valor">5.58%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">93,864</td></tr><tr><th scope="row">affiliates / 37</th><td class="valor">222</td><td class="valor">430</td><td class="valor">193.69%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">7,701</td></tr><tr><th scope="row">ntp.msn.com / referral</th><td class="valor">213</td><td class="valor">122</td><td class="valor">57.28%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">7,436</td></tr><tr><th scope="row">affiliates / 101601</th><td class="valor">210</td><td class="valor">16</td><td class="valor">7.62%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">660</td></tr><tr><th scope="row">affiliate_36 / 2117</th><td class="valor">194</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">0</td></tr><tr><th scope="row">yajuegoco.evo-games.com / referral</th><td class="valor">177</td><td class="valor">176</td><td class="valor">99.44%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">52,195</td></tr><tr><th scope="row">yajuego.io / referral</th><td class="valor">159</td><td class="valor">99</td><td class="valor">62.26%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">18,207</td></tr><tr><th scope="row">affiliates / 100857</th><td class="valor">157</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">32</td><td class="valor">20.38%</td><td class="valor">17.20%</td><td class="valor">0</td></tr><tr><th scope="row">Google / CPC</th><td class="valor">148</td><td class="valor">3</td><td class="valor">2.03%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">227</td></tr><tr><th scope="row">affiliates / 101932</th><td class="valor">145</td><td class="valor">48</td><td class="valor">33.10%</td><td class="valor">11</td><td class="valor">7.59%</td><td class="valor">5.88%</td><td class="valor">670</td></tr><tr><th scope="row">staticcasino.worldmatch.eu / referral</th><td class="valor">145</td><td class="valor">49</td><td class="valor">33.79%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">24,719</td></tr><tr><th scope="row">facebook.com / referral</th><td class="valor">126</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">9</td><td class="valor">7.14%</td><td class="valor">10.84%</td><td class="valor">0</td></tr><tr><th scope="row">lnkd.in / referral</th><td class="valor">115</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">0</td></tr><tr><th scope="row">vitad.org / referral</th><td class="valor">103</td><td class="valor">62</td><td class="valor">60.19%</td><td class="valor">0</td><td class="valor">0.00%</td><td class="valor">0.00%</td><td class="valor">31,185</td></tr><tr><th scope="row">ecosia.org / organic</th><td class="valor">102</td><td class="valor">55</td><td class="valor">53.92%</td><td class="valor">1</td><td class="valor">0.98%</td><td class="valor">12.50%</td><td class="valor">12,308</td></tr></tbody></table></div>
+</div></section>
+<section class="ad-sec ad-sec--papel" id="acciones"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">11 · Acciones</p><h2>Acciones Recomendadas</h2></header>
+    <ul class="ga4-lista">
       <li>Separar KPIs de adquisicion y reactivacion: evaluar registros por canal de adquisicion y purchases por canal de cierre/retorno.</li>
       <li>Auditar el paso <strong>registration-step_1 -> registration-step_2</strong>: es la perdida mas grande del flujo.</li>
       <li>Revisar UTMs y reglas de channel grouping para <strong>(not set)</strong>, <strong>(data not available)</strong>, referencias Yajuego y variaciones <strong>Google / CPC</strong> vs <strong>google / cpc</strong>.</li>
@@ -972,44 +265,17 @@
       <li>Profundizar en <strong>google / cpc</strong>: buena escala de registros y fuerte rol como primer origen de purchase.</li>
       <li>Revisar Facebook CPC: aporta volumen, pero bajo purchase / sesion y bajo revenue / sesion frente a Google y afiliados.</li>
     </ul>
-  </section>
-
-  <section id="conclusiones">
-    <h2>Conclusiones</h2>
-    <div class="grid cards">
-      <div class="card">
-        <h3>1. La adquisicion y la monetizacion no son el mismo problema</h3>
-        <p>Google CPC, Direct y Affiliates agrupado empujan registros. Organic, Direct, CRM y Affiliates agrupado concentran monetizacion. Evaluarlos con un unico KPI mezclaria objetivos distintos.</p>
-      </div>
-      <div class="card">
-        <h3>2. El embudo de registro pierde demasiado temprano</h3>
-        <p>Solo 12.24% de los eventos que llegan a step 1 pasan a step 2. La oportunidad mas grande no esta en el cierre del registro, sino en reducir friccion inicial.</p>
-      </div>
-      <div class="card">
-        <h3>3. Google CPC tiene valor de origen</h3>
-        <p>Google CPC registra 32,721 purchases por sesion, pero 52,279 como first user source. Su aporte real se subestima si solo se mira la sesion de compra.</p>
-      </div>
-      <div class="card">
-        <h3>4. Affiliates agrupado mezcla roles distintos</h3>
-        <p>Como grupo pesa fuerte en revenue, pero internamente combina afiliados de retorno, afiliados de registro y fuentes de baja eficiencia. Debe gestionarse por subrol, no como un solo bloque presupuestal.</p>
-      </div>
-      <div class="card">
-        <h3>5. Facebook CPC necesita auditoria de calidad</h3>
-        <p>Con 12,608 sesiones, aporta solo 28 purchases y 100 registros completos. Sin costo no podemos cerrar ROAS/CAC, pero en GA4 se ve como trafico de baja eficiencia.</p>
-      </div>
-      <div class="card">
-        <h3>6. La medicion tiene deuda de etiquetado</h3>
-        <p>(not set), data not available, referencias Yajuego y variantes de capitalizacion en source/medium estan diluyendo lectura de atribucion y performance.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="recomendaciones">
-    <h2>Recomendaciones Estrategicas</h2>
-    <div class="cols">
+</div></section>
+<section class="ad-sec" id="conclusiones"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">12 · Conclusiones</p><h2>Conclusiones</h2></header>
+    <div class="ad-grid ga4-grid"><article class="ad-card ga4-card"><h3 class="ad-card__t">1. La adquisicion y la monetizacion no son el mismo problema</h3><p class="ad-card__d">Google CPC, Direct y Affiliates agrupado empujan registros. Organic, Direct, CRM y Affiliates agrupado concentran monetizacion. Evaluarlos con un unico KPI mezclaria objetivos distintos.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">2. El embudo de registro pierde demasiado temprano</h3><p class="ad-card__d">Solo 12.24% de los eventos que llegan a step 1 pasan a step 2. La oportunidad mas grande no esta en el cierre del registro, sino en reducir friccion inicial.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">3. Google CPC tiene valor de origen</h3><p class="ad-card__d">Google CPC registra 32,721 purchases por sesion, pero 52,279 como first user source. Su aporte real se subestima si solo se mira la sesion de compra.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">4. Affiliates agrupado mezcla roles distintos</h3><p class="ad-card__d">Como grupo pesa fuerte en revenue, pero internamente combina afiliados de retorno, afiliados de registro y fuentes de baja eficiencia. Debe gestionarse por subrol, no como un solo bloque presupuestal.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">5. Facebook CPC necesita auditoria de calidad</h3><p class="ad-card__d">Con 12,608 sesiones, aporta solo 28 purchases y 100 registros completos. Sin costo no podemos cerrar ROAS/CAC, pero en GA4 se ve como trafico de baja eficiencia.</p></article><article class="ad-card ga4-card"><h3 class="ad-card__t">6. La medicion tiene deuda de etiquetado</h3><p class="ad-card__d">(not set), data not available, referencias Yajuego y variantes de capitalizacion en source/medium estan diluyendo lectura de atribucion y performance.</p></article></div>
+</div></section>
+<section class="ad-sec ad-sec--papel" id="recomendaciones"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">13 · Recomendaciones</p><h2>Recomendaciones Estrategicas</h2></header>
+    <div class="ga4-cols">
       <div>
-        <h3>Adquisicion</h3>
-        <ul>
+        <h3 class="ga4-h3">Adquisicion</h3>
+        <ul class="ga4-lista">
           <li>Separar presupuesto y reporting de adquisicion por registros completos, no por purchase inmediato.</li>
           <li>Priorizar analisis de <strong>google / cpc</strong>, <strong>direct</strong>, <strong>affiliates / 101964</strong>, <strong>100098</strong> y <strong>100624</strong> como fuentes con senales de registro.</li>
           <li>Revisar la calidad de <strong>Facebook / CPC</strong> antes de escalar: bajo purchase, bajo revenue por sesion y bajo avance de registro.</li>
@@ -1017,8 +283,8 @@
         </ul>
       </div>
       <div>
-        <h3>Monetizacion y Retencion</h3>
-        <ul>
+        <h3 class="ga4-h3">Monetizacion y Retencion</h3>
+        <ul class="ga4-lista">
           <li>Tratar <strong>affiliates / 102199</strong>, <strong>CRM / Popup</strong>, <strong>CRM / Email</strong> y Direct como canales de activacion/retorno.</li>
           <li>Medir revenue por usuario comprador y frecuencia de purchase, no solo purchase por sesion.</li>
           <li>Revisar campañas y landings relacionadas con <strong>/mobile/login</strong>, <strong>/mobile/betslip</strong> y <strong>/mobile/liveBetting</strong>, donde se concentra el valor.</li>
@@ -1026,74 +292,37 @@
         </ul>
       </div>
     </div>
-    <div class="callout">
-      La recomendacion central es operar dos tableros: uno de adquisicion, enfocado en registros y CAC; y otro de monetizacion, enfocado en purchase, revenue y recurrencia.
-    </div>
-  </section>
+    <div class="ad-lectura ga4-lectura"><p>La recomendacion central es operar dos tableros: uno de adquisicion, enfocado en registros y CAC; y otro de monetizacion, enfocado en purchase, revenue y recurrencia.</p></div>
+</div></section>
+<section class="ad-sec ad-sec--oscuro" id="plan"><div class="ad-wrap ga4-flow">
+<header class="ad-sec-cab ga4-cab"><p class="ad-eyebrow">14 · Plan</p><h2>Plan de Accion</h2></header>
+    <div class="ad-grid ga4-grid"><article class="ad-card ga4-card ad-card--dark"><h3 class="ad-card__t">Semana 1: Medicion y limpieza</h3><ul class="ga4-lista"> <li>Corregir naming del evento esperado: usar <strong>registration-complete</strong> en reportes.</li> <li>Auditar UTMs y channel grouping para (not set), data not available, Yajuego referrals y variantes Google/CPC.</li> <li>Crear tabla maestra de fuentes: adquisicion, retorno, CRM, afiliados, organico, referidos tecnicos.</li> <li>Validar si los referrals de proveedores de juego deben excluirse o agruparse como trafico interno/operativo.</li> </ul></article><article class="ad-card ga4-card ad-card--dark"><h3 class="ad-card__t">Semanas 2-3: CRO de registro</h3><ul class="ga4-lista"> <li>Instrumentar errores entre step 1 y step 2: campos, validacion, latencia, abandono y dispositivo.</li> <li>Comparar formularios por source/medium y landing, especialmente Direct, Google CPC y afiliados.</li> <li>Probar reduccion de friccion en step 1: menos campos visibles, mensajes de error claros, autocompletado y carga mas rapida.</li> <li>Medir uplift contra step 1 -> step 2 y step 1 -> complete.</li> </ul></article><article class="ad-card ga4-card ad-card--dark"><h3 class="ad-card__t">Semanas 3-4: Performance y presupuesto</h3><ul class="ga4-lista"> <li>Cruzar GA4 con inversion de Google Ads, Meta y costos de afiliados para calcular CAC, CPA purchase y ROAS.</li> <li>Separar Google CPC por campana: Brand, Promotions, Betting Terms, Competitor y PMax.</li> <li>Reducir o pausar fuentes con alto volumen y baja calidad hasta validar costo: Facebook CPC, affiliates 101961 y 101607.</li> <li>Proteger fuentes de monetizacion dentro de Affiliates, pero medirlas contra usuarios recurrentes y revenue incremental.</li> </ul></article><article class="ad-card ga4-card ad-card--dark"><h3 class="ad-card__t">30-60 dias: Modelo de atribucion</h3><ul class="ga4-lista"> <li>Reportar en paralelo: session source, first user source y campana de sesion.</li> <li>Definir reglas: adquisicion se decide por first user + registro; monetizacion por session source + purchase/revenue.</li> <li>Crear cohortes por primer origen: registro, primer purchase, revenue acumulado 7/14/30 dias.</li> <li>Identificar canales que originan usuarios valiosos aunque no cierren la compra en la misma sesion.</li> </ul></article><article class="ad-card ga4-card ad-card--dark"><h3 class="ad-card__t">60-90 dias: Escalamiento</h3><ul class="ga4-lista"> <li>Escalar fuentes con CAC competitivo y buena progresion step 1 -> complete.</li> <li>Asignar presupuesto incremental a Google CPC solo por clusters que prueben registro y revenue posterior.</li> <li>Negociar o ajustar afiliados segun rol: adquisicion real vs reactivacion/cierre.</li> <li>Construir dashboard recurrente por cliente con alertas de tracking, registros, purchase y revenue.</li> </ul></article><article class="ad-card ga4-card is-on"><h3 class="ad-card__t">Indicadores de exito</h3><ul class="ga4-lista"> <li>Subir step 1 -> step 2 de 12.24% a minimo 18-20%.</li> <li>Reducir trafico (not set) y data not available en fuentes clave.</li> <li>Separar 100% de reportes entre adquisicion y monetizacion.</li> <li>Identificar top 5 fuentes por CAC y top 5 por revenue incremental.</li> </ul></article></div>
+</div></section>
+  </main>
 
-  <section id="plan">
-    <h2>Plan de Accion</h2>
-    <div class="grid cards">
-      <div class="card">
-        <h3>Semana 1: Medicion y limpieza</h3>
-        <ul>
-          <li>Corregir naming del evento esperado: usar <strong>registration-complete</strong> en reportes.</li>
-          <li>Auditar UTMs y channel grouping para (not set), data not available, Yajuego referrals y variantes Google/CPC.</li>
-          <li>Crear tabla maestra de fuentes: adquisicion, retorno, CRM, afiliados, organico, referidos tecnicos.</li>
-          <li>Validar si los referrals de proveedores de juego deben excluirse o agruparse como trafico interno/operativo.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Semanas 2-3: CRO de registro</h3>
-        <ul>
-          <li>Instrumentar errores entre step 1 y step 2: campos, validacion, latencia, abandono y dispositivo.</li>
-          <li>Comparar formularios por source/medium y landing, especialmente Direct, Google CPC y afiliados.</li>
-          <li>Probar reduccion de friccion en step 1: menos campos visibles, mensajes de error claros, autocompletado y carga mas rapida.</li>
-          <li>Medir uplift contra step 1 -> step 2 y step 1 -> complete.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Semanas 3-4: Performance y presupuesto</h3>
-        <ul>
-          <li>Cruzar GA4 con inversion de Google Ads, Meta y costos de afiliados para calcular CAC, CPA purchase y ROAS.</li>
-          <li>Separar Google CPC por campana: Brand, Promotions, Betting Terms, Competitor y PMax.</li>
-          <li>Reducir o pausar fuentes con alto volumen y baja calidad hasta validar costo: Facebook CPC, affiliates 101961 y 101607.</li>
-          <li>Proteger fuentes de monetizacion dentro de Affiliates, pero medirlas contra usuarios recurrentes y revenue incremental.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>30-60 dias: Modelo de atribucion</h3>
-        <ul>
-          <li>Reportar en paralelo: session source, first user source y campana de sesion.</li>
-          <li>Definir reglas: adquisicion se decide por first user + registro; monetizacion por session source + purchase/revenue.</li>
-          <li>Crear cohortes por primer origen: registro, primer purchase, revenue acumulado 7/14/30 dias.</li>
-          <li>Identificar canales que originan usuarios valiosos aunque no cierren la compra en la misma sesion.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>60-90 dias: Escalamiento</h3>
-        <ul>
-          <li>Escalar fuentes con CAC competitivo y buena progresion step 1 -> complete.</li>
-          <li>Asignar presupuesto incremental a Google CPC solo por clusters que prueben registro y revenue posterior.</li>
-          <li>Negociar o ajustar afiliados segun rol: adquisicion real vs reactivacion/cierre.</li>
-          <li>Construir dashboard recurrente por cliente con alertas de tracking, registros, purchase y revenue.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Indicadores de exito</h3>
-        <ul>
-          <li>Subir step 1 -> step 2 de 12.24% a minimo 18-20%.</li>
-          <li>Reducir trafico (not set) y data not available en fuentes clave.</li>
-          <li>Separar 100% de reportes entre adquisicion y monetizacion.</li>
-          <li>Identificar top 5 fuentes por CAC y top 5 por revenue incremental.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    Archivo base: reports/betjuego_ga4_purchase_registration_analysis.json. Los datos provienen de GA4 Data API y pueden variar si cambia la ventana de atribucion o si GA4 reprocesa eventos recientes.
+  <footer class="ad-foot">
+    <div class="ad-foot__in"><span>Archivo base: reports/betjuego_ga4_purchase_registration_analysis.json. Los datos provienen de GA4 Data API y pueden variar si cambia la ventana de atribucion o si GA4 reprocesa eventos recientes.</span><a href="../index.html">← Volver al hub</a></div>
   </footer>
-</main>
+
+  <script>
+(function(){
+  var sections = [].slice.call(document.querySelectorAll('.ad-sec[id]'));
+  var links = [].slice.call(document.querySelectorAll('.ad-nav__links a'));
+  if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      var a = document.querySelector('.ad-nav__links a[href="#' + e.target.id + '"]');
+      if (!a) return;
+      a.setAttribute('aria-current', 'true');
+      var box = a.parentNode;
+      if (box.scrollWidth > box.clientWidth) box.scrollLeft += a.getBoundingClientRect().left - box.getBoundingClientRect().left - box.clientWidth / 2 + a.offsetWidth / 2;
+    });
+  }, {rootMargin: '-40% 0px -55% 0px'});
+  sections.forEach(function(s){ io.observe(s); });
+})();
+
+  </script>
 </body>
 </html>
