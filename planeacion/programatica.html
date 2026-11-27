@@ -1,275 +1,864 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Informe de la programática de YaJuego en noviembre: entrega en DV360 por canal, lectura de display, CTV y radio, y lo que llegó al sitio según Google Analytics.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#f4f4f1">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Informe de programática</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="../assets/css/adcom.css">
-  <script defer src="../assets/js/adcom.js"></script>
+  <link rel="stylesheet" href="../assets/ds/fonts.css">
+  <link rel="stylesheet" href="../assets/css/adcom-v2.css?v=20261127">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-padding-top:calc(var(--nav-height) + var(--space-12))}
+    body{margin:0;background:var(--washi);color:var(--sumi)}
+    dl,dd{margin:0}
+    .mb-doc :where(h2,h3,h4,p,figure){margin:0}
+    .ad-nav__links a:hover{color:var(--sumi)}
+    .ad-nav__links{gap:var(--space-2) var(--space-4)}
+    .ad-nav__links a{gap:6px}
+    .mb-nav-n{font-size:12px;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+    .mb-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+    @media (max-width:900px){
+      .ad-nav__links{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:var(--space-6)}
+      .ad-nav__links a{white-space:nowrap}
+    }
+    @media (max-width:640px){ .ad-nav{position:static} }
+
+    /* portada: el titular de un informe de datos es de la escala statement, no la del portal */
+    .mb-portada h1{font-size:clamp(36px,5.5vw,72px);line-height:1.04;letter-spacing:-.035em}
+    .mb-portada .ad-lead{max-width:62ch}
+    .mb-portada .ad-ficha{margin-block-start:var(--space-10)}
+
+    /* ritmo: papel y washi se alternan, y entre piezas hay aire */
+    .mb-doc > .ad-sec:nth-of-type(odd):not(.ad-sec--oscuro){--sec-bg:var(--papel)}
+    .mb-doc .ad-sec > .ad-wrap > :not(.mb-tit, .mb-nota) + *{margin-block-start:var(--space-12)}
+    .mb-doc .ad-sec > .ad-wrap > .ad-sec-cab{margin-block-end:var(--space-10)}
+    .ad-sec--oscuro a:not(.ad-btn):not(.ad-go){color:var(--sobre-oscuro-100)}
+
+    /* titulo y nota de una pieza */
+    .mb-tit{margin:0 0 var(--space-2);font-size:26px;line-height:1.2}
+    .mb-nota{margin:0 0 var(--space-6);max-width:var(--measure);color:var(--tinta-secundaria)}
+    .mb-pieza > .mb-nota{margin-block-end:var(--space-4)}
+    .mb-tit + .ad-tabla{margin-block-start:var(--space-4)}
+
+    /* lectura o aviso con titulo */
+    .mb-lect-t{margin:0 0 var(--space-2);font-size:17px;font-weight:500;color:var(--sumi)}
+    .ad-lectura p,.ad-aviso p{max-width:var(--measure)}
+    .ad-aviso{background:var(--crema)}
+
+    /* texto en columnas: titulo, nota y puntos */
+    .mb-col{border-top:1px solid var(--sumi);padding-block-start:var(--space-6)}
+    .mb-col p{color:var(--tinta-secundaria)}
+    .mb-columnas{--col:250px;--gap:var(--space-8)}
+    .mb-paneles{--col:280px;--gap:var(--space-8)}
+    .mb-lista{margin:0;padding:0 0 0 1.25em;color:var(--tinta-secundaria);font-size:16px}
+    .mb-lista li{padding-inline-start:4px}
+    .mb-lista li + li{margin-block-start:var(--space-2)}
+    .mb-lista--punto{list-style:disc}
+    .mb-lista--punto li::marker{color:var(--tinta-suave)}
+
+    /* cita con su explicacion */
+    .mb-cita-sub{margin-block-start:var(--space-2);max-width:var(--measure);font-size:17px;color:var(--tinta-secundaria)}
+
+    /* el momento invertido: tres llamados sobre el fondo oscuro */
+    .mb-llamados{--col:280px;--gap:var(--space-6)}
+    .mb-llamado{gap:var(--space-4)}
+    .mb-llamado .ad-card__t{margin-block-start:0;padding-block-start:0;font-size:22px}
+    .mb-llamado .ad-card__d{font-size:16px}
+    .mb-veredicto{margin:auto 0 0;padding-block-start:var(--space-4);border-top:1px solid var(--tinta-suave);font-family:var(--font-display);font-size:17px;font-weight:500;line-height:1.3;color:var(--sobre-oscuro-100)}
+    .mb-slab-pie{max-width:var(--measure);margin-block-start:var(--space-8);color:var(--sobre-oscuro-200)}
+    .mb-slab-pie b{font-weight:500;color:var(--sobre-oscuro-100)}
+
+    /* barras: nombre, valor, pista y nota */
+    .mb-barras{gap:var(--space-4)}
+    .mb-barra{display:grid;gap:6px}
+    .mb-barra-cab{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-4);font-size:15px}
+    .mb-barra-nombre{color:var(--tinta-secundaria)}
+    .mb-barra-val{font-weight:500;font-variant-numeric:tabular-nums}
+    .mb-barra-nota{font-size:13px;color:var(--tinta-suave)}
+    .mb-barras .ad-barra{height:16px}
+    .mb-barras .ad-barra>span,.mb-cmp .ad-barra>span{background:var(--tinta-secundaria)}
+    .mb-barras .ad-barra--on>span{background:var(--lima)}
+    .mb-barras .mb-b--sobre>span{background:var(--neg)}
+
+    /* las barras se dibujan al entrar en pantalla, solo donde el navegador lo permite */
+    @keyframes mb-crece{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    @media (prefers-reduced-motion:no-preference){
+      @supports (animation-timeline:view()){
+        .mb-crece .ad-barra>span{transform-origin:left;animation:mb-crece linear both;
+          animation-timeline:view();animation-range:entry 0% entry 70%}
+      }
+    }
+
+    /* tablas: ya traen scroll local; el foco llega por teclado */
+    .ad-tabla:focus-visible{outline:2px solid var(--sumi);outline-offset:3px}
+    .ad-tabla tbody th{font-weight:500;text-align:left}
+    .ad-tabla tr.mb-total > *{font-weight:500;border-top:1px solid var(--sumi)}
+    .ad-tabla td b{font-weight:500}
+    .ad-datos .ad-tabla{margin-block-start:var(--space-2)}
+    .ad-datos > summary::after{content:"+";margin-inline-start:var(--space-2);font-size:20px;line-height:1;color:var(--tinta-suave)}
+    .ad-datos[open] > summary::after{content:"−"}
+
+    /* pie: la nota de uso va en su propia linea */
+    .mb-foot-uso{flex-basis:100%}
+
+    /* diagramas: scroll local en el telefono, nunca de la pagina */
+    .mb-scroll{max-width:100%;overflow-x:auto}
+    .mb-scroll:focus-visible{outline:2px solid var(--sumi);outline-offset:3px}
+    .mb-svg{display:block;width:100%;min-width:720px;height:auto}
+    .mb-figura-dg{margin:0}
+    .mb-figura-dg figcaption{margin-block-start:var(--space-4);max-width:var(--measure);font-size:14px;color:var(--tinta-secundaria)}
+
+    .mb-grafico > h3{margin:0;font-size:26px;line-height:1.2}
+    .mb-grafico > .mb-nota{margin:0}
+    .mb-grafico figcaption{max-width:var(--measure)}
+    .mb-c-sumi{--c:var(--sumi);background:var(--c);color:var(--washi)}
+    .mb-c-secundaria{--c:var(--tinta-secundaria);background:var(--c);color:var(--washi)}
+    .mb-c-tenue{--c:var(--tinta-tenue);background:var(--c);color:var(--sumi)}
+    .mb-c-piedra{--c:var(--piedra);background:var(--c);color:var(--tinta-suave)}
+    .mb-c-neg{--c:var(--neg);background:var(--c);color:var(--washi)}
+    .mb-c-lima{--c:var(--lima);background:var(--c);color:var(--sumi)}
+    .ad-leyenda i.mb-c-lima{border-color:var(--sumi)}
+    .mb-muestra{width:28px;height:12px;flex:none}
+    .ad-leyenda i.mb-punto{border-radius:50%}
+    .ad-leyenda i.mb-punto--lo{--c:var(--sumi)}
+    .ad-leyenda i.mb-punto--hi{--c:var(--papel)}
+
+    /* reparto apilado */
+    .mb-apiladas{display:grid;gap:10px}
+    .mb-apilada{display:grid;grid-template-columns:minmax(84px,128px) minmax(0,1fr) 64px;
+      gap:12px;align-items:center;font-size:14px}
+    .mb-apilada-nombre{color:var(--tinta-secundaria)}
+    .mb-apilada.is-marca .mb-apilada-nombre{color:var(--sumi);font-weight:500}
+    .mb-apilada-total{text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+    .mb-apilada-barra{height:28px}
+    .mb-apilada-barra>li{display:flex;align-items:center;justify-content:center;min-width:0;
+      overflow:hidden;font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums}
+    .mb-corte{display:flex;align-items:center;gap:10px;margin-block:6px;
+      font-size:13px;color:var(--tinta-suave)}
+    .mb-corte::before,.mb-corte::after{content:"";flex:1;border-top:1px dashed var(--piedra-borde)}
+
+    /* cambio entre dos momentos: lo que baja a la izquierda, lo que sube a la derecha */
+    .mb-cambios{display:grid;gap:12px}
+    .mb-cambio{display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr) minmax(0,1fr) 72px;
+      align-items:center;font-size:15px}
+    .mb-cambio-nombre{color:var(--tinta-secundaria);padding-right:12px}
+    .mb-cambio-lado{display:flex;height:20px}
+    .mb-cambio-lado.antes{justify-content:flex-end;border-right:1px solid var(--sumi)}
+    .mb-cambio-lado i{display:block;height:100%}
+    .mb-cambio-valor{text-align:right;font-weight:500;font-size:17px;font-variant-numeric:tabular-nums}
+    .mb-cambio-eje{font-size:13px;color:var(--tinta-suave)}
+    .mb-cambio-eje span:nth-child(2){text-align:right;padding-right:10px}
+    .mb-cambio-eje span:nth-child(3){padding-left:10px}
+    .mb-cambio-eje span:last-child{text-align:right}
+    .mb-cambio.is-total{padding-top:12px;border-top:1px solid var(--sumi)}
+    .mb-cambio.is-total .mb-cambio-nombre{color:var(--sumi);font-weight:500}
+
+    /* dos grupos lado a lado */
+    .mb-comparar{display:grid;gap:var(--space-8) var(--space-12);
+      grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}
+    .mb-comparar h4{margin:0 0 var(--space-4);font-size:17px}
+    .mb-cmp{display:grid;gap:10px}
+    .mb-cmp-fila{display:grid;grid-template-columns:minmax(88px,112px) minmax(0,1fr) 48px;
+      gap:12px;align-items:center;font-size:14px}
+    .mb-cmp-fila b{text-align:right;font-weight:500;font-variant-numeric:tabular-nums}
+    .mb-cmp .ad-barra{height:14px}
+    .mb-cmp .mb-cmp-fila.is-acento .ad-barra>span{background:var(--sumi)}
+    .mb-cmp .mb-cmp-fila:not(.is-acento) .ad-barra>span{background:var(--tinta-tenue)}
+
+    /* una cifra con dos lecturas: el tramo entre ambas, y la referencia */
+    .mb-rangos{display:grid;gap:var(--space-4)}
+    .mb-rango-cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px var(--space-4)}
+    .mb-rango-nombre{font-weight:500}
+    .mb-rango-det{font-size:14px;color:var(--tinta-suave)}
+    .mb-rango-pista{position:relative;height:14px;margin-block:36px;
+      background:var(--crema);border:1px solid var(--piedra)}
+    .mb-rango-tramo{position:absolute;top:0;bottom:0;background:var(--tinta-tenue)}
+    .mb-rango-meta{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--sumi)}
+    .mb-rango-pin{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;
+      border:2px solid var(--sumi);border-radius:50%}
+    .mb-rango-pin--lo{background:var(--sumi)}
+    .mb-rango-pin--hi{background:var(--papel)}
+    .mb-rango-pin em{position:absolute;left:50%;transform:translateX(-50%);
+      font-style:normal;font-size:14px;font-weight:500;white-space:nowrap}
+    .mb-rango-pin--lo em{bottom:calc(100% + 6px)}
+    .mb-rango-pin--hi em{top:calc(100% + 6px)}
+    .mb-rango-pin.mb-izq em{left:-9px;transform:none}
+    .mb-rango-pin.mb-der em{left:auto;right:-9px;transform:none}
+
+    /* serie en el tiempo: la identidad la da el trazo, no el tono */
+    .mb-svg--linea{min-width:640px}
+    .mb-lt{font-size:12px;fill:var(--tinta-suave)}
+    .mb-lt--eje{font-weight:500}
+    .mb-lt--nom{font-size:13px;font-weight:500;fill:var(--sumi)}
+    .mb-lt--ref{font-size:13px;font-weight:500;fill:var(--tinta-suave)}
+    .mb-lmarca{stroke:var(--sumi)}
+    .mb-lt--marca{font-size:13px;font-weight:500;fill:var(--sumi)}
+    .mb-lg{stroke:var(--piedra)}
+    .mb-lref{stroke:var(--tinta-suave);stroke-dasharray:4 4}
+    .mb-tz{fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}
+    .mb-tz0{stroke:var(--sumi)}
+    .mb-tz1{stroke:var(--tinta-tenue)}
+    .mb-tz2{stroke:var(--tinta-secundaria);stroke-dasharray:7 5}
+    .mb-pt{stroke:var(--sec-bg,var(--washi));stroke-width:2}
+    .mb-pt0{fill:var(--sumi)}
+    .mb-pt1{fill:var(--tinta-tenue)}
+    .mb-pt2{fill:var(--tinta-secundaria)}
+    .mb-pt-lima{fill:var(--lima);stroke:var(--sumi);stroke-width:1.5}
+    .mb-dia{fill:transparent}
+    .mb-dia:hover{fill:var(--crema)}
+
+    /* cronograma: una pista por accion, las semanas separadas */
+    .mb-crono{display:grid;gap:12px;min-width:680px}
+    .mb-crono-fila{display:grid;grid-template-columns:240px minmax(0,1fr);gap:18px;align-items:center}
+    .mb-crono-nombre b{display:block;font-size:15px;font-weight:500;line-height:1.3}
+    .mb-crono-nombre span{font-size:13px;color:var(--tinta-suave)}
+    .mb-crono-semanas{display:grid;font-size:13px;color:var(--tinta-suave)}
+    .mb-crono-pista{position:relative;height:24px;background:var(--crema);border:1px solid var(--piedra)}
+    .mb-crono-pista i{position:absolute;top:0;bottom:0;background:var(--sumi)}
+    .mb-crono-pista i.is-on{background:var(--lima);outline:1px solid var(--sumi);outline-offset:-1px}
+    .mb-crono-pista u{position:absolute;top:0;bottom:0;width:2px;background:var(--papel);text-decoration:none}
+
+    /* diagramas de caja y recorrido */
+    .mb-dg-carril{fill:var(--crema);stroke:var(--piedra-borde);stroke-width:1}
+    .mb-dg-carril.is-nuestro{stroke:var(--sumi);stroke-width:1.5}
+    .mb-dg-rotulo{font-size:13px;font-weight:500;fill:var(--tinta-secundaria)}
+    .mb-dg-tit{font-family:var(--font-display);font-size:15px;font-weight:500;fill:var(--sumi)}
+    .mb-dg-det{font-size:12.5px;fill:var(--tinta-secundaria)}
+    .mb-dg-lla{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;fill:var(--tinta-secundaria)}
+    .mb-dg-sep{stroke:var(--tinta-suave);stroke-width:1;stroke-opacity:.45}
+    .mb-dg-flecha{fill:none;stroke:var(--sumi);stroke-width:1.5}
+    .mb-dg-et{font-size:12px;fill:var(--tinta-suave)}
+    .mb-dg-n{font-family:var(--font-display);font-size:14px;font-weight:500;text-anchor:middle;fill:var(--sumi)}
+    .mb-dg-etapa{font-family:var(--font-display);font-size:16px;font-weight:500;text-anchor:middle;fill:var(--sumi)}
+    .mb-dg-etapa-det{font-size:13px;text-anchor:middle;fill:var(--tinta-secundaria)}
+    .mb-dg-union{stroke:var(--piedra-borde);stroke-width:1.5}
+    .mb-tr-ve{fill:var(--crema);stroke:var(--sumi);stroke-width:1}
+    .mb-tr-no{fill:none;stroke:var(--tinta-suave);stroke-width:1.5;stroke-dasharray:6 5}
+    .mb-tr-nuevo{fill:var(--lima);stroke:var(--sumi);stroke-width:2}
+    .mb-tx{text-anchor:middle;fill:var(--sumi)}
+    .mb-tx--no{fill:var(--tinta-suave)}
+
+    @media (max-width:560px){
+      .mb-apilada{grid-template-columns:70px minmax(0,1fr) 50px;gap:8px}
+      .mb-apilada-barra>li{font-size:11px}
+      .mb-cambio{grid-template-columns:96px minmax(0,1fr) minmax(0,1fr) 56px;font-size:13px}
+      .mb-cmp-fila{grid-template-columns:76px minmax(0,1fr) 44px}
+      /* el cronograma no hace scroll en el telefono: nombre arriba, pista abajo a todo el ancho */
+      .mb-crono{min-width:0}
+      .mb-crono-fila{grid-template-columns:minmax(0,1fr);gap:6px}
+      .mb-crono-fila:first-child > span:first-child{display:none}
+    }
+
+    /* programatica de YaJuego: lo particular del informe */
+    .mb-llamados{--col:240px}
+    .pg-nota{margin-block-start:var(--space-4)}
+    .pg-romper{overflow-wrap:anywhere}
+    .pg-duo{--col:340px;--gap:var(--space-8) var(--space-12);align-items:start}
+    .mb-doc .ad-pasos{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));row-gap:var(--space-12)}
+    .pg-notas{display:grid;gap:var(--space-4);align-content:start}
+    .pg-notas .mb-nota{margin:0}
+    .pg-eje{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-4);
+      margin:0 0 var(--space-4);padding-block-end:var(--space-2);border-bottom:1px solid var(--sumi);
+      font-size:14px;color:var(--tinta-suave)}
+    .pg-eje b{font-size:17px;font-weight:500;color:var(--sumi)}
+    .pg-pa{fill:var(--sumi)}
+    .pg-pb{fill:var(--tinta-tenue)}
+  </style>
+  <link rel="icon" type="image/png" href="../assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="../assets/ds/logos/apple-touch-icon.png">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Ir al contenido</a>
 
-<header class="masthead">
-  <a class="wordmark" href="../index.html"><i></i>YaJuego <span>documentos</span></a>
-  <span class="stamp">Programática · noviembre</span>
-</header>
+<header class="ad-nav">
+    <nav class="ad-nav__in" aria-label="Secciones del documento">
+      <a class="ad-marca" href="../index.html"><img src="../assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · Informe de programática</i></a>
+      <div class="ad-nav__links"><a href="#resumen"><small class="mb-nav-n">01</small>Resumen</a><a href="#plan"><small class="mb-nav-n">02</small>Plan</a><a href="#ritmo"><small class="mb-nav-n">03</small>Entrega diaria</a><a href="#display"><small class="mb-nav-n">04</small>Display</a><a href="#ctv"><small class="mb-nav-n">05</small>CTV</a><a href="#radio"><small class="mb-nav-n">06</small>Radio</a><a href="#directo"><small class="mb-nav-n">07</small>Directo</a><a href="#analytics"><small class="mb-nav-n">08</small>Analytics</a><a href="#acciones"><small class="mb-nav-n">09</small>Próximos pasos</a></div>
+    </nav>
+  </header>
 
-<main id="contenido">
-
-  <section class="opening wrap">
-    <h1>Programática de noviembre: <em>entrega sobre el plan y más visitas directas</em></h1>
-    <p class="lede">Campaña «Bono de Bienvenida» en display premium, CTV y radio digital, del 3 al 19 de noviembre. Cruzamos lo que reporta DV360 con lo que Google Analytics vio en el sitio de YaJuego, y dejamos los ajustes que ayudarán a medir mejor lo que sigue.</p>
-    <div class="opening-meta">
-      <div><b>386.532</b><span>Impresiones entregadas</span></div>
-      <div><b>6.446</b><span>Clics según DV360</span></div>
-      <div><b>62% a 80%</b><span>De las metas, con 61% del mes</span></div>
-      <div><b>+12%</b><span>Visitas directas al sitio</span></div>
-    </div>
-  </section>
-
-  <section class="slab" id="resumen">
-    <div class="wrap">
-      <p class="portada-kicker">Resumen ejecutivo</p>
-      <h2>Cuatro cosas que conviene saber hoy</h2>
-      <p class="lede">Datos de DV360 y de Google Analytics hasta el 19 de noviembre de 2026. La campaña sigue activa hasta el 30.</p>
-      <div class="calls" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
-        <div class="call">
-          <h3>La entrega va por encima del plan</h3>
-          <p>Con 17 de 28 días corridos, display lleva 62% de su meta de clics, CTV 78% de sus views completos y radio 80% de sus escuchas. Al ritmo de la última semana, CTV y radio llegan a la meta antes del 30 de noviembre.</p>
-          <span class="verdict">Confirmar si el tope es presupuesto o volumen</span>
-        </div>
-        <div class="call">
-          <h3>Más gente entra directo a YaJuego</h3>
-          <p>Durante los 17 días de entrega, el tráfico directo del sitio pasó de 6.616 a 7.423 sesiones por día (+12%), y los usuarios diarios de 4.935 a 5.973 (+21%). Son unas 13.724 visitas adicionales en el periodo. Es una comparación, no una prueba, pero va en la dirección que busca una campaña de recordación.</p>
-          <span class="verdict">Repetir la lectura al cierre de la campaña</span>
-        </div>
-        <div class="call">
-          <h3>Dos ajustes técnicos para leer mejor los resultados</h3>
-          <p>Las URL de CTV y radio llevan la etiqueta UTM mal escrita, así que GA4 no puede atribuirles visitas, y el evento de registro del sitio dejó de medirse bien el 4 de noviembre (de unos 429 diarios a unos 21), aunque las sesiones y las compras siguen iguales. Con ambos corregidos, la próxima lectura podrá llegar hasta el registro.</p>
-          <span class="verdict">Corregir las UTM y restablecer el evento de registro</span>
-        </div>
-        <div class="call">
-          <h3>Los clics de display piden una revisión</h3>
-          <p>DV360 reporta 6.396 clics y GA4 vio 202 sesiones (3,2%), 40 de ellas desde fuera de Colombia. Conviene pedir a DV360 el reporte de tráfico inválido y confirmar que la etiqueta del sitio carga en móvil antes de decidir cómo seguir comprando display.</p>
-          <span class="verdict">Auditar los clics antes de ampliar display</span>
-        </div>
+<main class="mb-doc" id="contenido" tabindex="-1">
+    <header class="ad-hero mb-portada">
+      <div class="ad-wrap">
+        <p class="ad-eyebrow">Programática · noviembre</p>
+        <h1 id="titulo">Programática de noviembre: entrega sobre el plan y <span class="ad-hl">más visitas directas</span></h1>
+        <p class="ad-lead">Campaña «Bono de Bienvenida» en display premium, CTV y radio digital, del 3 al 19 de noviembre. Cruzamos lo que reporta DV360 con lo que Google Analytics vio en el sitio de YaJuego, y dejamos los ajustes que ayudarán a medir mejor lo que sigue.</p>
+        <dl class="ad-ficha">
+          <div><dt>Impresiones entregadas</dt><dd>386.532</dd></div>
+          <div><dt>Clics según DV360</dt><dd>6.446</dd></div>
+          <div><dt>De las metas, con 61% del mes</dt><dd>62% a 80%</dd></div>
+          <div><dt>Visitas directas al sitio</dt><dd>+12%</dd></div>
+        </dl>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <section class="band wrap" id="plan">
-    <div class="titulo-seccion">
-      <h2>Cómo va contra el plan</h2>
-      <p>Cada canal se compra por una métrica distinta: clics en display, views completos en CTV y escuchas en radio. La meta del mes y el avance se miden sobre esa métrica.</p>
-    </div>
-    <div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Avance de la métrica de compra por canal al 19 de noviembre. Entre paréntesis, el porcentaje de la meta.</caption><thead><tr><th scope="col">Canal</th><th scope="col">Meta del mes</th><th scope="col">Entregado</th><th scope="col">Avance</th><th scope="col">Proyección de la hoja</th><th scope="col">Con el ritmo de la última semana</th><th scope="col">Llega a la meta el</th></tr></thead><tbody><tr><th scope="row">Display premium<br><small>CPC · clics</small></th><td>10.313</td><td>6.396</td><td>62,0%</td><td>10.535 (102%)</td><td>10.347 (100%)</td><td>30 nov</td></tr><tr><th scope="row">CTV<br><small>CPV · views completos</small></th><td>65.625</td><td>51.260</td><td>78,1%</td><td>84.428 (129%)</td><td>73.375 (112%)</td><td>27 nov</td></tr><tr><th scope="row">Radio digital<br><small>CPL · escuchas</small></th><td>27.273</td><td>21.746</td><td>79,7%</td><td>35.817 (131%)</td><td>36.354 (133%)</td><td>24 nov</td></tr></tbody></table></div>
-    <p class="note" style="margin-top:var(--s-4)">La proyección de la hoja repite el promedio de todo el periodo. En CTV eso exagera: el día de mayor entrega fue de 10.816 impresiones y hoy son cerca de 2.000. Con el promedio de los últimos siete días (2.010 views por día) CTV cierra cerca de 73.375, no en 84.428.</p>
-
-    <dl class="tira-cifras">
-      <div><dt>Inversión estimada a la fecha</dt><dd>$18,2 M<small>60,7% de $30,0 M</small></dd></div>
-      <div><dt>Días con entrega</dt><dd>17 de 28<small>faltan 11</small></dd></div>
-      <div><dt>Tarifa efectiva de CTV</dt><dd>$124,4<small>contra $160 del plan</small></dd></div>
-    </dl>
-
-    <div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Tarifa e inversión estimada por canal.</caption><thead><tr><th scope="col">Canal</th><th scope="col">Tarifa del plan</th><th scope="col">Tarifa efectiva</th><th scope="col">Inversión estimada</th><th scope="col">% del presupuesto</th><th scope="col">Presupuesto del mes</th></tr></thead><tbody><tr><th scope="row">Display premium</th><td>$1.600</td><td>$1.566,3</td><td>$10.017.857</td><td>60,7%</td><td>$16.500.000</td></tr><tr><th scope="row">CTV</th><td>$160</td><td>$124,4</td><td>$6.374.999</td><td>60,7%</td><td>$10.500.000</td></tr><tr><th scope="row">Radio digital</th><td>$110</td><td>$83,8</td><td>$1.821.427</td><td>60,7%</td><td>$3.000.000</td></tr><tr><th scope="row"><strong>Total</strong></th><td></td><td></td><td><strong>$18.214.283</strong></td><td><strong>60,7%</strong></td><td><strong>$30.000.000</strong></td></tr></tbody></table></div>
-    <div class="panel" style="margin-top:var(--s-5)">
-      <h3>La inversión de la hoja es un cálculo, no la factura</h3>
-      <p>La hoja de seguimiento calcula la inversión de cada día como los resultados del día por una <b>tarifa efectiva</b>: el presupuesto del mes dividido entre la meta proyectada. Así el mes siempre termina en 100% del presupuesto el 30 de noviembre. Por eso el 60,7% ejecutado coincide con los 17 días de 28 corridos. Sirve para pacing, pero no confirma lo que cobrará DV360.</p>
-    </div>
-  </section>
-
-  <section class="band wrap" id="ritmo">
-    <div class="titulo-seccion">
-      <h2>Cómo se movió la entrega día a día</h2>
-      <p>Display se mantiene estable. CTV arrancó fuerte y bajó a una quinta parte desde el 11 de noviembre. Radio sostiene su ritmo.</p>
-    </div>
-    <figure class="chart">
-      <div class="legend"><span><i style="background:var(--serie-1)"></i>Display premium</span><span><i style="background:var(--serie-2)"></i>CTV</span><span><i style="background:var(--serie-3)"></i>Radio digital</span></div>
-      <svg viewBox="0 0 860 260" role="img" aria-label="Impresiones por día y canal" style="width:100%;height:auto;display:block"><line x1="56" y1="230.0" x2="740" y2="230.0" stroke="var(--rule)"/><text x="48" y="234.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0</text><line x1="56" y1="176.0" x2="740" y2="176.0" stroke="var(--rule)"/><text x="48" y="180.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">5.026</text><line x1="56" y1="122.0" x2="740" y2="122.0" stroke="var(--rule)"/><text x="48" y="126.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">10.053</text><line x1="56" y1="68.0" x2="740" y2="68.0" stroke="var(--rule)"/><text x="48" y="72.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">15.079</text><line x1="56" y1="14.0" x2="740" y2="14.0" stroke="var(--rule)"/><text x="48" y="18.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">20.105</text><text x="56.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">3 nov</text><text x="141.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">5 nov</text><text x="227.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">7 nov</text><text x="312.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">9 nov</text><text x="398.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">11 nov</text><text x="483.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">13 nov</text><text x="569.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">15 nov</text><text x="654.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">17 nov</text><text x="740.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">19 nov</text><polyline points="56.0,165.1 98.8,42.2 141.5,37.4 184.2,37.9 227.0,56.1 269.8,50.9 312.5,35.9 355.2,42.3 398.0,46.7 440.8,41.9 483.5,46.4 526.2,50.9 569.0,65.3 611.8,30.0 654.5,47.8 697.2,59.0 740.0,58.3" fill="none" stroke="var(--serie-1)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="58.3" r="4" fill="var(--serie-1)"/><polyline points="56.0,227.7 98.8,174.1 141.5,135.3 184.2,113.8 227.0,130.9 269.8,118.9 312.5,151.8 355.2,163.6 398.0,186.7 440.8,191.1 483.5,202.3 526.2,203.1 569.0,203.4 611.8,201.8 654.5,206.7 697.2,208.5 740.0,208.5" fill="none" stroke="var(--serie-2)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="208.5" r="4" fill="var(--serie-2)"/><polyline points="56.0,228.4 98.8,224.6 141.5,211.8 184.2,211.2 227.0,211.0 269.8,211.1 312.5,210.6 355.2,211.2 398.0,211.5 440.8,211.3 483.5,211.9 526.2,213.3 569.0,213.3 611.8,213.5 654.5,213.5 697.2,213.6 740.0,213.4" fill="none" stroke="var(--serie-3)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="213.4" r="4" fill="var(--serie-3)"/><text x="748" y="62.3" font-size="12" font-weight="700" fill="var(--fg)">Display premium</text><text x="748" y="212.5" font-size="12" font-weight="700" fill="var(--fg)">CTV</text><text x="748" y="226.5" font-size="12" font-weight="700" fill="var(--fg)">Radio digital</text></svg>
-      <figcaption class="chart-foot"><b>Impresiones por día.</b> Datos de DV360 vía la hoja de seguimiento. Los días sin entrega (1 y 2 de noviembre, y desde el 20) no se grafican.</figcaption>
-    </figure>
-  </section>
-
-  <section class="band wrap" id="display">
-    <div class="titulo-seccion">
-      <h2>Display premium</h2>
-      <p>278.866 impresiones y 6.396 clics, con un CTR de 2,29%. Es un CTR muy alto para display, donde lo habitual queda por debajo de 1%. Conviene verificar de qué clase son esos clics.</p>
-    </div>
-    <dl class="tira-cifras">
-      <div><dt>De las impresiones, en un solo sitio</dt><dd>74%<small>elespectador.com</small></dd></div>
-      <div><dt>De los clics, en ese sitio</dt><dd>81%<small>5.204 de 6.396</small></dd></div>
-      <div><dt>De la entrega, en móvil</dt><dd>99%<small>276.905 impresiones</small></dd></div>
-    </dl>
-    <div style="margin-top:var(--s-5)"><div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Display premium por sitio, de mayor a menor impresiones.</caption><thead><tr><th scope="col">Sitio</th><th scope="col">Impresiones</th><th scope="col">Participación</th><th scope="col">Clics</th><th scope="col">CTR</th></tr></thead><tbody><tr><th scope="row">elespectador.com</th><td>206.618</td><td>74%</td><td>5.204</td><td>2,52%</td></tr><tr><th scope="row">eluniversal.com.co</th><td>42.369</td><td>15%</td><td>808</td><td>1,91%</td></tr><tr><th scope="row">bluradio.com</th><td>6.327</td><td>2%</td><td>122</td><td>1,93%</td></tr><tr><th scope="row">vanguardia.com</th><td>5.514</td><td>2%</td><td>71</td><td>1,29%</td></tr><tr><th scope="row">caracoltv.com</th><td>4.947</td><td>2%</td><td>24</td><td>0,49%</td></tr><tr><th scope="row">semana.com</th><td>4.127</td><td>1%</td><td>19</td><td>0,46%</td></tr><tr><th scope="row">ntn24.com</th><td>2.828</td><td>1%</td><td>50</td><td>1,77%</td></tr></tbody></table></div></div>
-    <p class="note" style="margin-top:var(--s-4)">Un solo sitio sostiene toda la compra. Si El Espectador cambia sus condiciones, o si ese inventario está inflado, la campaña entera se mueve con él.</p>
-
-    <figure class="chart" style="margin-top:var(--s-6)">
-      <div class="chart-top"><h3>CTR diario de display</h3><span class="chart-hint">cae con el tiempo</span></div>
-      <svg viewBox="0 0 860 220" role="img" aria-label="CTR diario de display premium" style="width:100%;height:auto;display:block"><line x1="56" y1="190.0" x2="740" y2="190.0" stroke="var(--rule)"/><text x="48" y="194.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0,0%</text><line x1="56" y1="146.0" x2="740" y2="146.0" stroke="var(--rule)"/><text x="48" y="150.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0,9%</text><line x1="56" y1="102.0" x2="740" y2="102.0" stroke="var(--rule)"/><text x="48" y="106.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">1,7%</text><line x1="56" y1="58.0" x2="740" y2="58.0" stroke="var(--rule)"/><text x="48" y="62.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">2,6%</text><line x1="56" y1="14.0" x2="740" y2="14.0" stroke="var(--rule)"/><text x="48" y="18.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">3,5%</text><text x="56.0" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">4 nov</text><text x="147.2" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">6 nov</text><text x="238.4" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">8 nov</text><text x="329.6" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">10 nov</text><text x="420.8" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">12 nov</text><text x="512.0" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">14 nov</text><text x="603.2" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">16 nov</text><text x="740.0" y="212" text-anchor="middle" font-size="11" fill="var(--fg-muted)">19 nov</text><polyline points="56.0,27.0 101.6,49.1 147.2,65.4 192.8,75.2 238.4,77.0 284.0,56.7 329.6,70.3 375.2,79.0 420.8,86.2 466.4,91.9 512.0,84.5 557.6,56.3 603.2,81.2 648.8,78.0 694.4,88.8 740.0,85.1" fill="none" stroke="var(--serie-1)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="85.1" r="4" fill="var(--serie-1)"/><text x="748" y="89.1" font-size="12" font-weight="700" fill="var(--fg)">CTR</text></svg>
-      <figcaption class="chart-foot">Pasó de 3,2% el 4 de noviembre a 2,2% en la última semana, con una entrega diaria casi igual. Es la señal típica de una pieza que se desgasta o de un inventario que se agota.</figcaption>
-    </figure>
-
-    <div class="titulo-seccion" style="margin-top:var(--s-6)">
-      <h2>Formatos, audiencia y regiones</h2>
-      <p>El formato de 300x600 se lleva 75% de las impresiones y el mejor CTR.</p>
-    </div>
-    <div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Display premium por tamaño de pieza.</caption><thead><tr><th scope="col">Formato</th><th scope="col">Impresiones</th><th scope="col">Clics</th><th scope="col">CTR</th><th scope="col">Participación</th></tr></thead><tbody><tr><th scope="row">300x600</th><td>209.986</td><td>5.266</td><td>2,51%</td><td>75%</td></tr><tr><th scope="row">300x250</th><td>49.408</td><td>862</td><td>1,74%</td><td>18%</td></tr><tr><th scope="row">320x100</th><td>8.239</td><td>113</td><td>1,37%</td><td>3%</td></tr><tr><th scope="row">970x250</th><td>5.793</td><td>55</td><td>0,95%</td><td>2%</td></tr><tr><th scope="row">320x480</th><td>5.440</td><td>100</td><td>1,84%</td><td>2%</td></tr></tbody></table></div>
-    <div class="duo" style="margin-top:var(--s-6)">
-      <div><div class="axis"><span>Edad</span><span>% de impresiones</span></div><div class="share"><div class="share-row grow"><span>18-24</span><div class="share-bar"><i style="width:100.0%"></i></div><b>53%</b></div><div class="share-row grow"><span>25-34</span><div class="share-bar"><i style="width:7.5%"></i></div><b>4%</b></div><div class="share-row grow"><span>35-44</span><div class="share-bar"><i style="width:2.9%"></i></div><b>2%</b></div><div class="share-row grow"><span>45-54</span><div class="share-bar"><i style="width:4.5%"></i></div><b>2%</b></div><div class="share-row grow"><span>55-64</span><div class="share-bar"><i style="width:22.7%"></i></div><b>12%</b></div><div class="share-row grow"><span>65+</span><div class="share-bar"><i style="width:14.2%"></i></div><b>8%</b></div><div class="share-row grow"><span>Sin dato</span><div class="share-bar"><i style="width:36.6%"></i></div><b>19%</b></div></div></div>
-      <div><div class="axis"><span>Género</span><span>% de impresiones</span></div><div class="share"><div class="share-row grow"><span>Hombres</span><div class="share-bar"><i style="width:100.0%"></i></div><b>68%</b></div><div class="share-row grow"><span>Mujeres</span><div class="share-bar"><i style="width:46.1%"></i></div><b>31%</b></div><div class="share-row grow"><span>Sin dato</span><div class="share-bar"><i style="width:0.7%"></i></div><b>1%</b></div></div></div>
-    </div>
-    <p class="note" style="margin-top:var(--s-4)">53% de las impresiones se atribuye a 18 a 24 años y 19% no tiene dato de edad. En display el 68% es hombres.</p>
-    <div style="margin-top:var(--s-5)"><div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Display premium por región, de mayor a menor impresiones.</caption><thead><tr><th scope="col">Región</th><th scope="col">Impresiones</th><th scope="col">Clics</th><th scope="col">CTR</th></tr></thead><tbody><tr><th scope="row">Bogotá</th><td>72.825</td><td>1.588</td><td>2,18%</td></tr><tr><th scope="row">Antioquia</th><td>37.622</td><td>888</td><td>2,36%</td></tr><tr><th scope="row">Bolívar</th><td>35.870</td><td>645</td><td>1,80%</td></tr><tr><th scope="row">Otros</th><td>25.598</td><td>646</td><td>2,52%</td></tr><tr><th scope="row">Cundinamarca</th><td>21.358</td><td>543</td><td>2,54%</td></tr><tr><th scope="row">Valle del Cauca</th><td>18.505</td><td>449</td><td>2,43%</td></tr><tr><th scope="row">Santander</th><td>18.027</td><td>422</td><td>2,34%</td></tr><tr><th scope="row">Atlántico</th><td>10.937</td><td>246</td><td>2,25%</td></tr></tbody></table></div></div>
-  </section>
-
-  <section class="band wrap" id="ctv">
-    <div class="titulo-seccion">
-      <h2>CTV</h2>
-      <p>82.082 impresiones y 51.260 views completos, con 40 clics. En televisión conectada el clic no es una acción normal, así que no es la métrica para juzgar este canal.</p>
-    </div>
-    <dl class="tira-cifras">
-      <div><dt>Views completos sobre reproducciones</dt><dd>62%<small>plan: 90%</small></dd></div>
-      <div><dt>Primera semana</dt><dd>54%<small>del 3 al 9 de noviembre</small></dd></div>
-      <div><dt>Últimos cinco días</dt><dd>87%<small>del 15 al 19 de noviembre</small></dd></div>
-    </dl>
-    <figure class="chart" style="margin-top:var(--s-5)">
-      <div class="chart-top"><h3>Views completos sobre reproducciones, por día</h3><span class="chart-hint">plan: 90%</span></div>
-      <svg viewBox="0 0 860 260" role="img" aria-label="Porcentaje de views completos de CTV por día" style="width:100%;height:auto;display:block"><line x1="56" y1="230.0" x2="740" y2="230.0" stroke="var(--rule)"/><text x="48" y="234.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0%</text><line x1="56" y1="176.0" x2="740" y2="176.0" stroke="var(--rule)"/><text x="48" y="180.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">25%</text><line x1="56" y1="122.0" x2="740" y2="122.0" stroke="var(--rule)"/><text x="48" y="126.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">50%</text><line x1="56" y1="68.0" x2="740" y2="68.0" stroke="var(--rule)"/><text x="48" y="72.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">75%</text><line x1="56" y1="14.0" x2="740" y2="14.0" stroke="var(--rule)"/><text x="48" y="18.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">100%</text><text x="56.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">3 nov</text><text x="141.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">5 nov</text><text x="227.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">7 nov</text><text x="312.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">9 nov</text><text x="398.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">11 nov</text><text x="483.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">13 nov</text><text x="569.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">15 nov</text><text x="654.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">17 nov</text><text x="740.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">19 nov</text><line x1="56" y1="35.6" x2="740" y2="35.6" stroke="var(--fg)" stroke-width="1.5" stroke-dasharray="5 4"/><polyline points="56.0,138.0 98.8,105.1 141.5,120.2 184.2,122.5 227.0,92.1 269.8,122.2 312.5,118.4 355.2,116.8 398.0,63.0 440.8,47.5 483.5,41.4 526.2,53.2 569.0,49.4 611.8,50.6 654.5,37.9 697.2,36.2 740.0,36.4" fill="none" stroke="var(--serie-2)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="36.4" r="4" fill="var(--serie-2)"/><text x="748" y="39.6" font-size="12" font-weight="700" fill="var(--fg)">Plan 90%</text><text x="748" y="53.6" font-size="12" font-weight="700" fill="var(--fg)">VTR real</text></svg>
-      <figcaption class="chart-foot">Mejoró cuando la entrega diaria bajó, lo que sugiere que se depuró el inventario. Falta que DV360 confirme la causa.</figcaption>
-    </figure>
-    <div style="margin-top:var(--s-6)"><div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>CTV por app o sitio, de mayor a menor impresiones.</caption><thead><tr><th scope="col">App o sitio</th><th scope="col">Impresiones</th><th scope="col">Participación</th><th scope="col">Clics</th></tr></thead><tbody><tr><th scope="row">Canal RCN (Android TV)</th><td>41.296</td><td>50%</td><td>5</td></tr><tr><th scope="row">Live TV (Android TV)</th><td>8.002</td><td>10%</td><td>0</td></tr><tr><th scope="row">ViX (Android TV)</th><td>7.261</td><td>9%</td><td>0</td></tr><tr><th scope="row">ViX (Samsung)</th><td>6.400</td><td>8%</td><td>0</td></tr><tr><th scope="row">ViX (Roku)</th><td>6.176</td><td>8%</td><td>0</td></tr><tr><th scope="row">caracoltv.com</th><td>4.618</td><td>6%</td><td>35</td></tr><tr><th scope="row">ViX (LG)</th><td>3.383</td><td>4%</td><td>0</td></tr></tbody></table></div></div>
-    <p class="note" style="margin-top:var(--s-4)">Canal RCN en Android TV es la mitad de la entrega. <b>caracoltv.com</b> es inventario web, no televisión conectada: 4.618 impresiones (6%) y 35 de los 40 clics de todo el canal.</p>
-  </section>
-
-  <section class="band wrap" id="radio">
-    <div class="titulo-seccion">
-      <h2>Radio digital</h2>
-      <p>25.584 impresiones. Las 21.746 escuchas del reporte <b>no son una medición</b>: dividir escuchas entre impresiones da entre 84,9% y 85,0% todos los días, es decir, el 85% del plan aplicado a cada jornada.</p>
-    </div>
-    <dl class="tira-cifras">
-      <div><dt>De las impresiones, en Blu Radio</dt><dd>63%<small>la única emisora con clics</small></dd></div>
-      <div><dt>De las impresiones, a mujeres</dt><dd>75%<small>en display: 68% hombres</small></dd></div>
-      <div><dt>Clics en todo el canal</dt><dd>10<small>sobre 25.584 impresiones</small></dd></div>
-    </dl>
-    <div style="margin-top:var(--s-5)"><div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Radio digital por emisora, de mayor a menor impresiones.</caption><thead><tr><th scope="col">Emisora</th><th scope="col">Impresiones</th><th scope="col">Participación</th><th scope="col">Clics</th></tr></thead><tbody><tr><th scope="row">bluradio.com</th><td>16.184</td><td>63%</td><td>10</td></tr><tr><th scope="row">olimpicastereo.com.co</th><td>5.132</td><td>20%</td><td>0</td></tr><tr><th scope="row">mixradio.co</th><td>1.449</td><td>6%</td><td>0</td></tr><tr><th scope="row">radiotiempo.co</th><td>1.297</td><td>5%</td><td>0</td></tr><tr><th scope="row">lareinadelvallenato.co</th><td>566</td><td>2%</td><td>0</td></tr><tr><th scope="row">vibra.co</th><td>346</td><td>1%</td><td>0</td></tr></tbody></table></div></div>
-    <div class="duo" style="margin-top:var(--s-6)">
-      <div>
-        <div class="axis"><span>Locución</span><span>impresiones</span></div>
-        <div class="share"><div class="share-row grow"><span>Voz 1</span><div class="share-bar"><i style="width:100.0%"></i></div><b>6.528</b></div><div class="share-row grow"><span>Voz 2</span><div class="share-bar"><i style="width:95.2%"></i></div><b>6.217</b></div><div class="share-row grow"><span>Voz 3</span><div class="share-bar"><i style="width:97.4%"></i></div><b>6.359</b></div><div class="share-row grow"><span>Voz 4</span><div class="share-bar"><i style="width:99.3%"></i></div><b>6.480</b></div></div>
+    <section class="ad-sec ad-sec--oscuro" id="resumen" aria-labelledby="t-resumen">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        <p class="ad-eyebrow">Resumen ejecutivo</p>
+        <h2 id="t-resumen">Cuatro cosas que conviene saber hoy</h2>
+        <p>Datos de DV360 y de Google Analytics hasta el 19 de noviembre de 2026. La campaña sigue activa hasta el 30.</p>
+      </header>
+      <div class="ad-grid mb-llamados">
+        <article class="ad-card ad-card--dark mb-llamado">
+          <h3 class="ad-card__t">La entrega va por encima del plan</h3>
+          <p class="ad-card__d">Con 17 de 28 días corridos, display lleva 62% de su meta de clics, CTV 78% de sus views completos y radio 80% de sus escuchas. Al ritmo de la última semana, CTV y radio llegan a la meta antes del 30 de noviembre.</p>
+          <p class="mb-veredicto">Confirmar si el tope es presupuesto o volumen</p>
+        </article>
+        <article class="ad-card ad-card--dark mb-llamado">
+          <h3 class="ad-card__t">Más gente entra directo a YaJuego</h3>
+          <p class="ad-card__d">Durante los 17 días de entrega, el tráfico directo del sitio pasó de 6.616 a 7.423 sesiones por día (+12%), y los usuarios diarios de 4.935 a 5.973 (+21%). Son unas 13.724 visitas adicionales en el periodo. Es una comparación, no una prueba, pero va en la dirección que busca una campaña de recordación.</p>
+          <p class="mb-veredicto">Repetir la lectura al cierre de la campaña</p>
+        </article>
+        <article class="ad-card ad-card--dark mb-llamado">
+          <h3 class="ad-card__t">Dos ajustes técnicos para leer mejor los resultados</h3>
+          <p class="ad-card__d">Las URL de CTV y radio llevan la etiqueta UTM mal escrita, así que GA4 no puede atribuirles visitas, y el evento de registro del sitio dejó de medirse bien el 4 de noviembre (de unos 429 diarios a unos 21), aunque las sesiones y las compras siguen iguales. Con ambos corregidos, la próxima lectura podrá llegar hasta el registro.</p>
+          <p class="mb-veredicto">Corregir las UTM y restablecer el evento de registro</p>
+        </article>
+        <article class="ad-card ad-card--dark mb-llamado">
+          <h3 class="ad-card__t">Los clics de display piden una revisión</h3>
+          <p class="ad-card__d">DV360 reporta 6.396 clics y GA4 vio 202 sesiones (3,2%), 40 de ellas desde fuera de Colombia. Conviene pedir a DV360 el reporte de tráfico inválido y confirmar que la etiqueta del sitio carga en móvil antes de decidir cómo seguir comprando display.</p>
+          <p class="mb-veredicto">Auditar los clics antes de ampliar display</p>
+        </article>
       </div>
-      <div>
-        <p class="note" style="margin-top:0">Las cuatro locuciones recibieron casi la misma exposición, así que todavía no hay evidencia de cuál funciona mejor. Con 10 clics en total tampoco se puede leer por clics.</p>
-        <p class="note" style="margin-top:var(--s-4)">Para un producto de apuestas conviene revisar por qué el audio llega mayoritariamente a mujeres y si esa segmentación responde al público objetivo.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="band wrap" id="directo">
-    <div class="titulo-seccion">
-      <h2>Más gente entrando a YaJuego</h2>
-      <p>Durante los 17 días de entrega, el tráfico directo del sitio subió +12%: de 6.616 a 7.423 sesiones por día. Directo es quien escribe la dirección, abre la app o entra desde un marcador, el tipo de visita que puede reflejar mayor recordación de la marca.</p>
-    </div>
-    <dl class="tira-cifras">
-      <div><dt>Sesiones directas por día</dt><dd>7.423<small>antes: 6.616</small></dd></div>
-      <div><dt>Usuarios directos por día</dt><dd>5.973<small>antes: 4.935 (+21%)</small></dd></div>
-      <div><dt>Visitas adicionales en el periodo</dt><dd>~13.724<small>sobre el promedio de los días previos</small></dd></div>
-    </dl>
-    <figure class="chart" style="margin-top:var(--s-5)">
-      <div class="chart-top"><h3>Sesiones diarias de tráfico directo</h3><span class="chart-hint">17 días antes y 17 durante</span></div>
-      <svg viewBox="0 0 860 260" role="img" aria-label="Sesiones diarias de tráfico directo antes y durante la campaña" style="width:100%;height:auto;display:block"><line x1="56" y1="230.0" x2="740" y2="230.0" stroke="var(--rule)"/><text x="48" y="234.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0</text><line x1="56" y1="176.0" x2="740" y2="176.0" stroke="var(--rule)"/><text x="48" y="180.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">3.515</text><line x1="56" y1="122.0" x2="740" y2="122.0" stroke="var(--rule)"/><text x="48" y="126.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">7.031</text><line x1="56" y1="68.0" x2="740" y2="68.0" stroke="var(--rule)"/><text x="48" y="72.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">10.546</text><line x1="56" y1="14.0" x2="740" y2="14.0" stroke="var(--rule)"/><text x="48" y="18.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">14.062</text><text x="56.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">17 oct</text><text x="138.9" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">21 oct</text><text x="221.8" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">25 oct</text><text x="304.7" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">29 oct</text><text x="387.6" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">2 nov</text><text x="470.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">6 nov</text><text x="553.5" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">10 nov</text><text x="636.4" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">14 nov</text><text x="740.0" y="252" text-anchor="middle" font-size="11" fill="var(--fg-muted)">19 nov</text><line x1="408.4" y1="14" x2="408.4" y2="230" stroke="var(--fg)" stroke-width="1.5" stroke-dasharray="5 4"/><text x="414.4" y="26" font-size="12" font-weight="700" fill="var(--fg)">Arranca la campaña</text><polyline points="56.0,111.7 76.7,152.0 97.5,77.7 118.2,131.5 138.9,144.6 159.6,156.4 180.4,152.5 201.1,148.2 221.8,98.0 242.5,148.6 263.3,132.0 284.0,128.5 304.7,30.0 325.5,138.2 346.2,136.0 366.9,144.1 387.6,152.3 408.4,136.1 429.1,134.3 449.8,118.1 470.5,97.9 491.3,79.2 512.0,76.1 532.7,86.8 553.5,119.6 574.2,135.1 594.9,136.7 615.6,109.1 636.4,139.5 657.1,93.1 677.8,137.2 698.5,124.7 719.3,118.7 740.0,129.3" fill="none" stroke="var(--serie-1)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="129.3" r="4" fill="var(--serie-1)"/><text x="748" y="133.3" font-size="12" font-weight="700" fill="var(--fg)">Directo</text></svg>
-      <figcaption class="chart-foot">Con la mediana, que no depende de un día atípico, el aumento es de +20%: de 5.978 a 7.186 sesiones por día. Además, los días previos incluyen un pico de 13.020 sesiones, que sube el promedio de antes; por eso el +12% es una lectura prudente.</figcaption>
-    </figure>
-    <div style="margin-top:var(--s-5)"><div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Sesiones diarias del sitio antes y durante la campaña (17 oct a 2 nov contra 3 a 19 nov).</caption><thead><tr><th scope="col">Canal del sitio</th><th scope="col">Antes (17 días)</th><th scope="col">Durante (17 días)</th><th scope="col">Cambio</th></tr></thead><tbody><tr><th scope="row">Búsqueda orgánica de Google</th><td>8.440 por día</td><td>8.317 por día</td><td>-1%</td></tr><tr><th scope="row">Tráfico directo</th><td>6.616 por día</td><td>7.423 por día</td><td>+12%</td></tr><tr><th scope="row">Búsqueda de marca en Google Ads</th><td>739 por día</td><td>524 por día</td><td>-29%</td></tr></tbody></table></div></div>
-    <p class="note" style="margin-top:var(--s-4)">Es una comparación, no una prueba: en esas semanas hubo otras campañas activas y el sitio también cambia con la temporada y los partidos. La búsqueda orgánica quedó plana y la de marca pagada bajó; el crecimiento está en el directo. Para atribuirlo a la programática conviene repetir la lectura al cierre y, a futuro, planear un grupo de control.</p>
-  </section>
+    <section class="ad-sec" id="plan" aria-labelledby="t-plan">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-plan">Cómo va contra el plan</h2>
+        <p>Cada canal se compra por una métrica distinta: clics en display, views completos en CTV y escuchas en radio. La meta del mes y el avance se miden sobre esa métrica.</p>
+      </header>
 
-  <section class="band wrap" id="analytics">
-    <div class="titulo-seccion">
-      <h2>Del clic al sitio, según Google Analytics</h2>
-      <p>GA4 vio llegar 211 sesiones desde la programática contra 6.446 clics reportados por DV360.</p>
-    </div>
-    <figure class="chart">
-      <div class="legend"><span><i></i>Clics en DV360</span><span><i class="is-accent"></i>Sesiones en GA4</span></div>
-      <svg viewBox="0 0 860 280" role="img" aria-label="Clics de DV360 y sesiones de GA4 por día en display premium" style="width:100%;height:auto;display:block"><line x1="56" y1="250.0" x2="844" y2="250.0" stroke="var(--rule)"/><text x="48" y="254.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0</text><line x1="56" y1="191.0" x2="844" y2="191.0" stroke="var(--rule)"/><text x="48" y="195.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">155</text><line x1="56" y1="132.0" x2="844" y2="132.0" stroke="var(--rule)"/><text x="48" y="136.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">310</text><line x1="56" y1="73.0" x2="844" y2="73.0" stroke="var(--rule)"/><text x="48" y="77.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">465</text><line x1="56" y1="14.0" x2="844" y2="14.0" stroke="var(--rule)"/><text x="48" y="18.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">620</text><rect x="62.4" y="246.2" width="15.8" height="3.8" fill="var(--fg)"><title>3 nov: 10 clics (DV360)</title></rect><rect x="80.2" y="245.8" width="15.8" height="4.2" fill="var(--accent-deep)"><title>3 nov: 11 sesiones (GA4)</title></rect><text x="79.2" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">3 nov</text><rect x="108.8" y="35.5" width="15.8" height="214.5" fill="var(--fg)"><title>4 nov: 564 clics (DV360)</title></rect><rect x="126.5" y="249.2" width="15.8" height="1.5" fill="var(--accent-deep)"><title>4 nov: 2 sesiones (GA4)</title></rect><rect x="155.1" y="59.8" width="15.8" height="190.2" fill="var(--fg)"><title>5 nov: 500 clics (DV360)</title></rect><rect x="172.9" y="241.6" width="15.8" height="8.4" fill="var(--accent-deep)"><title>5 nov: 22 sesiones (GA4)</title></rect><text x="171.9" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">5 nov</text><rect x="201.5" y="82.2" width="15.8" height="167.8" fill="var(--fg)"><title>6 nov: 441 clics (DV360)</title></rect><rect x="219.2" y="245.1" width="15.8" height="4.9" fill="var(--accent-deep)"><title>6 nov: 13 sesiones (GA4)</title></rect><rect x="247.8" y="110.0" width="15.8" height="140.0" fill="var(--fg)"><title>7 nov: 368 clics (DV360)</title></rect><rect x="265.6" y="242.8" width="15.8" height="7.2" fill="var(--accent-deep)"><title>7 nov: 19 sesiones (GA4)</title></rect><text x="264.6" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">7 nov</text><rect x="294.2" y="108.1" width="15.8" height="141.9" fill="var(--fg)"><title>8 nov: 373 clics (DV360)</title></rect><rect x="311.9" y="245.1" width="15.8" height="4.9" fill="var(--accent-deep)"><title>8 nov: 13 sesiones (GA4)</title></rect><rect x="340.5" y="68.5" width="15.8" height="181.5" fill="var(--fg)"><title>9 nov: 477 clics (DV360)</title></rect><rect x="358.3" y="245.8" width="15.8" height="4.2" fill="var(--accent-deep)"><title>9 nov: 11 sesiones (GA4)</title></rect><text x="357.3" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">9 nov</text><rect x="386.9" y="92.5" width="15.8" height="157.5" fill="var(--fg)"><title>10 nov: 414 clics (DV360)</title></rect><rect x="404.6" y="245.8" width="15.8" height="4.2" fill="var(--accent-deep)"><title>10 nov: 11 sesiones (GA4)</title></rect><rect x="433.2" y="107.4" width="15.8" height="142.6" fill="var(--fg)"><title>11 nov: 375 clics (DV360)</title></rect><rect x="451.0" y="245.1" width="15.8" height="4.9" fill="var(--accent-deep)"><title>11 nov: 13 sesiones (GA4)</title></rect><text x="450.0" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">11 nov</text><rect x="479.6" y="113.1" width="15.8" height="136.9" fill="var(--fg)"><title>12 nov: 360 clics (DV360)</title></rect><rect x="497.4" y="240.5" width="15.8" height="9.5" fill="var(--accent-deep)"><title>12 nov: 25 sesiones (GA4)</title></rect><rect x="525.9" y="123.7" width="15.8" height="126.3" fill="var(--fg)"><title>13 nov: 332 clics (DV360)</title></rect><rect x="543.7" y="246.6" width="15.8" height="3.4" fill="var(--accent-deep)"><title>13 nov: 9 sesiones (GA4)</title></rect><text x="542.7" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">13 nov</text><rect x="572.3" y="117.6" width="15.8" height="132.4" fill="var(--fg)"><title>14 nov: 348 clics (DV360)</title></rect><rect x="590.1" y="242.8" width="15.8" height="7.2" fill="var(--accent-deep)"><title>14 nov: 19 sesiones (GA4)</title></rect><rect x="618.7" y="95.6" width="15.8" height="154.4" fill="var(--fg)"><title>15 nov: 406 clics (DV360)</title></rect><rect x="636.4" y="246.2" width="15.8" height="3.8" fill="var(--accent-deep)"><title>15 nov: 10 sesiones (GA4)</title></rect><text x="635.4" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">15 nov</text><rect x="665.0" y="97.5" width="15.8" height="152.5" fill="var(--fg)"><title>16 nov: 401 clics (DV360)</title></rect><rect x="682.8" y="248.5" width="15.8" height="1.5" fill="var(--accent-deep)"><title>16 nov: 4 sesiones (GA4)</title></rect><rect x="711.4" y="107.0" width="15.8" height="143.0" fill="var(--fg)"><title>17 nov: 376 clics (DV360)</title></rect><rect x="729.1" y="246.6" width="15.8" height="3.4" fill="var(--accent-deep)"><title>17 nov: 9 sesiones (GA4)</title></rect><text x="728.1" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">17 nov</text><rect x="757.7" y="128.7" width="15.8" height="121.3" fill="var(--fg)"><title>18 nov: 319 clics (DV360)</title></rect><rect x="775.5" y="247.3" width="15.8" height="2.7" fill="var(--accent-deep)"><title>18 nov: 7 sesiones (GA4)</title></rect><rect x="804.1" y="123.7" width="15.8" height="126.3" fill="var(--fg)"><title>19 nov: 332 clics (DV360)</title></rect><rect x="821.8" y="248.1" width="15.8" height="1.9" fill="var(--accent-deep)"><title>19 nov: 5 sesiones (GA4)</title></rect><text x="820.8" y="272" text-anchor="middle" font-size="11" fill="var(--fg-muted)">19 nov</text></svg>
-      <figcaption class="chart-foot"><b>Display premium, por día, en la misma escala.</b> Hubo entre 319 y 564 clics diarios en DV360 y entre 2 y 25 sesiones en GA4.</figcaption>
-    </figure>
-    <div style="margin-top:var(--s-5)"><div class="table-scroll" style="margin-top:var(--s-4)"><table><caption>Del clic a la sesión, del 3 al 19 de noviembre. La columna de registros no es confiable: el evento falla desde el 4 de noviembre.</caption><thead><tr><th scope="col">Canal</th><th scope="col">Clics en DV360</th><th scope="col">Sesiones en GA4</th><th scope="col">Sesiones por clic</th><th scope="col">Con interacción</th><th scope="col">Registros medidos</th></tr></thead><tbody><tr><th scope="row">Display premium</th><td>6.396</td><td>202</td><td>3,2%</td><td>18</td><td>no medible</td></tr><tr><th scope="row">CTV</th><td>40</td><td>8</td><td>20,0%</td><td>4</td><td>no medible</td></tr><tr><th scope="row">Radio digital</th><td>10</td><td>1</td><td>10,0%</td><td>1</td><td>no medible</td></tr></tbody></table></div></div>
-    <p class="note" style="margin-top:var(--s-4)">Una diferencia moderada entre clics y sesiones es normal: GA4 no cuenta a quien cierra la página antes de que cargue la etiqueta. Perder 97% no lo es.</p>
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Avance de la métrica de compra por canal al 19 de noviembre. Entre paréntesis, el porcentaje de la meta.">
+        <table>
+          <caption>Avance de la métrica de compra por canal al 19 de noviembre. Entre paréntesis, el porcentaje de la meta.</caption>
+          <thead><tr><th scope="col">Canal</th><th scope="col" class="valor">Meta del mes</th><th scope="col" class="valor">Entregado</th><th scope="col" class="valor">Avance</th><th scope="col" class="valor">Proyección de la hoja</th><th scope="col" class="valor">Con el ritmo de la última semana</th><th scope="col" class="valor">Llega a la meta el</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Display premium (CPC · clics)</th><td class="valor">10.313</td><td class="valor">6.396</td><td class="valor">62,0%</td><td class="valor">10.535 (102%)</td><td class="valor">10.347 (100%)</td><td class="valor">30 nov</td></tr><tr><th scope="row">CTV (CPV · views completos)</th><td class="valor">65.625</td><td class="valor">51.260</td><td class="valor">78,1%</td><td class="valor">84.428 (129%)</td><td class="valor">73.375 (112%)</td><td class="valor">27 nov</td></tr><tr><th scope="row">Radio digital (CPL · escuchas)</th><td class="valor">27.273</td><td class="valor">21.746</td><td class="valor">79,7%</td><td class="valor">35.817 (131%)</td><td class="valor">36.354 (133%)</td><td class="valor">24 nov</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <p class="mb-nota pg-nota">La proyección de la hoja repite el promedio de todo el periodo. En CTV eso exagera: el día de mayor entrega fue de 10.816 impresiones y hoy son cerca de 2.000. Con el promedio de los últimos siete días (2.010 views por día) CTV cierra cerca de 73.375, no en 84.428.</p>
+      </div>
 
-    <div class="duo" style="margin-top:var(--s-5)">
-      <div class="panel">
-        <h3>Calidad de las sesiones de display</h3>
+      <dl class="ad-kpis">
+        <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">Inversión estimada a la fecha</dt><dd class="ad-kpi__n">$18,2 M</dd><span class="ad-kpi__m">60,7% de $30,0 M</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Días con entrega</dt><dd class="ad-kpi__n">17 de 28</dd><span class="ad-kpi__m">faltan 11</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Tarifa efectiva de CTV</dt><dd class="ad-kpi__n">$124,4</dd><span class="ad-kpi__m">contra $160 del plan</span></div>
+      </dl>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tarifa e inversión estimada por canal.">
+        <table>
+          <caption>Tarifa e inversión estimada por canal.</caption>
+          <thead><tr><th scope="col">Canal</th><th scope="col" class="valor">Tarifa del plan</th><th scope="col" class="valor">Tarifa efectiva</th><th scope="col" class="valor">Inversión estimada</th><th scope="col" class="valor">% del presupuesto</th><th scope="col" class="valor">Presupuesto del mes</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Display premium</th><td class="valor">$1.600</td><td class="valor">$1.566,3</td><td class="valor">$10.017.857</td><td class="valor">60,7%</td><td class="valor">$16.500.000</td></tr><tr><th scope="row">CTV</th><td class="valor">$160</td><td class="valor">$124,4</td><td class="valor">$6.374.999</td><td class="valor">60,7%</td><td class="valor">$10.500.000</td></tr><tr><th scope="row">Radio digital</th><td class="valor">$110</td><td class="valor">$83,8</td><td class="valor">$1.821.427</td><td class="valor">60,7%</td><td class="valor">$3.000.000</td></tr><tr class="mb-total"><th scope="row">Total</th><td class="valor"></td><td class="valor"></td><td class="valor">$18.214.283</td><td class="valor">60,7%</td><td class="valor">$30.000.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="ad-lectura">
+        <h3 class="ad-lectura__k mb-lect-t">La inversión de la hoja es un cálculo, no la factura</h3>
+        <p>La hoja de seguimiento calcula la inversión de cada día como los resultados del día por una <b>tarifa efectiva</b>: el presupuesto del mes dividido entre la meta proyectada. Así el mes siempre termina en 100% del presupuesto el 30 de noviembre. Por eso el 60,7% ejecutado coincide con los 17 días de 28 corridos. Sirve para pacing, pero no confirma lo que cobrará DV360.</p>
+      </div>
+      </div>
+    </section>
+
+    <section class="ad-sec" id="ritmo" aria-labelledby="t-ritmo">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-ritmo">Cómo se movió la entrega día a día</h2>
+        <p>Display se mantiene estable. CTV arrancó fuerte y bajó a una quinta parte desde el 11 de noviembre. Radio sostiene su ritmo.</p>
+      </header>
+
+      <figure class="ad-figura mb-grafico">
+        <h3 class="mb-tit">Impresiones por día</h3>
+        <ul class="ad-leyenda"><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz0" x1="2" y1="6" x2="26" y2="6"/></svg>Display premium</li><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz1" x1="2" y1="6" x2="26" y2="6"/></svg>CTV</li><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz2" x1="2" y1="6" x2="26" y2="6"/></svg>Radio digital</li></ul>
+        <div class="mb-scroll" tabindex="0" role="region" aria-label="Impresiones por día"><svg class="mb-svg mb-svg--linea" viewBox="0 0 1040 300" width="1040" role="img"
+               aria-labelledby="g-imp-t">
+            <title id="g-imp-t">Impresiones por día</title>
+            <line class="mb-lg" x1="46" x2="870" y1="266.0" y2="266.0"/><text class="mb-lt" x="38" y="270.0" text-anchor="end">0</text><line class="mb-lg" x1="46" x2="870" y1="203.5" y2="203.5"/><text class="mb-lt" x="38" y="207.5" text-anchor="end">5.026</text><line class="mb-lg" x1="46" x2="870" y1="141.0" y2="141.0"/><text class="mb-lt" x="38" y="145.0" text-anchor="end">10.053</text><line class="mb-lg" x1="46" x2="870" y1="78.5" y2="78.5"/><text class="mb-lt" x="38" y="82.5" text-anchor="end">15.079</text><line class="mb-lg" x1="46" x2="870" y1="16.0" y2="16.0"/><text class="mb-lt" x="38" y="20.0" text-anchor="end">20.105</text><rect class="mb-dia" x="20.2" y="16" width="51.5" height="250"><title>3 nov · Display premium: 6.045 · CTV: 216 · Radio digital: 152</title></rect><rect class="mb-dia" x="71.8" y="16" width="51.5" height="250"><title>4 nov · Display premium: 17.480 · CTV: 5.202 · Radio digital: 507</title></rect><rect class="mb-dia" x="123.2" y="16" width="51.5" height="250"><title>5 nov · Display premium: 17.926 · CTV: 8.819 · Radio digital: 1.691</title></rect><rect class="mb-dia" x="174.8" y="16" width="51.5" height="250"><title>6 nov · Display premium: 17.883 · CTV: 10.816 · Radio digital: 1.753</title></rect><rect class="mb-dia" x="226.2" y="16" width="51.5" height="250"><title>7 nov · Display premium: 16.189 · CTV: 9.220 · Radio digital: 1.767</title></rect><rect class="mb-dia" x="277.8" y="16" width="51.5" height="250"><title>8 nov · Display premium: 16.673 · CTV: 10.340 · Radio digital: 1.762</title></rect><rect class="mb-dia" x="329.2" y="16" width="51.5" height="250"><title>9 nov · Display premium: 18.068 · CTV: 7.281 · Radio digital: 1.805</title></rect><rect class="mb-dia" x="380.8" y="16" width="51.5" height="250"><title>10 nov · Display premium: 17.470 · CTV: 6.180 · Radio digital: 1.750</title></rect><rect class="mb-dia" x="432.2" y="16" width="51.5" height="250"><title>11 nov · Display premium: 17.057 · CTV: 4.028 · Radio digital: 1.722</title></rect><rect class="mb-dia" x="483.8" y="16" width="51.5" height="250"><title>12 nov · Display premium: 17.511 · CTV: 3.622 · Radio digital: 1.738</title></rect><rect class="mb-dia" x="535.2" y="16" width="51.5" height="250"><title>13 nov · Display premium: 17.093 · CTV: 2.582 · Radio digital: 1.684</title></rect><rect class="mb-dia" x="586.8" y="16" width="51.5" height="250"><title>14 nov · Display premium: 16.668 · CTV: 2.505 · Radio digital: 1.553</title></rect><rect class="mb-dia" x="638.2" y="16" width="51.5" height="250"><title>15 nov · Display premium: 15.333 · CTV: 2.474 · Radio digital: 1.559</title></rect><rect class="mb-dia" x="689.8" y="16" width="51.5" height="250"><title>16 nov · Display premium: 18.616 · CTV: 2.629 · Radio digital: 1.538</title></rect><rect class="mb-dia" x="741.2" y="16" width="51.5" height="250"><title>17 nov · Display premium: 16.962 · CTV: 2.171 · Radio digital: 1.535</title></rect><rect class="mb-dia" x="792.8" y="16" width="51.5" height="250"><title>18 nov · Display premium: 15.913 · CTV: 1.997 · Radio digital: 1.526</title></rect><rect class="mb-dia" x="844.2" y="16" width="51.5" height="250"><title>19 nov · Display premium: 15.979 · CTV: 2.000 · Radio digital: 1.542</title></rect><polyline class="mb-tz mb-tz0" points="46.0,190.8 97.5,48.6 149.0,43.1 200.5,43.6 252.0,64.7 303.5,58.7 355.0,41.3 406.5,48.8 458.0,53.9 509.5,48.3 561.0,53.5 612.5,58.7 664.0,75.3 715.5,34.5 767.0,55.1 818.5,68.1 870.0,67.3"/><polyline class="mb-tz mb-tz1" points="46.0,263.3 97.5,201.3 149.0,156.3 200.5,131.5 252.0,151.4 303.5,137.4 355.0,175.5 406.5,189.2 458.0,215.9 509.5,221.0 561.0,233.9 612.5,234.9 664.0,235.2 715.5,233.3 767.0,239.0 818.5,241.2 870.0,241.1"/><polyline class="mb-tz mb-tz2" points="46.0,264.1 97.5,259.7 149.0,245.0 200.5,244.2 252.0,244.0 303.5,244.1 355.0,243.6 406.5,244.2 458.0,244.6 509.5,244.4 561.0,245.1 612.5,246.7 664.0,246.6 715.5,246.9 767.0,246.9 818.5,247.0 870.0,246.8"/><circle class="mb-pt mb-pt0" cx="870.0" cy="67.3" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="71.3">Display premium</text><circle class="mb-pt mb-pt1" cx="870.0" cy="241.1" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="245.1">CTV</text><circle class="mb-pt mb-pt2" cx="870.0" cy="246.8" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="263.1">Radio digital</text><text class="mb-lt" x="46.0" y="290" text-anchor="middle">3 nov</text><text class="mb-lt" x="149.0" y="290" text-anchor="middle">5 nov</text><text class="mb-lt" x="252.0" y="290" text-anchor="middle">7 nov</text><text class="mb-lt" x="355.0" y="290" text-anchor="middle">9 nov</text><text class="mb-lt" x="458.0" y="290" text-anchor="middle">11 nov</text><text class="mb-lt" x="561.0" y="290" text-anchor="middle">13 nov</text><text class="mb-lt" x="664.0" y="290" text-anchor="middle">15 nov</text><text class="mb-lt" x="767.0" y="290" text-anchor="middle">17 nov</text><text class="mb-lt" x="870.0" y="290" text-anchor="middle">19 nov</text>
+          </svg></div>
+        <figcaption>Datos de DV360 vía la hoja de seguimiento. Los días sin entrega (1 y 2 de noviembre, y desde el 20) no se grafican.</figcaption>
+        <details class="ad-datos">
+          <summary>Ver los datos</summary>
+          
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tabla">
+        <table>
+          
+          <thead><tr><th scope="col">Dia</th><th scope="col" class="valor">Display premium</th><th scope="col" class="valor">CTV</th><th scope="col" class="valor">Radio digital</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">3 nov</th><td class="valor">6.045</td><td class="valor">216</td><td class="valor">152</td></tr><tr><th scope="row">4 nov</th><td class="valor">17.480</td><td class="valor">5.202</td><td class="valor">507</td></tr><tr><th scope="row">5 nov</th><td class="valor">17.926</td><td class="valor">8.819</td><td class="valor">1.691</td></tr><tr><th scope="row">6 nov</th><td class="valor">17.883</td><td class="valor">10.816</td><td class="valor">1.753</td></tr><tr><th scope="row">7 nov</th><td class="valor">16.189</td><td class="valor">9.220</td><td class="valor">1.767</td></tr><tr><th scope="row">8 nov</th><td class="valor">16.673</td><td class="valor">10.340</td><td class="valor">1.762</td></tr><tr><th scope="row">9 nov</th><td class="valor">18.068</td><td class="valor">7.281</td><td class="valor">1.805</td></tr><tr><th scope="row">10 nov</th><td class="valor">17.470</td><td class="valor">6.180</td><td class="valor">1.750</td></tr><tr><th scope="row">11 nov</th><td class="valor">17.057</td><td class="valor">4.028</td><td class="valor">1.722</td></tr><tr><th scope="row">12 nov</th><td class="valor">17.511</td><td class="valor">3.622</td><td class="valor">1.738</td></tr><tr><th scope="row">13 nov</th><td class="valor">17.093</td><td class="valor">2.582</td><td class="valor">1.684</td></tr><tr><th scope="row">14 nov</th><td class="valor">16.668</td><td class="valor">2.505</td><td class="valor">1.553</td></tr><tr><th scope="row">15 nov</th><td class="valor">15.333</td><td class="valor">2.474</td><td class="valor">1.559</td></tr><tr><th scope="row">16 nov</th><td class="valor">18.616</td><td class="valor">2.629</td><td class="valor">1.538</td></tr><tr><th scope="row">17 nov</th><td class="valor">16.962</td><td class="valor">2.171</td><td class="valor">1.535</td></tr><tr><th scope="row">18 nov</th><td class="valor">15.913</td><td class="valor">1.997</td><td class="valor">1.526</td></tr><tr><th scope="row">19 nov</th><td class="valor">15.979</td><td class="valor">2.000</td><td class="valor">1.542</td></tr>
+          </tbody>
+        </table>
+      </div>
+        </details>
+      </figure>
+      
+      </div>
+    </section>
+
+    <section class="ad-sec" id="display" aria-labelledby="t-display">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-display">Display premium</h2>
+        <p>278.866 impresiones y 6.396 clics, con un CTR de 2,29%. Es un CTR muy alto para display, donde lo habitual queda por debajo de 1%. Conviene verificar de qué clase son esos clics.</p>
+      </header>
+
+      <dl class="ad-kpis">
+        <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">De las impresiones, en un solo sitio</dt><dd class="ad-kpi__n">74%</dd><span class="ad-kpi__m">elespectador.com</span></div><div class="ad-kpi"><dt class="ad-kpi__l">De los clics, en ese sitio</dt><dd class="ad-kpi__n">81%</dd><span class="ad-kpi__m">5.204 de 6.396</span></div><div class="ad-kpi"><dt class="ad-kpi__l">De la entrega, en móvil</dt><dd class="ad-kpi__n">99%</dd><span class="ad-kpi__m">276.905 impresiones</span></div>
+      </dl>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Display premium por sitio, de mayor a menor impresiones.">
+        <table>
+          <caption>Display premium por sitio, de mayor a menor impresiones.</caption>
+          <thead><tr><th scope="col">Sitio</th><th scope="col" class="valor">Impresiones</th><th scope="col" class="valor">Participación</th><th scope="col" class="valor">Clics</th><th scope="col" class="valor">CTR</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">elespectador.com</th><td class="valor">206.618</td><td class="valor">74%</td><td class="valor">5.204</td><td class="valor">2,52%</td></tr><tr><th scope="row">eluniversal.com.co</th><td class="valor">42.369</td><td class="valor">15%</td><td class="valor">808</td><td class="valor">1,91%</td></tr><tr><th scope="row">bluradio.com</th><td class="valor">6.327</td><td class="valor">2%</td><td class="valor">122</td><td class="valor">1,93%</td></tr><tr><th scope="row">vanguardia.com</th><td class="valor">5.514</td><td class="valor">2%</td><td class="valor">71</td><td class="valor">1,29%</td></tr><tr><th scope="row">caracoltv.com</th><td class="valor">4.947</td><td class="valor">2%</td><td class="valor">24</td><td class="valor">0,49%</td></tr><tr><th scope="row">semana.com</th><td class="valor">4.127</td><td class="valor">1%</td><td class="valor">19</td><td class="valor">0,46%</td></tr><tr><th scope="row">ntn24.com</th><td class="valor">2.828</td><td class="valor">1%</td><td class="valor">50</td><td class="valor">1,77%</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <p class="mb-nota pg-nota">Un solo sitio sostiene toda la compra. Si El Espectador cambia sus condiciones, o si ese inventario está inflado, la campaña entera se mueve con él.</p>
+      </div>
+
+      <figure class="ad-figura mb-grafico">
+        <h3 class="mb-tit">CTR diario de display</h3><p class="mb-nota">cae con el tiempo</p>
+        <ul class="ad-leyenda"><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz0" x1="2" y1="6" x2="26" y2="6"/></svg>CTR</li></ul>
+        <div class="mb-scroll" tabindex="0" role="region" aria-label="CTR diario de display"><svg class="mb-svg mb-svg--linea" viewBox="0 0 1040 300" width="1040" role="img"
+               aria-labelledby="g-ctr-t">
+            <title id="g-ctr-t">CTR diario de display</title>
+            <line class="mb-lg" x1="46" x2="870" y1="266.0" y2="266.0"/><text class="mb-lt" x="38" y="270.0" text-anchor="end">0,0%</text><line class="mb-lg" x1="46" x2="870" y1="203.5" y2="203.5"/><text class="mb-lt" x="38" y="207.5" text-anchor="end">0,9%</text><line class="mb-lg" x1="46" x2="870" y1="141.0" y2="141.0"/><text class="mb-lt" x="38" y="145.0" text-anchor="end">1,7%</text><line class="mb-lg" x1="46" x2="870" y1="78.5" y2="78.5"/><text class="mb-lt" x="38" y="82.5" text-anchor="end">2,6%</text><line class="mb-lg" x1="46" x2="870" y1="16.0" y2="16.0"/><text class="mb-lt" x="38" y="20.0" text-anchor="end">3,5%</text><rect class="mb-dia" x="18.5" y="16" width="54.9" height="250"><title>4 nov · CTR: 3,2%</title></rect><rect class="mb-dia" x="73.5" y="16" width="54.9" height="250"><title>5 nov · CTR: 2,8%</title></rect><rect class="mb-dia" x="128.4" y="16" width="54.9" height="250"><title>6 nov · CTR: 2,5%</title></rect><rect class="mb-dia" x="183.3" y="16" width="54.9" height="250"><title>7 nov · CTR: 2,3%</title></rect><rect class="mb-dia" x="238.3" y="16" width="54.9" height="250"><title>8 nov · CTR: 2,2%</title></rect><rect class="mb-dia" x="293.2" y="16" width="54.9" height="250"><title>9 nov · CTR: 2,6%</title></rect><rect class="mb-dia" x="348.1" y="16" width="54.9" height="250"><title>10 nov · CTR: 2,4%</title></rect><rect class="mb-dia" x="403.1" y="16" width="54.9" height="250"><title>11 nov · CTR: 2,2%</title></rect><rect class="mb-dia" x="458.0" y="16" width="54.9" height="250"><title>12 nov · CTR: 2,1%</title></rect><rect class="mb-dia" x="512.9" y="16" width="54.9" height="250"><title>13 nov · CTR: 1,9%</title></rect><rect class="mb-dia" x="567.9" y="16" width="54.9" height="250"><title>14 nov · CTR: 2,1%</title></rect><rect class="mb-dia" x="622.8" y="16" width="54.9" height="250"><title>15 nov · CTR: 2,6%</title></rect><rect class="mb-dia" x="677.7" y="16" width="54.9" height="250"><title>16 nov · CTR: 2,2%</title></rect><rect class="mb-dia" x="732.7" y="16" width="54.9" height="250"><title>17 nov · CTR: 2,2%</title></rect><rect class="mb-dia" x="787.6" y="16" width="54.9" height="250"><title>18 nov · CTR: 2,0%</title></rect><rect class="mb-dia" x="842.5" y="16" width="54.9" height="250"><title>19 nov · CTR: 2,1%</title></rect><polyline class="mb-tz mb-tz0" points="46.0,34.5 100.9,65.9 155.9,89.1 210.8,102.9 265.7,105.5 320.7,76.6 375.6,96.0 430.5,108.3 485.5,118.5 540.4,126.7 595.3,116.2 650.3,76.0 705.2,111.5 760.1,107.0 815.1,122.2 870.0,116.9"/><circle class="mb-pt mb-pt0" cx="870.0" cy="116.9" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="120.9">CTR</text><text class="mb-lt" x="46.0" y="290" text-anchor="middle">4 nov</text><text class="mb-lt" x="155.9" y="290" text-anchor="middle">6 nov</text><text class="mb-lt" x="265.7" y="290" text-anchor="middle">8 nov</text><text class="mb-lt" x="375.6" y="290" text-anchor="middle">10 nov</text><text class="mb-lt" x="485.5" y="290" text-anchor="middle">12 nov</text><text class="mb-lt" x="595.3" y="290" text-anchor="middle">14 nov</text><text class="mb-lt" x="705.2" y="290" text-anchor="middle">16 nov</text><text class="mb-lt" x="815.1" y="290" text-anchor="middle">18 nov</text>
+          </svg></div>
+        <figcaption>Pasó de 3,2% el 4 de noviembre a 2,2% en la última semana, con una entrega diaria casi igual. Es la señal típica de una pieza que se desgasta o de un inventario que se agota.</figcaption>
+        <details class="ad-datos">
+          <summary>Ver los datos</summary>
+          
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tabla">
+        <table>
+          
+          <thead><tr><th scope="col">Dia</th><th scope="col" class="valor">CTR</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">4 nov</th><td class="valor">3,2%</td></tr><tr><th scope="row">5 nov</th><td class="valor">2,8%</td></tr><tr><th scope="row">6 nov</th><td class="valor">2,5%</td></tr><tr><th scope="row">7 nov</th><td class="valor">2,3%</td></tr><tr><th scope="row">8 nov</th><td class="valor">2,2%</td></tr><tr><th scope="row">9 nov</th><td class="valor">2,6%</td></tr><tr><th scope="row">10 nov</th><td class="valor">2,4%</td></tr><tr><th scope="row">11 nov</th><td class="valor">2,2%</td></tr><tr><th scope="row">12 nov</th><td class="valor">2,1%</td></tr><tr><th scope="row">13 nov</th><td class="valor">1,9%</td></tr><tr><th scope="row">14 nov</th><td class="valor">2,1%</td></tr><tr><th scope="row">15 nov</th><td class="valor">2,6%</td></tr><tr><th scope="row">16 nov</th><td class="valor">2,2%</td></tr><tr><th scope="row">17 nov</th><td class="valor">2,2%</td></tr><tr><th scope="row">18 nov</th><td class="valor">2,0%</td></tr><tr><th scope="row">19 nov</th><td class="valor">2,1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+        </details>
+      </figure>
+
+      <div class="mb-pieza">
+        <h3 class="mb-tit">Formatos, audiencia y regiones</h3><p class="mb-nota">El formato de 300x600 se lleva 75% de las impresiones y el mejor CTR.</p>
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Display premium por tamaño de pieza.">
+        <table>
+          <caption>Display premium por tamaño de pieza.</caption>
+          <thead><tr><th scope="col">Formato</th><th scope="col" class="valor">Impresiones</th><th scope="col" class="valor">Clics</th><th scope="col" class="valor">CTR</th><th scope="col" class="valor">Participación</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">300x600</th><td class="valor">209.986</td><td class="valor">5.266</td><td class="valor">2,51%</td><td class="valor">75%</td></tr><tr><th scope="row">300x250</th><td class="valor">49.408</td><td class="valor">862</td><td class="valor">1,74%</td><td class="valor">18%</td></tr><tr><th scope="row">320x100</th><td class="valor">8.239</td><td class="valor">113</td><td class="valor">1,37%</td><td class="valor">3%</td></tr><tr><th scope="row">970x250</th><td class="valor">5.793</td><td class="valor">55</td><td class="valor">0,95%</td><td class="valor">2%</td></tr><tr><th scope="row">320x480</th><td class="valor">5.440</td><td class="valor">100</td><td class="valor">1,84%</td><td class="valor">2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+
+      <div class="mb-pieza">
+        <div class="ad-grid pg-duo"><div><p class="pg-eje"><b>Edad</b><span>% de impresiones</span></p><figure class="ad-figura mb-barras mb-crece">
+        <div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">18-24</span><b class="mb-barra-val">53%</b></div>
+          <div class="ad-barra" style="--v:100.0%" role="img" aria-label="18-24: 53%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">25-34</span><b class="mb-barra-val">4%</b></div>
+          <div class="ad-barra" style="--v:7.5%" role="img" aria-label="25-34: 4%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">35-44</span><b class="mb-barra-val">2%</b></div>
+          <div class="ad-barra" style="--v:2.9%" role="img" aria-label="35-44: 2%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">45-54</span><b class="mb-barra-val">2%</b></div>
+          <div class="ad-barra" style="--v:4.5%" role="img" aria-label="45-54: 2%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">55-64</span><b class="mb-barra-val">12%</b></div>
+          <div class="ad-barra" style="--v:22.7%" role="img" aria-label="55-64: 12%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">65+</span><b class="mb-barra-val">8%</b></div>
+          <div class="ad-barra" style="--v:14.2%" role="img" aria-label="65+: 8%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Sin dato</span><b class="mb-barra-val">19%</b></div>
+          <div class="ad-barra" style="--v:36.6%" role="img" aria-label="Sin dato: 19%"><span></span></div>
+          
+        </div>
+        
+      </figure></div><div><p class="pg-eje"><b>Género</b><span>% de impresiones</span></p><figure class="ad-figura mb-barras mb-crece">
+        <div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Hombres</span><b class="mb-barra-val">68%</b></div>
+          <div class="ad-barra" style="--v:100.0%" role="img" aria-label="Hombres: 68%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Mujeres</span><b class="mb-barra-val">31%</b></div>
+          <div class="ad-barra" style="--v:46.1%" role="img" aria-label="Mujeres: 31%"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Sin dato</span><b class="mb-barra-val">1%</b></div>
+          <div class="ad-barra" style="--v:0.7%" role="img" aria-label="Sin dato: 1%"><span></span></div>
+          
+        </div>
+        
+      </figure></div></div>
+        <p class="mb-nota pg-nota">53% de las impresiones se atribuye a 18 a 24 años y 19% no tiene dato de edad. En display el 68% es hombres.</p>
+      </div>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Display premium por región, de mayor a menor impresiones.">
+        <table>
+          <caption>Display premium por región, de mayor a menor impresiones.</caption>
+          <thead><tr><th scope="col">Región</th><th scope="col" class="valor">Impresiones</th><th scope="col" class="valor">Clics</th><th scope="col" class="valor">CTR</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Bogotá</th><td class="valor">72.825</td><td class="valor">1.588</td><td class="valor">2,18%</td></tr><tr><th scope="row">Antioquia</th><td class="valor">37.622</td><td class="valor">888</td><td class="valor">2,36%</td></tr><tr><th scope="row">Bolívar</th><td class="valor">35.870</td><td class="valor">645</td><td class="valor">1,80%</td></tr><tr><th scope="row">Otros</th><td class="valor">25.598</td><td class="valor">646</td><td class="valor">2,52%</td></tr><tr><th scope="row">Cundinamarca</th><td class="valor">21.358</td><td class="valor">543</td><td class="valor">2,54%</td></tr><tr><th scope="row">Valle del Cauca</th><td class="valor">18.505</td><td class="valor">449</td><td class="valor">2,43%</td></tr><tr><th scope="row">Santander</th><td class="valor">18.027</td><td class="valor">422</td><td class="valor">2,34%</td></tr><tr><th scope="row">Atlántico</th><td class="valor">10.937</td><td class="valor">246</td><td class="valor">2,25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      
+      </div>
+    </section>
+
+    <section class="ad-sec" id="ctv" aria-labelledby="t-ctv">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-ctv">CTV</h2>
+        <p>82.082 impresiones y 51.260 views completos, con 40 clics. En televisión conectada el clic no es una acción normal, así que no es la métrica para juzgar este canal.</p>
+      </header>
+
+      <dl class="ad-kpis">
+        <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">Views completos sobre reproducciones</dt><dd class="ad-kpi__n">62%</dd><span class="ad-kpi__m">plan: 90%</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Primera semana</dt><dd class="ad-kpi__n">54%</dd><span class="ad-kpi__m">del 3 al 9 de noviembre</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Últimos cinco días</dt><dd class="ad-kpi__n">87%</dd><span class="ad-kpi__m">del 15 al 19 de noviembre</span></div>
+      </dl>
+
+      <figure class="ad-figura mb-grafico">
+        <h3 class="mb-tit">Views completos sobre reproducciones, por día</h3><p class="mb-nota">plan: 90%</p>
+        <ul class="ad-leyenda"><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz0" x1="2" y1="6" x2="26" y2="6"/></svg>VTR real</li></ul>
+        <div class="mb-scroll" tabindex="0" role="region" aria-label="Views completos sobre reproducciones, por día"><svg class="mb-svg mb-svg--linea" viewBox="0 0 1040 300" width="1040" role="img"
+               aria-labelledby="g-vtr-t">
+            <title id="g-vtr-t">Views completos sobre reproducciones, por día</title>
+            <line class="mb-lg" x1="46" x2="870" y1="266.0" y2="266.0"/><text class="mb-lt" x="38" y="270.0" text-anchor="end">0%</text><line class="mb-lg" x1="46" x2="870" y1="203.5" y2="203.5"/><text class="mb-lt" x="38" y="207.5" text-anchor="end">25%</text><line class="mb-lg" x1="46" x2="870" y1="141.0" y2="141.0"/><text class="mb-lt" x="38" y="145.0" text-anchor="end">50%</text><line class="mb-lg" x1="46" x2="870" y1="78.5" y2="78.5"/><text class="mb-lt" x="38" y="82.5" text-anchor="end">75%</text><line class="mb-lg" x1="46" x2="870" y1="16.0" y2="16.0"/><text class="mb-lt" x="38" y="20.0" text-anchor="end">100%</text><line class="mb-lref" x1="46" x2="870" y1="41.0" y2="41.0"/><rect class="mb-dia" x="20.2" y="16" width="51.5" height="250"><title>3 nov · VTR real: 43%</title></rect><rect class="mb-dia" x="71.8" y="16" width="51.5" height="250"><title>4 nov · VTR real: 58%</title></rect><rect class="mb-dia" x="123.2" y="16" width="51.5" height="250"><title>5 nov · VTR real: 51%</title></rect><rect class="mb-dia" x="174.8" y="16" width="51.5" height="250"><title>6 nov · VTR real: 50%</title></rect><rect class="mb-dia" x="226.2" y="16" width="51.5" height="250"><title>7 nov · VTR real: 64%</title></rect><rect class="mb-dia" x="277.8" y="16" width="51.5" height="250"><title>8 nov · VTR real: 50%</title></rect><rect class="mb-dia" x="329.2" y="16" width="51.5" height="250"><title>9 nov · VTR real: 52%</title></rect><rect class="mb-dia" x="380.8" y="16" width="51.5" height="250"><title>10 nov · VTR real: 52%</title></rect><rect class="mb-dia" x="432.2" y="16" width="51.5" height="250"><title>11 nov · VTR real: 77%</title></rect><rect class="mb-dia" x="483.8" y="16" width="51.5" height="250"><title>12 nov · VTR real: 85%</title></rect><rect class="mb-dia" x="535.2" y="16" width="51.5" height="250"><title>13 nov · VTR real: 87%</title></rect><rect class="mb-dia" x="586.8" y="16" width="51.5" height="250"><title>14 nov · VTR real: 82%</title></rect><rect class="mb-dia" x="638.2" y="16" width="51.5" height="250"><title>15 nov · VTR real: 84%</title></rect><rect class="mb-dia" x="689.8" y="16" width="51.5" height="250"><title>16 nov · VTR real: 83%</title></rect><rect class="mb-dia" x="741.2" y="16" width="51.5" height="250"><title>17 nov · VTR real: 89%</title></rect><rect class="mb-dia" x="792.8" y="16" width="51.5" height="250"><title>18 nov · VTR real: 90%</title></rect><rect class="mb-dia" x="844.2" y="16" width="51.5" height="250"><title>19 nov · VTR real: 90%</title></rect><polyline class="mb-tz mb-tz0" points="46.0,159.5 97.5,121.5 149.0,138.9 200.5,141.6 252.0,106.3 303.5,141.2 355.0,136.8 406.5,135.0 458.0,72.7 509.5,54.7 561.0,47.8 612.5,61.4 664.0,56.9 715.5,58.3 767.0,43.6 818.5,41.7 870.0,41.9"/><text class="mb-lt mb-lt--ref" x="882.0" y="45.0">Plan 90%</text><circle class="mb-pt mb-pt0" cx="870.0" cy="41.9" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="63.0">VTR real</text><text class="mb-lt" x="46.0" y="290" text-anchor="middle">3 nov</text><text class="mb-lt" x="149.0" y="290" text-anchor="middle">5 nov</text><text class="mb-lt" x="252.0" y="290" text-anchor="middle">7 nov</text><text class="mb-lt" x="355.0" y="290" text-anchor="middle">9 nov</text><text class="mb-lt" x="458.0" y="290" text-anchor="middle">11 nov</text><text class="mb-lt" x="561.0" y="290" text-anchor="middle">13 nov</text><text class="mb-lt" x="664.0" y="290" text-anchor="middle">15 nov</text><text class="mb-lt" x="767.0" y="290" text-anchor="middle">17 nov</text><text class="mb-lt" x="870.0" y="290" text-anchor="middle">19 nov</text>
+          </svg></div>
+        <figcaption>Mejoró cuando la entrega diaria bajó, lo que sugiere que se depuró el inventario. Falta que DV360 confirme la causa.</figcaption>
+        <details class="ad-datos">
+          <summary>Ver los datos</summary>
+          
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tabla">
+        <table>
+          
+          <thead><tr><th scope="col">Dia</th><th scope="col" class="valor">VTR real</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">3 nov</th><td class="valor">43%</td></tr><tr><th scope="row">4 nov</th><td class="valor">58%</td></tr><tr><th scope="row">5 nov</th><td class="valor">51%</td></tr><tr><th scope="row">6 nov</th><td class="valor">50%</td></tr><tr><th scope="row">7 nov</th><td class="valor">64%</td></tr><tr><th scope="row">8 nov</th><td class="valor">50%</td></tr><tr><th scope="row">9 nov</th><td class="valor">52%</td></tr><tr><th scope="row">10 nov</th><td class="valor">52%</td></tr><tr><th scope="row">11 nov</th><td class="valor">77%</td></tr><tr><th scope="row">12 nov</th><td class="valor">85%</td></tr><tr><th scope="row">13 nov</th><td class="valor">87%</td></tr><tr><th scope="row">14 nov</th><td class="valor">82%</td></tr><tr><th scope="row">15 nov</th><td class="valor">84%</td></tr><tr><th scope="row">16 nov</th><td class="valor">83%</td></tr><tr><th scope="row">17 nov</th><td class="valor">89%</td></tr><tr><th scope="row">18 nov</th><td class="valor">90%</td></tr><tr><th scope="row">19 nov</th><td class="valor">90%</td></tr>
+          </tbody>
+        </table>
+      </div>
+        </details>
+      </figure>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="CTV por app o sitio, de mayor a menor impresiones.">
+        <table>
+          <caption>CTV por app o sitio, de mayor a menor impresiones.</caption>
+          <thead><tr><th scope="col">App o sitio</th><th scope="col" class="valor">Impresiones</th><th scope="col" class="valor">Participación</th><th scope="col" class="valor">Clics</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Canal RCN (Android TV)</th><td class="valor">41.296</td><td class="valor">50%</td><td class="valor">5</td></tr><tr><th scope="row">Live TV (Android TV)</th><td class="valor">8.002</td><td class="valor">10%</td><td class="valor">0</td></tr><tr><th scope="row">ViX (Android TV)</th><td class="valor">7.261</td><td class="valor">9%</td><td class="valor">0</td></tr><tr><th scope="row">ViX (Samsung)</th><td class="valor">6.400</td><td class="valor">8%</td><td class="valor">0</td></tr><tr><th scope="row">ViX (Roku)</th><td class="valor">6.176</td><td class="valor">8%</td><td class="valor">0</td></tr><tr><th scope="row">caracoltv.com</th><td class="valor">4.618</td><td class="valor">6%</td><td class="valor">35</td></tr><tr><th scope="row">ViX (LG)</th><td class="valor">3.383</td><td class="valor">4%</td><td class="valor">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <p class="mb-nota pg-nota">Canal RCN en Android TV es la mitad de la entrega. <b>caracoltv.com</b> es inventario web, no televisión conectada: 4.618 impresiones (6%) y 35 de los 40 clics de todo el canal.</p>
+      </div>
+      
+      </div>
+    </section>
+
+    <section class="ad-sec" id="radio" aria-labelledby="t-radio">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-radio">Radio digital</h2>
+        <p>25.584 impresiones. Las 21.746 escuchas del reporte <b>no son una medición</b>: dividir escuchas entre impresiones da entre 84,9% y 85,0% todos los días, es decir, el 85% del plan aplicado a cada jornada.</p>
+      </header>
+
+      <dl class="ad-kpis">
+        <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">De las impresiones, en Blu Radio</dt><dd class="ad-kpi__n">63%</dd><span class="ad-kpi__m">la única emisora con clics</span></div><div class="ad-kpi"><dt class="ad-kpi__l">De las impresiones, a mujeres</dt><dd class="ad-kpi__n">75%</dd><span class="ad-kpi__m">en display: 68% hombres</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Clics en todo el canal</dt><dd class="ad-kpi__n">10</dd><span class="ad-kpi__m">sobre 25.584 impresiones</span></div>
+      </dl>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Radio digital por emisora, de mayor a menor impresiones.">
+        <table>
+          <caption>Radio digital por emisora, de mayor a menor impresiones.</caption>
+          <thead><tr><th scope="col">Emisora</th><th scope="col" class="valor">Impresiones</th><th scope="col" class="valor">Participación</th><th scope="col" class="valor">Clics</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">bluradio.com</th><td class="valor">16.184</td><td class="valor">63%</td><td class="valor">10</td></tr><tr><th scope="row">olimpicastereo.com.co</th><td class="valor">5.132</td><td class="valor">20%</td><td class="valor">0</td></tr><tr><th scope="row">mixradio.co</th><td class="valor">1.449</td><td class="valor">6%</td><td class="valor">0</td></tr><tr><th scope="row">radiotiempo.co</th><td class="valor">1.297</td><td class="valor">5%</td><td class="valor">0</td></tr><tr><th scope="row">lareinadelvallenato.co</th><td class="valor">566</td><td class="valor">2%</td><td class="valor">0</td></tr><tr><th scope="row">vibra.co</th><td class="valor">346</td><td class="valor">1%</td><td class="valor">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+
+      <div class="mb-pieza">
+        <div class="ad-grid pg-duo"><div><p class="pg-eje"><b>Locución</b><span>impresiones</span></p><figure class="ad-figura mb-barras mb-crece">
+        <div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Voz 1</span><b class="mb-barra-val">6.528</b></div>
+          <div class="ad-barra" style="--v:100.0%" role="img" aria-label="Voz 1: 6.528"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Voz 2</span><b class="mb-barra-val">6.217</b></div>
+          <div class="ad-barra" style="--v:95.2%" role="img" aria-label="Voz 2: 6.217"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Voz 3</span><b class="mb-barra-val">6.359</b></div>
+          <div class="ad-barra" style="--v:97.4%" role="img" aria-label="Voz 3: 6.359"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Voz 4</span><b class="mb-barra-val">6.480</b></div>
+          <div class="ad-barra" style="--v:99.3%" role="img" aria-label="Voz 4: 6.480"><span></span></div>
+          
+        </div>
+        
+      </figure></div><div class="pg-notas"><p class="mb-nota">Las cuatro locuciones recibieron casi la misma exposición, así que todavía no hay evidencia de cuál funciona mejor. Con 10 clics en total tampoco se puede leer por clics.</p><p class="mb-nota">Para un producto de apuestas conviene revisar por qué el audio llega mayoritariamente a mujeres y si esa segmentación responde al público objetivo.</p></div></div>
+      </div>
+      
+      </div>
+    </section>
+
+    <section class="ad-sec" id="directo" aria-labelledby="t-directo">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-directo">Más gente entrando a YaJuego</h2>
+        <p>Durante los 17 días de entrega, el tráfico directo del sitio subió +12%: de 6.616 a 7.423 sesiones por día. Directo es quien escribe la dirección, abre la app o entra desde un marcador, el tipo de visita que puede reflejar mayor recordación de la marca.</p>
+      </header>
+
+      <dl class="ad-kpis">
+        <div class="ad-kpi ad-kpi--on"><dt class="ad-kpi__l">Sesiones directas por día</dt><dd class="ad-kpi__n">7.423</dd><span class="ad-kpi__m">antes: 6.616</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Usuarios directos por día</dt><dd class="ad-kpi__n">5.973</dd><span class="ad-kpi__m">antes: 4.935 (+21%)</span></div><div class="ad-kpi"><dt class="ad-kpi__l">Visitas adicionales en el periodo</dt><dd class="ad-kpi__n">~13.724</dd><span class="ad-kpi__m">sobre el promedio de los días previos</span></div>
+      </dl>
+
+      <figure class="ad-figura mb-grafico">
+        <h3 class="mb-tit">Sesiones diarias de tráfico directo</h3><p class="mb-nota">17 días antes y 17 durante</p>
+        <ul class="ad-leyenda"><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz0" x1="2" y1="6" x2="26" y2="6"/></svg>Directo</li></ul>
+        <div class="mb-scroll" tabindex="0" role="region" aria-label="Sesiones diarias de tráfico directo"><svg class="mb-svg mb-svg--linea" viewBox="0 0 1040 300" width="1040" role="img"
+               aria-labelledby="g-directo-t">
+            <title id="g-directo-t">Sesiones diarias de tráfico directo</title>
+            <line class="mb-lg" x1="46" x2="870" y1="266.0" y2="266.0"/><text class="mb-lt" x="38" y="270.0" text-anchor="end">0</text><line class="mb-lg" x1="46" x2="870" y1="203.5" y2="203.5"/><text class="mb-lt" x="38" y="207.5" text-anchor="end">3.515</text><line class="mb-lg" x1="46" x2="870" y1="141.0" y2="141.0"/><text class="mb-lt" x="38" y="145.0" text-anchor="end">7.031</text><line class="mb-lg" x1="46" x2="870" y1="78.5" y2="78.5"/><text class="mb-lt" x="38" y="82.5" text-anchor="end">10.546</text><line class="mb-lg" x1="46" x2="870" y1="16.0" y2="16.0"/><text class="mb-lt" x="38" y="20.0" text-anchor="end">14.062</text><line class="mb-lref mb-lmarca" x1="470.5" x2="470.5" y1="16" y2="266"/><text class="mb-lt mb-lt--marca" x="478.5" y="28">Arranca la campaña</text><rect class="mb-dia" x="33.5" y="16" width="25.0" height="250"><title>17 oct · Directo: 7.701</title></rect><rect class="mb-dia" x="58.5" y="16" width="25.0" height="250"><title>18 oct · Directo: 5.077</title></rect><rect class="mb-dia" x="83.5" y="16" width="25.0" height="250"><title>19 oct · Directo: 9.917</title></rect><rect class="mb-dia" x="108.4" y="16" width="25.0" height="250"><title>20 oct · Directo: 6.415</title></rect><rect class="mb-dia" x="133.4" y="16" width="25.0" height="250"><title>21 oct · Directo: 5.558</title></rect><rect class="mb-dia" x="158.4" y="16" width="25.0" height="250"><title>22 oct · Directo: 4.789</title></rect><rect class="mb-dia" x="183.3" y="16" width="25.0" height="250"><title>23 oct · Directo: 5.042</title></rect><rect class="mb-dia" x="208.3" y="16" width="25.0" height="250"><title>24 oct · Directo: 5.328</title></rect><rect class="mb-dia" x="233.3" y="16" width="25.0" height="250"><title>25 oct · Directo: 8.592</title></rect><rect class="mb-dia" x="258.2" y="16" width="25.0" height="250"><title>26 oct · Directo: 5.297</title></rect><rect class="mb-dia" x="283.2" y="16" width="25.0" height="250"><title>27 oct · Directo: 6.381</title></rect><rect class="mb-dia" x="308.2" y="16" width="25.0" height="250"><title>28 oct · Directo: 6.606</title></rect><rect class="mb-dia" x="333.2" y="16" width="25.0" height="250"><title>29 oct · Directo: 13.020</title></rect><rect class="mb-dia" x="358.1" y="16" width="25.0" height="250"><title>30 oct · Directo: 5.978</title></rect><rect class="mb-dia" x="383.1" y="16" width="25.0" height="250"><title>31 oct · Directo: 6.118</title></rect><rect class="mb-dia" x="408.1" y="16" width="25.0" height="250"><title>1 nov · Directo: 5.593</title></rect><rect class="mb-dia" x="433.0" y="16" width="25.0" height="250"><title>2 nov · Directo: 5.059</title></rect><rect class="mb-dia" x="458.0" y="16" width="25.0" height="250"><title>3 nov · Directo: 6.114</title></rect><rect class="mb-dia" x="483.0" y="16" width="25.0" height="250"><title>4 nov · Directo: 6.229</title></rect><rect class="mb-dia" x="507.9" y="16" width="25.0" height="250"><title>5 nov · Directo: 7.282</title></rect><rect class="mb-dia" x="532.9" y="16" width="25.0" height="250"><title>6 nov · Directo: 8.601</title></rect><rect class="mb-dia" x="557.9" y="16" width="25.0" height="250"><title>7 nov · Directo: 9.816</title></rect><rect class="mb-dia" x="582.8" y="16" width="25.0" height="250"><title>8 nov · Directo: 10.022</title></rect><rect class="mb-dia" x="607.8" y="16" width="25.0" height="250"><title>9 nov · Directo: 9.321</title></rect><rect class="mb-dia" x="632.8" y="16" width="25.0" height="250"><title>10 nov · Directo: 7.186</title></rect><rect class="mb-dia" x="657.8" y="16" width="25.0" height="250"><title>11 nov · Directo: 6.176</title></rect><rect class="mb-dia" x="682.7" y="16" width="25.0" height="250"><title>12 nov · Directo: 6.073</title></rect><rect class="mb-dia" x="707.7" y="16" width="25.0" height="250"><title>13 nov · Directo: 7.871</title></rect><rect class="mb-dia" x="732.7" y="16" width="25.0" height="250"><title>14 nov · Directo: 5.892</title></rect><rect class="mb-dia" x="757.6" y="16" width="25.0" height="250"><title>15 nov · Directo: 8.913</title></rect><rect class="mb-dia" x="782.6" y="16" width="25.0" height="250"><title>16 nov · Directo: 6.039</title></rect><rect class="mb-dia" x="807.6" y="16" width="25.0" height="250"><title>17 nov · Directo: 6.857</title></rect><rect class="mb-dia" x="832.5" y="16" width="25.0" height="250"><title>18 nov · Directo: 7.248</title></rect><rect class="mb-dia" x="857.5" y="16" width="25.0" height="250"><title>19 nov · Directo: 6.555</title></rect><polyline class="mb-tz mb-tz0" points="46.0,129.1 71.0,175.7 95.9,89.7 120.9,151.9 145.9,167.2 170.8,180.9 195.8,176.4 220.8,171.3 245.8,113.2 270.7,171.8 295.7,152.6 320.7,148.6 345.6,34.5 370.6,159.7 395.6,157.2 420.5,166.6 445.5,176.1 470.5,157.3 495.5,155.3 520.4,136.5 545.4,113.1 570.4,91.5 595.3,87.8 620.3,100.3 645.3,138.2 670.2,156.2 695.2,158.0 720.2,126.1 745.2,161.2 770.1,107.5 795.1,158.6 820.1,144.1 845.0,137.1 870.0,149.5"/><circle class="mb-pt mb-pt0" cx="870.0" cy="149.5" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="153.5">Directo</text><text class="mb-lt" x="46.0" y="290" text-anchor="middle">17 oct</text><text class="mb-lt" x="145.9" y="290" text-anchor="middle">21 oct</text><text class="mb-lt" x="245.8" y="290" text-anchor="middle">25 oct</text><text class="mb-lt" x="345.6" y="290" text-anchor="middle">29 oct</text><text class="mb-lt" x="445.5" y="290" text-anchor="middle">2 nov</text><text class="mb-lt" x="545.4" y="290" text-anchor="middle">6 nov</text><text class="mb-lt" x="645.3" y="290" text-anchor="middle">10 nov</text><text class="mb-lt" x="745.2" y="290" text-anchor="middle">14 nov</text><text class="mb-lt" x="845.0" y="290" text-anchor="middle">18 nov</text>
+          </svg></div>
+        <figcaption>Con la mediana, que no depende de un día atípico, el aumento es de +20%: de 5.978 a 7.186 sesiones por día. Además, los días previos incluyen un pico de 13.020 sesiones, que sube el promedio de antes; por eso el +12% es una lectura prudente.</figcaption>
+        <details class="ad-datos">
+          <summary>Ver los datos</summary>
+          
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tabla">
+        <table>
+          
+          <thead><tr><th scope="col">Dia</th><th scope="col" class="valor">Directo</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">17 oct</th><td class="valor">7.701</td></tr><tr><th scope="row">18 oct</th><td class="valor">5.077</td></tr><tr><th scope="row">19 oct</th><td class="valor">9.917</td></tr><tr><th scope="row">20 oct</th><td class="valor">6.415</td></tr><tr><th scope="row">21 oct</th><td class="valor">5.558</td></tr><tr><th scope="row">22 oct</th><td class="valor">4.789</td></tr><tr><th scope="row">23 oct</th><td class="valor">5.042</td></tr><tr><th scope="row">24 oct</th><td class="valor">5.328</td></tr><tr><th scope="row">25 oct</th><td class="valor">8.592</td></tr><tr><th scope="row">26 oct</th><td class="valor">5.297</td></tr><tr><th scope="row">27 oct</th><td class="valor">6.381</td></tr><tr><th scope="row">28 oct</th><td class="valor">6.606</td></tr><tr><th scope="row">29 oct</th><td class="valor">13.020</td></tr><tr><th scope="row">30 oct</th><td class="valor">5.978</td></tr><tr><th scope="row">31 oct</th><td class="valor">6.118</td></tr><tr><th scope="row">1 nov</th><td class="valor">5.593</td></tr><tr><th scope="row">2 nov</th><td class="valor">5.059</td></tr><tr><th scope="row">3 nov</th><td class="valor">6.114</td></tr><tr><th scope="row">4 nov</th><td class="valor">6.229</td></tr><tr><th scope="row">5 nov</th><td class="valor">7.282</td></tr><tr><th scope="row">6 nov</th><td class="valor">8.601</td></tr><tr><th scope="row">7 nov</th><td class="valor">9.816</td></tr><tr><th scope="row">8 nov</th><td class="valor">10.022</td></tr><tr><th scope="row">9 nov</th><td class="valor">9.321</td></tr><tr><th scope="row">10 nov</th><td class="valor">7.186</td></tr><tr><th scope="row">11 nov</th><td class="valor">6.176</td></tr><tr><th scope="row">12 nov</th><td class="valor">6.073</td></tr><tr><th scope="row">13 nov</th><td class="valor">7.871</td></tr><tr><th scope="row">14 nov</th><td class="valor">5.892</td></tr><tr><th scope="row">15 nov</th><td class="valor">8.913</td></tr><tr><th scope="row">16 nov</th><td class="valor">6.039</td></tr><tr><th scope="row">17 nov</th><td class="valor">6.857</td></tr><tr><th scope="row">18 nov</th><td class="valor">7.248</td></tr><tr><th scope="row">19 nov</th><td class="valor">6.555</td></tr>
+          </tbody>
+        </table>
+      </div>
+        </details>
+      </figure>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Sesiones diarias del sitio antes y durante la campaña (17 oct a 2 nov contra 3 a 19 nov).">
+        <table>
+          <caption>Sesiones diarias del sitio antes y durante la campaña (17 oct a 2 nov contra 3 a 19 nov).</caption>
+          <thead><tr><th scope="col">Canal del sitio</th><th scope="col" class="valor">Antes (17 días)</th><th scope="col" class="valor">Durante (17 días)</th><th scope="col" class="valor">Cambio</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Búsqueda orgánica de Google</th><td class="valor">8.440 por día</td><td class="valor">8.317 por día</td><td class="valor">-1%</td></tr><tr><th scope="row">Tráfico directo</th><td class="valor">6.616 por día</td><td class="valor">7.423 por día</td><td class="valor">+12%</td></tr><tr><th scope="row">Búsqueda de marca en Google Ads</th><td class="valor">739 por día</td><td class="valor">524 por día</td><td class="valor">-29%</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <p class="mb-nota pg-nota">Es una comparación, no una prueba: en esas semanas hubo otras campañas activas y el sitio también cambia con la temporada y los partidos. La búsqueda orgánica quedó plana y la de marca pagada bajó; el crecimiento está en el directo. Para atribuirlo a la programática conviene repetir la lectura al cierre y, a futuro, planear un grupo de control.</p>
+      </div>
+      
+      </div>
+    </section>
+
+    <section class="ad-sec" id="analytics" aria-labelledby="t-analytics">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-analytics">Del clic al sitio, según Google Analytics</h2>
+        <p>GA4 vio llegar 211 sesiones desde la programática contra 6.446 clics reportados por DV360.</p>
+      </header>
+
+      <figure class="ad-figura mb-grafico">
+        <h3 class="mb-tit">Display premium, por día, en la misma escala</h3>
+        <ul class="ad-leyenda"><li><i class="mb-c-sumi"></i>Clics en DV360</li><li><i class="mb-c-tenue"></i>Sesiones en GA4</li></ul>
+        <div class="mb-scroll" tabindex="0" role="region" aria-label="Display premium, por día, en la misma escala"><svg class="mb-svg" viewBox="0 0 1040 300" width="1040" role="img" aria-labelledby="pares-t"><title id="pares-t">Display premium, por día, en la misma escala</title><line class="mb-lg" x1="56" y1="266.0" x2="1024" y2="266.0"/><text class="mb-lt" x="48" y="270.0" text-anchor="end">0</text><line class="mb-lg" x1="56" y1="203.0" x2="1024" y2="203.0"/><text class="mb-lt" x="48" y="207.0" text-anchor="end">155</text><line class="mb-lg" x1="56" y1="140.0" x2="1024" y2="140.0"/><text class="mb-lt" x="48" y="144.0" text-anchor="end">310</text><line class="mb-lg" x1="56" y1="77.0" x2="1024" y2="77.0"/><text class="mb-lt" x="48" y="81.0" text-anchor="end">465</text><line class="mb-lg" x1="56" y1="14.0" x2="1024" y2="14.0"/><text class="mb-lt" x="48" y="18.0" text-anchor="end">620</text><rect class="pg-pa" x="64.1" y="261.9" width="19.4" height="4.1"><title>3 nov: 10 Clics en DV360</title></rect><rect class="pg-pb" x="85.5" y="261.5" width="19.4" height="4.5"><title>3 nov: 11 Sesiones en GA4</title></rect><text class="mb-lt" x="84.5" y="290" text-anchor="middle">3 nov</text><rect class="pg-pa" x="121.1" y="36.9" width="19.4" height="229.1"><title>4 nov: 564 Clics en DV360</title></rect><rect class="pg-pb" x="142.4" y="265.2" width="19.4" height="1.5"><title>4 nov: 2 Sesiones en GA4</title></rect><text class="mb-lt" x="141.4" y="290" text-anchor="middle">4 nov</text><rect class="pg-pa" x="178.0" y="62.9" width="19.4" height="203.1"><title>5 nov: 500 Clics en DV360</title></rect><rect class="pg-pb" x="199.4" y="257.1" width="19.4" height="8.9"><title>5 nov: 22 Sesiones en GA4</title></rect><text class="mb-lt" x="198.4" y="290" text-anchor="middle">5 nov</text><rect class="pg-pa" x="234.9" y="86.9" width="19.4" height="179.1"><title>6 nov: 441 Clics en DV360</title></rect><rect class="pg-pb" x="256.3" y="260.7" width="19.4" height="5.3"><title>6 nov: 13 Sesiones en GA4</title></rect><text class="mb-lt" x="255.3" y="290" text-anchor="middle">6 nov</text><rect class="pg-pa" x="291.9" y="116.5" width="19.4" height="149.5"><title>7 nov: 368 Clics en DV360</title></rect><rect class="pg-pb" x="313.2" y="258.3" width="19.4" height="7.7"><title>7 nov: 19 Sesiones en GA4</title></rect><text class="mb-lt" x="312.2" y="290" text-anchor="middle">7 nov</text><rect class="pg-pa" x="348.8" y="114.5" width="19.4" height="151.5"><title>8 nov: 373 Clics en DV360</title></rect><rect class="pg-pb" x="370.2" y="260.7" width="19.4" height="5.3"><title>8 nov: 13 Sesiones en GA4</title></rect><text class="mb-lt" x="369.2" y="290" text-anchor="middle">8 nov</text><rect class="pg-pa" x="405.8" y="72.2" width="19.4" height="193.8"><title>9 nov: 477 Clics en DV360</title></rect><rect class="pg-pb" x="427.1" y="261.5" width="19.4" height="4.5"><title>9 nov: 11 Sesiones en GA4</title></rect><text class="mb-lt" x="426.1" y="290" text-anchor="middle">9 nov</text><rect class="pg-pa" x="462.7" y="97.8" width="19.4" height="168.2"><title>10 nov: 414 Clics en DV360</title></rect><rect class="pg-pb" x="484.1" y="261.5" width="19.4" height="4.5"><title>10 nov: 11 Sesiones en GA4</title></rect><text class="mb-lt" x="483.1" y="290" text-anchor="middle">10 nov</text><rect class="pg-pa" x="519.6" y="113.7" width="19.4" height="152.3"><title>11 nov: 375 Clics en DV360</title></rect><rect class="pg-pb" x="541.0" y="260.7" width="19.4" height="5.3"><title>11 nov: 13 Sesiones en GA4</title></rect><text class="mb-lt" x="540.0" y="290" text-anchor="middle">11 nov</text><rect class="pg-pa" x="576.6" y="119.8" width="19.4" height="146.2"><title>12 nov: 360 Clics en DV360</title></rect><rect class="pg-pb" x="597.9" y="255.8" width="19.4" height="10.2"><title>12 nov: 25 Sesiones en GA4</title></rect><text class="mb-lt" x="596.9" y="290" text-anchor="middle">12 nov</text><rect class="pg-pa" x="633.5" y="131.1" width="19.4" height="134.9"><title>13 nov: 332 Clics en DV360</title></rect><rect class="pg-pb" x="654.9" y="262.3" width="19.4" height="3.7"><title>13 nov: 9 Sesiones en GA4</title></rect><text class="mb-lt" x="653.9" y="290" text-anchor="middle">13 nov</text><rect class="pg-pa" x="690.5" y="124.6" width="19.4" height="141.4"><title>14 nov: 348 Clics en DV360</title></rect><rect class="pg-pb" x="711.8" y="258.3" width="19.4" height="7.7"><title>14 nov: 19 Sesiones en GA4</title></rect><text class="mb-lt" x="710.8" y="290" text-anchor="middle">14 nov</text><rect class="pg-pa" x="747.4" y="101.1" width="19.4" height="164.9"><title>15 nov: 406 Clics en DV360</title></rect><rect class="pg-pb" x="768.8" y="261.9" width="19.4" height="4.1"><title>15 nov: 10 Sesiones en GA4</title></rect><text class="mb-lt" x="767.8" y="290" text-anchor="middle">15 nov</text><rect class="pg-pa" x="804.3" y="103.1" width="19.4" height="162.9"><title>16 nov: 401 Clics en DV360</title></rect><rect class="pg-pb" x="825.7" y="264.4" width="19.4" height="1.6"><title>16 nov: 4 Sesiones en GA4</title></rect><text class="mb-lt" x="824.7" y="290" text-anchor="middle">16 nov</text><rect class="pg-pa" x="861.3" y="113.3" width="19.4" height="152.7"><title>17 nov: 376 Clics en DV360</title></rect><rect class="pg-pb" x="882.6" y="262.3" width="19.4" height="3.7"><title>17 nov: 9 Sesiones en GA4</title></rect><text class="mb-lt" x="881.6" y="290" text-anchor="middle">17 nov</text><rect class="pg-pa" x="918.2" y="136.4" width="19.4" height="129.6"><title>18 nov: 319 Clics en DV360</title></rect><rect class="pg-pb" x="939.6" y="263.2" width="19.4" height="2.8"><title>18 nov: 7 Sesiones en GA4</title></rect><text class="mb-lt" x="938.6" y="290" text-anchor="middle">18 nov</text><rect class="pg-pa" x="975.2" y="131.1" width="19.4" height="134.9"><title>19 nov: 332 Clics en DV360</title></rect><rect class="pg-pb" x="996.5" y="264.0" width="19.4" height="2.0"><title>19 nov: 5 Sesiones en GA4</title></rect><text class="mb-lt" x="995.5" y="290" text-anchor="middle">19 nov</text></svg></div>
+        <figcaption>Hubo entre 319 y 564 clics diarios en DV360 y entre 2 y 25 sesiones en GA4.</figcaption>
+        <details class="ad-datos">
+          <summary>Ver los datos</summary>
+          
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tabla">
+        <table>
+          
+          <thead><tr><th scope="col">Día</th><th scope="col" class="valor">Clics en DV360</th><th scope="col" class="valor">Sesiones en GA4</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">3 nov</th><td class="valor">10</td><td class="valor">11</td></tr><tr><th scope="row">4 nov</th><td class="valor">564</td><td class="valor">2</td></tr><tr><th scope="row">5 nov</th><td class="valor">500</td><td class="valor">22</td></tr><tr><th scope="row">6 nov</th><td class="valor">441</td><td class="valor">13</td></tr><tr><th scope="row">7 nov</th><td class="valor">368</td><td class="valor">19</td></tr><tr><th scope="row">8 nov</th><td class="valor">373</td><td class="valor">13</td></tr><tr><th scope="row">9 nov</th><td class="valor">477</td><td class="valor">11</td></tr><tr><th scope="row">10 nov</th><td class="valor">414</td><td class="valor">11</td></tr><tr><th scope="row">11 nov</th><td class="valor">375</td><td class="valor">13</td></tr><tr><th scope="row">12 nov</th><td class="valor">360</td><td class="valor">25</td></tr><tr><th scope="row">13 nov</th><td class="valor">332</td><td class="valor">9</td></tr><tr><th scope="row">14 nov</th><td class="valor">348</td><td class="valor">19</td></tr><tr><th scope="row">15 nov</th><td class="valor">406</td><td class="valor">10</td></tr><tr><th scope="row">16 nov</th><td class="valor">401</td><td class="valor">4</td></tr><tr><th scope="row">17 nov</th><td class="valor">376</td><td class="valor">9</td></tr><tr><th scope="row">18 nov</th><td class="valor">319</td><td class="valor">7</td></tr><tr><th scope="row">19 nov</th><td class="valor">332</td><td class="valor">5</td></tr>
+          </tbody>
+        </table>
+      </div>
+        </details>
+      </figure>
+
+      <div class="mb-pieza">
+        
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Del clic a la sesión, del 3 al 19 de noviembre. La columna de registros no es confiable: el evento falla desde el 4 de noviembre.">
+        <table>
+          <caption>Del clic a la sesión, del 3 al 19 de noviembre. La columna de registros no es confiable: el evento falla desde el 4 de noviembre.</caption>
+          <thead><tr><th scope="col">Canal</th><th scope="col" class="valor">Clics en DV360</th><th scope="col" class="valor">Sesiones en GA4</th><th scope="col" class="valor">Sesiones por clic</th><th scope="col" class="valor">Con interacción</th><th scope="col" class="valor">Registros medidos</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Display premium</th><td class="valor">6.396</td><td class="valor">202</td><td class="valor">3,2%</td><td class="valor">18</td><td class="valor">no medible</td></tr><tr><th scope="row">CTV</th><td class="valor">40</td><td class="valor">8</td><td class="valor">20,0%</td><td class="valor">4</td><td class="valor">no medible</td></tr><tr><th scope="row">Radio digital</th><td class="valor">10</td><td class="valor">1</td><td class="valor">10,0%</td><td class="valor">1</td><td class="valor">no medible</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <p class="mb-nota pg-nota">Una diferencia moderada entre clics y sesiones es normal: GA4 no cuenta a quien cierra la página antes de que cargue la etiqueta. Perder 97% no lo es.</p>
+      </div>
+
+      <div class="ad-grid pg-duo"><div class="ad-lectura">
+        <h3 class="ad-lectura__k mb-lect-t">Calidad de las sesiones de display</h3>
         <p>9% de las 202 sesiones tuvo interacción real, y la tasa de rebote fue de 91%. Las sesiones programáticas solo dispararon la primera visita y la vista de página, pero esto no prueba que no se registren: el evento de registro está roto para todas las fuentes (ver más abajo).</p>
+      </div><div><div><p class="pg-eje"><b>País de las sesiones de display</b><span>sesiones</span></p><figure class="ad-figura mb-barras mb-crece">
+        <div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Colombia</span><b class="mb-barra-val">162</b></div>
+          <div class="ad-barra" style="--v:100.0%" role="img" aria-label="Colombia: 162"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">United States</span><b class="mb-barra-val">29</b></div>
+          <div class="ad-barra" style="--v:17.9%" role="img" aria-label="United States: 29"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Canada</span><b class="mb-barra-val">6</b></div>
+          <div class="ad-barra" style="--v:3.7%" role="img" aria-label="Canada: 6"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Peru</span><b class="mb-barra-val">3</b></div>
+          <div class="ad-barra" style="--v:1.9%" role="img" aria-label="Peru: 3"><span></span></div>
+          
+        </div><div class="mb-barra">
+          <div class="mb-barra-cab"><span class="mb-barra-nombre">Mexico</span><b class="mb-barra-val">1</b></div>
+          <div class="ad-barra" style="--v:0.6%" role="img" aria-label="Mexico: 1"><span></span></div>
+          
+        </div>
+        
+      </figure></div><p class="mb-nota pg-nota">29 sesiones llegan de Estados Unidos, ninguna con interacción. Que 20% venga de fuera de Colombia en una compra segmentada al país es otra señal que vale la pena revisar con DV360.</p></div></div>
+
+      <div class="mb-pieza">
+        <h3 class="mb-tit">Etiquetas por corregir en CTV y radio</h3><p class="mb-nota pg-romper">La URL de destino de CTV y radio llega con «uutm_source=programmatic_thebrand&amp;utm_campaignawareness=»: lleva una «u» de más y le falta el «=» antes de «awareness». GA4 no reconoce esos parámetros y el tráfico cae en «imasdk.googleapis.com», «(not set)» o «(direct)». Las 201 sesiones de display llegan sin parámetros en la URL: se atribuyen a la programática por otra vía que conviene confirmar con quien administra el sitio y GTM.</p>
+        <p class="mb-nota pg-nota">9 sesiones de la ventana llegaron con la etiqueta mal escrita. Mientras no se corrija, no hay forma confiable de medir CTV y radio en el sitio.</p>
       </div>
-      <div>
-        <div class="axis"><span>País de las sesiones de display</span><span>sesiones</span></div>
-        <div class="share"><div class="share-row grow"><span>Colombia</span><div class="share-bar"><i style="width:100.0%"></i></div><b>162</b></div><div class="share-row grow"><span>United States</span><div class="share-bar"><i style="width:17.9%"></i></div><b>29</b></div><div class="share-row grow"><span>Canada</span><div class="share-bar"><i style="width:3.7%"></i></div><b>6</b></div><div class="share-row grow"><span>Peru</span><div class="share-bar"><i style="width:1.9%"></i></div><b>3</b></div><div class="share-row grow"><span>Mexico</span><div class="share-bar"><i style="width:0.6%"></i></div><b>1</b></div></div>
-        <p class="note" style="margin-top:var(--s-4)">29 sesiones llegan de Estados Unidos, ninguna con interacción. Que 20% venga de fuera de Colombia en una compra segmentada al país es otra señal que vale la pena revisar con DV360.</p>
+
+      <div class="mb-pieza">
+        <h3 class="mb-tit" id="registros">El evento de registro necesita atención desde el 4 de noviembre</h3><p class="mb-nota">Mientras las sesiones, el ingreso a cuentas y las compras siguen en sus niveles de siempre, el evento «registration-complete» pasó de unos 429 por día a unos 21, y los pasos intermedios del formulario dejaron de registrarse. Pasó el mismo día en que arrancó la entrega de la programática, pero no es culpa de la campaña: afecta a todas las fuentes.</p>
       </div>
-    </div>
 
-    <div class="titulo-seccion" style="margin-top:var(--s-6)">
-      <h2>Etiquetas por corregir en CTV y radio</h2>
-      <p style="overflow-wrap:anywhere">La URL de destino de CTV y radio llega con «uutm_source=programmatic_thebrand&amp;utm_campaignawareness=»: lleva una «u» de más y le falta el «=» antes de «awareness». GA4 no reconoce esos parámetros y el tráfico cae en «imasdk.googleapis.com», «(not set)» o «(direct)». Las 201 sesiones de display llegan sin parámetros en la URL: se atribuyen a la programática por otra vía que conviene confirmar con quien administra el sitio y GTM.</p>
-    </div>
-    <p class="note" style="margin-top:var(--s-4)">9 sesiones de la ventana llegaron con la etiqueta mal escrita. Mientras no se corrija, no hay forma confiable de medir CTV y radio en el sitio.</p>
+      <figure class="ad-figura mb-grafico">
+        <h3 class="mb-tit">Registros completos por día, todo el sitio</h3><p class="mb-nota">según GA4</p>
+        <ul class="ad-leyenda"><li><svg class="mb-muestra" viewBox="0 0 28 12" aria-hidden="true"><line class="mb-tz mb-tz0" x1="2" y1="6" x2="26" y2="6"/></svg>Registros</li></ul>
+        <div class="mb-scroll" tabindex="0" role="region" aria-label="Registros completos por día, todo el sitio"><svg class="mb-svg mb-svg--linea" viewBox="0 0 1040 300" width="1040" role="img"
+               aria-labelledby="g-reg-t">
+            <title id="g-reg-t">Registros completos por día, todo el sitio</title>
+            <line class="mb-lg" x1="46" x2="870" y1="266.0" y2="266.0"/><text class="mb-lt" x="38" y="270.0" text-anchor="end">0</text><line class="mb-lg" x1="46" x2="870" y1="203.5" y2="203.5"/><text class="mb-lt" x="38" y="207.5" text-anchor="end">132</text><line class="mb-lg" x1="46" x2="870" y1="141.0" y2="141.0"/><text class="mb-lt" x="38" y="145.0" text-anchor="end">264</text><line class="mb-lg" x1="46" x2="870" y1="78.5" y2="78.5"/><text class="mb-lt" x="38" y="82.5" text-anchor="end">395</text><line class="mb-lg" x1="46" x2="870" y1="16.0" y2="16.0"/><text class="mb-lt" x="38" y="20.0" text-anchor="end">527</text><rect class="mb-dia" x="32.3" y="16" width="27.5" height="250"><title>20 oct · Registros: 488</title></rect><rect class="mb-dia" x="59.7" y="16" width="27.5" height="250"><title>21 oct · Registros: 478</title></rect><rect class="mb-dia" x="87.2" y="16" width="27.5" height="250"><title>22 oct · Registros: 402</title></rect><rect class="mb-dia" x="114.7" y="16" width="27.5" height="250"><title>23 oct · Registros: 398</title></rect><rect class="mb-dia" x="142.1" y="16" width="27.5" height="250"><title>24 oct · Registros: 425</title></rect><rect class="mb-dia" x="169.6" y="16" width="27.5" height="250"><title>25 oct · Registros: 475</title></rect><rect class="mb-dia" x="197.1" y="16" width="27.5" height="250"><title>26 oct · Registros: 470</title></rect><rect class="mb-dia" x="224.5" y="16" width="27.5" height="250"><title>27 oct · Registros: 428</title></rect><rect class="mb-dia" x="252.0" y="16" width="27.5" height="250"><title>28 oct · Registros: 458</title></rect><rect class="mb-dia" x="279.5" y="16" width="27.5" height="250"><title>29 oct · Registros: 435</title></rect><rect class="mb-dia" x="306.9" y="16" width="27.5" height="250"><title>30 oct · Registros: 358</title></rect><rect class="mb-dia" x="334.4" y="16" width="27.5" height="250"><title>31 oct · Registros: 320</title></rect><rect class="mb-dia" x="361.9" y="16" width="27.5" height="250"><title>1 nov · Registros: 399</title></rect><rect class="mb-dia" x="389.3" y="16" width="27.5" height="250"><title>2 nov · Registros: 432</title></rect><rect class="mb-dia" x="416.8" y="16" width="27.5" height="250"><title>3 nov · Registros: 464</title></rect><rect class="mb-dia" x="444.3" y="16" width="27.5" height="250"><title>4 nov · Registros: 184</title></rect><rect class="mb-dia" x="471.7" y="16" width="27.5" height="250"><title>5 nov · Registros: 18</title></rect><rect class="mb-dia" x="499.2" y="16" width="27.5" height="250"><title>6 nov · Registros: 26</title></rect><rect class="mb-dia" x="526.7" y="16" width="27.5" height="250"><title>7 nov · Registros: 28</title></rect><rect class="mb-dia" x="554.1" y="16" width="27.5" height="250"><title>8 nov · Registros: 7</title></rect><rect class="mb-dia" x="581.6" y="16" width="27.5" height="250"><title>9 nov · Registros: 31</title></rect><rect class="mb-dia" x="609.1" y="16" width="27.5" height="250"><title>10 nov · Registros: 20</title></rect><rect class="mb-dia" x="636.5" y="16" width="27.5" height="250"><title>11 nov · Registros: 28</title></rect><rect class="mb-dia" x="664.0" y="16" width="27.5" height="250"><title>12 nov · Registros: 13</title></rect><rect class="mb-dia" x="691.5" y="16" width="27.5" height="250"><title>13 nov · Registros: 24</title></rect><rect class="mb-dia" x="718.9" y="16" width="27.5" height="250"><title>14 nov · Registros: 10</title></rect><rect class="mb-dia" x="746.4" y="16" width="27.5" height="250"><title>15 nov · Registros: 7</title></rect><rect class="mb-dia" x="773.9" y="16" width="27.5" height="250"><title>16 nov · Registros: 16</title></rect><rect class="mb-dia" x="801.3" y="16" width="27.5" height="250"><title>17 nov · Registros: 29</title></rect><rect class="mb-dia" x="828.8" y="16" width="27.5" height="250"><title>18 nov · Registros: 19</title></rect><rect class="mb-dia" x="856.3" y="16" width="27.5" height="250"><title>19 nov · Registros: 46</title></rect><polyline class="mb-tz mb-tz0" points="46.0,34.5 73.5,39.3 100.9,75.3 128.4,77.2 155.9,64.4 183.3,40.7 210.8,43.1 238.3,63.0 265.7,48.7 293.2,59.7 320.7,96.2 348.1,114.2 375.6,76.7 403.1,61.1 430.5,45.9 458.0,178.7 485.5,257.5 512.9,253.7 540.4,252.7 567.9,262.7 595.3,251.3 622.8,256.5 650.3,252.7 677.7,259.8 705.2,254.6 732.7,261.3 760.1,262.7 787.6,258.4 815.1,252.2 842.5,257.0 870.0,244.2"/><circle class="mb-pt mb-pt0" cx="870.0" cy="244.2" r="5"/><text class="mb-lt mb-lt--nom" x="882.0" y="248.2">Registros</text><text class="mb-lt" x="46.0" y="290" text-anchor="middle">20 oct</text><text class="mb-lt" x="128.4" y="290" text-anchor="middle">23 oct</text><text class="mb-lt" x="210.8" y="290" text-anchor="middle">26 oct</text><text class="mb-lt" x="293.2" y="290" text-anchor="middle">29 oct</text><text class="mb-lt" x="375.6" y="290" text-anchor="middle">1 nov</text><text class="mb-lt" x="458.0" y="290" text-anchor="middle">4 nov</text><text class="mb-lt" x="540.4" y="290" text-anchor="middle">7 nov</text><text class="mb-lt" x="622.8" y="290" text-anchor="middle">10 nov</text><text class="mb-lt" x="705.2" y="290" text-anchor="middle">13 nov</text><text class="mb-lt" x="787.6" y="290" text-anchor="middle">16 nov</text><text class="mb-lt" x="870.0" y="290" text-anchor="middle">19 nov</text>
+          </svg></div>
+        <figcaption>La cuenta de Google Ads usa ese mismo evento como su conversión principal. Si la caída es de medición y no de comportamiento, esa cuenta optimiza con datos incompletos desde hace dos semanas. Hay que confirmar con quien administra el sitio qué cambió el 4 de noviembre.</figcaption>
+        <details class="ad-datos">
+          <summary>Ver los datos</summary>
+          
+      <div class="ad-tabla" tabindex="0" role="region" aria-label="Tabla">
+        <table>
+          
+          <thead><tr><th scope="col">Dia</th><th scope="col" class="valor">Registros</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">20 oct</th><td class="valor">488</td></tr><tr><th scope="row">21 oct</th><td class="valor">478</td></tr><tr><th scope="row">22 oct</th><td class="valor">402</td></tr><tr><th scope="row">23 oct</th><td class="valor">398</td></tr><tr><th scope="row">24 oct</th><td class="valor">425</td></tr><tr><th scope="row">25 oct</th><td class="valor">475</td></tr><tr><th scope="row">26 oct</th><td class="valor">470</td></tr><tr><th scope="row">27 oct</th><td class="valor">428</td></tr><tr><th scope="row">28 oct</th><td class="valor">458</td></tr><tr><th scope="row">29 oct</th><td class="valor">435</td></tr><tr><th scope="row">30 oct</th><td class="valor">358</td></tr><tr><th scope="row">31 oct</th><td class="valor">320</td></tr><tr><th scope="row">1 nov</th><td class="valor">399</td></tr><tr><th scope="row">2 nov</th><td class="valor">432</td></tr><tr><th scope="row">3 nov</th><td class="valor">464</td></tr><tr><th scope="row">4 nov</th><td class="valor">184</td></tr><tr><th scope="row">5 nov</th><td class="valor">18</td></tr><tr><th scope="row">6 nov</th><td class="valor">26</td></tr><tr><th scope="row">7 nov</th><td class="valor">28</td></tr><tr><th scope="row">8 nov</th><td class="valor">7</td></tr><tr><th scope="row">9 nov</th><td class="valor">31</td></tr><tr><th scope="row">10 nov</th><td class="valor">20</td></tr><tr><th scope="row">11 nov</th><td class="valor">28</td></tr><tr><th scope="row">12 nov</th><td class="valor">13</td></tr><tr><th scope="row">13 nov</th><td class="valor">24</td></tr><tr><th scope="row">14 nov</th><td class="valor">10</td></tr><tr><th scope="row">15 nov</th><td class="valor">7</td></tr><tr><th scope="row">16 nov</th><td class="valor">16</td></tr><tr><th scope="row">17 nov</th><td class="valor">29</td></tr><tr><th scope="row">18 nov</th><td class="valor">19</td></tr><tr><th scope="row">19 nov</th><td class="valor">46</td></tr>
+          </tbody>
+        </table>
+      </div>
+        </details>
+      </figure>
+      
+      </div>
+    </section>
 
-    <div class="titulo-seccion" style="margin-top:var(--s-6)" id="registros">
-      <h2>El evento de registro necesita atención desde el 4 de noviembre</h2>
-      <p>Mientras las sesiones, el ingreso a cuentas y las compras siguen en sus niveles de siempre, el evento «registration-complete» pasó de unos 429 por día a unos 21, y los pasos intermedios del formulario dejaron de registrarse. Pasó el mismo día en que arrancó la entrega de la programática, pero no es culpa de la campaña: afecta a todas las fuentes.</p>
-    </div>
-    <figure class="chart" style="margin-top:var(--s-5)">
-      <div class="chart-top"><h3>Registros completos por día, todo el sitio</h3><span class="chart-hint">según GA4</span></div>
-      <svg viewBox="0 0 860 240" role="img" aria-label="Eventos registration-complete por día en todo el sitio" style="width:100%;height:auto;display:block"><line x1="56" y1="210.0" x2="740" y2="210.0" stroke="var(--rule)"/><text x="48" y="214.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">0</text><line x1="56" y1="161.0" x2="740" y2="161.0" stroke="var(--rule)"/><text x="48" y="165.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">132</text><line x1="56" y1="112.0" x2="740" y2="112.0" stroke="var(--rule)"/><text x="48" y="116.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">264</text><line x1="56" y1="63.0" x2="740" y2="63.0" stroke="var(--rule)"/><text x="48" y="67.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">395</text><line x1="56" y1="14.0" x2="740" y2="14.0" stroke="var(--rule)"/><text x="48" y="18.0" text-anchor="end" font-size="11" fill="var(--fg-muted)">527</text><text x="56.0" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">20 oct</text><text x="124.4" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">23 oct</text><text x="192.8" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">26 oct</text><text x="261.2" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">29 oct</text><text x="329.6" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">1 nov</text><text x="398.0" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">4 nov</text><text x="466.4" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">7 nov</text><text x="534.8" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">10 nov</text><text x="603.2" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">13 nov</text><text x="671.6" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">16 nov</text><text x="740.0" y="232" text-anchor="middle" font-size="11" fill="var(--fg-muted)">19 nov</text><polyline points="56.0,28.5 78.8,32.2 101.6,60.5 124.4,62.0 147.2,51.9 170.0,33.4 192.8,35.2 215.6,50.8 238.4,39.7 261.2,48.2 284.0,76.9 306.8,91.0 329.6,61.6 352.4,49.3 375.2,37.4 398.0,141.6 420.8,203.3 443.6,200.3 466.4,199.6 489.2,207.4 512.0,198.5 534.8,202.6 557.6,199.6 580.4,205.2 603.2,201.1 626.0,206.3 648.8,207.4 671.6,204.0 694.4,199.2 717.2,202.9 740.0,192.9" fill="none" stroke="var(--serie-1)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="740.0" cy="192.9" r="4" fill="var(--serie-1)"/><text x="748" y="196.9" font-size="12" font-weight="700" fill="var(--fg)">Registros</text></svg>
-      <figcaption class="chart-foot">La cuenta de Google Ads usa ese mismo evento como su conversión principal. Si la caída es de medición y no de comportamiento, esa cuenta optimiza con datos incompletos desde hace dos semanas. Hay que confirmar con quien administra el sitio qué cambió el 4 de noviembre.</figcaption>
-    </figure>
-  </section>
+    <section class="ad-sec" id="acciones" aria-labelledby="t-acciones">
+      <div class="ad-wrap">
+      <header class="ad-sec-cab">
+        
+        <h2 id="t-acciones">Próximos pasos</h2>
+        <p>En orden de prioridad. Las tres primeras casi no cuestan y condicionan todo lo demás.</p>
+      </header>
 
-  <section class="band wrap" id="acciones">
-    <div class="titulo-seccion">
-      <h2>Próximos pasos</h2>
-      <p>En orden de prioridad. Las tres primeras casi no cuestan y condicionan todo lo demás.</p>
-    </div>
-    <ol class="orders">
-      <li>
-        <div><h3>Reparar la medición de registros</h3><p class="note" style="margin-top:var(--s-4)">Hoy</p></div>
-        <div><p>Revisar con quien administra el sitio y GTM qué cambió el 4 de noviembre en el formulario de registro y restablecer los eventos de los pasos 1, 2, 3 y de registro completo. Sin eso no se puede evaluar ninguna campaña, y la de Google Ads optimiza con datos incompletos.</p></div>
-      </li>
-      <li>
-        <div><h3>Corregir las UTM de CTV y radio</h3><p class="note" style="margin-top:var(--s-4)">Esta semana</p></div>
-        <div><p>Cambiar «uutm_source» por «utm_source» y agregar el «=» a «utm_campaign=awareness» en las URL de destino de DV360. Sin esto, el efecto de CTV y radio en el sitio es invisible.</p></div>
-      </li>
-      <li>
-        <div><h3>Auditar los clics de display</h3><p class="note" style="margin-top:var(--s-4)">Antes del 25 de noviembre</p></div>
-        <div><p>Pedir a DV360 el reporte de tráfico inválido y la verificación de visibilidad, y comprobar que la etiqueta de GA4 cargue en la página de destino de móvil. Si el tráfico resulta inválido, solicitar la compensación de los clics que no corresponden a personas.</p></div>
-      </li>
-      <li>
-        <div><h3>Cambiar la métrica de compra de display</h3><p class="note" style="margin-top:var(--s-4)">Decisión para diciembre</p></div>
-        <div><p>Comprar por clic premia justo lo que está fallando. Para lo que sigue conviene optimizar por sesiones con interacción o por registro, y limitar la entrega a los sitios que sí traen personas.</p></div>
-      </li>
-      <li>
-        <div><h3>Aclarar el tope de CTV y radio</h3><p class="note" style="margin-top:var(--s-4)">Pregunta para el equipo de compra</p></div>
-        <div><p>Al ritmo de la última semana, radio llega a su meta el 24 nov y CTV el 27 nov. Hay que saber si el límite es el presupuesto, que frenaría la entrega antes del 30, o el volumen, que seguiría entregando por encima de la meta.</p></div>
-      </li>
-      <li>
-        <div><h3>Pedir escuchas medidas en radio y revisar la audiencia de audio</h3><p class="note" style="margin-top:var(--s-4)">Pregunta para DV360</p></div>
-        <div><p>Las escuchas deben salir del reporte de audio completo, no de un porcentaje fijo. Y vale la pena ver por qué el audio llega mayoritariamente a mujeres.</p></div>
-      </li>
-    </ol>
-  </section>
-
+      
+      <ol class="ad-pasos">
+        <li class="ad-paso">
+          <span class="ad-n ad-n--lg" aria-hidden="true">1</span>
+          <h3>1. Reparar la medición de registros</h3>
+          <p>Revisar con quien administra el sitio y GTM qué cambió el 4 de noviembre en el formulario de registro y restablecer los eventos de los pasos 1, 2, 3 y de registro completo. Sin eso no se puede evaluar ninguna campaña, y la de Google Ads optimiza con datos incompletos.</p>
+          <p class="ad-cap__r">Hoy</p>
+          
+        </li><li class="ad-paso">
+          <span class="ad-n ad-n--lg" aria-hidden="true">2</span>
+          <h3>2. Corregir las UTM de CTV y radio</h3>
+          <p>Cambiar «uutm_source» por «utm_source» y agregar el «=» a «utm_campaign=awareness» en las URL de destino de DV360. Sin esto, el efecto de CTV y radio en el sitio es invisible.</p>
+          <p class="ad-cap__r">Esta semana</p>
+          
+        </li><li class="ad-paso">
+          <span class="ad-n ad-n--lg" aria-hidden="true">3</span>
+          <h3>3. Auditar los clics de display</h3>
+          <p>Pedir a DV360 el reporte de tráfico inválido y la verificación de visibilidad, y comprobar que la etiqueta de GA4 cargue en la página de destino de móvil. Si el tráfico resulta inválido, solicitar la compensación de los clics que no corresponden a personas.</p>
+          <p class="ad-cap__r">Antes del 25 de noviembre</p>
+          
+        </li><li class="ad-paso">
+          <span class="ad-n ad-n--lg" aria-hidden="true">4</span>
+          <h3>4. Cambiar la métrica de compra de display</h3>
+          <p>Comprar por clic premia justo lo que está fallando. Para lo que sigue conviene optimizar por sesiones con interacción o por registro, y limitar la entrega a los sitios que sí traen personas.</p>
+          <p class="ad-cap__r">Decisión para diciembre</p>
+          
+        </li><li class="ad-paso">
+          <span class="ad-n ad-n--lg" aria-hidden="true">5</span>
+          <h3>5. Aclarar el tope de CTV y radio</h3>
+          <p>Al ritmo de la última semana, radio llega a su meta el 24 nov y CTV el 27 nov. Hay que saber si el límite es el presupuesto, que frenaría la entrega antes del 30, o el volumen, que seguiría entregando por encima de la meta.</p>
+          <p class="ad-cap__r">Pregunta para el equipo de compra</p>
+          
+        </li><li class="ad-paso">
+          <span class="ad-n ad-n--lg" aria-hidden="true">6</span>
+          <h3>6. Pedir escuchas medidas en radio y revisar la audiencia de audio</h3>
+          <p>Las escuchas deben salir del reporte de audio completo, no de un porcentaje fijo. Y vale la pena ver por qué el audio llega mayoritariamente a mujeres.</p>
+          <p class="ad-cap__r">Pregunta para DV360</p>
+          
+        </li>
+      </ol>
+      
+      </div>
+    </section>
 </main>
 
-<footer class="footer">
-  <span>YaJuego, biblioteca de documentos</span>
-  <span>Colombia. Juega con control, +18</span>
+<footer class="ad-foot">
+  <div class="ad-foot__in">
+    <span>YaJuego, biblioteca de documentos</span>
+    <span>Colombia. Juega con control, +18</span>
+  </div>
 </footer>
-
 </body>
 </html>
