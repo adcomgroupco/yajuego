@@ -1,0 +1,3 @@
+# yajuego
+
+@AGENTS.md
