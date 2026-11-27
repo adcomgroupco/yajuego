@@ -5,210 +5,201 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Índice de los documentos de consultoría digital de YaJuego.">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#f4f4f1">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Documentos</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="assets/css/adcom.css">
-  <script defer src="assets/js/adcom.js"></script>
+  <link rel="stylesheet" href="assets/ds/fonts.css">
+  <link rel="stylesheet" href="assets/css/adcom-v2.css?v=20261128">
+  <style>
+    /* El portal es nativo de v2: solo tokens del sistema, ningún valor suelto. */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-padding-top:var(--nav-height)}
+    body{margin:0;background:var(--washi);color:var(--sumi)}
+    .ad-nav__links a:hover{color:var(--sumi)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:var(--papel);padding:1px 6px;border-radius:var(--radius-input)}
+    .pt-colofon dd{margin:0;font-size:17px;line-height:1.5;color:var(--tinta-secundaria)}
+
+    /* documentos: la cabecera se queda fija mientras se recorre la lista */
+    .pt-cab{margin:0}
+    @media (min-width:901px){.pt-cab{position:sticky;top:calc(var(--nav-height) + var(--space-8))}}
+    .pt-docs .ad-fila__t{font-size:clamp(20px,2.2vw,26px)}
+    .pt-docs .ad-fila .ad-go,.pt-docs .ad-fila .ad-link{justify-self:end}
+    @media (max-width:640px){
+      .pt-docs .ad-fila{grid-template-columns:auto minmax(0,1fr) auto;gap:var(--space-4)}
+      .pt-docs .ad-fila .ad-go,.pt-docs .ad-fila .ad-link{grid-column:auto}
+      .pt-docs .ad-fila .ad-go{padding:0 14px}
+      .ad-nav__links{display:none}
+    }
+  </style>
+  <link rel="icon" type="image/png" href="assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="assets/ds/logos/apple-touch-icon.png">
 </head>
 <body>
-<a class="skip-link" href="#top">Ir a los documentos</a>
+<a class="skip-link" href="#diagnostico">Ir a los documentos</a>
 
-<header class="masthead">
-  <a class="wordmark" href="index.html"><i></i>YaJuego <span>documentos</span></a>
-  <nav aria-label="Documentos">
-    <a href="#diagnostico">Diagnóstico</a>
-    <a href="#auditorias">Auditorías</a>
-    <a href="#planeacion">Planeación de medios</a>
+<header class="ad-nav">
+  <nav class="ad-nav__in" aria-label="Documentos">
+    <a class="ad-marca" href="index.html"><img src="assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · documentos</i></a>
+    <div class="ad-nav__links"><a href="#diagnostico">Diagnóstico</a><a href="#auditorias">Auditorías</a><a href="#planeacion">Planeación de medios</a></div>
   </nav>
-  <span class="stamp">Consultoría digital</span>
 </header>
 
-<main id="top">
+<main>
+  <section class="ad-hero ad-hero--centro" aria-labelledby="titulo">
+    <div class="ad-wrap">
+      <p class="ad-eyebrow">Consultoría digital</p>
+      <h1 id="titulo">
+        <span class="ad-ln">Los documentos</span>
+        <span class="ad-ln">de YaJuego, en <span class="ad-hl">orden</span>.</span>
+      </h1>
+      <p class="ad-lead">Diagnóstico, auditorías y planeación de medios de YaJuego, en un solo lugar.</p>
+      <div class="ad-hero__acciones">
+        <a class="ad-btn ad-btn--accent" href="#diagnostico">Ver los documentos</a>
+      </div>
+    </div>
+  </section>
 
-<section class="opening wrap">
-  <h1>Documentos de la cuenta</h1>
-  <p class="lede">Diagnóstico, auditorías y planeación de medios de YaJuego, en un solo lugar.</p>
-  <nav class="categorias" aria-label="Categorías de documentos">
-    <a href="#diagnostico">Diagnóstico <b>3</b></a>
-    <a href="#auditorias">Auditorías <b>6</b></a>
-    <a href="#planeacion">Planeación de medios <b>7</b></a>
-  </nav>
-</section>
+  <section class="ad-sec ad-sec--papel pt-docs" id="diagnostico" aria-labelledby="t-diagnostico">
+    <div class="ad-wrap ad-split ad-split--arriba">
+      <header class="ad-sec-cab ad-sec-cab--grande pt-cab">
+        <p class="ad-eyebrow">Tres documentos</p>
+        <h2 id="t-diagnostico">Diagnóstico</h2>
+        <p class="ad-lead">Punto de partida y hallazgos.</p>
+      </header>
+      <ol class="ad-filas" aria-label="Diagnóstico">
+        <li><a class="ad-fila" href="resumen.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">1</span>
+          <span><span class="ad-fila__t">Resumen general</span></span>
+          <span class="ad-go" aria-hidden="true">Abrir</span>
+        </a></li>
+        <li><a class="ad-fila" href="diagnostico-inicial.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">2</span>
+          <span><span class="ad-fila__t">Diagnóstico inicial</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="reporte-inicio-tiktok.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">3</span>
+          <span><span class="ad-fila__t">Inicio de pauta en TikTok</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+      </ol>
+    </div>
+  </section>
 
-<section class="grupo wrap" id="diagnostico">
-  <div class="grupo-head">
-    <h2>Diagnóstico</h2>
-    <p>Punto de partida y hallazgos.</p>
-  </div>
+  <section class="ad-sec pt-docs" id="auditorias" aria-labelledby="t-auditorias">
+    <div class="ad-wrap ad-split ad-split--arriba">
+      <header class="ad-sec-cab ad-sec-cab--grande pt-cab">
+        <p class="ad-eyebrow">Seis documentos</p>
+        <h2 id="t-auditorias">Auditorías</h2>
+        <p class="ad-lead">Palabras clave, GTM y medición.</p>
+      </header>
+      <ol class="ad-filas" aria-label="Auditorías">
+        <li><a class="ad-fila" href="auditoria-google-ads.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">1</span>
+          <span><span class="ad-fila__t">Auditoría de Google Ads</span></span>
+          <span class="ad-go" aria-hidden="true">Abrir</span>
+        </a></li>
+        <li><a class="ad-fila" href="google-ads-audit.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">2</span>
+          <span><span class="ad-fila__t">Google Ads Audit (English)</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="auditoria-keywords.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">3</span>
+          <span><span class="ad-fila__t">Auditoría de keywords</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="auditoria-gtm.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">4</span>
+          <span><span class="ad-fila__t">Auditoría general GTM</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="auditoria-gtm-plan-accion.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">5</span>
+          <span><span class="ad-fila__t">Plan de acción GTM</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="auditoria-ga4.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">6</span>
+          <span><span class="ad-fila__t">Auditoría GA4</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+      </ol>
+    </div>
+  </section>
 
-  <div class="shelf">
-    <a class="card card-breve" href="resumen.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-documento"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Resumen general</h3>
-    </a>
+  <section class="ad-sec ad-sec--papel pt-docs" id="planeacion" aria-labelledby="t-planeacion">
+    <div class="ad-wrap ad-split ad-split--arriba">
+      <header class="ad-sec-cab ad-sec-cab--grande pt-cab">
+        <p class="ad-eyebrow">Siete documentos</p>
+        <h2 id="t-planeacion">Planeación de medios</h2>
+        <p class="ad-lead">Ruta, flow y seguimiento de pauta.</p>
+      </header>
+      <ol class="ad-filas" aria-label="Planeación de medios">
+        <li><a class="ad-fila" href="ruta.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">1</span>
+          <span><span class="ad-fila__t">Ruta de pauta digital</span></span>
+          <span class="ad-go" aria-hidden="true">Abrir</span>
+        </a></li>
+        <li><a class="ad-fila" href="flow-mundial-top-view.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">2</span>
+          <span><span class="ad-fila__t">Flow Mundial + TopView</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="flow-ago-dic-influencers.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">3</span>
+          <span><span class="ad-fila__t">Flow Ago-Dic + Influencers</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="roster-influencers.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">4</span>
+          <span><span class="ad-fila__t">Roster de influencers</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="cotizacion-roster-influencers.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">5</span>
+          <span><span class="ad-fila__t">Cotización del roster</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="informe-programatica.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">6</span>
+          <span><span class="ad-fila__t">Informe de programática</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+        <li><a class="ad-fila" href="seguimiento-pauta.html">
+          <span class="ad-n ad-n--md" aria-hidden="true">7</span>
+          <span><span class="ad-fila__t">Seguimiento de pauta</span></span>
+          <span class="ad-link" aria-hidden="true">Abrir ›</span>
+        </a></li>
+      </ol>
+    </div>
+  </section>
 
-    <a class="card card-breve" href="diagnostico-inicial.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-buscar"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Diagnóstico inicial</h3>
-    </a>
+  <section class="ad-sec" aria-label="Sobre esta biblioteca">
+    <div class="ad-wrap">
+      <dl class="ad-cifras pt-colofon">
+        <div class="ad-stat"><dt class="ad-stat__m">Cuenta</dt><dd>YaJuego, Colombia</dd></div>
+        <div class="ad-stat"><dt class="ad-stat__m">Uso</dt><dd>Abrir <code>index.html</code> en el navegador, o servir la carpeta con <code>python -m http.server</code></dd></div>
+        <div class="ad-stat"><dt class="ad-stat__m">Alcance</dt><dd>Documentos internos de la cuenta</dd></div>
+      </dl>
+    </div>
+  </section>
 
-    <a class="card card-breve" href="reporte-inicio-tiktok.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-tendencia"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Inicio de pauta en TikTok</h3>
-    </a>
-  </div>
-</section>
-
-<section class="grupo wrap" id="auditorias">
-  <div class="grupo-head">
-    <h2>Auditorías</h2>
-    <p>Palabras clave, GTM y medición.</p>
-  </div>
-
-  <div class="shelf">
-    <a class="card card-breve" href="auditoria-google-ads.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-buscar"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Auditoría de Google Ads</h3>
-    </a>
-
-    <a class="card card-breve" href="google-ads-audit.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-buscar"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Google Ads Audit (English)</h3>
-    </a>
-
-    <a class="card card-breve" href="auditoria-keywords.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-buscar"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Auditoría de keywords</h3>
-    </a>
-
-    <a class="card card-breve" href="auditoria-gtm.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-buscar"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Auditoría general GTM</h3>
-    </a>
-
-    <a class="card card-breve" href="auditoria-gtm-plan-accion.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-ruta"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Plan de acción GTM</h3>
-    </a>
-
-    <a class="card card-breve" href="auditoria-ga4.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-buscar"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Auditoría GA4</h3>
-    </a>
-  </div>
-</section>
-
-<section class="grupo wrap" id="planeacion">
-  <div class="grupo-head">
-    <h2>Planeación de medios</h2>
-    <p>Ruta, flow y seguimiento de pauta.</p>
-  </div>
-
-  <div class="shelf">
-    <a class="card card-breve" href="ruta.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-ruta"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Ruta de pauta digital</h3>
-    </a>
-
-    <a class="card card-breve" href="flow-mundial-top-view.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-grafico"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Flow Mundial + TopView</h3>
-    </a>
-
-    <a class="card card-breve" href="flow-ago-dic-influencers.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-grafico"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Flow Ago-Dic + Influencers</h3>
-    </a>
-
-    <a class="card card-breve" href="roster-influencers.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-documento"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Roster de influencers</h3>
-    </a>
-
-    <a class="card card-breve" href="cotizacion-roster-influencers.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-documento"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Cotización del roster</h3>
-    </a>
-
-    <a class="card card-breve" href="informe-programatica.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-tendencia"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Informe de programática</h3>
-    </a>
-
-    <a class="card card-breve" href="seguimiento-pauta.html">
-      <span class="card-top">
-        <svg class="ico ico-lg" aria-hidden="true"><use href="#i-tabla"></use></svg>
-        <svg class="ico" aria-hidden="true"><use href="#i-abrir"></use></svg>
-      </span>
-      <h3>Seguimiento de pauta</h3>
-    </a>
-  </div>
-</section>
-
-<section class="colophon wrap">
-  <dl>
-    <dt>Cuenta</dt><dd>YaJuego, Colombia</dd>
-    <dt>Uso</dt>
-    <dd>Abrir <code>index.html</code> en el navegador, o servir la carpeta con
-    <code>python -m http.server</code></dd>
-    <dt>Alcance</dt>
-    <dd>Documentos internos de la cuenta</dd>
-  </dl>
-</section>
-
+  <section class="ad-sec ad-sec--oscuro ad-cierre" aria-labelledby="t-cierre">
+    <div class="ad-wrap ad-cierre__in">
+      <div>
+        <h2 id="t-cierre">Cada auditoría termina en un plan.</h2>
+        <p>Los hallazgos se convierten en acciones con fecha y criterio de éxito.</p>
+      </div>
+      <a class="ad-btn ad-btn--accent" href="#titulo">Volver al inicio</a>
+    </div>
+  </section>
 </main>
 
-<footer class="footer">
-  <span>YaJuego, biblioteca de documentos</span>
-  <span>Colombia. Juega con control, +18</span>
+<footer class="ad-foot">
+  <div class="ad-foot__in">
+    <span>YaJuego · Biblioteca de documentos</span>
+    <span>Colombia. Juega con control, +18</span>
+  </div>
 </footer>
-
 </body>
 </html>
