@@ -1,85 +1,106 @@
 <!DOCTYPE html>
-<html lang="es" data-suelo="tinta">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F7F6F2">
   <title>YaJuego | Seguimiento de pauta</title>
-<link rel="stylesheet" href="../assets/css/adcom-tokens.css">
   <meta name="description" content="Dashboard de seguimiento continuo de la pauta digital de YaJuego, construido en Looker Studio.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/site.css">
-  <link rel="stylesheet" href="../assets/css/seguimiento.css">
+  <link rel="stylesheet" href="../assets/ds/fonts.css">
+  <link rel="stylesheet" href="../assets/css/adcom-v2.css?v=20261127">
+  <link rel="stylesheet" href="../assets/css/seguimiento.css?v=20261127">
+  <link rel="icon" type="image/png" href="../assets/favicon-adcom.png">
+  <link rel="apple-touch-icon" href="../assets/ds/logos/apple-touch-icon.png">
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="blob"></div>
-
   <a class="skip-link" href="#dashboard">Ir al dashboard</a>
 
-  <main class="wrap">
+  <header class="ad-nav">
+    <nav class="ad-nav__in" aria-label="Principal">
+      <a class="ad-marca" href="../index.html"><img src="../assets/logos/adcom-wordmark.png" alt="Adcom" width="96" height="22"><i>YaJuego · Seguimiento de pauta</i></a>
+      <div class="ad-nav__links"><a href="#usos">Qué permite</a><a href="#dashboard">Dashboard</a></div>
+    </nav>
+  </header>
 
-    <div class="eyebrow">YaJuego · Seguimiento continuo</div>
-    <h1>Informe de <span>seguimiento</span> de pauta</h1>
-    <p class="lede">
-      Dashboard construido en Looker Studio para monitorear la pauta digital de forma continua, sin depender
-      de reportes manuales. Es la <strong>capa viva</strong> del trabajo: mientras las auditorías son
-      fotografías de un momento, este informe permite seguir la evolución de la inversión y los resultados
-      día a día, y es donde se comprueba si las correcciones de medición y estructura realmente movieron la aguja.
-    </p>
+  <main>
 
-    <ul class="uses">
-      <li>
-        <b>Monitoreo sin espera</b>
-        Consulta el desempeño de las campañas cuando se necesite, en lugar de esperar el cierre de mes.
-      </li>
-      <li>
-        <b>Lectura compartida</b>
-        Una sola fuente de verdad para agencia y cliente: se discute sobre los mismos números.
-      </li>
-      <li>
-        <b>Control de la inversión</b>
-        Seguimiento del gasto y su distribución frente a lo planeado en la Ruta y los flows.
-      </li>
-      <li>
-        <b>Cierre del ciclo</b>
-        Verifica en datos reales el efecto de los ajustes propuestos en las auditorías de GTM y GA4.
-      </li>
-    </ul>
+    <section class="ad-sec ad-hero">
+      <div class="ad-wrap">
+        <p class="ad-eyebrow">YaJuego · Seguimiento continuo</p>
+        <h1 class="ad-t-display-hero">
+          <span class="ad-ln">Informe de <span class="ad-hl">seguimiento</span></span>
+          <span class="ad-ln">de pauta</span>
+        </h1>
+        <p class="ad-lead sg-lede">
+          Dashboard construido en Looker Studio para monitorear la pauta digital de forma continua, sin depender
+          de reportes manuales. Es la <strong>capa viva</strong> del trabajo: mientras las auditorías son
+          fotografías de un momento, este informe permite seguir la evolución de la inversión y los resultados
+          día a día, y es donde se comprueba si las correcciones de medición y estructura realmente movieron la aguja.
+        </p>
+        <div class="ad-hero__acciones">
+          <a class="ad-btn ad-btn--accent"
+             href="https://lookerstudio.google.com/reporting/a93f572c-c153-4c40-b649-d703748c97f2/page/p_7y0a87d3pd"
+             target="_blank" rel="noopener">
+            Abrir en Looker Studio ↗
+          </a>
+          <a class="ad-link" href="../diagnostico/resumen.html">← Volver al resumen</a>
+        </div>
+        <p class="sg-hint">Requiere permisos de acceso al informe en Looker Studio.</p>
+      </div>
+    </section>
 
-    <div class="bar">
-      <a class="btn btn-primary"
-         href="https://lookerstudio.google.com/reporting/a93f572c-c153-4c40-b649-d703748c97f2/page/p_7y0a87d3pd"
-         target="_blank" rel="noopener">
-        Abrir en Looker Studio ↗
-      </a>
-      <a class="btn btn-ghost" href="../diagnostico/resumen.html">← Volver al resumen</a>
-      <span class="hint">Requiere permisos de acceso al informe en Looker Studio.</span>
-    </div>
+    <section class="ad-sec ad-sec--papel" id="usos" aria-label="Qué permite el informe">
+      <div class="ad-wrap">
+        <div class="ad-grid sg-usos" style="--col:240px">
+          <article class="ad-card">
+            <span class="ad-card__t">Monitoreo sin espera</span>
+            <span class="ad-card__d">Consulta el desempeño de las campañas cuando se necesite, en lugar de esperar el cierre de mes.</span>
+          </article>
+          <article class="ad-card">
+            <span class="ad-card__t">Lectura compartida</span>
+            <span class="ad-card__d">Una sola fuente de verdad para agencia y cliente: se discute sobre los mismos números.</span>
+          </article>
+          <article class="ad-card">
+            <span class="ad-card__t">Control de la inversión</span>
+            <span class="ad-card__d">Seguimiento del gasto y su distribución frente a lo planeado en la Ruta y los flows.</span>
+          </article>
+          <article class="ad-card is-on">
+            <span class="ad-card__t">Cierre del ciclo</span>
+            <span class="ad-card__d">Verifica en datos reales el efecto de los ajustes propuestos en las auditorías de GTM y GA4.</span>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <div class="embed" id="dashboard">
-      <iframe
-        title="Informe de seguimiento de pauta YaJuego en Looker Studio"
-        src="https://datastudio.google.com/embed/reporting/a93f572c-c153-4c40-b649-d703748c97f2/page/p_7y0a87d3pd"
-        frameborder="0"
-        loading="lazy"
-        allowfullscreen
-        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-      </iframe>
-    </div>
+    <section class="ad-sec">
+      <div class="ad-wrap">
+        <div class="sg-embed" id="dashboard">
+          <iframe
+            title="Informe de seguimiento de pauta YaJuego en Looker Studio"
+            src="https://datastudio.google.com/embed/reporting/a93f572c-c153-4c40-b649-d703748c97f2/page/p_7y0a87d3pd"
+            frameborder="0"
+            loading="lazy"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+          </iframe>
+        </div>
 
-    <p class="note">
-      Si el dashboard aparece en blanco, es por permisos: inicia sesión con la cuenta de Google autorizada
-      o ábrelo directamente en Looker Studio con el botón de arriba. Para una lectura más cómoda de tablas
-      y gráficos, se recomienda abrirlo en pantalla completa.
-    </p>
+        <p class="ad-aviso sg-nota">
+          Si el dashboard aparece en blanco, es por permisos: inicia sesión con la cuenta de Google autorizada
+          o ábrelo directamente en Looker Studio con el botón de arriba. Para una lectura más cómoda de tablas
+          y gráficos, se recomienda abrirlo en pantalla completa.
+        </p>
+      </div>
+    </section>
 
-    <div class="footer">
+  </main>
+
+  <footer class="ad-foot">
+    <div class="ad-foot__in">
       <span>YaJuego · Consultoría digital 2026 · Informe de seguimiento de pauta.</span>
       <a href="../index.html">← Volver al hub</a>
     </div>
-
-  </main>
+  </footer>
 </body>
 </html>
